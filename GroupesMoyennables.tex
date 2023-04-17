@@ -1,0 +1,116 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{faktor}
+\usepackage{enumerate}
+\usepackage[T1]{fontenc}
+
+\newtheorem{thm}{Théorème}[subsection]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Définition}
+\newtheorem{corr}[thm]{Corollaire}
+\newtheorem{lem}[thm]{Lemme}
+\addto\captionsenglish{\def\proofname{Preuve}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\norm}[1]{\left\Vert #1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\ket}[1]{\left\langle #1 \right\rangle}
+\newcommand{\halfilon}{{\frac\varepsilon2}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\indic}{\mathds{1}}
+\newcommand\fundef[3]{#1: \left\{\begin{array}{ccc}#2\\#3\end{array}\right.}
+\newcommand\funlam[2]{\left\{\begin{array}{ccc}#1\\#2\end{array}\right.}
+\newcommand{\tq}{\;\middle|\;}
+\newcommand{\interior}[1]{\mathring{#1}}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\transpose}[1]{\prescript{t}{}{#1}{}{}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\infi}{\bigwedge}
+\newcommand{\supr}{\bigvee}
+\newcommand{\comp}{\circ}
+\newcommand{\nhds}{\mathcal{N}}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\blank}{{-}}
+
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Vect}{Vect}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\solset}{Sol}
+\DeclareMathOperator{\Sp}{Sp}
+
+\begin{document}
+
+\selectlanguage{french}
+
+\begin{titlepage}
+\title{Groupes Moyennables}
+\author{Anatole \textsc{Dedecker}}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+\thispagestyle{empty}
+\selectlanguage{english}
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\section*{Conventions et remarques préliminaires}
+
+Dans ce mémoire, nous utiliserons le terme de \textit{mesure} pour désigner une mesure \textbf{finiment}-additive sur un 
+\textit{espace mesurable}, c'est à dire un couple $(X, \mathcal{A})$ où $\mathcal{A}$ est une $\sigma$-algèbre. 
+Lorsqu'une telle mesure est de plus $\sigma$-additive (ce qui est souvent inclus dans la définition de \og{}mesure\fg{}),
+nous dirons qu'il s'agit d'une \textit{$\sigma$-mesure}. 
+
+Nous admettrons qu'il est possible de définir une théorie de l'intégration pour toute mesure, les théorèmes de convergence
+monotone et dominée n'étant bien sûr valables que dans le cas des $\sigma$-mesures. 
+
+Si $\varphi:(X,\mathcal{A})\to(Y,\mathcal{B})$ est une application mesurable et $m$ est une mesure sur $(X, \mathcal{A})$, 
+nous noterons $\varphi_*m$ la mesure image sur $(Y, \mathcal{B})$. C'est une $\sigma$-mesure si $m$ en est une, et intégrer 
+une fonction $f$ selon $\varphi_*m$ revient exactement à intégrer $f\comp\varphi$ selon $m$. Enfin, c'est une construction
+fonctorielle, au sens où l'on a $(\psi\comp\varphi)_*m = \psi_*\varphi_*m$ pour toute application mesurable 
+$\psi : (Y, \mathcal{B})\to(Z, \mathcal{C})$. 
+
+\paragraph{}
+Si $G$ est un groupe et $g\in G$, nous noterons $l_g$ et $r_g$ les applications de tranlations:
+\begin{align*}
+    \fundef{l_g=(g\blank)}{G\to G}{x\mapsto gx}\quad\text{ et }\quad\fundef{r_g=(\blank g)}{G\to G}{x\mapsto xg}
+\end{align*}
+
+Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
+si $G$ est un groupe topologique muni de sa tribu borélienne, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
+(par translations) à gauche (resp. à droite)} si $\forall g\in G, (l_g)_*m = m$ (resp. $(r_g)_*m = m$). Si les deux conditions
+sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
+
+Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
+Radon sur $G$ invariante par tranlations à gauche (resp. à droite).
+
+TODO rappeler théorème
+
+\section{Premières définitions}
+
+\end{document}
