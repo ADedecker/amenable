@@ -1,25 +1,25 @@
 \documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{bbm}
 \usepackage{amsthm}
-\usepackage[utf8]{inputenc}
 \usepackage{a4wide}
 \usepackage{mathrsfs}
 \usepackage{stmaryrd}
 \usepackage{mathtools}
-\usepackage[french]{babel}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{faktor}
 \usepackage{enumerate}
 \usepackage[T1]{fontenc}
 
-\newtheorem{thm}{Théorème}[subsection]
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{defn}[thm]{Définition}
-\newtheorem{corr}[thm]{Corollaire}
-\newtheorem{lem}[thm]{Lemme}
-\addto\captionsenglish{\def\proofname{Preuve}}
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{corollary}[theorem]{Corollaire}
+\newtheorem{lem}[theorem]{Lemme}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
@@ -30,12 +30,14 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\U}{\mathcal{U}}
+\newcommand{\Bor}{\mathcal{B}}
 \newcommand{\norm}[1]{\left\Vert #1\right\Vert}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\ket}[1]{\left\langle #1 \right\rangle}
 \newcommand{\halfilon}{{\frac\varepsilon2}}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\indic}{\mathds{1}}
+\newcommand{\indic}{\mathbbm{1}}
+\newcommand{\integral}[2]{\int #1~\mathrm{d}#2}
 \newcommand\fundef[3]{#1: \left\{\begin{array}{ccc}#2\\#3\end{array}\right.}
 \newcommand\funlam[2]{\left\{\begin{array}{ccc}#1\\#2\end{array}\right.}
 \newcommand{\tq}{\;\middle|\;}
@@ -50,9 +52,10 @@
 \renewcommand{\implies}{\Rightarrow}
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\blank}{{-}}
-
+\newcommand{\invop}{\mathrm{inv}}
 
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\card}{Card}
 \DeclareMathOperator{\Id}{Id}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\Vect}{Vect}
@@ -61,8 +64,6 @@
 \DeclareMathOperator{\Sp}{Sp}
 
 \begin{document}
-
-\selectlanguage{french}
 
 \begin{titlepage}
 \title{Groupes Moyennables}
@@ -73,7 +74,6 @@
 
 \tableofcontents
 \thispagestyle{empty}
-\selectlanguage{english}
 
 \clearpage
 
@@ -95,15 +95,17 @@ une fonction $f$ selon $\varphi_*m$ revient exactement à intégrer $f\comp\varp
 fonctorielle, au sens où l'on a $(\psi\comp\varphi)_*m = \psi_*\varphi_*m$ pour toute application mesurable 
 $\psi : (Y, \mathcal{B})\to(Z, \mathcal{C})$. 
 
+TODO mesure à densité
+
 \paragraph{}
-Si $G$ est un groupe et $g\in G$, nous noterons $l_g$ et $r_g$ les applications de tranlations:
-\begin{align*}
-    \fundef{l_g=(g\blank)}{G\to G}{x\mapsto gx}\quad\text{ et }\quad\fundef{r_g=(\blank g)}{G\to G}{x\mapsto xg}
-\end{align*}
+Si $G$ est un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, $r_g$ les applications de tranlations:
+\begin{equation*}
+    \fundef{\invop = (\blank)\inv}{G&\to& G}{x&\mapsto& x\inv}\text{;}\quad\fundef{\ell_g=(g\blank)}{G&\to& G}{x&\mapsto& gx}\text{;}\quad\fundef{r_g=(\blank g)}{G&\to& G}{x&\mapsto& xg}
+\end{equation*}
 
 Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
-si $G$ est un groupe topologique muni de sa tribu borélienne, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
-(par translations) à gauche (resp. à droite)} si $\forall g\in G, (l_g)_*m = m$ (resp. $(r_g)_*m = m$). Si les deux conditions
+si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
+(par translations) à gauche (resp. à droite)} si $\forall g\in G, {\ell_g}_*m = m$ (resp. ${r_g}_*m = m$). Si les deux conditions
 sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
 
 Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
@@ -112,5 +114,65 @@ Radon sur $G$ invariante par tranlations à gauche (resp. à droite).
 TODO rappeler théorème
 
 \section{Premières définitions}
+
+Fixons $\Gamma$ un groupe topologique séparé et localement compact. La notion qui va nous intéresser dans ces notes est la suivante.
+
+\begin{definition}
+    On dit qu'un groupe topologique séparé et localement compact $\Gamma$ est \emph{moyennable} s'il admet une 
+    mesure de probabilité borélienne et invariante par translations.
+\end{definition}
+
+Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
+\begin{prop}
+    Supposons qu'il existe une mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations à gauche.
+    Alors $\Gamma$ est un groupe moyennable.
+\end{prop} 
+
+\begin{proof}
+    Il s'agit donc de construire une \textbf{autre} mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
+    Posons d'abord, pour $A\in\Bor(G)$, $\fundef{f_A}{\Gamma&\to& \Gamma}{g&\mapsto& m(Ag\inv)}$. Chaque $f_A$ est bornée par $1 = m(\Gamma)$, 
+    donc intégrable pour la mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{f_A}{(\invop_*m)}$. \\
+    Notons que, pour $A$ et $B$ boréliens disjoints, ainsi que $g, x\in\Gamma$, on a :
+    \begin{gather*}
+        f_\Gamma = \indic \\
+        f_{A\cup B} = f_A + f_B \\
+        f_{g\inv A}(x) = m(g\inv Ax\inv) = ({\ell_g}_*m)(Ax\inv) = m(Ax\inv) = f_A(x) \\
+        f_{Ag\inv}(x) = m(Ag\inv x\inv) = f_A(xg) = (f_A \comp r_g)(x)
+    \end{gather*}
+    En intégrant ces relations, on obtient bien :
+    \begin{gather*}
+        n(\Gamma) = (\invop_*m)(\Gamma) = 1 \\
+        n(A\cup B) = n(A) + n(B) \\
+        ({\ell_g}_*n)(A) = n(g\inv A) = n(A) \\
+        ({r_g}_*n)(A) = \integral{f_A\comp r_g\comp\invop}{m} = \integral{f_A\comp\invop\comp \ell_g}{m} = n(A)
+    \end{gather*}
+    Ce qui conlut.
+\end{proof}
+
+Les premiers exemples de groupes moyennables sont les groupes compacts (et en particulier les groupes finis discrets) séparés.
+En effet, la mesure de Haar normalisée d'un tel groupe est une mesure de probabilité invariante par tranlation. Les phénomènes
+plus intéressants vont donc se produire dans le cas non-compact, et il convient de noter que ces groupes ne peuvent pas avoir
+de $\sigma$-mesure de probabilité invariante par translations (TODO ref). C'est donc l'affaibilissement de la 
+$\sigma$-additivité en additivité finie qui engendre la complexité. \\
+
+Comme constaté dans la preuve ci-dessus, [TODO forme linéaire]
+
+On peut maintenant donner notre premier exemple de groupe non-compact moyennable.
+
+\begin{theorem}\label{Z_amenable}
+    $\Z$ est moyennable.
+\end{theorem}
+
+On va pour cela utiliser la variation suivante sur le théorème de Hahn-Banach.
+
+TODO
+
+\begin{proof}[Démonstration du théorème \ref{Z_amenable}]
+    Considérons le sous-espace vectoriel $S$ de $\mathrm{L}^\infty(G)$ formé des fonctions simples,
+    c'est à dire les fonctions $f \in\mathscr{L}^\infty(G)=\mathrm{L}^\infty(G)$ d'image finie,
+    et telle que l'ensemble $f\inv(x)$ soit fini pour tout $x\ne0$.
+
+    On pose alors $\fundef{\varphi}{S&\to&\R}{f&\mapsto&\sum_{x\in\R^*} x\card(f\inv(x))}$.
+\end{proof}
 
 \end{document}
