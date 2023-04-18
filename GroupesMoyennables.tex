@@ -168,11 +168,14 @@ On va pour cela utiliser la variation suivante sur le théorème de Hahn-Banach.
 TODO
 
 \begin{proof}[Démonstration du théorème \ref{Z_amenable}]
-    Considérons le sous-espace vectoriel $S$ de $\mathrm{L}^\infty(G)$ formé des fonctions simples,
-    c'est à dire les fonctions $f \in\mathscr{L}^\infty(G)=\mathrm{L}^\infty(G)$ d'image finie,
-    et telle que l'ensemble $f\inv(x)$ soit fini pour tout $x\ne0$.
+    Considérons le sous-espace vectoriel $C$ de $\mathrm{L}^\infty(\Z) = \ell^\infty(\Z)$ formé 
+    des suites $u:\Z\to\R$ convergentes en $+\infty$. Posons alors 
+    $\fundef{\varphi}{C&\to&\R}{u&\mapsto&\lim_{n\to+\infty}u_n}$.
 
-    On pose alors $\fundef{\varphi}{S&\to&\R}{f&\mapsto&\sum_{x\in\R^*} x\card(f\inv(x))}$.
+    Il est clair que $\varphi$ est linéaire. De plus, pour $u\in C$, on a $\forall n, \abs{u_n}\le\norm{u_n}_\infty$
+    donc en passant à la limite $\abs{\varphi(u)}\le\norm{u}_\infty$, donc $\varphi$ est continue. $\varphi$ est enfin clairement positive.
+    Par le résultat ci-dessus (TODO ref) on obtient donc $\widetilde{\varphi}:$
+
 \end{proof}
 
 \end{document}
