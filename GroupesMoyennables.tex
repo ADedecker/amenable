@@ -16,10 +16,11 @@
 \usepackage[T1]{fontenc}
 
 \newtheorem{theorem}{Théorème}[section]
-\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{definition}[theorem]{Définition}
 \newtheorem{corollary}[theorem]{Corollaire}
-\newtheorem{lem}[theorem]{Lemme}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{remark}[theorem]{Remarque}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
@@ -33,6 +34,7 @@
 \newcommand{\Bor}{\mathcal{B}}
 \newcommand{\norm}[1]{\left\Vert #1\right\Vert}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\card}[1]{\abs{#1}}
 \newcommand{\ket}[1]{\left\langle #1 \right\rangle}
 \newcommand{\halfilon}{{\frac\varepsilon2}}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
@@ -41,6 +43,7 @@
 \newcommand\fundef[3]{#1: \left\{\begin{array}{ccc}#2\\#3\end{array}\right.}
 \newcommand\funlam[2]{\left\{\begin{array}{ccc}#1\\#2\end{array}\right.}
 \newcommand{\tq}{\;\middle|\;}
+\newcommand{\ssi}{si et seulement si }
 \newcommand{\interior}[1]{\mathring{#1}}
 \newcommand{\closure}[1]{\overline{#1}}
 \newcommand{\transpose}[1]{\prescript{t}{}{#1}{}{}}
@@ -55,8 +58,8 @@
 \newcommand{\invop}{\mathrm{inv}}
 
 \DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\card}{Card}
-\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Id}{id}
+\DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\Vect}{Vect}
 \DeclareMathOperator{\Ima}{Im}
@@ -98,6 +101,14 @@ $\psi : (Y, \mathcal{B})\to(Z, \mathcal{C})$.
 TODO mesure à densité
 
 \paragraph{}
+
+Conformément à la convention dans le monde anglophone, et pour éviter toute confusion, nous dirons qu'un espace topologique
+$X$ est \emph{compact} s'il vérifie la propriété de Borel-Lebesgue, sans hypothèse de séparation. 
+Nous dirons que $X$ est \emph{localement compact} si, pour tout $x\in X$, le filtre $\nhds_x$ des voisinages de $x$ admet
+une \textbf{base} formée d'ensembles compacts. Si $X$ est séparé, on retrouve que $X$ est localement compact 
+\ssi tout point admet \textbf{un} voisinage compact.
+
+\paragraph{}
 Si $G$ est un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, $r_g$ les applications de tranlations:
 \begin{equation*}
     \fundef{\invop = (\blank)\inv}{G&\to& G}{x&\mapsto& x\inv}\text{;}\quad\fundef{\ell_g=(g\blank)}{G&\to& G}{x&\mapsto& gx}\text{;}\quad\fundef{r_g=(\blank g)}{G&\to& G}{x&\mapsto& xg}
@@ -115,18 +126,20 @@ TODO rappeler théorème
 
 \section{Premières définitions}
 
-Fixons $\Gamma$ un groupe topologique séparé et localement compact. La notion qui va nous intéresser dans ces notes est la suivante.
+\subsection{Mesure et moyenne}
+
+Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ces notes est la suivante.
 
 \begin{definition}
-    On dit qu'un groupe topologique séparé et localement compact $\Gamma$ est \emph{moyennable} s'il admet une 
-    mesure de probabilité borélienne et invariante par translations.
+    On dit qu'un groupe topologique $\Gamma$ est \emph{moyennable} s'il admet une 
+    mesure de probabilité borélienne invariante par translations.
 \end{definition}
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
-\begin{prop}
+\begin{proposition}\label{bilateral_of_left}
     Supposons qu'il existe une mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations à gauche.
     Alors $\Gamma$ est un groupe moyennable.
-\end{prop} 
+\end{proposition} 
 
 \begin{proof}
     Il s'agit donc de construire une \textbf{autre} mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
@@ -149,13 +162,101 @@ Notons tout de suite que l'invariance bilatère n'impose pas de restriction supl
     Ce qui conlut.
 \end{proof}
 
-Les premiers exemples de groupes moyennables sont les groupes compacts (et en particulier les groupes finis discrets) séparés.
+Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
 En effet, la mesure de Haar normalisée d'un tel groupe est une mesure de probabilité invariante par tranlation. Les phénomènes
 plus intéressants vont donc se produire dans le cas non-compact, et il convient de noter que ces groupes ne peuvent pas avoir
 de $\sigma$-mesure de probabilité invariante par translations (TODO ref). C'est donc l'affaibilissement de la 
 $\sigma$-additivité en additivité finie qui engendre la complexité. \\
 
-Comme constaté dans la preuve ci-dessus, [TODO forme linéaire]
+Comme constaté dans la preuve ci-dessus, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
+On dispose pour cela du résultat suivant.
+\begin{proposition}\label{repr}
+    Soit $(X, \mathcal{A})$ un espace mesurable. Pour $m$ mesure de probabilité, [TODO]
+\end{proposition}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+Cela nous amène à donner la définition suivante.
+
+\begin{definition}
+    Soit $\Gamma$ un groupe localement compact et séparé. Une \emph{moyenne à gauche (resp. à droite)} sur $\Gamma$ est une forme 
+    linéaire positive $T : \mathrm{L}^\infty(\Gamma)\to\C$ vérifiant $T(\indic) = 1$ et $\forall g\in\Gamma, T\comp\lambda_g = T$
+    (resp. $T\comp\rho_g = T$). Une moyenne bilatère sera simplement appelée \emph{moyenne}.
+\end{definition}
+
+\begin{remark}
+    Les moyennes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(\mathrm{L}^\infty(\Gamma), \lambda)$ de 
+    $\Gamma$ vers la représentation triviale, avec la condition suppplémentaire que $T(\indic) = 1$.
+\end{remark}
+
+Remarquons que la bijection $T$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
+invariantes aux moyennes sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
+$f\in\mathscr{L}^\infty(\Gamma)$ et $g\in\Gamma$, on a 
+$T_m(\lambda_g(f)) = \integral{f\comp\ell_{g\inv}}{m} = \integral{f}{m} = T_m(f)$. Réciproquement, si $T$ est une 
+moyenne à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
+$m(g\inv A) = T(\indic_{g\inv A}) = T(\indic_A \comp\ell_g) = T(\lambda_{g\inv}(\indic_A)) = T(\indic_A) = m(A)$.
+En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de montrer le résultat suivant.
+\begin{proposition}
+    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet une moyenne (resp. une moyenne à gauche, resp. une manière à droite).
+\end{proposition}
+
+Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
+\paragraph{}
+
+Pour étudier les moyennes avec les outils de l'analyse fonctionnelle, il sera utile de transformer la condition de positivité en une condition
+de norme. C'est ce que fournit le lemme suivant.
+
+\begin{lemma}
+    Soit $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon et $\varphi:\mathrm{L}^\infty(X)\to\C$ une forme linéaire. 
+    Si $\varphi(\indic) = 1$, on a :
+    \begin{equation*}
+        \norm{\varphi} = 1 \iff \forall a \ge 0, \varphi(a) \geq 0
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Supposons d'abord $\norm{\varphi} = 1$, et soit $a\ge 0$ de norme 1. On a donc, pour $x\in X$, $a(x), 1-a(x)\in[0,1]$,
+    d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
+    $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
+    Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in\mathscr{L}^\infty(X)$ quelconque,
+    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut. \\
+\end{proof}
+
+L'intérêt de la condition $\norm\varphi = 1$ dans ce lemme est qu'elle est conservée lors du prolongement de l'application $\varphi$ par le théorème
+de Hahn-Banach, alors qu'il n'est pas clair du tout qu'on puisse prolonger une forme linéaire positive en préservant la positivité. On va donc pouvoir se restreindre
+à étudier les moyennes sur des sous-espaces plus concrets de $\mathrm{L}^\infty(\Gamma)$.
+
+Plus précisément, toujours pour $\Gamma$ groupe localement compact et séparé, on introduit $L_0(\Gamma) := \sum_{g\in\Gamma} \Ima(\lambda(g) - \id)$ le sous-espace de 
+$\mathrm{L}^\infty(\Gamma)$ engendré par les (classes de) fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in\mathscr{L}^\infty(\Gamma)$. 
+Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
+
+\begin{lemma}
+    $\indic\notin L_0(G)$
+\end{lemma}
+
+\begin{proof}
+    Supposons d'abord que $\indic$ soit de la forme $\lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
+    $f\in\mathrm{L}^\infty(\Gamma)$. On a alors $\forall n\in\N, f(\gamma^n) = f(1) + n$, donc $\norm{f(\gamma^n)}\xrightarrow[n\to+\infty]{}+\infty$
+    ce qui contredit le fait que $f$ est borné. \\
+    Pour le cas général, on suppose cette fois $\indic = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
+    $f : I\to\mathrm{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
+    un élément), et la fonction : 
+    \begin{equation*}
+        \fundef{F}{\Gamma^I&\to&\C}{x&\mapsto&\frac{1}{\card{I}}\sum_{i\in I}f_i(x_i)}
+    \end{equation*}
+    $F$ est mesurable, et la majoration
+    $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in\mathscr{L}^\infty(\Gamma^I)$. 
+    Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. \\
+    TODO classes de fonctions ?
+\end{proof}
+
+On peut alors considérer l'espace $L(G) := \C\cdot\indic \oplus L_0(G)$, qui est intéressant en ce qu'il permet de caractériser entièrement
+les moyennes à gauche.
+
+\paragraph{}
+
 
 On peut maintenant donner notre premier exemple de groupe non-compact moyennable.
 
@@ -176,6 +277,9 @@ TODO
     donc en passant à la limite $\abs{\varphi(u)}\le\norm{u}_\infty$, donc $\varphi$ est continue. $\varphi$ est enfin clairement positive.
     Par le résultat ci-dessus (TODO ref) on obtient donc $\widetilde{\varphi}:$
 
+    TODO
 \end{proof}
+
+\subsection{Condition de F\o{}lner}
 
 \end{document}
