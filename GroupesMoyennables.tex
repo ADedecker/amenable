@@ -13,6 +13,7 @@
 \usepackage{hyperref}
 \usepackage{faktor}
 \usepackage{enumerate}
+\usepackage{xcolor}
 \usepackage[T1]{fontenc}
 
 \newtheorem{theorem}{Théorème}[section]
@@ -56,6 +57,7 @@
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\blank}{{-}}
 \newcommand{\invop}{\mathrm{inv}}
+\newcommand{\TODO}[1]{{\color{red}TODO :} #1}
 
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\Id}{id}
@@ -98,8 +100,6 @@ une fonction $f$ selon $\varphi_*m$ revient exactement à intégrer $f\comp\varp
 fonctorielle, au sens où l'on a $(\psi\comp\varphi)_*m = \psi_*\varphi_*m$ pour toute application mesurable 
 $\psi : (Y, \mathcal{B})\to(Z, \mathcal{C})$. 
 
-TODO mesure à densité
-
 \paragraph{}
 
 Conformément à la convention dans le monde anglophone, et pour éviter toute confusion, nous dirons qu'un espace topologique
@@ -122,11 +122,9 @@ sont vérifiées, nous parlerons simplement de mesure \textit{invariante par tra
 Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
 Radon sur $G$ invariante par tranlations à gauche (resp. à droite).
 
-TODO rappeler théorème
+\TODO{Théorème mesure de Haar}
 
 \section{Premières définitions}
-
-\subsection{Mesure et moyenne}
 
 Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ces notes est la suivante.
 
@@ -165,17 +163,17 @@ Notons tout de suite que l'invariance bilatère n'impose pas de restriction supl
 Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
 En effet, la mesure de Haar normalisée d'un tel groupe est une mesure de probabilité invariante par tranlation. Les phénomènes
 plus intéressants vont donc se produire dans le cas non-compact, et il convient de noter que ces groupes ne peuvent pas avoir
-de $\sigma$-mesure de probabilité invariante par translations (TODO ref). C'est donc l'affaibilissement de la 
+de $\sigma$-mesure de probabilité invariante par translations (\TODO{référence}). C'est donc l'affaibilissement de la 
 $\sigma$-additivité en additivité finie qui engendre la complexité. \\
 
 Comme constaté dans la preuve ci-dessus, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
 On dispose pour cela du résultat suivant.
 \begin{proposition}\label{repr}
-    Soit $(X, \mathcal{A})$ un espace mesurable. Pour $m$ mesure de probabilité, [TODO]
+    Soit $(X, \mathcal{A})$ un espace mesurable. Pour $m$ mesure de probabilité, \TODO{}
 \end{proposition}
 
 \begin{proof}
-    TODO
+    \TODO{}
 \end{proof}
 
 Cela nous amène à donner la définition suivante.
@@ -208,7 +206,7 @@ Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est s�
 Pour étudier les moyennes avec les outils de l'analyse fonctionnelle, il sera utile de transformer la condition de positivité en une condition
 de norme. C'est ce que fournit le lemme suivant.
 
-\begin{lemma}
+\begin{lemma}\label{positive_iff_norm}
     Soit $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon et $\varphi:\mathrm{L}^\infty(X)\to\C$ une forme linéaire. 
     Si $\varphi(\indic) = 1$, on a :
     \begin{equation*}
@@ -233,7 +231,7 @@ $\mathrm{L}^\infty(\Gamma)$ engendré par les (classes de) fonctions de la forme
 Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
 
 \begin{lemma}
-    $\indic\notin L_0(G)$
+    $\indic\notin L_0(\Gamma)$
 \end{lemma}
 
 \begin{proof}
@@ -249,37 +247,128 @@ Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est in
     $F$ est mesurable, et la majoration
     $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in\mathscr{L}^\infty(\Gamma^I)$. 
     Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. \\
-    TODO classes de fonctions ?
+    \TODO{gérer les classes de fonctions}
 \end{proof}
 
-On peut alors considérer l'espace $L(G) := \C\cdot\indic \oplus L_0(G)$, qui est intéressant en ce qu'il permet de caractériser entièrement
-les moyennes à gauche.
+On peut alors considérer l'espace $L(\Gamma) := \C\cdot\indic \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
+les moyennes à gauche sur $\Gamma$, au sens du théorème suivant.
 
-\paragraph{}
+\begin{theorem}\label{left_mean_iff}
+    Considérons l'application linéaire $\widetilde{T} : L(\Gamma)\to\C$ définie par $\widetilde{T}(\indic) = 1$
+    et $\widetilde{T}_{|L_0(\Gamma)} = 0$. 
+    
+    Le groupe $\Gamma$ est moyennable \ssi l'application $\widetilde{T}$ est continue et de norme $1$.
+    Si c'est le cas, les moyennes à gauche sur $\Gamma$ sont exactement les prolongements de $\widetilde{T}$ à 
+    $\mathrm{L}^\infty(\Gamma)$ qui préservent la norme.
+\end{theorem}
 
+En remarquant que $\forall c\in\C, \forall f\in L_0(\Gamma), \widetilde{T}(c + f) = c$, et qu'on a toujours 
+$\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critère de moyennabilité suivant:
 
-On peut maintenant donner notre premier exemple de groupe non-compact moyennable.
+\begin{corollary}\label{amenable_iff_L0}
+    $\Gamma$ est moyennable \ssi $\forall c\in\C, \forall f\in L_0(\Gamma), \abs{c}\le\norm{c + f}_\infty$.
+\end{corollary}
+
+\begin{proof}[Démonstration du théorème \ref{left_mean_iff}]
+    Supposons d'abord $\Gamma$ moyennable, et soit $T$ une moyenne à gauche sur $\Gamma$.
+    On sait déjà que $T$ prolonge $\widetilde{T}$, puisque $T$ est nulle sur $L_0(\Gamma)$ et 
+    $T(\indic)=1$. On a donc $\norm{\widetilde{T}}\le\norm{T}=1$ par restriction, et en fait $\norm{\widetilde{T}} = 1$
+    puique $\widetilde{T}(\indic)=1$. 
+
+    Supposons maintenant $\norm{\widetilde{T}}=1$. Par le théorème de Hahn-Banach, $\widetilde{T}$ se prolonge 
+    en $T:\mathrm{L}^\infty(\Gamma)\to\C$ linéaire continue de même norme. Comme de plus $T(\indic)=1$ et 
+    $T_{|L_0(\Gamma)} = 0$, $T$ est une moyenne à gauche sur $\Gamma$. En fait, cet argument montre bien 
+    que tout prolongement de norme $1$ est une moyenne à gauche, ce qui termine la preuve.
+\end{proof}
+
+Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de groupe non-compact moyennable.
 
 \begin{theorem}\label{Z_amenable}
     $\Z$ est moyennable.
 \end{theorem}
 
-On va pour cela utiliser la variation suivante sur le théorème de Hahn-Banach.
+\begin{proof}
+    Commençons par simplifier un peu notre description de $L_0(\Z)$. Un simple argument de somme
+    télescopique montre que, pour $n>0$ et $u\in\mathrm{L}^\infty(\Z)=\ell^\infty(\Z)$:
+    \begin{equation*}
+        (\lambda(n)-\id)(u) = \left(\sum_{1\le i\le n} \lambda(i+1) - \lambda(i)\right)(u) = (\lambda(1)-\id)\left(\sum_{1\le i\le n} \lambda(i)(u)\right)
+    \end{equation*}
 
-TODO
+    Comme de plus $\lambda(0)-\id = 0$ et $\lambda(-n)-\id = -(\lambda(n)-\id)\comp\lambda(-n)$,
+    on en déduit que $\Ima(\lambda(n)-\id)\subseteq\Ima(\lambda(1)-\id)$ pour tout $n\in\Z$, et donc $L_0(\Z) = \Ima(\lambda(1)-\id)$. \\
 
-\begin{proof}[Démonstration du théorème \ref{Z_amenable}]
-    Considérons le sous-espace vectoriel $C$ de $\mathrm{L}^\infty(\Z) = \ell^\infty(\Z)$ formé 
-    des suites $u:\Z\to\R$ convergentes en $+\infty$. Posons alors 
-    $\fundef{\varphi}{C&\to&\R}{u&\mapsto&\lim_{n\to+\infty}u_n}$.
+    Soient maintenant $c\in\C$ et $v\in L_0(\Z)$. On peut donc écrire $v = \lambda(1)(u)-u$ pour un certain $u\in\ell^\infty(\Z)$. 
+    On veut montrer $\abs{c}\le\norm{c + \lambda(1)(u) - u}_\infty =: M$. 
 
-    Il est clair que $\varphi$ est linéaire. De plus, pour $u\in C$, on a $\forall n, \abs{u_n}\le\norm{u_n}_\infty$
-    donc en passant à la limite $\abs{\varphi(u)}\le\norm{u}_\infty$, donc $\varphi$ est continue. $\varphi$ est enfin clairement positive.
-    Par le résultat ci-dessus (TODO ref) on obtient donc $\widetilde{\varphi}:$
+    Par définition, on a $\forall n\in\Z, -M\le u_n-u_{n-1}-c\le M$. En moyennant ces inégalités pour 
+    $n\in\rrbracket N-k, N\rrbracket$, on obtient, encore par un argument de somme télescopique :
+    \begin{equation}\label{Z_amenable_eq1}
+        \forall N\in\Z, \forall k\in\N,\quad -M\le \frac{u_N - u_{N-k}}{k} - c \le M
+    \end{equation}
 
-    TODO
+    Mais $u$ est bornée, donc il existe une suite strictement croissante $\varphi:\N\to\N$ telle que $u\comp\varphi$
+    soit convergente. En particulier $\frac{\abs{u_{\varphi(n+1)}-u_{\varphi(n)}}}{\varphi(n+1)-\varphi(n)}\le\abs{u_{\varphi(n+1)}-u_{\varphi(n)}}\xrightarrow[n\to+\infty]{}0$, 
+    donc $\frac{u_{\varphi(n+1)}-u_{\varphi(n)}}{\varphi(n+1)-\varphi(n)}-c\xrightarrow[n\to+\infty]{}-c$. En passant à la limite dans l'inégalité (\ref{Z_amenable_eq1}),
+    on obtient donc $-M\le-c\le M$, ce qui conclut.
 \end{proof}
 
-\subsection{Condition de F\o{}lner}
+Présentée ainsi, la preuve précédente peut sembler très spécifique à $\Z$ et peu généralisables. Pourtant, l'idée clé 
+est simplement de considérer une \og{}moyenne\fg{} d'inégalités de la forme $-M\le c + u(\gamma\inv x) - u(x)\le M$, 
+ce qui peut tout à fait se généraliser à un groupe discret quelconque. 
+
+Les obstacles sont donc la forme spécifique de $L_0(\Z)$ et le recours à une suite extraite pour forcer la convergence des $u_{n+1}-u_n$. Nous allons voir 
+qu'il est possible de les contourner.
+
+\begin{proof}[Deuxième démonstration du théorème \ref{Z_amenable}]
+    Soient $c\in\C$ et $v\in L_0(\Z)$, de sorte que $v = \sum_{i\in I} (\lambda(n_i)(f_i) - f_i)$ pour certains $I$ fini, $n : I \to\Z$ et
+    $f : I\to\ell^\infty(\Z)$. Posons toujours $M := \norm{c + v}_\infty$.
+
+    Par définition, on a $\forall k\in\Z$:
+    \begin{equation*}
+        -M \le c + \sum_i (f_i(k-n_i) - f_i(k)) \le M
+    \end{equation*}
+    En moyennant ces inégalités pour $k\in F_N := \llbracket-N,N\rrbracket$, on obient $\forall N\in\N$:
+    \begin{equation}\label{Z_amenable_eq2}
+        -M \le c + \sum_i \frac1{2N+1} \sum_{k=-N}^N (f_i(k-n_i) - f_i(k)) \le M
+    \end{equation}
+
+    Étudions donc, pour $i$ fixé, les moyennes de la forme $\frac1{2N+1} \sum_{k=-N}^N (f_i(k-n_i) - f_i(k))$. On a :
+    \begin{align*}
+        \abs{\sum_{k=-N}^N (f_i(k-n_i) - f_i(k))} &= \abs{\sum_{k\in F_N - n_i} f_i(k) - \sum_{k\in F_N}f_i(k)} \\
+            &= \abs{\sum_{\substack{k\in F_N - n_i \\ k\notin F_N}} f_i(k) -
+            \sum_{\substack{k\in F_N \\ k\notin F_N-n_i}} f_i(k)} \\
+            &\le \sum_{k\in (F_N-n_i)\triangle F_N} \norm{f_i}_\infty \\
+            &=\norm{f_i}_\infty \cdot \card{(F_N-n_i)\triangle F_N}
+    \end{align*}
+    Or, pour $N>n_i$, l'ensemble $(F_N-n_i)\triangle F_N = \llbracket -N-n_i, -N\llbracket\ \amalg\ \rrbracket N-n_i, N\rrbracket$ est de cardinal $2n_i$ constant.
+    On a donc:
+    \begin{gather*}
+        \frac{\card{(F_N-n_i)\triangle F_N}}{2N+1} \xrightarrow[N\to+\infty]{} 0 \\
+        \frac1{2N+1} \sum_{k=-N}^N (f_i(k-n_i) - f_i(k)) \xrightarrow[N\to+\infty]{} 0
+    \end{gather*}
+
+    En passant à la limite dans l'inégalité (\ref{Z_amenable_eq2}), on obtient donc $-M\le c\le M$, ce qui conclut.
+\end{proof}
+
+Notons que, dans cette deuxième démonstration, l'hypothèse $\Gamma=\Z$ n'a été utilisée que pour établir l'existence d'une suite $F:\N\to\mathcal{P}(\Z)$
+telle que $\forall n\in\Z, \frac{\card{(F_N-n)\triangle F_N}}{\card{F_N}} \xrightarrow[N\to+\infty]{} 0$. 
+
+Dans le cas général, la mesure de Haar $\mu$ va remplacer le cardinal, et on va donc s'intéresser aux réels $\frac{\mu(\gamma F \triangle F)}{\mu(F)}$ 
+pour $F$ partie compacte de $\Gamma$ et $\gamma\in\Gamma$, et à leur comportement asymptotique
+lorsque $F$ est grand. C'est l'objet de la partie suivante.
+
+\section{Condition de F\o{}lner}
+
+Dans cette section, $\Gamma$ est un groupe topologique séparé et localement compact, et on fixe 
+$\mu$ une mesure de Haar à gauche sur $\Gamma$.
+
+On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathcal{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
+$\mathcal{K}_+(\Gamma)$ des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
+C'est une application bien définie car tout élément de $\mathcal{K}_+(\Gamma)$ est de mesure finie non-nulle,
+et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
+
+Un filtre $\mathscr{F}$ sur $\mathcal{K}_+(\Gamma)$ est dit \emph{de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
+de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence compacte sur $\mathcal{F}(\Gamma, \R_+)$.
+Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{de F\o{}lner} si le filtre image 
 
 \end{document}
