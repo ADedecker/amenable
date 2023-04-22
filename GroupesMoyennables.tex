@@ -40,7 +40,7 @@
 \newcommand{\halfilon}{{\frac\varepsilon2}}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\indic}{\mathbbm{1}}
-\newcommand{\integral}[2]{\int #1~\mathrm{d}#2}
+\newcommand{\integral}[4]{\int_{#1}^{#2} #3~\mathrm{d}#4}
 \newcommand\fundef[3]{#1: \left\{\begin{array}{ccc}#2\\#3\end{array}\right.}
 \newcommand\funlam[2]{\left\{\begin{array}{ccc}#1\\#2\end{array}\right.}
 \newcommand{\tq}{\;\middle|\;}
@@ -49,6 +49,7 @@
 \newcommand{\closure}[1]{\overline{#1}}
 \newcommand{\transpose}[1]{\prescript{t}{}{#1}{}{}}
 \newcommand{\inv}{^{-1}}
+\newcommand{\compl}{^c}
 \newcommand{\infi}{\bigwedge}
 \newcommand{\supr}{\bigvee}
 \newcommand{\comp}{\circ}
@@ -57,6 +58,8 @@
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\blank}{{-}}
 \newcommand{\invop}{\mathrm{inv}}
+\newcommand{\parts}{\mathfrak{P}}
+\newcommand{\finparts}{\mathfrak{P}_{\mathrm{fin}}}
 \newcommand{\TODO}[1]{{\color{red}TODO :} #1}
 
 \DeclareMathOperator{\sgn}{sgn}
@@ -120,13 +123,25 @@ si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous di
 sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
 
 Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
-Radon sur $G$ invariante par tranlations à gauche (resp. à droite).
+Radon sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
+utiliserons à de nombreuses reprises.
 
-\TODO{Théorème mesure de Haar}
+\begin{theorem}\label{theorem_Haar}
+    Tout groupe topologique $G$ séparé et localement compact admet une mesure de Haar à gauche, unique à multiplication par un réel strictement 
+    positif près. 
+    
+    Si $\mu$ est une telle mesure, tout ouvert $U$ non-vide de $G$ est de mesure strictement positive,
+    et $\mu(G)<+\infty$ \ssi G est compact.
+
+    Enfin, si $G$ est compact, les mesures de Haar à gauche sont exactement les mesures de Haar à droite.
+\end{theorem}
+
+\TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
+
 
 \section{Premières définitions}
 
-Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ces notes est la suivante.
+Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ce mémoire est la suivante.
 
 \begin{definition}
     On dit qu'un groupe topologique $\Gamma$ est \emph{moyennable} s'il admet une 
@@ -135,14 +150,14 @@ Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ce
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
-    Supposons qu'il existe une mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations à gauche.
+    Supposons qu'il existe une mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
     Alors $\Gamma$ est un groupe moyennable.
 \end{proposition} 
 
 \begin{proof}
-    Il s'agit donc de construire une \textbf{autre} mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
+    Il s'agit donc de construire une \emph{autre} mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
     Posons d'abord, pour $A\in\Bor(G)$, $\fundef{f_A}{\Gamma&\to& \Gamma}{g&\mapsto& m(Ag\inv)}$. Chaque $f_A$ est bornée par $1 = m(\Gamma)$, 
-    donc intégrable pour la mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{f_A}{(\invop_*m)}$. \\
+    donc intégrable pour la mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{}{}{f_A}{(\invop_*m)}$. \\
     Notons que, pour $A$ et $B$ boréliens disjoints, ainsi que $g, x\in\Gamma$, on a :
     \begin{gather*}
         f_\Gamma = \indic \\
@@ -162,11 +177,46 @@ Notons tout de suite que l'invariance bilatère n'impose pas de restriction supl
 
 Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
 En effet, la mesure de Haar normalisée d'un tel groupe est une mesure de probabilité invariante par tranlation. Les phénomènes
-plus intéressants vont donc se produire dans le cas non-compact, et il convient de noter que ces groupes ne peuvent pas avoir
-de $\sigma$-mesure de probabilité invariante par translations (\TODO{référence}). C'est donc l'affaibilissement de la 
-$\sigma$-additivité en additivité finie qui engendre la complexité. \\
+plus intéressants vont donc se produire pour les groupes non-compacts, et il convient de noter que ces groupes ne peuvent pas avoir
+de $\sigma$-mesure de probabilité invariante par translations d'après le théorème \ref{theorem_Haar}. C'est donc l'affaibilissement de la 
+$\sigma$-additivité en additivité finie qui engendre la complexité. 
 
-Comme constaté dans la preuve ci-dessus, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
+\paragraph{}
+
+Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-moyennable.
+
+\begin{theorem}
+    Le groupe libre en deux générateurs $F_2$ (muni de la topologie discrète) n'est pas moyennable.
+\end{theorem}
+
+\begin{proof}
+    Notons $a, b$ les deux générateurs. Pour $m$ mot réduit en $\set{a, b, a\inv, b\inv}$, notons 
+    $S(m)$ l'ensemble des $g\in F_2$ dont l'écriture (unique) comme mot réduit
+    commence par $m$. On a par exemple $ab\in S(a)$ mais $a a\inv b \notin S(a)$ car le mot réduit associé 
+    à $a a\inv b$ est $b$.
+
+    Remarquons que $a\inv S(a) = S(a\inv)\compl$. En effet, si $m$ est un mot réduit ne commençant pas par $a\inv$, 
+    $am$ est un mot réduit commençant par $a$. Réciproquement si $am$ est un mot réduit alors $m$ est réduit et ne commence 
+    pas par $a\inv$. \TODO{est-ce que c'est assez clair ?}
+
+    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe une mesure de probabilité $m$ sur 
+    $F_2$ invariante par translation. On a alors :
+    \begin{gather*}
+        m(S(a)) + m(S(a\inv)) = m(a\inv S(a)\ \amalg\ S(a\inv)) = 1 \\
+        m(S(b)) + m(S(b\inv)) = m(b\inv S(b)\ \amalg\ S(b\inv)) = 1
+    \end{gather*}
+    Mais les ensembles $S(a)$, $S(a\inv)$, $S(b)$ et $S(b\inv)$, donc :
+    \begin{equation*}
+        1 = m(F_2) \ge m(S(a)) + m(S(a\inv)) + m(S(b)) + m(S(b\inv)) = 2
+    \end{equation*} 
+    D'où contradiction.
+\end{proof}
+
+\TODO{Mentionner importance historique ?}
+
+\paragraph{}
+
+Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
 On dispose pour cela du résultat suivant.
 \begin{proposition}\label{repr}
     Soit $(X, \mathcal{A})$ un espace mesurable. Pour $m$ mesure de probabilité, \TODO{}
@@ -192,7 +242,9 @@ Cela nous amène à donner la définition suivante.
 Remarquons que la bijection $T$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
 invariantes aux moyennes sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
 $f\in\mathscr{L}^\infty(\Gamma)$ et $g\in\Gamma$, on a 
-$T_m(\lambda_g(f)) = \integral{f\comp\ell_{g\inv}}{m} = \integral{f}{m} = T_m(f)$. Réciproquement, si $T$ est une 
+$T_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = T_m(f)$. 
+
+Réciproquement, si $T$ est une 
 moyenne à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
 $m(g\inv A) = T(\indic_{g\inv A}) = T(\indic_A \comp\ell_g) = T(\lambda_{g\inv}(\indic_A)) = T(\indic_A) = m(A)$.
 En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de montrer le résultat suivant.
@@ -219,7 +271,7 @@ de norme. C'est ce que fournit le lemme suivant.
     d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
     $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
     Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in\mathscr{L}^\infty(X)$ quelconque,
-    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut. \\
+    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut.
 \end{proof}
 
 L'intérêt de la condition $\norm\varphi = 1$ dans ce lemme est qu'elle est conservée lors du prolongement de l'application $\varphi$ par le théorème
@@ -237,7 +289,9 @@ Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est in
 \begin{proof}
     Supposons d'abord que $\indic$ soit de la forme $\lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
     $f\in\mathrm{L}^\infty(\Gamma)$. On a alors $\forall n\in\N, f(\gamma^n) = f(1) + n$, donc $\norm{f(\gamma^n)}\xrightarrow[n\to+\infty]{}+\infty$
-    ce qui contredit le fait que $f$ est borné. \\
+    ce qui contredit le fait que $f$ est borné. \TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
+    vraie que presque partout !}
+
     Pour le cas général, on suppose cette fois $\indic = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
     $f : I\to\mathrm{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
     un élément), et la fonction : 
@@ -246,8 +300,7 @@ Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est in
     \end{equation*}
     $F$ est mesurable, et la majoration
     $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in\mathscr{L}^\infty(\Gamma^I)$. 
-    Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. \\
-    \TODO{gérer les classes de fonctions}
+    Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
 \end{proof}
 
 On peut alors considérer l'espace $L(\Gamma) := \C\cdot\indic \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
@@ -277,8 +330,9 @@ $\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critè
 
     Supposons maintenant $\norm{\widetilde{T}}=1$. Par le théorème de Hahn-Banach, $\widetilde{T}$ se prolonge 
     en $T:\mathrm{L}^\infty(\Gamma)\to\C$ linéaire continue de même norme. Comme de plus $T(\indic)=1$ et 
-    $T_{|L_0(\Gamma)} = 0$, $T$ est une moyenne à gauche sur $\Gamma$. En fait, cet argument montre bien 
-    que tout prolongement de norme $1$ est une moyenne à gauche, ce qui termine la preuve.
+    $T_{|L_0(\Gamma)} = 0$, $T$ est une moyenne à gauche sur $\Gamma$. En fait, cet argument montre même 
+    que \emph{tout} prolongement de norme $1$ de $\widetilde{T}$ \footnote{et pas seulement le prolongement fourni par Hahn-Banach} 
+    est une moyenne à gauche, ce qui termine la preuve.
 \end{proof}
 
 Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de groupe non-compact moyennable.
@@ -300,16 +354,16 @@ Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de gr
     Soient maintenant $c\in\C$ et $v\in L_0(\Z)$. On peut donc écrire $v = \lambda(1)(u)-u$ pour un certain $u\in\ell^\infty(\Z)$. 
     On veut montrer $\abs{c}\le\norm{c + \lambda(1)(u) - u}_\infty =: M$. 
 
-    Par définition, on a $\forall n\in\Z, -M\le u_n-u_{n-1}-c\le M$. En moyennant ces inégalités pour 
+    Par définition, on a $\forall n\in\Z, -M\le c+u_{n-1}-u_n\le M$. En moyennant ces inégalités pour 
     $n\in\rrbracket N-k, N\rrbracket$, on obtient, encore par un argument de somme télescopique :
     \begin{equation}\label{Z_amenable_eq1}
-        \forall N\in\Z, \forall k\in\N,\quad -M\le \frac{u_N - u_{N-k}}{k} - c \le M
+        \forall N\in\Z, \forall k\in\N,\quad -M\le c-\frac{u_N - u_{N-k}}{k} \le M
     \end{equation}
 
     Mais $u$ est bornée, donc il existe une suite strictement croissante $\varphi:\N\to\N$ telle que $u\comp\varphi$
     soit convergente. En particulier $\frac{\abs{u_{\varphi(n+1)}-u_{\varphi(n)}}}{\varphi(n+1)-\varphi(n)}\le\abs{u_{\varphi(n+1)}-u_{\varphi(n)}}\xrightarrow[n\to+\infty]{}0$, 
-    donc $\frac{u_{\varphi(n+1)}-u_{\varphi(n)}}{\varphi(n+1)-\varphi(n)}-c\xrightarrow[n\to+\infty]{}-c$. En passant à la limite dans l'inégalité (\ref{Z_amenable_eq1}),
-    on obtient donc $-M\le-c\le M$, ce qui conclut.
+    donc $c-\frac{u_{\varphi(n+1)}-u_{\varphi(n)}}{\varphi(n+1)-\varphi(n)}\xrightarrow[n\to+\infty]{}c$. En passant à la limite dans l'inégalité (\ref{Z_amenable_eq1}),
+    on obtient donc $-M\le c\le M$, ce qui conclut.
 \end{proof}
 
 Présentée ainsi, la preuve précédente peut sembler très spécifique à $\Z$ et peu généralisables. Pourtant, l'idée clé 
@@ -320,7 +374,7 @@ Les obstacles sont donc la forme spécifique de $L_0(\Z)$ et le recours à une s
 qu'il est possible de les contourner.
 
 \begin{proof}[Deuxième démonstration du théorème \ref{Z_amenable}]
-    Soient $c\in\C$ et $v\in L_0(\Z)$, de sorte que $v = \sum_{i\in I} (\lambda(n_i)(f_i) - f_i)$ pour certains $I$ fini, $n : I \to\Z$ et
+    Soient $c\in\C$ et $v\in L_0(\Z)$, que l'on peut bien sûr décomposer en $v = \sum_{i\in I} (\lambda(n_i)(f_i) - f_i)$ pour certains $I$ fini, $n : I \to\Z$ et
     $f : I\to\ell^\infty(\Z)$. Posons toujours $M := \norm{c + v}_\infty$.
 
     Par définition, on a $\forall k\in\Z$:
@@ -350,7 +404,10 @@ qu'il est possible de les contourner.
     En passant à la limite dans l'inégalité (\ref{Z_amenable_eq2}), on obtient donc $-M\le c\le M$, ce qui conclut.
 \end{proof}
 
-Notons que, dans cette deuxième démonstration, l'hypothèse $\Gamma=\Z$ n'a été utilisée que pour établir l'existence d'une suite $F:\N\to\mathcal{P}(\Z)$
+Notons que, dans cette deuxième démonstration, l'hypothèse $\Gamma=\Z$ n'a été utilisée que pour établir l'existence d'une suite $F:\N\to\finparts^*(\Z)$ 
+    \footnote{On note $\parts(X)$ (resp. $\parts^*(X)$) l'ensemble des parties (resp. parties non-vides) de $X$, et $\finparts(X)$ (resp $\finparts^*(X)$) 
+    l'ensemble des parties finies (resp. parties finies non-vides) de $X$.}
+de parties finies non-vides de $\Z$,
 telle que $\forall n\in\Z, \frac{\card{(F_N-n)\triangle F_N}}{\card{F_N}} \xrightarrow[N\to+\infty]{} 0$. 
 
 Dans le cas général, la mesure de Haar $\mu$ va remplacer le cardinal, et on va donc s'intéresser aux réels $\frac{\mu(\gamma F \triangle F)}{\mu(F)}$ 
@@ -363,12 +420,96 @@ Dans cette section, $\Gamma$ est un groupe topologique séparé et localement co
 $\mu$ une mesure de Haar à gauche sur $\Gamma$.
 
 On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathcal{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
-$\mathcal{K}_+(\Gamma)$ des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
+$\mathcal{K}_+(\Gamma)$
+\footnote{On note $\mathcal{K}(X)$ (resp. $\mathcal{K}^*(X)$, resp. $\mathcal{K}_+(X)$) l'ensemble des parties compactes 
+(resp. compactes non-vides, resp. compactes d'intérieur non-vide) d'un espace topologique $X$. }
+des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
 C'est une application bien définie car tout élément de $\mathcal{K}_+(\Gamma)$ est de mesure finie non-nulle,
 et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
 Un filtre $\mathscr{F}$ sur $\mathcal{K}_+(\Gamma)$ est dit \emph{de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
-de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence compacte sur $\mathcal{F}(\Gamma, \R_+)$.
-Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{de F\o{}lner} si le filtre image 
+de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence 
+%compacte 
+simple
+sur $\mathcal{F}(\Gamma, \R_+)$.
+Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
+voisinages de l'infini dans $\N$, est de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
+une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est donc de F\o{}lner \ssi la suite de fonctions
+$n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)$ converge vers $0$
+%uniformément sur tout compact. 
+simplement.
+
+Notons que si $\Gamma$ est discret, 
+%la topologie de la convergence compacte coïncide avec celle de la convergence simple,
+les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
+et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre $\mathscr{F}$
+est donc de F\o{}lner \ssi, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
+converge vers $0$ selon le filtre $\mathscr{F}$. De même, une suite $F:\N\to\finparts^*(\Gamma)$
+est de F\o{}lner \ssi pour tout $\gamma\in\Gamma$, la suite $n\mapsto\frac{\card{\gamma F_n\triangle F_n}}{\card{F_n}}$ converge 
+vers $0$.
+
+Avant d'aller plus loin, donnons un critère plus simple pour l'existence d'un filtre de F\o{}lner sur $\Gamma$.
+
+\begin{lemma}
+    Le groupe séparé et localement compact $\Gamma$ admet un filtre de F\o{}lner \ssi il satisfait la 
+    \emph{condition de F\o{}lner} :
+    \begin{equation}\label{Folner_cond}
+        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathcal{K}_+(\Gamma), 
+        \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
+    \end{equation}
+%    \begin{equation}\label{Folner_cond}
+%        \forall\varepsilon>0, \forall A\in\mathcal{K}(\Gamma), \exists K\in\mathcal{K}_+(\Gamma), \forall\gamma\in A, 
+%        \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
+%    \end{equation}
+
+    Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
+\end{lemma}
+
+\begin{proof}
+    \TODO{}
+\end{proof}
+
+\TODO{Quelle est la bonne topologie à mettre sur $\mathcal{F}(\Gamma, \R_+)$ pour la définition de filtre de F\o{}lner : convergence simple ou compacte ?
+    En tout cas la convergence simple suffit à faire marcher le théorème suivant.}
+
+Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre de F\o{}lner,
+en adaptant simplement la deuxième preuve de ce théorème.
+
+\begin{theorem}\label{amenable_of_Folner}
+    Si $\Gamma$ admet un filtre de F\o{}lner, alors $\Gamma$ est moyennable.
+\end{theorem}
+
+\begin{proof}
+    On utilise toujours le critère \ref{amenable_iff_L0}. Soient donc $c\in\C$ et $v\in L_0(\Gamma)$, 
+    que l'on écrit encore sous la forme $v = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour certains $I$ fini, $\gamma : I \to\Gamma$ et
+    $f : I\to\mathscr{L}^\infty(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
+
+    Par définition, on a $\forall x\in\Gamma$:
+    \begin{equation*}
+        -M \le c + \sum_i (f_i(\gamma_i\inv x) - f_i(x)) \le M
+    \end{equation*}
+    En moyennant ces inégalités sur un $K\in\mathcal{K}_+(\Gamma)$ quelconque, on obtient:
+    \begin{equation}\label{amenable_of_Folner_eq1}
+        -M \le c + \sum_i \frac1{\mu(K)} \integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)} \le M
+    \end{equation}
+
+    Or, pour $i$ fixé, l'invariance par translation de $\mu$ donne :
+    \begin{align*}
+        \abs{\integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}} 
+            &= \abs{\integral{\gamma_i\inv K}{}{f_i}{\mu} - \integral{K}{}{f_i}{\mu}} \\
+            &= \abs{\integral{\gamma_i\inv K\setminus K}{}{f_i}{\mu} - \integral{K\setminus\gamma_i\inv K}{}{f_i}{\mu}} \\
+            &\le \integral{\gamma_i\inv K\triangle K}{}{\norm{f_i}_\infty}{\mu} \\
+            &=\norm{f_i}_\infty \cdot \mu(\gamma_i\inv K\triangle K)
+    \end{align*}
+    
+    Soit finalement $\mathscr{F}$ un filtre de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
+    la fonction $K\mapsto\frac1{\mu(K)} \integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}$ converge vers $0$
+    selon $\mathscr{F}$, et ce pour chaque $i\in I$. Il suffit enfin de prendre la limite selon $\mathscr{F}$ des inégalités \ref{amenable_of_Folner_eq1}
+    pour obtenir $-M\le c\le M$. 
+\end{proof}
+
+\TODO{Faire aussi la construction par ultrafiltre}
+
+\TODO{Montrer la réciproque}
 
 \end{document}
