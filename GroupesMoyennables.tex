@@ -138,6 +138,7 @@ utiliserons à de nombreuses reprises.
 
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
 
+\TODO{Notations $\mathscr{L}^p$, $\mathrm{L}^p$, $B$ (fonctions mesurables bornées (pas "presque partout"), sans quotient)}
 
 \section{Premières définitions}
 
@@ -170,7 +171,7 @@ Notons tout de suite que l'invariance bilatère n'impose pas de restriction supl
         n(\Gamma) = (\invop_*m)(\Gamma) = 1 \\
         n(A\cup B) = n(A) + n(B) \\
         ({\ell_g}_*n)(A) = n(g\inv A) = n(A) \\
-        ({r_g}_*n)(A) = \integral{f_A\comp r_g\comp\invop}{m} = \integral{f_A\comp\invop\comp \ell_g}{m} = n(A)
+        ({r_g}_*n)(A) = \integral{}{}{f_A\comp r_g\comp\invop}{m} = \integral{}{}{f_A\comp\invop\comp \ell_g}{m} = n(A)
     \end{gather*}
     Ce qui conlut.
 \end{proof}
@@ -185,7 +186,7 @@ $\sigma$-additivité en additivité finie qui engendre la complexité.
 
 Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-moyennable.
 
-\begin{theorem}
+\begin{theorem}\label{not_amenable_F2}
     Le groupe libre en deux générateurs $F_2$ (muni de la topologie discrète) n'est pas moyennable.
 \end{theorem}
 
@@ -219,30 +220,87 @@ Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-m
 Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
 On dispose pour cela du résultat suivant.
 \begin{proposition}\label{repr}
-    Soit $(X, \mathcal{A})$ un espace mesurable. Pour $m$ mesure de probabilité, \TODO{}
+    Soit $X$ un espace mesurable. Pour toute mesure de probabilité $m$ sur $X$, on définit :
+    \begin{equation*}
+        \fundef{I_m}{B(X)&\to&\C}{f&\mapsto&\integral{}{}{f}{m}}
+    \end{equation*}
+    L'application $I:m\mapsto I_m$ est alors une bijection de l'ensemble $\mathrm{Proba}(X)$ des mesures de
+    probabilités sur $X$ sur l'ensemble des formes linéaires positives sur $B(X)$ de valeur $1$ en $\indic$, la 
+    réciproque étant donnée par $T\mapsto(A\mapsto T(\indic_A))$.
 \end{proposition}
 
+Commençons par prouver le lemme suivant, qui sera utile en lui-même.
+
+\begin{lemma}\label{positive_iff_norm}
+    Soit $X$ un espace mesurable et $\varphi:B(X)\to\C$ une forme linéaire. 
+    Si $\varphi(\indic) = 1$, on a l'équivalence :
+    \begin{equation*}
+        \norm{\varphi} = 1 \iff \forall a \ge 0, \varphi(a) \geq 0
+    \end{equation*}
+\end{lemma}
+
 \begin{proof}
-    \TODO{}
+    Supposons d'abord $\norm{\varphi} = 1$, et soit $a\ge 0$ de norme 1. On a donc, pour $x\in X$, $a(x), 1-a(x)\in[0,1]$,
+    d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
+    $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
+    Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in B(X)$ quelconque,
+    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut.
 \end{proof}
+
+\begin{proof}[Démonstration du théorème \ref{repr}]
+    Toute fonction mesurable bornée étant intégrable par rapport à toute mesure de probabilité, il est clair que $I$ est bien définie. 
+    Les propriétés élémentaires de l'intégration de Lebesgue, qui restent valables dans le cas de mesures finiment-additives,
+    donnent immédiatement que chaque $I_m$ est bien une forme linéaire positive avec $I_m(\indic) = 1$, et qu'on a
+    $I_m(\indic_A) = m(A)$ pour tout $A\subseteq X$ mesurable.
+
+    Soit maintenant $T$ une forme linéaire positive sur $B(X)$, vérifiant $T(\indic) = 1$.
+    Il faut alors montrer que $m : A\mapsto T(\indic_A)$ est bien une mesure de probabilité sur $X$,
+    puis que $T = I_m$ pour cette mesure $m$. $m$ est bien à valeurs positive par positivité de $T$, et 
+    de plus $m(X) = T(\indic) = 1$ et $m(\varnothing) = T(0) = 0$. Soient enfin $A, B\subseteq X$ deux ensembles
+    mesurables disjoints, de sorte que $\indic_{A\cup B} = \indic_A + \indic_B$. On a alors bien 
+    $m(A\cup B) = m(A) + m(B)$ ce qui assure l'additivité finie. 
+
+    Pour finir, considérons le sous-espace vectoriel $S(X, m)$ de $B(X)$ des fonctions $m$-simples, c'est à dire des 
+    fonctions $f:X\to\C$ mesurables, d'image finie, et vérifiant $\forall c\in\C^*, m(f\inv(x)) < +\infty$ (cette dernière 
+    condition est automatiquement vérifiée dans notre cas d'une mesure de probabilité, mais nécessaire en général).
+    Montrons que $S(X, m)$ est dense dans $B(X)$. Soit donc $f\in B(X)$, que nous supposons d'abord positive, et construisons 
+    une suite $g:\N\to S(X, m)$ de la manière suivante :
+    \begin{gather*}
+        g_0 := 0 \\
+        g_{n+1} := g_n + \frac12\norm{f - g_n}\indic_{\set{x\tq f(x) - g_n(x) \ge \frac12\norm{f - g_n}}}
+    \end{gather*}
+    Il est clair que chaque $g_n$ est une fonction simple positive et inférieure à $f$, et que la suite $g$ est croissante.
+    De plus, pour tout $n\in\N$ et $x\in X$, on est dans l'un des cas suivants : 
+    \begin{gather*}
+        f(x)-g_{n+1}(x) = f(x)-g_n(x) \le \frac12\norm{f - g_n} \\
+        f(x)-g_{n+1}(x) = f(x)-g_n(x)-\frac12\norm{f-g_n} \le \frac12\norm{f-g_n}
+    \end{gather*}
+    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$.
+    Dans le cas général, il suffit alors de décomposer $f$ en combinaison linéaire de fonctions positives et d'appliquer 
+    le résultat à chacune de ces fonctions. Cela montre donc la densité souhaitée. Or les formes linéaires $T$ et $I_m$
+    coïncident sur les indicatrices, donc sur $S(X, m)$, et elles sont continues par le lemme \ref{positive_iff_norm}. 
+    Par densité, elles sont donc égales, ce qui termine la preuve.
+\end{proof}
+
+\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
 
 Cela nous amène à donner la définition suivante.
 
 \begin{definition}
-    Soit $\Gamma$ un groupe localement compact et séparé. Une \emph{moyenne à gauche (resp. à droite)} sur $\Gamma$ est une forme 
-    linéaire positive $T : \mathrm{L}^\infty(\Gamma)\to\C$ vérifiant $T(\indic) = 1$ et $\forall g\in\Gamma, T\comp\lambda_g = T$
+    Soit $\Gamma$ un groupe localement compact et séparé. Une \emph{moyenne à gauche} (resp. \emph{à droite}) sur $\Gamma$ est une forme 
+    linéaire positive $T : B(\Gamma)\to\C$ vérifiant $T(\indic) = 1$ et $\forall g\in\Gamma, T\comp\lambda_g = T$
     (resp. $T\comp\rho_g = T$). Une moyenne bilatère sera simplement appelée \emph{moyenne}.
 \end{definition}
 
 \begin{remark}
-    Les moyennes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(\mathrm{L}^\infty(\Gamma), \lambda)$ de 
+    Les moyennes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(B(\Gamma), \lambda)$ de 
     $\Gamma$ vers la représentation triviale, avec la condition suppplémentaire que $T(\indic) = 1$.
 \end{remark}
 
-Remarquons que la bijection $T$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
+Remarquons que la bijection $I$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
 invariantes aux moyennes sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
-$f\in\mathscr{L}^\infty(\Gamma)$ et $g\in\Gamma$, on a 
-$T_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = T_m(f)$. 
+$f\in B(\Gamma)$ et $g\in\Gamma$, on a 
+$I_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = I_m(f)$. 
 
 Réciproquement, si $T$ est une 
 moyenne à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
@@ -255,32 +313,17 @@ En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de mo
 Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
 \paragraph{}
 
-Pour étudier les moyennes avec les outils de l'analyse fonctionnelle, il sera utile de transformer la condition de positivité en une condition
-de norme. C'est ce que fournit le lemme suivant.
+Sans grande surprise, nous allons maintenant vouloir appliquer différents outils de l'analyse fonctionelle à l'étude des moyennes.
+Pour cela, nous allons utiliser à nouveau le lemme \ref{positive_iff_norm}, de manière beaucoup plus fine que dans la preuve 
+du théorème \ref{repr} (où nous avions seulement besoin de la continuité des formes linéaires positives).
 
-\begin{lemma}\label{positive_iff_norm}
-    Soit $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon et $\varphi:\mathrm{L}^\infty(X)\to\C$ une forme linéaire. 
-    Si $\varphi(\indic) = 1$, on a :
-    \begin{equation*}
-        \norm{\varphi} = 1 \iff \forall a \ge 0, \varphi(a) \geq 0
-    \end{equation*}
-\end{lemma}
-
-\begin{proof}
-    Supposons d'abord $\norm{\varphi} = 1$, et soit $a\ge 0$ de norme 1. On a donc, pour $x\in X$, $a(x), 1-a(x)\in[0,1]$,
-    d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
-    $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
-    Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in\mathscr{L}^\infty(X)$ quelconque,
-    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut.
-\end{proof}
-
-L'intérêt de la condition $\norm\varphi = 1$ dans ce lemme est qu'elle est conservée lors du prolongement de l'application $\varphi$ par le théorème
-de Hahn-Banach, alors qu'il n'est pas clair du tout qu'on puisse prolonger une forme linéaire positive en préservant la positivité. On va donc pouvoir se restreindre
-à étudier les moyennes sur des sous-espaces plus concrets de $\mathrm{L}^\infty(\Gamma)$.
+En effet, la condition $\norm\varphi = 1$ qui apparaît dans ce lemme a le bon goût d'être conservée lors du prolongement de l'application 
+$\varphi$ par le théorème de Hahn-Banach, alors qu'il n'est pas clair du tout qu'on puisse prolonger une forme linéaire positive en préservant 
+la positivité. On va donc pouvoir se restreindre à étudier les moyennes sur des sous-espaces plus concrets de $B(\Gamma)$.
 
 Plus précisément, toujours pour $\Gamma$ groupe localement compact et séparé, on introduit $L_0(\Gamma) := \sum_{g\in\Gamma} \Ima(\lambda(g) - \id)$ le sous-espace de 
-$\mathrm{L}^\infty(\Gamma)$ engendré par les (classes de) fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in\mathscr{L}^\infty(\Gamma)$. 
-Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
+$B(\Gamma)$ engendré par les (classes de) fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in B(\Gamma)$. 
+Il est alors clair qu'une forme linéaire sur $B(\Gamma)$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
 
 \begin{lemma}
     $\indic\notin L_0(\Gamma)$
@@ -288,18 +331,19 @@ Il est alors clair qu'une forme linéaire sur $\mathrm{L}^\infty(\Gamma)$ est in
 
 \begin{proof}
     Supposons d'abord que $\indic$ soit de la forme $\lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
-    $f\in\mathrm{L}^\infty(\Gamma)$. On a alors $\forall n\in\N, f(\gamma^n) = f(1) + n$, donc $\norm{f(\gamma^n)}\xrightarrow[n\to+\infty]{}+\infty$
-    ce qui contredit le fait que $f$ est borné. \TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
-    vraie que presque partout !}
+    $f\in B(\Gamma)$. On a alors $\forall n\in\N, f(\gamma^n) = f(1) + n$, donc $\norm{f(\gamma^n)}\xrightarrow[n\to+\infty]{}+\infty$
+    ce qui contredit le fait que $f$ est bornée. 
+    %\TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
+    %vraie que presque partout !}
 
     Pour le cas général, on suppose cette fois $\indic = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to\mathrm{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
+    $f : I\to B(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
     un élément), et la fonction : 
     \begin{equation*}
         \fundef{F}{\Gamma^I&\to&\C}{x&\mapsto&\frac{1}{\card{I}}\sum_{i\in I}f_i(x_i)}
     \end{equation*}
     $F$ est mesurable, et la majoration
-    $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in\mathscr{L}^\infty(\Gamma^I)$. 
+    $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in B(\Gamma^I)$. 
     Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
 \end{proof}
 
@@ -329,13 +373,24 @@ $\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critè
     puique $\widetilde{T}(\indic)=1$. 
 
     Supposons maintenant $\norm{\widetilde{T}}=1$. Par le théorème de Hahn-Banach, $\widetilde{T}$ se prolonge 
-    en $T:\mathrm{L}^\infty(\Gamma)\to\C$ linéaire continue de même norme. Comme de plus $T(\indic)=1$ et 
+    en $T:B(\Gamma)\to\C$ linéaire continue de même norme. Comme de plus $T(\indic)=1$ et 
     $T_{|L_0(\Gamma)} = 0$, $T$ est une moyenne à gauche sur $\Gamma$. En fait, cet argument montre même 
     que \emph{tout} prolongement de norme $1$ de $\widetilde{T}$ \footnote{et pas seulement le prolongement fourni par Hahn-Banach} 
     est une moyenne à gauche, ce qui termine la preuve.
 \end{proof}
 
-Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de groupe non-compact moyennable.
+Illustrons ce critère sur le cas du groupe libre $F_2$. Dans ce cas, on peut montrer que $\norm{\widetilde{T}}\ge3$.
+Reprenons pour cela les notations de la preuve du théorème \ref{not_amenable_F2}, et posons $f := (\lambda(a\inv)-\id)(\indic_{S(a)})$ et 
+$g:=(\lambda(b\inv) - \id)(\indic_{S(b)})$, qui sont deux éléments de $L_0(F_2)$. L'égalité $a\inv S(a) = S(a\inv)\compl$ donne que 
+$f = \indic_{a\inv S(a)} - \indic_{S(a)} = \indic_{\set{1}\cup S(b)\cup S(b\inv)}$, et de même 
+$g = \indic_{\set{1}\cup S(a)\cup S(a\inv)}$, de sorte que $f+g=\indic + \delta_1$. Mais alors 
+$-\frac23(\indic+\delta_1)\in L_0(F_2)$, donc $\widetilde{T}(\indic - \frac23(\indic+\delta_1)) = 1$, 
+et d'autre part $\norm{\indic - \frac23(\indic+\delta_1)}_\infty=\frac13$. 
+On a donc bien $\norm{\widetilde{T}}\geq3$.
+
+\paragraph{}
+
+Donnons maintenant, toujours à l'aide du critère \ref{amenable_iff_L0}, notre premier exemple de groupe moyennable non-compact.
 
 \begin{theorem}\label{Z_amenable}
     $\Z$ est moyennable.
@@ -343,7 +398,7 @@ Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de gr
 
 \begin{proof}
     Commençons par simplifier un peu notre description de $L_0(\Z)$. Un simple argument de somme
-    télescopique montre que, pour $n>0$ et $u\in\mathrm{L}^\infty(\Z)=\ell^\infty(\Z)$:
+    télescopique montre que, pour $n>0$ et $u\in B(\Z)=\ell^\infty(\Z)$:
     \begin{equation*}
         (\lambda(n)-\id)(u) = \left(\sum_{1\le i\le n} \lambda(i+1) - \lambda(i)\right)(u) = (\lambda(1)-\id)\left(\sum_{1\le i\le n} \lambda(i)(u)\right)
     \end{equation*}
@@ -366,7 +421,7 @@ Le critère \ref{amenable_iff_L0} nous permet de donner un premier exemple de gr
     on obtient donc $-M\le c\le M$, ce qui conclut.
 \end{proof}
 
-Présentée ainsi, la preuve précédente peut sembler très spécifique à $\Z$ et peu généralisables. Pourtant, l'idée clé 
+Présentée ainsi, la preuve précédente peut sembler très spécifique à $\Z$ et peu généralisable. Pourtant, l'idée clé 
 est simplement de considérer une \og{}moyenne\fg{} d'inégalités de la forme $-M\le c + u(\gamma\inv x) - u(x)\le M$, 
 ce qui peut tout à fait se généraliser à un groupe discret quelconque. 
 
@@ -482,7 +537,7 @@ en adaptant simplement la deuxième preuve de ce théorème.
 \begin{proof}
     On utilise toujours le critère \ref{amenable_iff_L0}. Soient donc $c\in\C$ et $v\in L_0(\Gamma)$, 
     que l'on écrit encore sous la forme $v = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour certains $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to\mathscr{L}^\infty(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
+    $f : I\to B(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
 
     Par définition, on a $\forall x\in\Gamma$:
     \begin{equation*}
