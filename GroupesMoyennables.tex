@@ -485,56 +485,56 @@ des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\ga
 C'est une application bien définie car tout élément de $\mathcal{K}_+(\Gamma)$ est de mesure finie non-nulle,
 et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
-Un filtre $\mathscr{F}$ sur $\mathcal{K}_+(\Gamma)$ est dit \emph{de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
-de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence 
-%compacte 
-simple
-sur $\mathcal{F}(\Gamma, \R_+)$.
-Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
-voisinages de l'infini dans $\N$, est de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
-une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est donc de F\o{}lner \ssi la suite de fonctions
-$n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)$ converge vers $0$
-%uniformément sur tout compact. 
-simplement.
+Un filtre $\mathscr{F}$ sur $\mathcal{K}_+(\Gamma)$ est dit \emph{simplement de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
+de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence simple sur $\mathcal{F}(\Gamma, \R_+)$. 
+Si la convergence est uniforme sur les compacts, on parle de filtre \emph{uniformément de F\o{}lner}.
+Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{simplement (resp. uniformément) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
+voisinages de l'infini dans $\N$, est simplement (resp. uniformément) de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
+une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est donc simplement (resp. uniformément) de F\o{}lner \ssi la suite de fonctions
+$n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)$ converge vers $0$ simplement 
+(resp. uniformément sur tout compact).
 
 Notons que si $\Gamma$ est discret, 
-%la topologie de la convergence compacte coïncide avec celle de la convergence simple,
-les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
+la topologie de la convergence compacte coïncide avec celle de la convergence simple, de sorte que tout filtre 
+simplement de F\o{}lner est automatiquement uniformément de F\o{}lner.
+De plus, les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
 et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre $\mathscr{F}$
 est donc de F\o{}lner \ssi, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
 converge vers $0$ selon le filtre $\mathscr{F}$. De même, une suite $F:\N\to\finparts^*(\Gamma)$
 est de F\o{}lner \ssi pour tout $\gamma\in\Gamma$, la suite $n\mapsto\frac{\card{\gamma F_n\triangle F_n}}{\card{F_n}}$ converge 
 vers $0$.
 
-Avant d'aller plus loin, donnons un critère plus simple pour l'existence d'un filtre de F\o{}lner sur $\Gamma$.
+Avant d'aller plus loin, donnons un critère plus simple pour l'existence de filtres de F\o{}lner (simplement ou uniformément) sur $\Gamma$.
 
 \begin{lemma}
-    Le groupe séparé et localement compact $\Gamma$ admet un filtre de F\o{}lner \ssi il satisfait la 
-    \emph{condition de F\o{}lner} :
-    \begin{equation}\label{Folner_cond}
+    Le groupe séparé et localement compact $\Gamma$ admet un filtre simplement de F\o{}lner \ssi il satisfait la 
+    \emph{condition de F\o{}lner simple} :
+    \begin{equation}\label{simple_Folner_cond}
         \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathcal{K}_+(\Gamma), 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
     \end{equation}
-%    \begin{equation}\label{Folner_cond}
-%        \forall\varepsilon>0, \forall A\in\mathcal{K}(\Gamma), \exists K\in\mathcal{K}_+(\Gamma), \forall\gamma\in A, 
-%        \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
-%    \end{equation}
+    Il admet de un filtre uniformément de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner uniforme} : 
+    \begin{equation}\label{uniform_Folner_cond}
+        \forall\varepsilon>0, \forall A\in\mathcal{K}(\Gamma), \exists K\in\mathcal{K}_+(\Gamma), \forall\gamma\in A, 
+        \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
+    \end{equation}
 
-    Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
+    \TODO{Dans quel cas a-t-on des suites ?}
+    %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
 \end{lemma}
 
 \begin{proof}
     \TODO{}
 \end{proof}
 
-\TODO{Quelle est la bonne topologie à mettre sur $\mathcal{F}(\Gamma, \R_+)$ pour la définition de filtre de F\o{}lner : convergence simple ou compacte ?
-    En tout cas la convergence simple suffit à faire marcher le théorème suivant.}
+%\TODO{Quelle est la bonne topologie à mettre sur $\mathcal{F}(\Gamma, \R_+)$ pour la définition de filtre de F\o{}lner : convergence simple ou compacte ?
+%    En tout cas la convergence simple suffit à faire marcher le théorème suivant.}
 
-Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre de F\o{}lner,
+Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre (simplement) de F\o{}lner,
 en adaptant simplement la deuxième preuve de ce théorème.
 
 \begin{theorem}\label{amenable_of_Folner}
-    Si $\Gamma$ admet un filtre de F\o{}lner, alors $\Gamma$ est moyennable.
+    Si $\Gamma$ admet un filtre simplement de F\o{}lner, alors $\Gamma$ est moyennable.
 \end{theorem}
 
 \begin{proof}
@@ -560,7 +560,7 @@ en adaptant simplement la deuxième preuve de ce théorème.
             &=\norm{f_i}_\infty \cdot \mu(\gamma_i\inv K\triangle K)
     \end{align*}
     
-    Soit finalement $\mathscr{F}$ un filtre de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
+    Soit finalement $\mathscr{F}$ un filtre simplement de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
     la fonction $K\mapsto\frac1{\mu(K)} \integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}$ converge vers $0$
     selon $\mathscr{F}$, et ce pour chaque $i\in I$. Il suffit enfin de prendre la limite selon $\mathscr{F}$ des inégalités \ref{amenable_of_Folner_eq1}
     pour obtenir $-M\le c\le M$. 
