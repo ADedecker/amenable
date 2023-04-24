@@ -229,6 +229,9 @@ On dispose pour cela du résultat suivant.
     réciproque étant donnée par $T\mapsto(A\mapsto T(\indic_A))$.
 \end{proposition}
 
+On appellera \emph{moyenne} toute forme linéaire positive sur $B(X)$ de valeur $1$ en $\indic$. On va donc montrer que 
+les moyennes sur $X$ sont en bijections avec les mesures de probabilité sur $X$.
+
 Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 
 \begin{lemma}\label{positive_iff_norm}
@@ -250,10 +253,10 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 \begin{proof}[Démonstration du théorème \ref{repr}]
     Toute fonction mesurable bornée étant intégrable par rapport à toute mesure de probabilité, il est clair que $I$ est bien définie. 
     Les propriétés élémentaires de l'intégration de Lebesgue, qui restent valables dans le cas de mesures finiment-additives,
-    donnent immédiatement que chaque $I_m$ est bien une forme linéaire positive avec $I_m(\indic) = 1$, et qu'on a
+    donnent immédiatement que chaque $I_m$ est bien moyenne, et qu'on a
     $I_m(\indic_A) = m(A)$ pour tout $A\subseteq X$ mesurable.
 
-    Soit maintenant $T$ une forme linéaire positive sur $B(X)$, vérifiant $T(\indic) = 1$.
+    Soit maintenant $T$ une moyenne sur $X$.
     Il faut alors montrer que $m : A\mapsto T(\indic_A)$ est bien une mesure de probabilité sur $X$,
     puis que $T = I_m$ pour cette mesure $m$. $m$ est bien à valeurs positive par positivité de $T$, et 
     de plus $m(X) = T(\indic) = 1$ et $m(\varnothing) = T(0) = 0$. Soient enfin $A, B\subseteq X$ deux ensembles
@@ -287,33 +290,33 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 Cela nous amène à donner la définition suivante.
 
 \begin{definition}
-    Soit $\Gamma$ un groupe localement compact et séparé. Une \emph{moyenne à gauche} (resp. \emph{à droite}) sur $\Gamma$ est une forme 
-    linéaire positive $T : B(\Gamma)\to\C$ vérifiant $T(\indic) = 1$ et $\forall g\in\Gamma, T\comp\lambda_g = T$
-    (resp. $T\comp\rho_g = T$). Une moyenne bilatère sera simplement appelée \emph{moyenne}.
+    Soit $\Gamma$ un groupe localement compact et séparé. Une moyenne $T : B(\Gamma)\to\C$ sur $\Gamma$ est dite 
+    \emph{invariante à gauche} (resp. \emph{à droite}) si $\forall g\in\Gamma, T\comp\lambda_g = T$
+    (resp. $T\comp\rho_g = T$). Une moyenne invariante à droite et à gauche sera simplement dite \emph{invariante}.
 \end{definition}
 
 \begin{remark}
-    Les moyennes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(B(\Gamma), \lambda)$ de 
+    Les moyennes invariantes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(B(\Gamma), \lambda)$ de 
     $\Gamma$ vers la représentation triviale, avec la condition suppplémentaire que $T(\indic) = 1$.
 \end{remark}
 
 Remarquons que la bijection $I$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
-invariantes aux moyennes sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
+invariantes à gauche aux moyennes invariantes à gauche sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
 $f\in B(\Gamma)$ et $g\in\Gamma$, on a 
 $I_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = I_m(f)$. 
 
 Réciproquement, si $T$ est une 
-moyenne à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
+moyenne invariante à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
 $m(g\inv A) = T(\indic_{g\inv A}) = T(\indic_A \comp\ell_g) = T(\lambda_{g\inv}(\indic_A)) = T(\indic_A) = m(A)$.
 En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de montrer le résultat suivant.
 \begin{proposition}
-    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet une moyenne (resp. une moyenne à gauche, resp. une manière à droite).
+    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet une moyenne invariante (resp. à gauche, resp. à droite).
 \end{proposition}
 
 Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
 \paragraph{}
 
-Sans grande surprise, nous allons maintenant vouloir appliquer différents outils de l'analyse fonctionelle à l'étude des moyennes.
+Sans grande surprise, nous allons maintenant vouloir appliquer différents outils de l'analyse fonctionelle à l'étude des moyennes invariantes.
 Pour cela, nous allons utiliser à nouveau le lemme \ref{positive_iff_norm}, de manière beaucoup plus fine que dans la preuve 
 du théorème \ref{repr} (où nous avions seulement besoin de la continuité des formes linéaires positives).
 
@@ -322,8 +325,8 @@ $\varphi$ par le théorème de Hahn-Banach, alors qu'il n'est pas clair du tout 
 la positivité. On va donc pouvoir se restreindre à étudier les moyennes sur des sous-espaces plus concrets de $B(\Gamma)$.
 
 Plus précisément, toujours pour $\Gamma$ groupe localement compact et séparé, on introduit $L_0(\Gamma) := \sum_{g\in\Gamma} \Ima(\lambda(g) - \id)$ le sous-espace de 
-$B(\Gamma)$ engendré par les (classes de) fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in B(\Gamma)$. 
-Il est alors clair qu'une forme linéaire sur $B(\Gamma)$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
+$B(\Gamma)$ engendré par les fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in B(\Gamma)$. 
+Il est alors clair qu'une forme linéaire sur $B(\Gamma)$ est une moyenne invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
 
 \begin{lemma}
     $\indic\notin L_0(\Gamma)$
