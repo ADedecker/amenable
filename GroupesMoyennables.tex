@@ -89,10 +89,13 @@
 
 \section*{Conventions et remarques préliminaires}
 
-Dans ce mémoire, nous utiliserons le terme de \textit{mesure} pour désigner une mesure \textbf{finiment}-additive sur un 
+\TODO{Réécrire}
+
+Dans ce mémoire, nous utiliserons le terme de \textit{quasi-mesure} pour désigner une mesure \textbf{finiment}-additive sur un 
 \textit{espace mesurable}, c'est à dire un couple $(X, \mathcal{A})$ où $\mathcal{A}$ est une $\sigma$-algèbre. 
-Lorsqu'une telle mesure est de plus $\sigma$-additive (ce qui est souvent inclus dans la définition de \og{}mesure\fg{}),
-nous dirons qu'il s'agit d'une \textit{$\sigma$-mesure}. 
+Lorsqu'une telle mesure est de plus $\sigma$-additive (ce qui est souvent inclus dans la définition de \og{}mesure\fg{},
+mais nous n'utiliserons pas cette convention),
+nous dirons qu'il s'agit d'une \textit{mesure}. 
 
 Nous admettrons qu'il est possible de définir une théorie de l'intégration pour toute mesure, les théorèmes de convergence
 monotone et dominée n'étant bien sûr valables que dans le cas des $\sigma$-mesures. 
@@ -136,29 +139,36 @@ utiliserons à de nombreuses reprises.
     Enfin, si $G$ est compact, les mesures de Haar à gauche sont exactement les mesures de Haar à droite.
 \end{theorem}
 
+\TODO{Ensembles de mesures nulles pour Haar}
+
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
 
 \TODO{Notations $\mathscr{L}^p$, $\mathrm{L}^p$, $B$ (fonctions mesurables bornées (pas "presque partout"), sans quotient)}
 
 \section{Premières définitions}
 
-Fixons $\Gamma$ un groupe topologique. La notion qui va nous intéresser dans ce mémoire est la suivante.
+Fixons $\Gamma$ un groupe topologique séparé et localement compact. La notion qui va nous intéresser dans ce mémoire est la suivante.
 
 \begin{definition}
-    On dit qu'un groupe topologique $\Gamma$ est \emph{moyennable} s'il admet une 
-    mesure de probabilité borélienne invariante par translations.
+    Le groupe topologique $\Gamma$ est \emph{moyennable} s'il admet une 
+    quasi-mesure de probabilité borélienne invariante par translations et absolument continue par rapport à une 
+    mesure de Haar sur $\Gamma$.
 \end{definition}
+
+Comme toutes les mesures de Haar (à droite et à gauche) sont absolument continues les unes par rappost aux autres,
+l'aboslue continuité par rapport à \emph{une} mesure de Haar est équivalente à l'absolue continuité par rapport à \emph{toute}
+mesure de Haar. 
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
-    Supposons qu'il existe une mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
+    Supposons qu'il existe une quasi-mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
     Alors $\Gamma$ est un groupe moyennable.
 \end{proposition} 
 
 \begin{proof}
-    Il s'agit donc de construire une \emph{autre} mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
+    Il s'agit donc de construire une \emph{autre} quasi-mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
     Posons d'abord, pour $A\in\Bor(G)$, $\fundef{f_A}{\Gamma&\to& \Gamma}{g&\mapsto& m(Ag\inv)}$. Chaque $f_A$ est bornée par $1 = m(\Gamma)$, 
-    donc intégrable pour la mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{}{}{f_A}{(\invop_*m)}$. \\
+    donc intégrable pour la quasi-mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{}{}{f_A}{(\invop_*m)}$. \\
     Notons que, pour $A$ et $B$ boréliens disjoints, ainsi que $g, x\in\Gamma$, on a :
     \begin{gather*}
         f_\Gamma = \indic \\
@@ -177,9 +187,9 @@ Notons tout de suite que l'invariance bilatère n'impose pas de restriction supl
 \end{proof}
 
 Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
-En effet, la mesure de Haar normalisée d'un tel groupe est une mesure de probabilité invariante par tranlation. Les phénomènes
+En effet, la mesure de Haar normalisée d'un tel groupe est une (quasi-)mesure de probabilité invariante par tranlation. Les phénomènes
 plus intéressants vont donc se produire pour les groupes non-compacts, et il convient de noter que ces groupes ne peuvent pas avoir
-de $\sigma$-mesure de probabilité invariante par translations d'après le théorème \ref{theorem_Haar}. C'est donc l'affaibilissement de la 
+de mesure de probabilité invariante par translations d'après le théorème \ref{theorem_Haar}. C'est donc l'affaibilissement de la 
 $\sigma$-additivité en additivité finie qui engendre la complexité. 
 
 \paragraph{}
@@ -200,7 +210,7 @@ Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-m
     $am$ est un mot réduit commençant par $a$. Réciproquement si $am$ est un mot réduit alors $m$ est réduit et ne commence 
     pas par $a\inv$. \TODO{est-ce que c'est assez clair ?}
 
-    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe une mesure de probabilité $m$ sur 
+    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe une quasi-mesure de probabilité $m$ sur 
     $F_2$ invariante par translation. On a alors :
     \begin{gather*}
         m(S(a)) + m(S(a\inv)) = m(a\inv S(a)\ \amalg\ S(a\inv)) = 1 \\
@@ -217,10 +227,10 @@ Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-m
 
 \paragraph{}
 
-Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la mesure $m$ à travers la théorie de l'intégration.
+Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la quasi-mesure $m$ à travers la théorie de l'intégration.
 On dispose pour cela du résultat suivant.
 \begin{proposition}\label{repr}
-    Soit $X$ un espace mesurable. Pour toute mesure de probabilité $m$ sur $X$, on définit :
+    Soit $X$ un espace mesurable. Pour toute quasi-mesure de probabilité $m$ sur $X$, on définit :
     \begin{equation*}
         \fundef{I_m}{B(X)&\to&\C}{f&\mapsto&\integral{}{}{f}{m}}
     \end{equation*}
@@ -472,7 +482,7 @@ Dans le cas général, la mesure de Haar $\mu$ va remplacer le cardinal, et on v
 pour $F$ partie compacte de $\Gamma$ et $\gamma\in\Gamma$, et à leur comportement asymptotique
 lorsque $F$ est grand. C'est l'objet de la partie suivante.
 
-\section{Condition de F\o{}lner}
+\section{Conditions de F\o{}lner et de Reiter}
 
 Dans cette section, $\Gamma$ est un groupe topologique séparé et localement compact, et on fixe 
 $\mu$ une mesure de Haar à gauche sur $\Gamma$.
@@ -569,5 +579,7 @@ en adaptant simplement la deuxième preuve de ce théorème.
 \TODO{Faire aussi la construction par ultrafiltre}
 
 \TODO{Montrer la réciproque}
+
+\section{Contenance faible et C*-algèbres}
 
 \end{document}
