@@ -32,6 +32,7 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\U}{\mathcal{U}}
+\newcommand{\ev}{\mathrm{ev}}
 \newcommand{\Bor}{\mathcal{B}}
 \newcommand{\norm}[1]{\left\Vert #1\right\Vert}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
@@ -58,6 +59,7 @@
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\blank}{{-}}
 \newcommand{\invop}{\mathrm{inv}}
+\newcommand{\divop}{\mathrm{div}}
 \newcommand{\parts}{\mathfrak{P}}
 \newcommand{\finparts}{\mathfrak{P}_{\mathrm{fin}}}
 \newcommand{\TODO}[1]{{\color{red}TODO :} #1}
@@ -147,54 +149,206 @@ utiliserons à de nombreuses reprises.
 
 \section{Premières définitions}
 
-Fixons $\Gamma$ un groupe topologique séparé et localement compact. La notion qui va nous intéresser dans ce mémoire est la suivante.
+Fixons $\Gamma$ un groupe topologique séparé et localement compact. Sauf mention explicite du contraire, $\mu$ désigne une mesure de Haar arbitraire
+sur $\Gamma$.
+
+La notion qui va nous intéresser dans ce mémoire est la suivante.
 
 \begin{definition}
-    Le groupe topologique $\Gamma$ est \emph{moyennable} s'il admet une 
-    quasi-mesure de probabilité borélienne invariante par translations et absolument continue par rapport à une 
-    mesure de Haar sur $\Gamma$.
+    Le groupe séparé et localement compact $\Gamma$ est \emph{moyennable} s'il existe une forme linéaire positive $m : \mathrm{L}^\infty(G)\to\C$
+    vérifiant $m(1) = 1$ et $\forall g\in\Gamma, m\comp\lambda_g = m = m\comp\rho_g$.
 \end{definition}
 
-Comme toutes les mesures de Haar (à droite et à gauche) sont absolument continues les unes par rappost aux autres,
-l'aboslue continuité par rapport à \emph{une} mesure de Haar est équivalente à l'absolue continuité par rapport à \emph{toute}
-mesure de Haar. 
+Plus généralement, nous appellerons \emph{moyenne} sur un espace mesuré $(X,\mathcal{A},\mu)$ toute forme 
+linéaire positive $m : \mathrm{L}^\infty(X, \mu)\to\C$ vérifiant $m(1) = 1$. Si de plus $X$ est un groupe 
+et si $\mathcal{A}$ est stable par translations à gauche (resp. à droite), nous dirons qu'une moyenne est \emph{invariante à gauche}
+(resp. \emph{à droite}) si $\forall x\in X, m\comp\lambda(x) = m$ (resp. $m\comp\rho(x) = m$). Si ces deux conditions 
+sont vérifiées, nous dirons simplement que $T$ est \emph{invariante par translations} ou simplement \emph{invariante}.
+
+Un groupe topologique séparé et localement compact $\Gamma$ est donc moyennable \ssi $(\Gamma, \Bor(\Gamma), \mu)$ admet une 
+moyenne invariante, pour toute mesure de Haar $\mu$ sur $\Gamma$, le choix n'ayant aucune importance car toutes les mesures 
+de Haar sont absolument continues les unes par rappost aux autres, et donc définissent le même espace $\mathrm{L}^\infty(\Gamma)$.
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
-    Supposons qu'il existe une quasi-mesure de probabilité borélienne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
+    Supposons qu'il existe une moyenne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
     Alors $\Gamma$ est un groupe moyennable.
 \end{proposition} 
 
+Commençons par prouver le lemme suivant, qui sera utile en lui-même.
+
+\begin{lemma}\label{positive_iff_norm}
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $\varphi:\mathrm{L}^\infty(X,\mu)\to\C$ une forme linéaire. 
+    On a l'équivalence :
+    \begin{equation*}
+        \norm{\varphi} = \varphi(1) \iff \forall a \ge 0, \varphi(a) \geq 0
+    \end{equation*}
+\end{lemma}
+
 \begin{proof}
-    Il s'agit donc de construire une \emph{autre} quasi-mesure $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
-    Posons d'abord, pour $A\in\Bor(G)$, $\fundef{f_A}{\Gamma&\to& \Gamma}{g&\mapsto& m(Ag\inv)}$. Chaque $f_A$ est bornée par $1 = m(\Gamma)$, 
-    donc intégrable pour la quasi-mesure de probabilité $\invop_*m$. Posons alors $n(A) := \integral{}{}{f_A}{(\invop_*m)}$. \\
-    Notons que, pour $A$ et $B$ boréliens disjoints, ainsi que $g, x\in\Gamma$, on a :
+    Supposons d'abord $\norm{\varphi} = \varphi(1)$, et soit $a\ge 0$ de norme 1. On a donc, pour presque tout $x\in X$, $\set{a(x), 1-a(x)}\subseteq[0,1]$,
+    d'où enfin $\norm{1-a}\le 1$. Mais par ailleurs $\norm{\varphi} = \varphi(a) + \varphi(1-a) \le \varphi(a) + \abs{\varphi(1-a)} \le \varphi(a) + \norm{\varphi}\norm{1 - a}$, et finalement
+    $\varphi(a)\ge \norm{\varphi}(1 - \norm{1-a}) \ge0$. 
+
+    Supposons maintenant $\varphi$ positive. Notons déjà qu'on a bien sûr $\norm{\varphi}\ge\abs{\varphi(1)}=\varphi(1)$. Soit donc $a\in\mathrm{L}^\infty(X,\mu)$ quelconque,
+    et notons que $-\norm{a}\cdot1\le a\le\norm{a}\cdot1$, de sorte que $-\norm{a}\varphi(1)\le\varphi(a)\le\norm{a}\varphi(1)$, ce qui conclut.
+\end{proof}
+
+\begin{proof}[Démonstration de la proposition \ref{bilateral_of_left}]
+    Il s'agit donc de construire une \emph{autre} moyenne $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
+    Posons d'abord, pour $f\in\mathrm{L}^\infty(\Gamma)$ quelconque, $\fundef{\widehat{f}}{\Gamma&\to&\C}{g&\mapsto&m(f\comp r_g)}$. On a 
+    $\forall g\in\Gamma, \abs{\widehat{f}(g)} \le \norm{f\comp r_g}_\infty = \norm{f}_\infty$ par le lemme \ref{positive_iff_norm}, 
+    donc $\widehat{f}\in B(\Gamma)\subseteq\mathscr{L}^\infty(\Gamma)$.
+    Posons alors $n(f) := m\left(\widehat{f}\comp\invop\right)$
+    \footnote{Le fait que $\widehat{f}\comp\invop$ soit bornée presque partout provient de ce que $\widehat{f}$ est bornée \emph{partout}.}.
+
+    Notons que, pour $f, f_1, f_2\in\mathrm{L}^\infty(\Gamma)$ et $g, x\in\Gamma$, on a :
     \begin{gather*}
-        f_\Gamma = \indic \\
-        f_{A\cup B} = f_A + f_B \\
-        f_{g\inv A}(x) = m(g\inv Ax\inv) = ({\ell_g}_*m)(Ax\inv) = m(Ax\inv) = f_A(x) \\
-        f_{Ag\inv}(x) = m(Ag\inv x\inv) = f_A(xg) = (f_A \comp r_g)(x)
+        \widehat{1} = 1 \\
+        \widehat{f_1 + f_2} = \widehat{f_1} + \widehat{f_2} \\
+        \widehat{f\comp\ell_g}(x) = m(f\comp\ell_g\comp r_x) = m(f\comp r_x\comp\ell_g) = m(f\comp r_x) = \widehat{f}(x) \\
+        \widehat{f\comp r_g}(x) = m(f\comp r_g\comp r_x) = m(f\comp r_{xg}) = \widehat{f}(xg) = \left(\widehat{f}\comp r_g\right)(x)
     \end{gather*}
-    En intégrant ces relations, on obtient bien :
+    En précomposant par $\invop$ et en appliquant $m$ à ces relations, on obtient :
     \begin{gather*}
-        n(\Gamma) = (\invop_*m)(\Gamma) = 1 \\
-        n(A\cup B) = n(A) + n(B) \\
-        ({\ell_g}_*n)(A) = n(g\inv A) = n(A) \\
-        ({r_g}_*n)(A) = \integral{}{}{f_A\comp r_g\comp\invop}{m} = \integral{}{}{f_A\comp\invop\comp \ell_g}{m} = n(A)
+        n(1) = m(1\comp\invop) = 1 \\
+        n(f_1 + f_2) = m\left(\widehat{f_1}\comp\invop + \widehat{f_2}\comp\invop\right) = n(f_1) + n(f_2) \\
+        (n\comp\lambda(g))(f) = m\left(\widehat{f\comp\ell_{g\inv}}\comp\invop\right) = m\left(\widehat{f}\comp\invop\right) = n(f) \\
+        (n\comp\rho(g))(f) = m\left(\widehat{f\comp r_g}\comp\invop\right) = m\left(\widehat{f}\comp r_g\comp\invop\right) = m\left(\widehat{f}\comp \invop\comp\ell_{g\inv}\right) = n(f)
     \end{gather*}
     Ce qui conlut.
 \end{proof}
 
 Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
-En effet, la mesure de Haar normalisée d'un tel groupe est une (quasi-)mesure de probabilité invariante par tranlation. Les phénomènes
-plus intéressants vont donc se produire pour les groupes non-compacts, et il convient de noter que ces groupes ne peuvent pas avoir
-de mesure de probabilité invariante par translations d'après le théorème \ref{theorem_Haar}. C'est donc l'affaibilissement de la 
-$\sigma$-additivité en additivité finie qui engendre la complexité. 
+En effet, si l'on note $\mu$ la mesure de Haar normalisée d'un tel groupe, l'intégration selon $\mu$ fournit une moyenne invariante. 
 
-\paragraph{}
+Au vu de cet exemple, il peut être tentant de supposer que toute moyenne est donnée par l'intégration pour une mesure 
+de Radon. En fait, s'il était vrai, la notion de moyennabilité ne serait pas très intéressante :
+en effet, si $\mu$ est une mesure de Radon sur $\Gamma$ telle que $f\mapsto\integral{}{}{f}{\mu}$ soit une moyenne bien définie et invariante,
+alors $\mu$ est automatiquement une mesure de Haar de masse $1$, et le théorème \ref{theorem_Haar} assure qu'une telle mesure n'existe que si
+$\Gamma$ est compact. Les groupes moyennables seraient donc exactement les groupes compacts !
 
-Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-moyennable.
+Évidemment ce n'est pas le cas, et nous montrerons en temps voulu que la classe des groupes moyennables est bien plus grande que 
+celle des groupes moyennables. Cependant, nous disposons bien d'un théorème de représentation des moyennes comme des
+\og{}intégrales\fg{}, à condition d'affaiblir la condition de $\sigma$-additivité des mesures.
+
+Un \emph{contenu} sur un espace mesurable $(X, \mathcal{A})$\footnote{On trouve dans la littérature des définitions de \emph{contenu} autorisant $\mathcal{A}$ à n'être qu'une algèbre d'ensembles,
+mais nous supposerons toujours qu'il s'agit d'une $\sigma$-algèbre.} est une fonction $m:\mathcal{A}\to\closure{\R_+}$ vérifiant $m(\varnothing) = 0$
+et $m(A_1\cup A_2) = m(A_1) + m(A_2)$ pour $A_1, A_2\in\mathcal{A}$ disjoints. Les mesures sur $(X, \mathcal{A})$
+sont donc exactement les contenus $\sigma$-additifs. Notons tout de suite que les contenus ne donnent pas lieu à 
+une théorie de l'intégration intéressante : en effet, en l'absence du théorème de convergence monotone, il n'est pas clair que l'intégrale 
+des fonctions positives \footnote{On rappelle que l'intégrale d'une fonction positive $f$ est définie comme la borne supérieure des 
+intégrales des fonctions simples positives inférieures à $f$} soit additive ! On a par contre le résultat suivant en se retreignant à
+intégrer des fonctions bornées selon des contenus finis.
+
+\begin{proposition}\label{content_integration_and_repr}
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $m$ un contenu fini\footnote{i.e. $m(X)<+\infty$} sur $(X, \mathcal{A})$ \emph{absolument continu par rapport
+    à} $\mu$. Il existe alors une unique forme linéaire positive $I_m : \mathrm{L}^\infty(X, \mu)\to\C$ vérifiant $I_m(\indic_A) = m(A)$ pour tout
+    $A\in\mathcal{A}$. 
+
+    De plus, l'application $m\mapsto I_m$ est une bijection de l'ensemble des contenus finis absoluments continus par rapport à $\mu$
+    sur l'ensemble des formes linéaires positives sur $\mathrm{L}^\infty(X, \mu)$.
+\end{proposition}
+
+\begin{proof}
+    On considère le sous-espace vectoriel $\mathscr{S}(X)$ de $\mathscr{L}^\infty(X, \mu)$ formé des fonctions simples, c'est à dire des
+    fonctions $f:X\to\C$ mesurables d'image finie, et $\mathrm{S}(X, \mu)$ son image dans $\mathrm{L}^\infty(X, \mu)$. Il est clair que
+    $\mathrm{S}(X, \mu)$ est l'espace vectoriel engendré par les classes des indicatrices des éléments de $\mathcal{A}$. Autrement dit, l'application
+    $\fundef{\Theta}{\C^{(\mathcal{A})}&\to&\mathrm{S}(X, \mu)}{\delta_A&\mapsto&\indic_A}$ est surjective.
+    
+    Montrons tout d'abord que $\mathrm{S}(X, \mu)$ est dense dans $\mathrm{L}^\infty(X, \mu)$. Soit donc $f\in\mathscr{L}^\infty(X, \mu)$, 
+    que nous supposons d'abord positive, et construisons une suite $g:\N\to \mathscr{S}(X, m)$ de la manière suivante :
+    \begin{gather*}
+        g_0 := 0 \\
+        g_{n+1} := g_n + \frac12\norm{f - g_n}\indic_{\set{x\tq f(x) - g_n(x) \ge \frac12\norm{f - g_n}}}
+    \end{gather*}
+    Il est clair que chaque $g_n$ est une fonction simple positive et inférieure à $f$, et que la suite $g$ est croissante.
+    De plus, pour tout $n\in\N$ et $x\in X$, on est dans l'un des cas suivants : 
+    \begin{gather*}
+        f(x)-g_{n+1}(x) = f(x)-g_n(x) \le \frac12\norm{f - g_n} \\
+        f(x)-g_{n+1}(x) = f(x)-g_n(x)-\frac12\norm{f-g_n} \le \frac12\norm{f-g_n}
+    \end{gather*}
+    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$.
+    Dans le cas général, il suffit alors de décomposer $f$ en combinaison linéaire de fonctions positives et d'appliquer 
+    le résultat à chacune de ces fonctions. 
+
+    Pour $m$ contenu fini avec $m\ll\mu$, posons $\fundef{\widehat{I}_m}{\C^{(\mathcal{A})}&\to&\C}{\delta_A&\mapsto&m(A)}$.
+    Soit $\alpha\in\ker\Theta$, i.e tel que $f := \sum_{A\in\mathcal{A}} \alpha_A\indic_A =_\mu 0$. Considérons alors l'ensemble 
+    fini $\mathcal{S}:=\alpha\inv\left(\set{0}\compl\right)\subseteq\mathcal{A}$ des $A$ tels que $\alpha_A\ne 0$, et la fonction 
+    $\epsilon:X\to 2^\mathcal{S}$\footnote{On identifie 2 à l'ensemble $\set{0, 1}$} dont la composante selon $A\in\mathcal{S}$
+    est l'indicatrice de $A$. Notons que chaque $A\in\mathcal{S}$ est l'union disjointe des $\epsilon\inv(b)$ pour $b\in2^\mathcal{S}$, $b(A) = 1$.
+    On a donc :
+    \begin{align*}
+        \widehat{I}_m(\alpha) 
+            &= \sum_{A\in\mathcal{S}} \alpha_A m(A) \\
+            &= \sum_{A\in\mathcal{S}} \sum_{\substack{b\in2^\mathcal{S} \\ b(A) = 1}} \alpha_A m(\epsilon\inv(b)) \\
+            &= \sum_{b\in2^\mathcal{S}} m(\epsilon\inv(b)) \sum_{\substack{A\in\mathcal{S} \\ b(A) = 1}} \alpha_A \\
+            &= \sum_{b\in2^\mathcal{S}} m(\epsilon\inv(b)) \sum_{A\in\mathcal{S}} \alpha_A b(A)
+    \end{align*}
+    Or, pour chaque $b\in2^\mathcal{S}$, la fonction $f$ est constante de valeur $\sum_{A\in\mathcal{S}} \alpha_A b(A)$ sur l'ensemble 
+    $\epsilon\inv(b)$. Comme $f$ est $\mu$-presque nulle, cela implique qu'on a ou bien $\sum_{A\in\mathcal{S}} \alpha_A b(A)=0$ ou bien $\mu(\epsilon\inv(b)) = m(\epsilon\inv(b)) = 0$,
+    ce qui assure finalement que $\widehat{I}_m(\alpha) = 0$.
+
+    On a donc montré que $\ker\Theta\subseteq\ker\widehat{I}_m$. $\widehat{I}_m$ se factorise donc à travers la surjection $\Theta$ en
+    $\widetilde{I}_m:\mathrm{S}(X, \mu)\to\C$ linéaire vérifiant $\forall A\in\mathcal{A}, \widetilde{I}_m(\indic_A) = m(A)$. De plus, pour 
+    $f\in\mathscr{S}(X)$, on a :
+    \begin{equation*}
+        \abs{\widetilde{I}_m(f)} = \abs{\sum_{z\in f(X)} zm(f\inv(z))} \le \sum_{z\in f(X)} \norm{f}_\infty m(f\inv(z)) = \norm{f}_\infty m(X)
+    \end{equation*}
+    Comme par ailleurs $\widetilde{I}_m(1)=m(X)$, on a donc $\widetilde{I}_m$ continue de norme exactement $m(X)$.
+    Par le théorème de prolongement des applications uniformément continues, elle se prolonge donc de manière unique en $I_m : \mathrm{L}^\infty(X, \mu)\to\C$
+    linéaire continue de même norme $m(X) = I_m(1)$. Le lemme \ref{positive_iff_norm} assure alors que $I_m$ est positive, et convient donc. 
+    L'unicité de $I_m$ est alors 
+    immédiate, la formule $m(A) = I_m(\indic_A)$ imposant la valeur sur $\mathrm{S}(X, \mu)$, puis sur $\mathrm{L}^\infty(X, \mu)$ par densité et continuité des formes linéaires 
+    positives.
+
+    Reste à montrer la bijectivité de $m\mapsto I_m$. L'injectivité est immédiate, la formule $m(A) = I_m(\indic_A)$ déterminant
+    entièrement $m$. Soit donc $T : \mathrm{L}^\infty(X, \mu)\to\C$ une forme linéaire positive quelconque, posons $\fundef{m}{\mathcal{A}&\to&\closure{\R_+}}{A&\mapsto&T(\indic_A)}$.
+    Il est clair que $m$ est alors un contenu, et la définition assure que $m\ll\mu$ car l'indicatrice d'un borélien de $\mu$-mesure nulle 
+    est nulle dans $\mathrm{L}^\infty(X,\mu)$. Comme $T$ est positive et vérifie $\forall A\in\mathcal{A}, m(A)=T(\indic_A)$, l'unicité 
+    démontrée précédemment assure que $T = I_m$, ce qui conclut.
+\end{proof}
+
+\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
+
+\begin{remark}
+    Dans le cas où $m$ est une mesure finie, l'unicité assure que la forme $I_m$ n'est autre que l'intégrale par rapport à $m$, ou plus précisément sa précomposition
+    par l'application naturelle $\mathrm{L}^\infty(X, \mu)\to\mathrm{L}^\infty(X, m)\hookrightarrow\mathrm{L}^1(X, m)$.
+\end{remark}
+
+Il est clair que la bijection $I$ de la proposition \ref{content_integration_and_repr} fait correspondre les moyennes 
+sur $(X, \mathcal{A})$ aux contenus de masse 1 et absoluments continuous par rapport à $\mu$. On voudrait maintenant pouvoir exprimer 
+la condition d'invariance par translations, et il nous faut pour cela aborder l'aspect fonctioriel de la construction de $I$.
+
+Soient $(X, \mathcal{A})$, $(Y, \mathcal{B})$ deux espaces mesurables, $m$ un contenu sur $(X, \mathcal{A})$ et $\varphi : X\to Y$ mesurable.
+On définit alors le \emph{contenu image} de $m$ par $\varphi$ par $\fundef{\varphi_* m}{\mathcal{B}&\to&\closure{\R_+}}{B&\mapsto&m(\varphi\inv(B))}$.
+Il est clair qu'il s'agit encore d'un contenu. Si de plus $X$ et $Y$ sont munis de mesures $\mu$ et $\nu$, et si on a 
+$m\ll\mu$ et $\varphi_*m\ll\nu$
+\footnote{Autrement dit, la préimage par $\varphi$ de tout ensemble $\nu$-négligeable est $\mu$-négligeable. Cette condition assure que la précomposition 
+par $\varphi$ est une opération bien définie de $\mathrm{L}^\infty(Y, \nu)$ vers $\mathrm{L}^\infty(X, \mu)$. Enfin, si $\varphi_*\mu\ll\nu$, cette condition découle de l'hypothèse $m\ll\mu$, 
+puisque $\varphi_*m\ll \varphi_*\mu\ll\nu$}
+, alors :
+\begin{equation*}
+    \forall B\in\mathcal{B}, I_{\varphi_*m}(\indic_B) = m(\varphi\inv(B)) = I_m(\indic_{\varphi\inv(B)}) = I_m(\indic_B\comp \varphi)
+\end{equation*}
+La forme linéaire $\funlam{\mathrm{L}^\infty(Y, \nu)&\to&\C}{f&\mapsto&I_m(f\comp\varphi)}$ étant par ailleurs positive, l'unicité dans la proposition
+\ref{content_integration_and_repr} assure qu'elle est égale à $I_{\varphi_*m}$, de sorte que :
+\begin{equation*}
+    \forall f\in\mathrm{L}^\infty(Y, \nu), I_{\varphi_*m}(f) = I_m(f\comp\varphi)
+\end{equation*}
+
+En revenant au cas d'un groupe séparé localement compact $\Gamma$ muni d'une mesure de Haar $\mu$, 
+cette dernière égalité montre que $I_m$ est une moyenne invariante à gauche (resp. à droite) \ssi 
+$m$ est de masse $1$ et $\forall g\in\Gamma, {\ell_g}_*m = m$ (resp. ${r_g}_*m = m$). On dira qu'un tel 
+contenu est \emph{invariant à gauche} (resp. \emph{à droite}) s'il vérifie cette dernière condition, et 
+\emph{invariant} s'il est invariant à gauche et à droite. En prenant en compte la proposition \ref{bilateral_of_left},
+on vient donc de montrer le résultat suivant.
+\begin{proposition}
+    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet un contenu de masse $1$ et invariant 
+    (resp. invariant à gauche, resp. invariant à droite).
+\end{proposition}
+
+Utilisons tout de suite ce critère concret pour donner un premier exemple de groupe \emph{non}-moyennable.
 
 \begin{theorem}\label{not_amenable_F2}
     Le groupe libre en deux générateurs $F_2$ (muni de la topologie discrète) n'est pas moyennable.
@@ -210,13 +364,13 @@ Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-m
     $am$ est un mot réduit commençant par $a$. Réciproquement si $am$ est un mot réduit alors $m$ est réduit et ne commence 
     pas par $a\inv$. \TODO{est-ce que c'est assez clair ?}
 
-    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe une quasi-mesure de probabilité $m$ sur 
-    $F_2$ invariante par translation. On a alors :
+    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe un contenu $m$ sur 
+    $F_2$ de masse 1 et invariant par translation. On a alors :
     \begin{gather*}
         m(S(a)) + m(S(a\inv)) = m(a\inv S(a)\ \amalg\ S(a\inv)) = 1 \\
         m(S(b)) + m(S(b\inv)) = m(b\inv S(b)\ \amalg\ S(b\inv)) = 1
     \end{gather*}
-    Mais les ensembles $S(a)$, $S(a\inv)$, $S(b)$ et $S(b\inv)$, donc :
+    Mais les ensembles $S(a)$, $S(a\inv)$, $S(b)$ et $S(b\inv)$ sont disjoints, donc :
     \begin{equation*}
         1 = m(F_2) \ge m(S(a)) + m(S(a\inv)) + m(S(b)) + m(S(b\inv)) = 2
     \end{equation*} 
@@ -225,146 +379,152 @@ Avant d'aller plus loin, donnons aussi un premier exemple de groupe \emph{non}-m
 
 \TODO{Mentionner importance historique ?}
 
+%\paragraph{}
+%
+%Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la quasi-mesure $m$ à travers la théorie de l'intégration.
+%On dispose pour cela du résultat suivant.
+%\begin{proposition}\label{repr}
+%    Soit $X$ un espace mesurable. Pour toute quasi-mesure de probabilité $m$ sur $X$, on définit :
+%    \begin{equation*}
+%        \fundef{I_m}{B(X)&\to&\C}{f&\mapsto&\integral{}{}{f}{m}}
+%    \end{equation*}
+%    L'application $I:m\mapsto I_m$ est alors une bijection de l'ensemble $\mathrm{Proba}(X)$ des mesures de
+%    probabilités sur $X$ sur l'ensemble des formes linéaires positives sur $B(X)$ de valeur $1$ en $\indic$, la 
+%    réciproque étant donnée par $T\mapsto(A\mapsto T(\indic_A))$.
+%\end{proposition}
+%
+%On appellera \emph{moyenne} toute forme linéaire positive sur $B(X)$ de valeur $1$ en $\indic$. On va donc montrer que 
+%les moyennes sur $X$ sont en bijections avec les mesures de probabilité sur $X$.
+%
+%Commençons par prouver le lemme suivant, qui sera utile en lui-même.
+%
+%\begin{lemma}\label{positive_iff_norm}
+%    Soit $X$ un espace mesurable et $\varphi:B(X)\to\C$ une forme linéaire. 
+%    Si $\varphi(\indic) = 1$, on a l'équivalence :
+%    \begin{equation*}
+%        \norm{\varphi} = 1 \iff \forall a \ge 0, \varphi(a) \geq 0
+%    \end{equation*}
+%\end{lemma}
+%
+%\begin{proof}
+%    Supposons d'abord $\norm{\varphi} = 1$, et soit $a\ge 0$ de norme 1. On a donc, pour $x\in X$, $a(x), 1-a(x)\in[0,1]$,
+%    d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
+%    $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
+%    Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in B(X)$ quelconque,
+%    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut.
+%\end{proof}
+%
+%\begin{proof}[Démonstration du théorème \ref{repr}]
+%    Toute fonction mesurable bornée étant intégrable par rapport à toute mesure de probabilité, il est clair que $I$ est bien définie. 
+%    Les propriétés élémentaires de l'intégration de Lebesgue, qui restent valables dans le cas de mesures finiment-additives,
+%    donnent immédiatement que chaque $I_m$ est bien moyenne, et qu'on a
+%    $I_m(\indic_A) = m(A)$ pour tout $A\subseteq X$ mesurable.
+%
+%    Soit maintenant $T$ une moyenne sur $X$.
+%    Il faut alors montrer que $m : A\mapsto T(\indic_A)$ est bien une mesure de probabilité sur $X$,
+%    puis que $T = I_m$ pour cette mesure $m$. $m$ est bien à valeurs positive par positivité de $T$, et 
+%    de plus $m(X) = T(\indic) = 1$ et $m(\varnothing) = T(0) = 0$. Soient enfin $A, B\subseteq X$ deux ensembles
+%    mesurables disjoints, de sorte que $\indic_{A\cup B} = \indic_A + \indic_B$. On a alors bien 
+%    $m(A\cup B) = m(A) + m(B)$ ce qui assure l'additivité finie. 
+%
+%    Pour finir, considérons le sous-espace vectoriel $S(X, m)$ de $B(X)$ des fonctions $m$-simples, c'est à dire des 
+%    fonctions $f:X\to\C$ mesurables, d'image finie, et vérifiant $\forall c\in\C^*, m(f\inv(x)) < +\infty$ (cette dernière 
+%    condition est automatiquement vérifiée dans notre cas d'une mesure de probabilité, mais nécessaire en général).
+%    Montrons que $S(X, m)$ est dense dans $B(X)$. Soit donc $f\in B(X)$, que nous supposons d'abord positive, et construisons 
+%    une suite $g:\N\to S(X, m)$ de la manière suivante :
+%    \begin{gather*}
+%        g_0 := 0 \\
+%        g_{n+1} := g_n + \frac12\norm{f - g_n}\indic_{\set{x\tq f(x) - g_n(x) \ge \frac12\norm{f - g_n}}}
+%    \end{gather*}
+%    Il est clair que chaque $g_n$ est une fonction simple positive et inférieure à $f$, et que la suite $g$ est croissante.
+%    De plus, pour tout $n\in\N$ et $x\in X$, on est dans l'un des cas suivants : 
+%    \begin{gather*}
+%        f(x)-g_{n+1}(x) = f(x)-g_n(x) \le \frac12\norm{f - g_n} \\
+%        f(x)-g_{n+1}(x) = f(x)-g_n(x)-\frac12\norm{f-g_n} \le \frac12\norm{f-g_n}
+%    \end{gather*}
+%    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$.
+%    Dans le cas général, il suffit alors de décomposer $f$ en combinaison linéaire de fonctions positives et d'appliquer 
+%    le résultat à chacune de ces fonctions. Cela montre donc la densité souhaitée. Or les formes linéaires $T$ et $I_m$
+%    coïncident sur les indicatrices, donc sur $S(X, m)$, et elles sont continues par le lemme \ref{positive_iff_norm}. 
+%    Par densité, elles sont donc égales, ce qui termine la preuve.
+%\end{proof}
+%
+%\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
+%
+%Cela nous amène à donner la définition suivante.
+%
+%\begin{definition}
+%    Soit $\Gamma$ un groupe localement compact et séparé. Une moyenne $T : B(\Gamma)\to\C$ sur $\Gamma$ est dite 
+%    \emph{invariante à gauche} (resp. \emph{à droite}) si $\forall g\in\Gamma, T\comp\lambda_g = T$
+%    (resp. $T\comp\rho_g = T$). Une moyenne invariante à droite et à gauche sera simplement dite \emph{invariante}.
+%\end{definition}
+%
+%\begin{remark}
+%    Les moyennes invariantes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(B(\Gamma), \lambda)$ de 
+%    $\Gamma$ vers la représentation triviale, avec la condition suppplémentaire que $T(\indic) = 1$.
+%\end{remark}
+%
+%Remarquons que la bijection $I$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
+%invariantes à gauche aux moyennes invariantes à gauche sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
+%$f\in B(\Gamma)$ et $g\in\Gamma$, on a 
+%$I_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = I_m(f)$. 
+%
+%Réciproquement, si $T$ est une 
+%moyenne invariante à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
+%$m(g\inv A) = T(\indic_{g\inv A}) = T(\indic_A \comp\ell_g) = T(\lambda_{g\inv}(\indic_A)) = T(\indic_A) = m(A)$.
+%En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de montrer le résultat suivant.
+%\begin{proposition}
+%    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet une moyenne invariante (resp. à gauche, resp. à droite).
+%\end{proposition}
+%
+%Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
+%\paragraph{}
+
 \paragraph{}
+Nous allons maintenant vouloir appliquer les outils de l'analyse fonctionelle à l'étude des moyennes invariantes.
+Pour cela, le lemme \ref{positive_iff_norm} va de nouveau s'avérer crucial.
 
-Comme constaté dès la preuve de la proposition \ref{bilateral_of_left}, il va sans surprise être très souvent utile d'étudier la quasi-mesure $m$ à travers la théorie de l'intégration.
-On dispose pour cela du résultat suivant.
-\begin{proposition}\label{repr}
-    Soit $X$ un espace mesurable. Pour toute quasi-mesure de probabilité $m$ sur $X$, on définit :
-    \begin{equation*}
-        \fundef{I_m}{B(X)&\to&\C}{f&\mapsto&\integral{}{}{f}{m}}
-    \end{equation*}
-    L'application $I:m\mapsto I_m$ est alors une bijection de l'ensemble $\mathrm{Proba}(X)$ des mesures de
-    probabilités sur $X$ sur l'ensemble des formes linéaires positives sur $B(X)$ de valeur $1$ en $\indic$, la 
-    réciproque étant donnée par $T\mapsto(A\mapsto T(\indic_A))$.
-\end{proposition}
-
-On appellera \emph{moyenne} toute forme linéaire positive sur $B(X)$ de valeur $1$ en $\indic$. On va donc montrer que 
-les moyennes sur $X$ sont en bijections avec les mesures de probabilité sur $X$.
-
-Commençons par prouver le lemme suivant, qui sera utile en lui-même.
-
-\begin{lemma}\label{positive_iff_norm}
-    Soit $X$ un espace mesurable et $\varphi:B(X)\to\C$ une forme linéaire. 
-    Si $\varphi(\indic) = 1$, on a l'équivalence :
-    \begin{equation*}
-        \norm{\varphi} = 1 \iff \forall a \ge 0, \varphi(a) \geq 0
-    \end{equation*}
-\end{lemma}
-
-\begin{proof}
-    Supposons d'abord $\norm{\varphi} = 1$, et soit $a\ge 0$ de norme 1. On a donc, pour $x\in X$, $a(x), 1-a(x)\in[0,1]$,
-    d'où enfin $\norm{\indic-a}\le 1$. Mais on a $1 = \varphi(a) + \varphi(\indic-a) \le \varphi(a) + \abs{\varphi(\indic-a)} \le \varphi(a) + \norm{\indic - a}$, d'où
-    $\varphi(a)\ge 1 - \norm{\indic-a}\ge0$. \\
-    Supposons maintenant $\varphi$ positif. Notons déjà que l'égalité $\varphi(\indic) = 1$ entraîne $\norm{\varphi}\ge1$. Soit donc $a\in B(X)$ quelconque,
-    et notons que $-\norm{a}\indic\le a\le\norm{a}\indic$, de sorte que $-\norm{a}\le\varphi(a)\le\norm{a}$, ce qui conclut.
-\end{proof}
-
-\begin{proof}[Démonstration du théorème \ref{repr}]
-    Toute fonction mesurable bornée étant intégrable par rapport à toute mesure de probabilité, il est clair que $I$ est bien définie. 
-    Les propriétés élémentaires de l'intégration de Lebesgue, qui restent valables dans le cas de mesures finiment-additives,
-    donnent immédiatement que chaque $I_m$ est bien moyenne, et qu'on a
-    $I_m(\indic_A) = m(A)$ pour tout $A\subseteq X$ mesurable.
-
-    Soit maintenant $T$ une moyenne sur $X$.
-    Il faut alors montrer que $m : A\mapsto T(\indic_A)$ est bien une mesure de probabilité sur $X$,
-    puis que $T = I_m$ pour cette mesure $m$. $m$ est bien à valeurs positive par positivité de $T$, et 
-    de plus $m(X) = T(\indic) = 1$ et $m(\varnothing) = T(0) = 0$. Soient enfin $A, B\subseteq X$ deux ensembles
-    mesurables disjoints, de sorte que $\indic_{A\cup B} = \indic_A + \indic_B$. On a alors bien 
-    $m(A\cup B) = m(A) + m(B)$ ce qui assure l'additivité finie. 
-
-    Pour finir, considérons le sous-espace vectoriel $S(X, m)$ de $B(X)$ des fonctions $m$-simples, c'est à dire des 
-    fonctions $f:X\to\C$ mesurables, d'image finie, et vérifiant $\forall c\in\C^*, m(f\inv(x)) < +\infty$ (cette dernière 
-    condition est automatiquement vérifiée dans notre cas d'une mesure de probabilité, mais nécessaire en général).
-    Montrons que $S(X, m)$ est dense dans $B(X)$. Soit donc $f\in B(X)$, que nous supposons d'abord positive, et construisons 
-    une suite $g:\N\to S(X, m)$ de la manière suivante :
-    \begin{gather*}
-        g_0 := 0 \\
-        g_{n+1} := g_n + \frac12\norm{f - g_n}\indic_{\set{x\tq f(x) - g_n(x) \ge \frac12\norm{f - g_n}}}
-    \end{gather*}
-    Il est clair que chaque $g_n$ est une fonction simple positive et inférieure à $f$, et que la suite $g$ est croissante.
-    De plus, pour tout $n\in\N$ et $x\in X$, on est dans l'un des cas suivants : 
-    \begin{gather*}
-        f(x)-g_{n+1}(x) = f(x)-g_n(x) \le \frac12\norm{f - g_n} \\
-        f(x)-g_{n+1}(x) = f(x)-g_n(x)-\frac12\norm{f-g_n} \le \frac12\norm{f-g_n}
-    \end{gather*}
-    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$.
-    Dans le cas général, il suffit alors de décomposer $f$ en combinaison linéaire de fonctions positives et d'appliquer 
-    le résultat à chacune de ces fonctions. Cela montre donc la densité souhaitée. Or les formes linéaires $T$ et $I_m$
-    coïncident sur les indicatrices, donc sur $S(X, m)$, et elles sont continues par le lemme \ref{positive_iff_norm}. 
-    Par densité, elles sont donc égales, ce qui termine la preuve.
-\end{proof}
-
-\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
-
-Cela nous amène à donner la définition suivante.
-
-\begin{definition}
-    Soit $\Gamma$ un groupe localement compact et séparé. Une moyenne $T : B(\Gamma)\to\C$ sur $\Gamma$ est dite 
-    \emph{invariante à gauche} (resp. \emph{à droite}) si $\forall g\in\Gamma, T\comp\lambda_g = T$
-    (resp. $T\comp\rho_g = T$). Une moyenne invariante à droite et à gauche sera simplement dite \emph{invariante}.
-\end{definition}
-
-\begin{remark}
-    Les moyennes invariantes à gauche sur $\Gamma$ sont exactement les morphismes de la représentation $(B(\Gamma), \lambda)$ de 
-    $\Gamma$ vers la représentation triviale, avec la condition suppplémentaire que $T(\indic) = 1$.
-\end{remark}
-
-Remarquons que la bijection $I$ de la proposition \ref{repr} fait correspondre les mesures de probabilité 
-invariantes à gauche aux moyennes invariantes à gauche sur $\Gamma$. En effet, si $m$ est invariante à gauche, alors pour tous 
-$f\in B(\Gamma)$ et $g\in\Gamma$, on a 
-$I_m(\lambda_g(f)) = \integral{}{}{f\comp\ell_{g\inv}}{m} = \integral{}{}{f}{m} = I_m(f)$. 
-
-Réciproquement, si $T$ est une 
-moyenne invariante à gauche, alors la mesure $m$ associe vérifie, pour tous $A\in\Bor(\Gamma)$ et $g\in\Gamma$, 
-$m(g\inv A) = T(\indic_{g\inv A}) = T(\indic_A \comp\ell_g) = T(\lambda_{g\inv}(\indic_A)) = T(\indic_A) = m(A)$.
-En prenant en compte la proposition \ref{bilateral_of_left}, on vient donc de montrer le résultat suivant.
-\begin{proposition}
-    Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet une moyenne invariante (resp. à gauche, resp. à droite).
-\end{proposition}
-
-Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
-\paragraph{}
-
-Sans grande surprise, nous allons maintenant vouloir appliquer différents outils de l'analyse fonctionelle à l'étude des moyennes invariantes.
-Pour cela, nous allons utiliser à nouveau le lemme \ref{positive_iff_norm}, de manière beaucoup plus fine que dans la preuve 
-du théorème \ref{repr} (où nous avions seulement besoin de la continuité des formes linéaires positives).
-
-En effet, la condition $\norm\varphi = 1$ qui apparaît dans ce lemme a le bon goût d'être conservée lors du prolongement de l'application 
+En effet, la condition $\norm\varphi = \varphi(1)$ qui apparaît dans ce lemme a le bon goût d'être conservée lors du prolongement de l'application 
 $\varphi$ par le théorème de Hahn-Banach, alors qu'il n'est pas clair du tout qu'on puisse prolonger une forme linéaire positive en préservant 
-la positivité. On va donc pouvoir se restreindre à étudier les moyennes sur des sous-espaces plus concrets de $B(\Gamma)$.
+la positivité. On va donc pouvoir se restreindre à étudier les moyennes sur des sous-espaces plus concrets de $\mathrm{L}^\infty(\Gamma)$.
 
 Plus précisément, toujours pour $\Gamma$ groupe localement compact et séparé, on introduit $L_0(\Gamma) := \sum_{g\in\Gamma} \Ima(\lambda(g) - \id)$ le sous-espace de 
-$B(\Gamma)$ engendré par les fonctions de la forme $x\mapsto f(g\inv x) - f(x)$ pour $f\in B(\Gamma)$. 
-Il est alors clair qu'une forme linéaire sur $B(\Gamma)$ est une moyenne invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
+$\mathrm{L}^\infty(\Gamma)$ engendré par les classes de fonctions de la forme $\lambda(g)(f) - f$ pour $f\in \mathrm{L}^\infty(\Gamma)$. 
+Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
 
 \begin{lemma}
-    $\indic\notin L_0(\Gamma)$
+    $1\notin L_0(\Gamma)$
 \end{lemma}
 
 \begin{proof}
-    Supposons d'abord que $\indic$ soit de la forme $\lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
-    $f\in B(\Gamma)$. On a alors $\forall n\in\N, f(\gamma^n) = f(1) + n$, donc $\norm{f(\gamma^n)}\xrightarrow[n\to+\infty]{}+\infty$
-    ce qui contredit le fait que $f$ est bornée. 
+    Supposons d'abord qu'on ait $1 =_\mu \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
+    $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_\infty}$ est donc $\mu$-négligeable,
+    et par conséquent $T := \bigcup_{n\in\N}\gamma^{-n}S$ l'est aussi. $T$ est donc non-vide, choisissons alors $t\in T$. On a alors 
+    $\forall n\in\N, \norm{f}_\infty\geq \abs{f(\gamma^{-n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
     %\TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
     %vraie que presque partout !}
 
-    Pour le cas général, on suppose cette fois $\indic = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to B(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
-    un élément), et la fonction : 
+    Pour le cas général, on suppose cette fois $1 =_\mu \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
+    $f : I\to \mathscr{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
+    un élément), muni de la mesure de Haar produit $\nu:=\mu^{\otimes I}$, et la fonction : 
     \begin{equation*}
         \fundef{F}{\Gamma^I&\to&\C}{x&\mapsto&\frac{1}{\card{I}}\sum_{i\in I}f_i(x_i)}
     \end{equation*}
     $F$ est mesurable, et la majoration
-    $\forall x\in\Gamma^I, \abs{f(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$ assure que $F\in B(\Gamma^I)$. 
-    Enfin, $\indic_{\Gamma^I} = \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
+    $\abs{F(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$, valable pour presque tout $x\in\Gamma^I$
+    \footnote{Notons $S_i:=\set{x\in\Gamma\tq \abs{f_i(x)}>\norm{f}_\infty}$ et $T:=\set{x\in\Gamma^I\tq \abs{F(x)}>\frac1{\card{I}}\sum_i\norm{f_i}_\infty}$. 
+        On a clairement $T\subseteq\bigcup_{i\in I}\pi_i\inv(S_i)$, où $\pi_i:\Gamma^I\to\Gamma$ désigne la $i$-ème projection. \\
+        Or $\mu^{\otimes I}(\pi_i\inv(S_i)) = \mu^{\otimes I}(\Gamma\times\dots\times S_i\times\dots\times\Gamma)=\mu(\Gamma)\times\dots\times\mu(S_i)\times\dots\times\mu(\Gamma)=0$ puisque $\mu(S_i)=0$.
+        Donc $T$ est bien $\mu^{\otimes I}$-négligeable.},
+    assure que $F\in \mathscr{L}^\infty(\Gamma^I)$. 
+    Enfin, $1 =_{\nu} \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
 \end{proof}
 
-On peut alors considérer l'espace $L(\Gamma) := \C\cdot\indic \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
+On peut alors considérer l'espace $L(\Gamma) := \C\cdot 1 \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
 les moyennes à gauche sur $\Gamma$, au sens du théorème suivant.
 
 \begin{theorem}\label{left_mean_iff}
-    Considérons l'application linéaire $\widetilde{T} : L(\Gamma)\to\C$ définie par $\widetilde{T}(\indic) = 1$
+    Considérons l'application linéaire $\widetilde{T} : L(\Gamma)\to\C$ définie par $\widetilde{T}(1) = 1$
     et $\widetilde{T}_{|L_0(\Gamma)} = 0$. 
     
     Le groupe $\Gamma$ est moyennable \ssi l'application $\widetilde{T}$ est continue et de norme $1$.
@@ -382,14 +542,12 @@ $\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critè
 \begin{proof}[Démonstration du théorème \ref{left_mean_iff}]
     Supposons d'abord $\Gamma$ moyennable, et soit $T$ une moyenne à gauche sur $\Gamma$.
     On sait déjà que $T$ prolonge $\widetilde{T}$, puisque $T$ est nulle sur $L_0(\Gamma)$ et 
-    $T(\indic)=1$. On a donc $\norm{\widetilde{T}}\le\norm{T}=1$ par restriction, et en fait $\norm{\widetilde{T}} = 1$
-    puique $\widetilde{T}(\indic)=1$. 
+    $T(1)=1$. On a donc $\norm{\widetilde{T}}\le\norm{T}=1$ par restriction, et en fait $\norm{\widetilde{T}} = 1$
+    puique $\widetilde{T}(1)=1$. 
 
-    Supposons maintenant $\norm{\widetilde{T}}=1$. Par le théorème de Hahn-Banach, $\widetilde{T}$ se prolonge 
-    en $T:B(\Gamma)\to\C$ linéaire continue de même norme. Comme de plus $T(\indic)=1$ et 
-    $T_{|L_0(\Gamma)} = 0$, $T$ est une moyenne à gauche sur $\Gamma$. En fait, cet argument montre même 
-    que \emph{tout} prolongement de norme $1$ de $\widetilde{T}$ \footnote{et pas seulement le prolongement fourni par Hahn-Banach} 
-    est une moyenne à gauche, ce qui termine la preuve.
+    Supposons maintenant $\norm{\widetilde{T}}=1$, et soit $T$ un prolongement linéaire continu de $\widetilde{T}$ de norme $1$.
+    On a alors $T(1)=1=\norm{T}$ et $T_{|L_0(\Gamma)} = 0$, donc $T$ est une moyenne à gauche sur $\Gamma$. Le théorème de Hahn-Banach
+    garantissant l'existence d'un tel prolongement, cela termine la preuve.
 \end{proof}
 
 Illustrons ce critère sur le cas du groupe libre $F_2$. Dans ce cas, on peut montrer que $\norm{\widetilde{T}}\ge3$.
@@ -411,7 +569,7 @@ Donnons maintenant, toujours à l'aide du critère \ref{amenable_iff_L0}, notre 
 
 \begin{proof}
     Commençons par simplifier un peu notre description de $L_0(\Z)$. Un simple argument de somme
-    télescopique montre que, pour $n>0$ et $u\in B(\Z)=\ell^\infty(\Z)$:
+    télescopique montre que, pour $n>0$ et $u\in \mathrm{L}^\infty(\Z)=\ell^\infty(\Z)$:
     \begin{equation*}
         (\lambda(n)-\id)(u) = \left(\sum_{1\le i\le n} \lambda(i+1) - \lambda(i)\right)(u) = (\lambda(1)-\id)\left(\sum_{1\le i\le n} \lambda(i)(u)\right)
     \end{equation*}
@@ -487,20 +645,20 @@ lorsque $F$ est grand. C'est l'objet de la partie suivante.
 Dans cette section, $\Gamma$ est un groupe topologique séparé et localement compact, et on fixe 
 $\mu$ une mesure de Haar à gauche sur $\Gamma$.
 
-On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathcal{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
-$\mathcal{K}_+(\Gamma)$
-\footnote{On note $\mathcal{K}(X)$ (resp. $\mathcal{K}^*(X)$, resp. $\mathcal{K}_+(X)$) l'ensemble des parties compactes 
+On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathfrak{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
+$\mathfrak{K}_+(\Gamma)$
+\footnote{On note $\mathfrak{K}(X)$ (resp. $\mathfrak{K}^*(X)$, resp. $\mathfrak{K}_+(X)$) l'ensemble des parties compactes 
 (resp. compactes non-vides, resp. compactes d'intérieur non-vide) d'un espace topologique $X$. }
 des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
-C'est une application bien définie car tout élément de $\mathcal{K}_+(\Gamma)$ est de mesure finie non-nulle,
+C'est une application bien définie car tout élément de $\mathfrak{K}_+(\Gamma)$ est de mesure finie non-nulle,
 et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
-Un filtre $\mathscr{F}$ sur $\mathcal{K}_+(\Gamma)$ est dit \emph{simplement de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
+Un filtre $\mathscr{F}$ sur $\mathfrak{K}_+(\Gamma)$ est dit \emph{faiblement de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
 de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence simple sur $\mathcal{F}(\Gamma, \R_+)$. 
-Si la convergence est uniforme sur les compacts, on parle de filtre \emph{uniformément de F\o{}lner}.
-Une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est \emph{simplement (resp. uniformément) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
-voisinages de l'infini dans $\N$, est simplement (resp. uniformément) de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
-une suite $K:\N\to\mathcal{K}_+(\Gamma)$ est donc simplement (resp. uniformément) de F\o{}lner \ssi la suite de fonctions
+Si la convergence est uniforme sur les compacts, on parle de filtre \emph{fortement de F\o{}lner}.
+Une suite $K:\N\to\mathfrak{K}_+(\Gamma)$ est \emph{faiblement (resp. fortement) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
+voisinages de l'infini dans $\N$, est faiblement (resp. fortement) de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
+une suite $K:\N\to\mathfrak{K}_+(\Gamma)$ est donc faiblement (resp. fortement) de F\o{}lner \ssi la suite de fonctions
 $n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)$ converge vers $0$ simplement 
 (resp. uniformément sur tout compact).
 
@@ -516,18 +674,18 @@ vers $0$.
 
 Avant d'aller plus loin, donnons un critère plus simple pour l'existence de filtres de F\o{}lner (simplement ou uniformément) sur $\Gamma$.
 
-\begin{lemma}
-    Le groupe séparé et localement compact $\Gamma$ admet un filtre simplement de F\o{}lner \ssi il satisfait la 
-    \emph{condition de F\o{}lner simple} :
-    \begin{equation}\label{simple_Folner_cond}
-        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathcal{K}_+(\Gamma), 
+\begin{lemma}\label{Folner_filter_of_cond}
+    $\Gamma$ admet un filtre faiblement de F\o{}lner \ssi il satisfait la 
+    \emph{condition de F\o{}lner faible} :
+    \begin{equation*}\label{weak_Folner_cond}
+        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathfrak{K}_+(\Gamma), 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
-    \end{equation}
-    Il admet de un filtre uniformément de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner uniforme} : 
-    \begin{equation}\label{uniform_Folner_cond}
-        \forall\varepsilon>0, \forall A\in\mathcal{K}(\Gamma), \exists K\in\mathcal{K}_+(\Gamma), \forall\gamma\in A, 
+    \end{equation*}
+    Il admet de un filtre fortement de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner forte} : 
+    \begin{equation*}\label{strong_Folner_cond}
+        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall\gamma\in A, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
-    \end{equation}
+    \end{equation*}
 
     \TODO{Dans quel cas a-t-on des suites ?}
     %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
@@ -540,25 +698,25 @@ Avant d'aller plus loin, donnons un critère plus simple pour l'existence de fil
 %\TODO{Quelle est la bonne topologie à mettre sur $\mathcal{F}(\Gamma, \R_+)$ pour la définition de filtre de F\o{}lner : convergence simple ou compacte ?
 %    En tout cas la convergence simple suffit à faire marcher le théorème suivant.}
 
-Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre (simplement) de F\o{}lner,
-en adaptant simplement la deuxième preuve de ce théorème.
+Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre faiblement de F\o{}lner,
+en adaptant directement la deuxième preuve de ce théorème.
 
 \begin{theorem}\label{amenable_of_Folner}
-    Si $\Gamma$ admet un filtre simplement de F\o{}lner, alors $\Gamma$ est moyennable.
+    Si $\Gamma$ admet un filtre faiblement de F\o{}lner, alors $\Gamma$ est moyennable.
 \end{theorem}
 
 \begin{proof}
     On utilise toujours le critère \ref{amenable_iff_L0}. Soient donc $c\in\C$ et $v\in L_0(\Gamma)$, 
     que l'on écrit encore sous la forme $v = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour certains $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to B(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
+    $f : I\to \mathscr{L}^\infty(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
 
     Par définition, on a $\forall x\in\Gamma$:
-    \begin{equation*}
-        -M \le c + \sum_i (f_i(\gamma_i\inv x) - f_i(x)) \le M
-    \end{equation*}
-    En moyennant ces inégalités sur un $K\in\mathcal{K}_+(\Gamma)$ quelconque, on obtient:
     \begin{equation}\label{amenable_of_Folner_eq1}
-        -M \le c + \sum_i \frac1{\mu(K)} \integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)} \le M
+        -M \le c + \sum_i (f_i(\gamma_i\inv x) - f_i(x)) \le M
+    \end{equation}
+    En moyennant ces inégalités sur un $K\in\mathfrak{K}_+(\Gamma)$ quelconque, on obtient:
+    \begin{equation}\label{amenable_of_Folner_eq2}
+        -M \le c + \sum_i \frac1{\mu(K)} \integral{K}{}{\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
     \end{equation}
 
     Or, pour $i$ fixé, l'invariance par translation de $\mu$ donne :
@@ -567,18 +725,138 @@ en adaptant simplement la deuxième preuve de ce théorème.
             &= \abs{\integral{\gamma_i\inv K}{}{f_i}{\mu} - \integral{K}{}{f_i}{\mu}} \\
             &= \abs{\integral{\gamma_i\inv K\setminus K}{}{f_i}{\mu} - \integral{K\setminus\gamma_i\inv K}{}{f_i}{\mu}} \\
             &\le \integral{\gamma_i\inv K\triangle K}{}{\norm{f_i}_\infty}{\mu} \\
-            &=\norm{f_i}_\infty \cdot \mu(\gamma_i\inv K\triangle K)
+            &= \norm{f_i}_\infty \cdot \mu(\gamma_i\inv K\triangle K)
     \end{align*}
     
-    Soit finalement $\mathscr{F}$ un filtre simplement de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
+    Soit finalement $\mathscr{F}$ un filtre faiblement de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
     la fonction $K\mapsto\frac1{\mu(K)} \integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}$ converge vers $0$
-    selon $\mathscr{F}$, et ce pour chaque $i\in I$. Il suffit enfin de prendre la limite selon $\mathscr{F}$ des inégalités \ref{amenable_of_Folner_eq1}
+    selon $\mathscr{F}$, et ce pour chaque $i\in I$. Il suffit enfin de prendre la limite selon $\mathscr{F}$ des inégalités \ref{amenable_of_Folner_eq2}
     pour obtenir $-M\le c\le M$. 
 \end{proof}
 
-\TODO{Faire aussi la construction par ultrafiltre}
+La condition de F\o{}lner est très intéressante pour exprimer la moyennabilité de groupes discrets en termes combinatoires. Elle permet ainsi 
+de lier la moyennabilité à la \emph{croissance} d'un groupe finiment engendré. \TODO{Dire quelques mots de plus ?} 
 
-\TODO{Montrer la réciproque}
+Cependant, pour établir la théorie, il sera utile de travailler avec une condition un peu plus flexible. Pour voir cela, reprenons une dernière fois la preuve
+précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{amenable_of_Folner_eq1} sur un compact, observons ce qui se passe 
+lorsqu'on considère une moyenne pondérée par une fonction $\varphi\in\mathscr{L}^1(\Gamma)$, positive et de masse $1$ (le cas déjà traité correspondant à $\varphi=\frac1{\mu(K)}\indic_K$).
+On obtient alors:
+\begin{equation*}\label{intuition_Reiter_eq1}
+    -M \le c + \sum_i \integral{K}{}{\varphi(x)\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
+\end{equation*}
+Pour $i$ fixé, on a alors :
+\begin{align*}
+    \abs{\integral{}{}{\varphi(x)(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}} 
+        &= \abs{\integral{}{}{\varphi(\gamma_i x)f_i(x)}{\mu(x)} - \integral{}{}{\varphi(x) f_i(x)}{\mu(x)}} \\
+        &= \abs{\integral{}{}{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}{\mu}} \\
+        &\le \norm{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}_1 \\
+        &\le \norm{f_i}_\infty \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1
+\end{align*}
+Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1$ vers $0$, ce qui motive les définitions suivantes.
+
+\paragraph{}
+
+Notons $\mathscr{L}^1_{1,+}(\Gamma)$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1_{1, +}(\Gamma)$ son image dans 
+$\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1_{1, +}(\Gamma)\to\mathcal{F}(\Gamma, \R_+)$, définie par
+par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1$.
+
+Un filtre $\mathscr{F}$ sur $\mathrm{L}^1_{1, +}(\Gamma)$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
+topologie de la convergence simple (resp. uniforme sur les compacts) sur $\mathcal{F}(\Gamma, \R_+)$. 
+Une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est \emph{faiblement de Reiter} (resp \emph{fortement de Reiter}) si le filtre $\varphi_*\nhds_{+\infty}^\N$ est faiblement (resp. fortement) de Reiter. Comme $\mathfrak{r}_*\varphi_*\nhds_{+\infty}^\N = (\mathfrak{r}\comp \varphi)_*\nhds_{+\infty}^\N$,
+une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est donc faiblement (resp. fortement) de Reiter \ssi la suite de fonctions
+$n\mapsto\left(\gamma\mapsto\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1\right)$ converge vers $0$ simplement 
+(resp. uniformément sur tout compact).
+
+On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de manière similaire.
+
+\begin{lemma}
+    $\Gamma$ admet un filtre faiblement de Reiter \ssi il satisfait la 
+    \emph{condition de Reiter faible} :
+    \begin{equation*}\label{weak_Reiter_cond}
+        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1_{1,+}(\Gamma), 
+        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1<\varepsilon
+    \end{equation*}
+    Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
+    \begin{equation*}\label{strong_Reiter_cond}
+        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \varphi\in\mathscr{L}^1_{1,+}(\Gamma), \forall\gamma\in A, 
+        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1<\varepsilon
+    \end{equation*}
+
+    \TODO{Dans quel cas a-t-on des suites ?}
+    %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
+\end{lemma}
+
+Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\mathfrak{K}_+(\Gamma)$, l'application 
+$\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1_{1,+}(\Gamma)$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
+Si $\mathscr{F}$ est un filtre de F\o{}lner fort (resp. faible), $\chi_*\mathscr{F}$ est donc un filtre de Reiter fort (resp. faible).
+
+Avant d'en arriver au résultat crucial de cette partie, introduisons une dernière notion. Une moyenne $m$ sur $\Gamma$ est dite 
+\emph{topologiquement invariante (à gauche)} si :
+\begin{equation*}
+    \forall f\in\mathrm{L}^\infty(\Gamma), \forall\varphi\in\mathrm{L}^1_{1, +}(\Gamma), m(\varphi*f) = m(f)
+\end{equation*}
+
+Le théorème suivant assure que toutes les notions définies dans cette partie sont en fait équivalentes à la moyennabilité ! À travers la condition de Reiter, il nous 
+permettra de caractériser la moyennabilité par la théorie des représentations dans la partie suivante.
+
+\begin{theorem}\label{amenable_TFAE}
+    Soit $\Gamma$ un groupe topologique séparé et localement compact. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}[(i)]
+        \item $\Gamma$ est moyennable
+        \item Il existe une moyenne topologiquement invariante sur $\Gamma$
+        \item $\Gamma$ satisfait la condition de Reiter forte
+        \item $\Gamma$ satisfait la condition de F\o{}lner forte
+        \item $\Gamma$ satisfait la condition de F\o{}lner faible
+        \item $\Gamma$ satisfait la condition de Reiter faible
+    \end{enumerate}
+\end{theorem}
+
+La preuve nécessite un certain nombre de résultats et définitions préliminaires, que nous détaillons maintenant. 
+
+\paragraph{}
+
+Notons tout d'abord $UC_b(\Gamma_s)$ l'ensemble des fonctions $f:\Gamma_s\to\C$ qui sont bornées et uniformément 
+continues, où $\Gamma_s$ désigne l'espace uniforme obtenu 
+en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{gauche}\footnote{On noterait de même $\Gamma_d$
+le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{droite}.}.
+Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_s$ le filtre des entourages,
+est définie par l'égalité $\mathcal{U}\Gamma_s=(\divop_s)^*\nhds_1^\Gamma$, pour 
+$\fundef{\divop_s}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x\inv y}$\footnote{Dans le cas de la structure 
+uniforme droite, on remplaçerait $\divop_s$ par $\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&xy\inv}$.}.
+Rappelons aussi que la structure d'un espace métrique $(X, d)$ est définie par 
+$\mathcal{U}X = d^*\nhds_0$. 
+
+Pour $f\in\mathscr{L}^\infty(\Gamma)$, on a donc : 
+\begin{align*}
+    f\in UC_b(\Gamma_s)
+        &\iff \mathcal{U}\Gamma_s \le\footnotemark\ (f\times f)^*\mathcal{U}\C \\
+        &\iff (\divop_s)^*\nhds_1^\Gamma \le (f\times f)^*d^*\nhds_0 \\
+        &\iff (\divop_s)^*\nhds_1^\Gamma \le (f\times f)^*d^*\nhds_0 \\
+\end{align*}
+\footnotetext{Si $\mathscr{F}, \mathscr{G}$ sont deux filtres sur un ensemble $X$, 
+on note $\mathscr{F}\le \mathscr{G}$ si $\mathscr{F}$ est \emph{plus fin que} $\mathscr{G}$,
+c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. } 
+
+%,
+%cette dernière condition pouvant se réécrire : 
+%\begin{equation}\label{cara_left_uniform_continuous}
+%    \forall\varepsilon>0,\set{g\in\Gamma\tq\forall x\in\Gamma, \abs{f(gx)-f(x)}<\varepsilon}\in\nhds_1
+%\end{equation}
+%De manière équivalente, $f\in\mathscr{L}^\infty(\Gamma)$ appartient à $UC_b(\Gamma)$ \ssi l'application $\fundef{\ev_f\comp\lambda}{\Gamma&\to&\mathrm{L}^\infty(\Gamma)}{g&\mapsto&\lambda(g)(f)}$ est continue en $1$
+%\footnote{
+%    En effet, le symmétrique d'un voisinage de $1$ étant voisinage de $1$, on a:
+%    \begin{align*}
+%        (\ref{cara_left_uniform_continuous})
+%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\forall x\in\Gamma,\abs{f(gx)-f(x)}\le\varepsilon \\
+%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g\inv)(f) - f}_\infty\le\varepsilon \\
+%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g)(f) - f}_\infty\le\varepsilon \\
+%            &\iff \ev_f\comp\lambda \text{ continue en 1}
+%    \end{align*}
+%    De plus, si 
+%}.
+
+\begin{proof} \TODO{}
+\end{proof}
 
 \section{Contenance faible et C*-algèbres}
 
