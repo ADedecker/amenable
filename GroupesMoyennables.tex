@@ -14,6 +14,7 @@
 \usepackage{faktor}
 \usepackage{enumerate}
 \usepackage{xcolor}
+\usepackage{tikz, tkz-tab, tikz-cd}
 \usepackage[T1]{fontenc}
 
 \newtheorem{theorem}{Théorème}[section]
@@ -197,7 +198,7 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 \begin{proof}[Démonstration de la proposition \ref{bilateral_of_left}]
     Il s'agit donc de construire une \emph{autre} moyenne $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
     Posons d'abord, pour $f\in\mathrm{L}^\infty(\Gamma)$ quelconque, $\fundef{\widehat{f}}{\Gamma&\to&\C}{g&\mapsto&m(f\comp r_g)}$. On a 
-    $\forall g\in\Gamma, \abs{\widehat{f}(g)} \le \norm{f\comp r_g}_\infty = \norm{f}_\infty$ par le lemme \ref{positive_iff_norm}, 
+    $\forall g\in\Gamma, \abs{\widehat{f}(g)} \le \norm{f\comp r_g}_{\mathrm{L}^\infty} = \norm{f}_{\mathrm{L}^\infty}$ par le lemme \ref{positive_iff_norm}, 
     donc $\widehat{f}\in B(\Gamma)\subseteq\mathscr{L}^\infty(\Gamma)$.
     Posons alors $n(f) := m\left(\widehat{f}\comp\invop\right)$
     \footnote{Le fait que $\widehat{f}\comp\invop$ soit bornée presque partout provient de ce que $\widehat{f}$ est bornée \emph{partout}.}.
@@ -263,12 +264,12 @@ intégrer des fonctions bornées selon des contenus finis.
         g_{n+1} := g_n + \frac12\norm{f - g_n}\indic_{\set{x\tq f(x) - g_n(x) \ge \frac12\norm{f - g_n}}}
     \end{gather*}
     Il est clair que chaque $g_n$ est une fonction simple positive et inférieure à $f$, et que la suite $g$ est croissante.
-    De plus, pour tout $n\in\N$ et $x\in X$, on est dans l'un des cas suivants : 
+    De plus, pour tout $n\in\N$, et pour presque tout $x\in X$, on est dans l'un des cas suivants : 
     \begin{gather*}
         f(x)-g_{n+1}(x) = f(x)-g_n(x) \le \frac12\norm{f - g_n} \\
         f(x)-g_{n+1}(x) = f(x)-g_n(x)-\frac12\norm{f-g_n} \le \frac12\norm{f-g_n}
     \end{gather*}
-    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$.
+    Il vient $\norm{f - g_{n+1}}\le\frac12\norm{f - g_n}$, d'où $\norm{f - g_n}\xrightarrow[n\to+\infty]{} 0$ dans $\mathrm{L}^\infty(X, \mu)$.
     Dans le cas général, il suffit alors de décomposer $f$ en combinaison linéaire de fonctions positives et d'appliquer 
     le résultat à chacune de ces fonctions. 
 
@@ -293,7 +294,7 @@ intégrer des fonctions bornées selon des contenus finis.
     $\widetilde{I}_m:\mathrm{S}(X, \mu)\to\C$ linéaire vérifiant $\forall A\in\mathcal{A}, \widetilde{I}_m(\indic_A) = m(A)$. De plus, pour 
     $f\in\mathscr{S}(X)$, on a :
     \begin{equation*}
-        \abs{\widetilde{I}_m(f)} = \abs{\sum_{z\in f(X)} zm(f\inv(z))} \le \sum_{z\in f(X)} \norm{f}_\infty m(f\inv(z)) = \norm{f}_\infty m(X)
+        \abs{\widetilde{I}_m(f)} = \abs{\sum_{z\in f(X)} zm(f\inv(z))} \le \sum_{z\in f(X)} \norm{f}_{\mathrm{L}^\infty} m(f\inv(z)) = \norm{f}_{\mathrm{L}^\infty} m(X)
     \end{equation*}
     Comme par ailleurs $\widetilde{I}_m(1)=m(X)$, on a donc $\widetilde{I}_m$ continue de norme exactement $m(X)$.
     Par le théorème de prolongement des applications uniformément continues, elle se prolonge donc de manière unique en $I_m : \mathrm{L}^\infty(X, \mu)\to\C$
@@ -498,9 +499,9 @@ Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa 
 
 \begin{proof}
     Supposons d'abord qu'on ait $1 =_\mu \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
-    $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_\infty}$ est donc $\mu$-négligeable,
+    $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_{\mathrm{L}^\infty}}$ est donc $\mu$-négligeable,
     et par conséquent $T := \bigcup_{n\in\N}\gamma^{-n}S$ l'est aussi. $T$ est donc non-vide, choisissons alors $t\in T$. On a alors 
-    $\forall n\in\N, \norm{f}_\infty\geq \abs{f(\gamma^{-n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
+    $\forall n\in\N, \norm{f}_{\mathrm{L}^\infty}\geq \abs{f(\gamma^{-n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
     %\TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
     %vraie que presque partout !}
 
@@ -511,8 +512,8 @@ Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa 
         \fundef{F}{\Gamma^I&\to&\C}{x&\mapsto&\frac{1}{\card{I}}\sum_{i\in I}f_i(x_i)}
     \end{equation*}
     $F$ est mesurable, et la majoration
-    $\abs{F(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_\infty$, valable pour presque tout $x\in\Gamma^I$
-    \footnote{Notons $S_i:=\set{x\in\Gamma\tq \abs{f_i(x)}>\norm{f}_\infty}$ et $T:=\set{x\in\Gamma^I\tq \abs{F(x)}>\frac1{\card{I}}\sum_i\norm{f_i}_\infty}$. 
+    $\abs{F(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}$, valable pour presque tout $x\in\Gamma^I$
+    \footnote{Notons $S_i:=\set{x\in\Gamma\tq \abs{f_i(x)}>\norm{f}_{\mathrm{L}^\infty}}$ et $T:=\set{x\in\Gamma^I\tq \abs{F(x)}>\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}}$. 
         On a clairement $T\subseteq\bigcup_{i\in I}\pi_i\inv(S_i)$, où $\pi_i:\Gamma^I\to\Gamma$ désigne la $i$-ème projection. \\
         Or $\mu^{\otimes I}(\pi_i\inv(S_i)) = \mu^{\otimes I}(\Gamma\times\dots\times S_i\times\dots\times\Gamma)=\mu(\Gamma)\times\dots\times\mu(S_i)\times\dots\times\mu(\Gamma)=0$ puisque $\mu(S_i)=0$.
         Donc $T$ est bien $\mu^{\otimes I}$-négligeable.},
@@ -536,7 +537,7 @@ En remarquant que $\forall c\in\C, \forall f\in L_0(\Gamma), \widetilde{T}(c + f
 $\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critère de moyennabilité suivant:
 
 \begin{corollary}\label{amenable_iff_L0}
-    $\Gamma$ est moyennable \ssi $\forall c\in\C, \forall f\in L_0(\Gamma), \abs{c}\le\norm{c + f}_\infty$.
+    $\Gamma$ est moyennable \ssi $\forall c\in\C, \forall f\in L_0(\Gamma), \abs{c}\le\norm{c + f}_{\mathrm{L}^\infty}$.
 \end{corollary}
 
 \begin{proof}[Démonstration du théorème \ref{left_mean_iff}]
@@ -556,7 +557,7 @@ $g:=(\lambda(b\inv) - \id)(\indic_{S(b)})$, qui sont deux éléments de $L_0(F_2
 $f = \indic_{a\inv S(a)} - \indic_{S(a)} = \indic_{\set{1}\cup S(b)\cup S(b\inv)}$, et de même 
 $g = \indic_{\set{1}\cup S(a)\cup S(a\inv)}$, de sorte que $f+g=\indic + \delta_1$. Mais alors 
 $-\frac23(\indic+\delta_1)\in L_0(F_2)$, donc $\widetilde{T}(\indic - \frac23(\indic+\delta_1)) = 1$, 
-et d'autre part $\norm{\indic - \frac23(\indic+\delta_1)}_\infty=\frac13$. 
+et d'autre part $\norm{\indic - \frac23(\indic+\delta_1)}_{\mathrm{L}^\infty}=\frac13$. 
 On a donc bien $\norm{\widetilde{T}}\geq3$.
 
 \paragraph{}
@@ -708,7 +709,7 @@ en adaptant directement la deuxième preuve de ce théorème.
 \begin{proof}
     On utilise toujours le critère \ref{amenable_iff_L0}. Soient donc $c\in\C$ et $v\in L_0(\Gamma)$, 
     que l'on écrit encore sous la forme $v = \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour certains $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to \mathscr{L}^\infty(\Gamma)$. Posons aussi $M := \norm{c + v}_\infty$.
+    $f : I\to \mathscr{L}^\infty(\Gamma)$. Posons aussi $M := \norm{c + v}_{\mathrm{L}^\infty}$.
 
     Par définition, on a $\forall x\in\Gamma$:
     \begin{equation}\label{amenable_of_Folner_eq1}
@@ -724,8 +725,8 @@ en adaptant directement la deuxième preuve de ce théorème.
         \abs{\integral{K}{}{(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}} 
             &= \abs{\integral{\gamma_i\inv K}{}{f_i}{\mu} - \integral{K}{}{f_i}{\mu}} \\
             &= \abs{\integral{\gamma_i\inv K\setminus K}{}{f_i}{\mu} - \integral{K\setminus\gamma_i\inv K}{}{f_i}{\mu}} \\
-            &\le \integral{\gamma_i\inv K\triangle K}{}{\norm{f_i}_\infty}{\mu} \\
-            &= \norm{f_i}_\infty \cdot \mu(\gamma_i\inv K\triangle K)
+            &\le \integral{\gamma_i\inv K\triangle K}{}{\norm{f_i}_{\mathrm{L}^\infty}}{\mu} \\
+            &= \norm{f_i}_{\mathrm{L}^\infty} \cdot \mu(\gamma_i\inv K\triangle K)
     \end{align*}
     
     Soit finalement $\mathscr{F}$ un filtre faiblement de F\o{}lner pour $\Gamma$. L'estimation précédente assure alors que
@@ -749,22 +750,22 @@ Pour $i$ fixé, on a alors :
     \abs{\integral{}{}{\varphi(x)(f_i(\gamma_i\inv x) - f_i(x))}{\mu(x)}} 
         &= \abs{\integral{}{}{\varphi(\gamma_i x)f_i(x)}{\mu(x)} - \integral{}{}{\varphi(x) f_i(x)}{\mu(x)}} \\
         &= \abs{\integral{}{}{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}{\mu}} \\
-        &\le \norm{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}_1 \\
-        &\le \norm{f_i}_\infty \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1
+        &\le \norm{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}_{\mathrm{L}^1} \\
+        &\le \norm{f_i}_{\mathrm{L}^\infty} \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}
 \end{align*}
-Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1$ vers $0$, ce qui motive les définitions suivantes.
+Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.
 
 \paragraph{}
 
 Notons $\mathscr{L}^1_{1,+}(\Gamma)$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1_{1, +}(\Gamma)$ son image dans 
 $\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1_{1, +}(\Gamma)\to\mathcal{F}(\Gamma, \R_+)$, définie par
-par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1$.
+par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$.
 
 Un filtre $\mathscr{F}$ sur $\mathrm{L}^1_{1, +}(\Gamma)$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
 topologie de la convergence simple (resp. uniforme sur les compacts) sur $\mathcal{F}(\Gamma, \R_+)$. 
 Une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est \emph{faiblement de Reiter} (resp \emph{fortement de Reiter}) si le filtre $\varphi_*\nhds_{+\infty}^\N$ est faiblement (resp. fortement) de Reiter. Comme $\mathfrak{r}_*\varphi_*\nhds_{+\infty}^\N = (\mathfrak{r}\comp \varphi)_*\nhds_{+\infty}^\N$,
 une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est donc faiblement (resp. fortement) de Reiter \ssi la suite de fonctions
-$n\mapsto\left(\gamma\mapsto\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1\right)$ converge vers $0$ simplement 
+$n\mapsto\left(\gamma\mapsto\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}\right)$ converge vers $0$ simplement 
 (resp. uniformément sur tout compact).
 
 On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de manière similaire.
@@ -774,12 +775,12 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
     \emph{condition de Reiter faible} :
     \begin{equation*}\label{weak_Reiter_cond}
         \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1_{1,+}(\Gamma), 
-        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1<\varepsilon
+        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation*}
     Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
     \begin{equation*}\label{strong_Reiter_cond}
         \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \varphi\in\mathscr{L}^1_{1,+}(\Gamma), \forall\gamma\in A, 
-        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_1<\varepsilon
+        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation*}
 
     \TODO{Dans quel cas a-t-on des suites ?}
@@ -815,27 +816,42 @@ La preuve nécessite un certain nombre de résultats et définitions préliminai
 
 \paragraph{}
 
-Notons tout d'abord $UC_b(\Gamma_s)$ l'ensemble des fonctions $f:\Gamma_s\to\C$ qui sont bornées et uniformément 
-continues, où $\Gamma_s$ désigne l'espace uniforme obtenu 
-en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{gauche}\footnote{On noterait de même $\Gamma_d$
-le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{droite}.}.
-Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_s$ le filtre des entourages,
-est définie par l'égalité $\mathcal{U}\Gamma_s=(\divop_s)^*\nhds_1^\Gamma$, pour 
-$\fundef{\divop_s}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x\inv y}$\footnote{Dans le cas de la structure 
-uniforme droite, on remplaçerait $\divop_s$ par $\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&xy\inv}$.}.
+Notons tout d'abord $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_s\to\C$ qui sont bornées et uniformément 
+continues, où $\Gamma_d$ désigne l'espace uniforme obtenu 
+en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{droite}\footnote{On noterait de même $\Gamma_s$
+le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}.
+Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_d$ le filtre des entourages,
+est définie par l'égalité $\mathcal{U}\Gamma_d=(\divop_d)^*\nhds_1^\Gamma$, pour 
+$\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x y\inv}$\footnote{Dans le cas de la structure 
+uniforme gauche, on remplaçerait $\divop_d$ par $\fundef{\divop_s}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x\inv y}$.}.
 Rappelons aussi que la structure d'un espace métrique $(X, d)$ est définie par 
 $\mathcal{U}X = d^*\nhds_0$. 
-
-Pour $f\in\mathscr{L}^\infty(\Gamma)$, on a donc : 
-\begin{align*}
-    f\in UC_b(\Gamma_s)
-        &\iff \mathcal{U}\Gamma_s \le\footnotemark\ (f\times f)^*\mathcal{U}\C \\
-        &\iff (\divop_s)^*\nhds_1^\Gamma \le (f\times f)^*d^*\nhds_0 \\
-        &\iff (\divop_s)^*\nhds_1^\Gamma \le (f\times f)^*d^*\nhds_0 \\
-\end{align*}
-\footnotetext{Si $\mathscr{F}, \mathscr{G}$ sont deux filtres sur un ensemble $X$, 
+Pour $f:\Gamma\to\C$ bornée, on a donc : 
+\begin{align}
+    f\in UC_b(\Gamma_d)
+        &\iff \mathcal{U}\Gamma_d \le\footnotemark\ (f\times f)^*\mathcal{U}\C \nonumber \\
+        &\iff (\divop_d)^*\nhds_1^\Gamma \le (f\times f)^*d^*\nhds_0 \nonumber \\
+        &\iff \forall W\in\nhds_0, \exists V\in\nhds_1^\Gamma, \set{(x, y)\tq x y\inv\in V} \subseteq \set{(x, y)\tq \abs{f(x)-f(y)}\in W} \nonumber \\
+        &\iff \forall \varepsilon>0, \exists V\in\nhds_1^\Gamma, \forall y\in\Gamma, \forall g\in V, \abs{f(gy)-f(y)} < \varepsilon \nonumber \\
+        &\iff \forall \varepsilon>0, \exists V\in\nhds_1^\Gamma, \forall g\in V, \norm{\lambda(g)(f) - f}_\infty < \varepsilon \label{UCB_explicit_cara}
+\end{align}
+Où on a pu remplace $\lambda(g\inv)$ par $\lambda(g)$ en remplaçant $V$ par son symétrique. Cela permet de donner la caractérisation suivante de $UC_b(\Gamma_d)$.
+\footnotetext{Si $\mathscr{F}, \mathscr{G}$ sont deux filtres sur un ensemble $X$,
 on note $\mathscr{F}\le \mathscr{G}$ si $\mathscr{F}$ est \emph{plus fin que} $\mathscr{G}$,
 c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. } 
+
+\begin{lemma}
+    Soit $f\in\ell^\infty(\Gamma)$\footnote{i.e $f$ est bornée \emph{partout}}. $f$ appartient à $UC_b(\Gamma_d)$ \ssi l'application 
+    $\fundef{\ev_f\comp\lambda}{\Gamma&\to&\ell^\infty(\Gamma)}{g&\mapsto&\lambda(g)(f)}$
+    est continue.
+\end{lemma}
+
+On donne une démonstration directe en se basant sur la caractérisation \ref{UCB_explicit_cara}, mais on 
+pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plus général, démontré en annexe.
+
+\begin{proof}
+    \TODO{}
+\end{proof}
 
 %,
 %cette dernière condition pouvant se réécrire : 
@@ -848,16 +864,114 @@ c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. }
 %    \begin{align*}
 %        (\ref{cara_left_uniform_continuous})
 %            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\forall x\in\Gamma,\abs{f(gx)-f(x)}\le\varepsilon \\
-%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g\inv)(f) - f}_\infty\le\varepsilon \\
-%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g)(f) - f}_\infty\le\varepsilon \\
+%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g\inv)(f) - f}_{\mathrm{L}^\infty}\le\varepsilon \\
+%            &\iff \forall\varepsilon>0,\exists U\in\nhds_1^\Gamma,\norm{\lambda(g)(f) - f}_{\mathrm{L}^\infty}\le\varepsilon \\
 %            &\iff \ev_f\comp\lambda \text{ continue en 1}
 %    \end{align*}
 %    De plus, si 
 %}.
 
-\begin{proof} \TODO{}
+\begin{proof}[Démonstration du théorème \ref{amenable_TFAE}] \TODO{}
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
+
+\newpage
+
+\section{Annexes}
+
+\subsection*{Sur la convergence uniforme des translatées}
+
+Soient $X$ un ensemble et $Y$ un espace uniforme. On note $\mathcal{F}_u(X, Y)$ l'ensemble des 
+fonctions de $X$ dans $Y$ muni de la structure uniforme de la convergence uniforme, dont le filtre des entourages 
+$\mathcal{U}(\mathcal{F}_u(X, Y))$ admet pour base les ensembles de la forme 
+$\mathbf{S}_X(V) := \set{(f, g)\tq\forall x\in X, (f(x),g(x))\in V}$ lorsque $V$ parcourt (une base de) $\mathcal{U}Y$.
+
+Le but de cette section est de démontrer le théorème suivante.
+\begin{theorem}\label{uniform_continuous_iff_postcomp}
+    Soient $G$ un groupe topologique, $X$ un espace uniforme, et $f:G\to X$. Les assertions suivantes sont équivalentes.
+    \begin{enumerate}[(i)]
+        \item $f:G_d\to X$ est uniformément continue \emph{pour la structure uniforme droite}.
+        \item L'application $\fundef{\ev_f\comp\lambda}{G_s&\to&\mathcal{F}_u(G,X)}{g&\mapsto&\lambda(g)(f)}$ est uniformément continue
+            \emph{pour la structure uniforme gauche}.
+        \item L'application $\ev_f\comp\lambda:G\to\mathcal{F}_u(G,X)$ est continue.
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    Soit $G$ un groupe topologique. L'application $\ell : G_d\mapsto\mathcal{F}_u(G, G_d)$
+    \footnote{On écrit $\mathcal{F}_u(G, G_d)$ au lieu de $\mathcal{F}_u(G_d, G_d)$ car l'espace
+    ne dépend pas de la structure uniforme du premier facteur (en fait, on devrait même écrire l'ensemble $G$ 
+    à la place du groupe topologique $G$).} est un plongement d'espaces uniformes.
+\end{lemma}
+
+\begin{proof}
+    Il est évident que $\ell$ est injective, puisque $\ell(g)(1)=g$. Il s'agit
+    donc de montrer que $\mathcal{U}G_d = (\ell\times\ell)^*\mathcal{U}(\mathcal{F}_u(G, G_d))$,
+    et on va pour cela remarquer que la famille $\mathcal{B}:=\set{\divop_d\inv(V)}_{V\in\nhds_1^G}$ est une base commune pour ces deux filtres.
+
+    L'égalité $\mathcal{U}G_d=(\divop_d)^*\nhds_1^G$ garantit que $\mathcal{B}$ est effectivement une base de $\mathcal{U}G_d$,
+    et donc que $\mathcal{C}:=\set{(\ell\times\ell)\inv\left(\mathbf{S}_G(\divop_d\inv(V))\right)}_{V\in\nhds_1^G}$ est une base de $(\ell\times\ell)^*\mathcal{U}(\mathcal{F}_u(G, G_d))$.
+    Or, pour $V\in\nhds_1^G$ et $g, h\in G$, on a :
+    \begin{align*}
+        (g, h)\in(\ell\times\ell)\inv\left(\mathbf{S}_G(\divop_d\inv(V))\right) 
+            &\iff (\ell_g,\ell_h)\in \mathbf{S}_G(\divop_d\inv(V)) \\
+            &\iff \forall x\in G, (\ell_g(x),\ell_h(x))\in\divop_d\inv(V) \\
+            &\iff \forall x\in G, g x x\inv h\inv \in V \\
+            &\iff g h\inv \in V \\
+            &\iff (g, h) \in\divop_d\inv(V)
+    \end{align*}
+    Ceci montre que $\mathcal{B}=\mathcal{C}$ est bien une base de $(\ell\times\ell)^*\mathcal{U}(\mathcal{F}_u(G, G_d))$, ce qui conclut.
+\end{proof}
+
+Remarquons que l'application $\ev_f\comp\lambda$ peut encore s'écrire comme la composition suivante :
+\begin{center}
+    \begin{tikzcd}
+        G_s \arrow[r, , "\invop", "\sim"' inner sep=.4mm] &G_d \arrow[r, hook, "\ell"] &\mathcal{F}_u(G, G_d) \arrow[r, , "(f\comp\blank)"] &\mathcal{F}_u(G, X)
+    \end{tikzcd}
+\end{center}
+Or, $\invop$ et $\ell$ étant respectivement un isomorphisme et un plongement d'espaces uniformes (et donc d'espaces topologiques), 
+la continuité (resp. la continuité uniforme) de $\ev_f\comp\lambda$ équivaut à la continuité (resp. la continuité uniforme) de 
+$(f\comp\blank):\mathcal{F}_u(G, G_d)\to\mathcal{F}_u(G, X)$. Le théorème \ref{uniform_continuous_iff_postcomp} découle donc 
+du lemme suivant. 
+
+\begin{lemma}
+    Soient $X$, $Y$ deux espaces uniformes et $f:X\to Y$. Les propositions suivantes sont équivalentes.
+    \begin{enumerate}[(i)]
+        \item $f$ est uniformément continue
+        \item $(f\comp\blank) : \mathcal{F}_u(X, X)\to\mathcal{F}_u(X, Y)$ est uniformément continue
+        \item $(f\comp\blank)$ est continue
+        \item $(f\comp\blank)$ est continue en $\id_X$
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Montrons \framebox{$(i)\implies(ii)$}. On suppose donc $f$ uniformément continue, et on se donne $V\in\mathcal{U}Y$. On a alors :
+    \begin{align*}
+        ((f\comp\blank)\times(f\comp\blank))\inv(\mathbf{S}_X(V)) 
+            &= \set{(\varphi_1, \varphi_2)\tq\forall x, (f(\varphi_1(x)), f(\varphi_2(x)))\in V} \\
+            &= \mathbf{S}_X((f\times f)\inv(V))
+    \end{align*}
+    L'uniforme continuité de $f$ garantit que $(f\times f)\inv(V)\in\mathcal{U}X$, ce qui entraîne :
+    \begin{equation*}
+        \mathbf{S}_X((f\times f)\inv(V))\in\mathcal{U}(\mathcal{F}_u(X, X))
+    \end{equation*}
+    Ceci montre que $(f\comp\blank)$ est uniformément continue.
+
+    Les implications \framebox{$(ii)\implies(iii)$} et \framebox{$(iii)\implies(iv)$} étant claires, montrons
+    \framebox{$(iv)\implies(i)$}. On suppose donc $(f\comp\blank)$ continue en $\id_X$, et on se donne 
+    $V\in\mathcal{U}Y$. La définition de la convergence uniforme assure que 
+    $\mathbf{T}:=\set{h : X\to Y\tq \forall x, (h(x), f(x))\in V}$ est un voisinage de $f = (f\comp\blank)(\id_X)$ dans 
+    $\mathcal{F}_u(X, Y)$. Par continuité, $(f\comp\blank)\inv(\mathbf{T})$ est donc un voisinage de $\id_X$ dans $\mathcal{F}_u(X, X)$,
+    ce qui signifie qu'il contient un ensemble de la forme $\mathbf{U}:=\set{\varphi : X\to X\tq \forall x, (\varphi(x), x)\in W}$ pour 
+    un $W\in\mathcal{U}X$. 
+    
+    Or, pour $(x_1, x_2)\in W$, il est clair qu'il existe une fonction $\varphi\in\mathbf{U}$ telle que $\varphi(x_2) = x_1$
+    \footnote{On peut par exemple poser $\varphi(x_2)=x_1$ et $\varphi(x) = x$ pour $x\ne x_2$.}.
+    Mais alors $f\comp\varphi\in\mathbf{T}$, d'où, en évaluant en $x_2$, $(f(x_1),f(x_2))\in V$.
+    On a donc montré que $W\subseteq (f\times f)\inv(W)$, ce qui garantit l'uniforme continuité de $f$.
+
+    Ceci conclut la preuve du lemme, ainsi que celle du théorème \ref{uniform_continuous_iff_postcomp}.
+\end{proof}
 
 \end{document}
