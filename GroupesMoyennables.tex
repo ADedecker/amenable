@@ -24,6 +24,7 @@
 \newtheorem{lemma}[theorem]{Lemme}
 \newtheorem{remark}[theorem]{Remarque}
 
+\renewcommand{\i}{\mathrm{i}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -39,6 +40,7 @@
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\card}[1]{\abs{#1}}
 \newcommand{\ket}[1]{\left\langle #1 \right\rangle}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\halfilon}{{\frac\varepsilon2}}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\indic}{\mathbbm{1}}
@@ -155,7 +157,7 @@ sur $\Gamma$.
 
 La notion qui va nous intéresser dans ce mémoire est la suivante.
 
-\begin{definition}
+\begin{definition}\label{amenable_def}
     Le groupe séparé et localement compact $\Gamma$ est \emph{moyennable} s'il existe une forme linéaire positive $m : \mathrm{L}^\infty(G)\to\C$
     vérifiant $m(1) = 1$ et $\forall g\in\Gamma, m\comp\lambda_g = m = m\comp\rho_g$.
 \end{definition}
@@ -168,7 +170,7 @@ sont vérifiées, nous dirons simplement que $T$ est \emph{invariante par transl
 
 Un groupe topologique séparé et localement compact $\Gamma$ est donc moyennable \ssi $(\Gamma, \Bor(\Gamma), \mu)$ admet une 
 moyenne invariante, pour toute mesure de Haar $\mu$ sur $\Gamma$, le choix n'ayant aucune importance car toutes les mesures 
-de Haar sont absolument continues les unes par rappost aux autres, et donc définissent le même espace $\mathrm{L}^\infty(\Gamma)$.
+de Haar sont absolument continues les unes par rapport aux autres, et donc définissent le même espace $\mathrm{L}^\infty(\Gamma)$.
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
@@ -224,7 +226,7 @@ Les premiers exemples de groupes moyennables sont les groupes compacts séparés
 En effet, si l'on note $\mu$ la mesure de Haar normalisée d'un tel groupe, l'intégration selon $\mu$ fournit une moyenne invariante. 
 
 Au vu de cet exemple, il peut être tentant de supposer que toute moyenne est donnée par l'intégration pour une mesure 
-de Radon. En fait, s'il était vrai, la notion de moyennabilité ne serait pas très intéressante :
+de Radon. En fait, si c'était le cas, la notion de moyennabilité ne serait pas très intéressante :
 en effet, si $\mu$ est une mesure de Radon sur $\Gamma$ telle que $f\mapsto\integral{}{}{f}{\mu}$ soit une moyenne bien définie et invariante,
 alors $\mu$ est automatiquement une mesure de Haar de masse $1$, et le théorème \ref{theorem_Haar} assure qu'une telle mesure n'existe que si
 $\Gamma$ est compact. Les groupes moyennables seraient donc exactement les groupes compacts !
@@ -665,15 +667,15 @@ $n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)
 
 Notons que si $\Gamma$ est discret, 
 la topologie de la convergence compacte coïncide avec celle de la convergence simple, de sorte que tout filtre 
-simplement de F\o{}lner est automatiquement uniformément de F\o{}lner.
+faiblement de F\o{}lner est automatiquement fortement de F\o{}lner.
 De plus, les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
 et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre $\mathscr{F}$
-est donc de F\o{}lner \ssi, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
+est donc de F\o{}lner si et seulement si, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
 converge vers $0$ selon le filtre $\mathscr{F}$. De même, une suite $F:\N\to\finparts^*(\Gamma)$
 est de F\o{}lner \ssi pour tout $\gamma\in\Gamma$, la suite $n\mapsto\frac{\card{\gamma F_n\triangle F_n}}{\card{F_n}}$ converge 
 vers $0$.
 
-Avant d'aller plus loin, donnons un critère plus simple pour l'existence de filtres de F\o{}lner (simplement ou uniformément) sur $\Gamma$.
+Avant d'aller plus loin, donnons un critère plus simple pour l'existence de filtres de F\o{}lner (faibles ou forts) sur $\Gamma$.
 
 \begin{lemma}\label{Folner_filter_of_cond}
     $\Gamma$ admet un filtre faiblement de F\o{}lner \ssi il satisfait la 
@@ -743,7 +745,7 @@ précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{
 lorsqu'on considère une moyenne pondérée par une fonction $\varphi\in\mathscr{L}^1(\Gamma)$, positive et de masse $1$ (le cas déjà traité correspondant à $\varphi=\frac1{\mu(K)}\indic_K$).
 On obtient alors:
 \begin{equation*}\label{intuition_Reiter_eq1}
-    -M \le c + \sum_i \integral{K}{}{\varphi(x)\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
+    -M \le c + \sum_i \integral{}{}{\varphi(x)\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
 \end{equation*}
 Pour $i$ fixé, on a alors :
 \begin{align*}
@@ -814,9 +816,11 @@ permettra de caractériser la moyennabilité par la théorie des représentation
 
 La preuve nécessite un certain nombre de résultats et définitions préliminaires, que nous détaillons maintenant. 
 
-\paragraph{}
+\TODO{Dans les sections suivantes, motiver les résultats à l'avance. Ou bien les mettre dans la preuve et faire les preuves des lemmes ensuite.}
 
-Notons tout d'abord $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_s\to\C$ qui sont bornées et uniformément 
+\subsection{L'espace \texorpdfstring{$UC_b(\Gamma_d)$}{des fonctions uniformément continues bornées}}
+
+Nous notons $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_d\to\C$ qui sont bornées et uniformément 
 continues, où $\Gamma_d$ désigne l'espace uniforme obtenu 
 en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{droite}\footnote{On noterait de même $\Gamma_s$
 le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}.
@@ -824,7 +828,7 @@ Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_d$
 est définie par l'égalité $\mathcal{U}\Gamma_d=(\divop_d)^*\nhds_1^\Gamma$, pour 
 $\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x y\inv}$\footnote{Dans le cas de la structure 
 uniforme gauche, on remplaçerait $\divop_d$ par $\fundef{\divop_s}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x\inv y}$.}.
-Rappelons aussi que la structure d'un espace métrique $(X, d)$ est définie par 
+Rappelons aussi que la structure uniforme associée à l'espace métrique $(X, d)$ est définie par 
 $\mathcal{U}X = d^*\nhds_0$. 
 Pour $f:\Gamma\to\C$ bornée, on a donc : 
 \begin{align}
@@ -835,7 +839,7 @@ Pour $f:\Gamma\to\C$ bornée, on a donc :
         &\iff \forall \varepsilon>0, \exists V\in\nhds_1^\Gamma, \forall y\in\Gamma, \forall g\in V, \abs{f(gy)-f(y)} < \varepsilon \nonumber \\
         &\iff \forall \varepsilon>0, \exists V\in\nhds_1^\Gamma, \forall g\in V, \norm{\lambda(g)(f) - f}_\infty < \varepsilon \label{UCB_explicit_cara}
 \end{align}
-Où on a pu remplace $\lambda(g\inv)$ par $\lambda(g)$ en remplaçant $V$ par son symétrique. Cela permet de donner la caractérisation suivante de $UC_b(\Gamma_d)$.
+Où on a pu remplacer $\lambda(g\inv)$ par $\lambda(g)$ en remplaçant $V$ par son symétrique. Cela permet de donner la caractérisation suivante de $UC_b(\Gamma_d)$.
 \footnotetext{Si $\mathscr{F}, \mathscr{G}$ sont deux filtres sur un ensemble $X$,
 on note $\mathscr{F}\le \mathscr{G}$ si $\mathscr{F}$ est \emph{plus fin que} $\mathscr{G}$,
 c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. } 
@@ -850,7 +854,132 @@ On donne une démonstration directe en se basant sur la caractérisation \ref{UC
 pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plus général, démontré en annexe.
 
 \begin{proof}
-    \TODO{}
+    Remarquons d'abord que $\ev_f\comp\lambda$ est continue \ssi elle est continue en $1$. Le sens direct est immédiat, supposons donc 
+    la continuité en $1$, et montrons la continuité en $x\in\Gamma$ quelconque. Soit donc $\varepsilon>0$. La continuité en $1$ fournit 
+    $V\in\nhds_1$ tel que $\forall g\in V, \norm{\lambda(g)(f) - f}_\infty<\varepsilon$. Notons alors que :
+    \begin{equation*}
+        \forall g\in V, \norm{\lambda(xg)(f) - \lambda(x)(f)}_\infty = \norm{\lambda(x)(\lambda(g)(f) - f)}_\infty = \norm{\lambda(g)(f) - f}_\infty < \varepsilon
+    \end{equation*}
+    Comme $xV\in\nhds_x$ cela conclut, puisqu'on a $\forall y\in xV, \norm{\lambda(y)(f) - \lambda(x)(f)}_\infty < \varepsilon$.
+
+    Or, on remarque que la caractérisation \ref{UCB_explicit_cara} de $UC_b(\Gamma_d)$ exprime précisément la continuité en $1$ de l'application $\ev_f\comp\lambda$.
+    Cela conclut la preuve du lemme.
+\end{proof}
+
+\subsection{Moyennes provenant de fonctions intégrables}
+
+Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}^p$ sont complexes, et
+si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{comme espace vectoriel complexe}. Si
+$E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
+
+Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
+Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
+$\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}.
+
+Soit $(X,\mathcal{A},\mu)$ espace mesuré. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
+induit, par restriction, un plongement isométrique $\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$. 
+En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
+car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
+
+Le résultat principal quant à ce plongement est que son image est $*$-faiblement dense.
+
+\begin{lemma}
+    Munissons l'espace $\mathrm{L}^1(X,\mu)$ de la topologie faible $\sigma(\mathrm{L}^1, \mathrm{L}^\infty) = \sigma\left(\mathrm{L}^1, {\mathrm{L}^1}^*\right)$
+    \footnote{Cette égalité provient de ce que ${\mathrm{L}^1}^*\simeq\mathrm{L}^\infty$}, 
+    l'espace $\mathrm{L}^\infty(X,\mu)^*$ de la topologie faible-$*$ $\sigma({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$,
+    et les parties $\mathrm{L}^1_{1, +}(X, \mu)$, $\mathcal{M}(X, \mu)$ des topologies induites respectives.
+
+    L'application $\iota:\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$ est alors un plongement d'espaces 
+    vectoriels topologiques, et le plongement topologique induit $\widetilde{\iota}:\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$
+    est d'image dense. 
+\end{lemma}
+
+\begin{proof}
+    Notons que, pour tous $f\in\mathscr{L}^1(X, \mu), \varphi\in\mathscr{L}^\infty(X, \mu)$, on a, pour les dualités usuelles 
+    $({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$ et $(\mathrm{L}^1, \mathrm{L}^\infty)$ :
+    \begin{equation*}
+        \ket{\iota(f), \varphi} = \iota(f)(\varphi) = \integral{}{}{f\varphi}{\mu} = \ket{f, \varphi}
+    \end{equation*}
+    Cela assure que $\iota$ est effectivement un plongement topologique pour les topologies faibles associées à ces dualités,
+    et donc un plongement d'espaces vectoriels topologiques par linéarité.
+
+    La partie importante est donc la densité, qui va reposer crucialement sur la convexité de $\mathrm{L}^1_{1, +}(X, \mu)$ et sur le théorème de séparation de Hahn-Banach.
+    Notre objectif est de montrer l'inclusion $\mathcal{M}(X, \mu)\subseteq\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$ (l'adhérence étant prise dans 
+    ${\mathrm{L}^\infty(X,\mu)}^*$ pour la topologie faible-$*$). On suppose donc que ce n'est pas le cas, ce qui fournit
+    $m\in\mathcal{M}(X, \mu)$ tel que $m\notin\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$. Appliquons alors le théorème de séparation de
+    Hahn-Banach au compact (séparé) convexe $\set{m}$ et au fermé convexe $\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$
+    de l'espace localement convexe \emph{réel} $\floor{\mathrm{L}^\infty(X,\mu)^*}$
+    \footnote{L'espace vectoriel réel sous-jacent à un espace localement convexe complexe
+    est par définition localement convexe. } 
+    sous-jacent à l'espace localement convexe \emph{complexe} $\mathrm{L}^\infty(X,\mu)^*$
+    \footnote{Toute topologie faible est localement convexe, comme topologie initiale 
+    pour une famille d'applications linéaires à valeurs dans l'espace localement convexe $\K$, où $\K\in\set{\R, \C}$ 
+    désigne le corps des scalaires. }. 
+    Cela fournit une forme $\R$-linéaire continue $f : \floor{\mathrm{L}^\infty(X,\mu)^*} \to \R$ et un réel 
+    $a$ tel que $f(m)<a$ et $\forall x\in \closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}, f(x)>a$. 
+    %En particulier, par le théorème des 
+    %valeurs intermédiaires, $a = f(\alpha)$ pour un certain $\alpha\in\mathrm{L}^\infty(X,\mu)^*$.
+
+    Écrivons alors $f=\Re g$ où $\fundef{g}{\mathrm{L}^\infty(X,\mu)^* &\to& \C}{x&\mapsto&f(x)-\i f(\i x)}$ est $\C$-linéaire et continue, et 
+    supposons que $g$ est de la forme $\ev_\varphi$ pour $\varphi\in\mathrm{L}^\infty(X, \mu)$. On a alors, pour $u\in\mathrm{L}^1_{1, +}(X, \mu)$ :
+\begin{align*}
+    \ket{u, \Re\varphi - a} 
+        &= \Re\ket{u, \varphi - a}\footnotemark \\
+        &= \Re\ket{\iota(u), \varphi} - \ket{u, a} \\
+        &= \Re g(\iota(u)) - a\ket{u, 1} \\
+        &= f(\iota(u)) - a \\
+        &> 0
+\end{align*}
+\footnotetext{Cette égalité provient de ce que $u$ est à valeurs réelles.}Tout élément positif de $\mathrm{L}^1(X, \mu)$ étant nul ou multiple positif d'un élément de $\mathrm{L}^1_{1, +}(X, \mu)$
+\footnote{Plus précisément, si $u\in\mathrm{L}^1(X,\mu)$ est positif et non nul, on a $\integral{}{}{u}{\mu}=\norm{u}_{\mathrm{L}^1}\ne 0$. On peut alors poser 
+$\widetilde{u}:=\frac1{\integral{}{}{u}{\mu}}\cdot u\in\mathrm{L}^1_{1, +}(X, \mu)$, de sorte que
+$u = \left(\integral{}{}{u}{\mu}\right)\cdot\widetilde{u}$.}, cette inégalité s'étend à tout $u\in\mathrm{L}^1(X, \mu)$ positif. 
+Autrement dit, $\Re\varphi$ est positive \emph{lorsqu'elle est vue comme forme linéaire sur $\mathrm{L}^1(X, \mu)$}. Si l'on admet
+que $\Re\varphi - a$ est en fait positive au sens usuel, on obtient directement une contradiction avec la positivité de $m$, puisque : 
+\begin{align*}
+    m(\Re\varphi - a) 
+        &= m(\varphi - a) - \i m(\Im\varphi) \\
+        &= \Re m(\varphi - a)\footnotemark \\
+        &= \Re g(m) - a \\
+        &= f(m) - a \\
+        &< 0
+\end{align*}
+\footnotetext{Comme $\Im\varphi$ est à valeurs réelles, la positivité de $m$ assure que $\i m(\Im\varphi)\in \i\R$.}
+
+Pour conclure, il s'agit de montrer que les deux hypothèses que nous avons faites au cours de la preuve sont vérifiées. C'est l'objet 
+des deux lemmes suivants.
+
+\begin{lemma}\label{dual_of_weak}
+    Soit $E, F$ deux espaces vectoriels (réels ou complexes) en dualité, et supposons $E$ muni de la topologie faible $\sigma(E, F)$ associée à cette dualité. 
+    Alors toute forme linéaire continue sur $E$ est de la forme $x\mapsto\ket{x, y}$ pour un certain $y\in F$.
+\end{lemma}
+
+\begin{lemma}\label{positive_of_positive_form}
+    Soit $\varphi\in\mathscr{L}^\infty(X, \mu)$. Si l'intégrale $\integral{}{}{f\varphi}{\mu}$ est positive 
+    pour toute fonction $f\in\mathscr{L}^1(X, \mu)$ positive $\mu$-presque partout, alors $\varphi$ est 
+    positive $\mu$-presque partout.
+\end{lemma}
+
+Le lemme \ref{dual_of_weak} assure ainsi que l'on peut toujours écrire $g=\ev_\varphi$,
+tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\Re\varphi - a$, ce qui conclut la preuve.
+\end{proof}
+
+\begin{proof}[Démonstration du lemme \ref{dual_of_weak}]
+    Soit $\varphi$ une forme linéaire continue sur $E$. La continuité assure que l'ensemble $\mathbf{U} := \varphi\inv(B(0, 1))$ est un voisinage
+    de $0$ pour $\sigma(E, F)$, ce qui fournit\footnote{Car la topologie $\sigma(E, F)$ est initiale 
+    pour la famille des applications $\ket{\blank, y}$, où $y$ parcourt $F$.} $\varepsilon>0$, $I$ fini et $f : I\to F$ tels que
+    $\mathbf{V} := \bigcap_{i\in I} \set{x\in E\tq \abs{\ket{x, f_i}}<\varepsilon}\subseteq\mathbf{U}$. 
+    
+    Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. \TODO{finir}
+\end{proof}
+
+\begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
+    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ est de mesure non nulle. Il existe alors 
+    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle, de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
+    $\integral{}{}{\indic_\mathbf{T}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
+    donc nulle. La fonction positive $-\indic_\mathbf{T}\varphi$ est d'intégrale nulle, 
+    l'inégalité de Markov assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
+    sur l'ensemble $\mathbf{T}$ de mesure non-nulle.
 \end{proof}
 
 %,
@@ -871,7 +1000,9 @@ pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plu
 %    De plus, si 
 %}.
 
-\begin{proof}[Démonstration du théorème \ref{amenable_TFAE}] \TODO{}
+\subsection{Démonstration du théorème \ref{amenable_TFAE}} 
+
+\begin{proof}\TODO{}
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
@@ -880,7 +1011,7 @@ pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plu
 
 \section{Annexes}
 
-\subsection*{Sur la convergence uniforme des translatées}
+\subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
 Soient $X$ un ensemble et $Y$ un espace uniforme. On note $\mathcal{F}_u(X, Y)$ l'ensemble des 
 fonctions de $X$ dans $Y$ muni de la structure uniforme de la convergence uniforme, dont le filtre des entourages 
