@@ -94,24 +94,7 @@
 
 \section*{Conventions et remarques préliminaires}
 
-\TODO{Réécrire}
-
-Dans ce mémoire, nous utiliserons le terme de \textit{quasi-mesure} pour désigner une mesure \textbf{finiment}-additive sur un 
-\textit{espace mesurable}, c'est à dire un couple $(X, \mathcal{A})$ où $\mathcal{A}$ est une $\sigma$-algèbre. 
-Lorsqu'une telle mesure est de plus $\sigma$-additive (ce qui est souvent inclus dans la définition de \og{}mesure\fg{},
-mais nous n'utiliserons pas cette convention),
-nous dirons qu'il s'agit d'une \textit{mesure}. 
-
-Nous admettrons qu'il est possible de définir une théorie de l'intégration pour toute mesure, les théorèmes de convergence
-monotone et dominée n'étant bien sûr valables que dans le cas des $\sigma$-mesures. 
-
-Si $\varphi:(X,\mathcal{A})\to(Y,\mathcal{B})$ est une application mesurable et $m$ est une mesure sur $(X, \mathcal{A})$, 
-nous noterons $\varphi_*m$ la mesure image sur $(Y, \mathcal{B})$. C'est une $\sigma$-mesure si $m$ en est une, et intégrer 
-une fonction $f$ selon $\varphi_*m$ revient exactement à intégrer $f\comp\varphi$ selon $m$. Enfin, c'est une construction
-fonctorielle, au sens où l'on a $(\psi\comp\varphi)_*m = \psi_*\varphi_*m$ pour toute application mesurable 
-$\psi : (Y, \mathcal{B})\to(Z, \mathcal{C})$. 
-
-\paragraph{}
+\TODO{Réorganiser cette section}
 
 Conformément à la convention dans le monde anglophone, et pour éviter toute confusion, nous dirons qu'un espace topologique
 $X$ est \emph{compact} s'il vérifie la propriété de Borel-Lebesgue, sans hypothèse de séparation. 
@@ -144,11 +127,10 @@ utiliserons à de nombreuses reprises.
     Enfin, si $G$ est compact, les mesures de Haar à gauche sont exactement les mesures de Haar à droite.
 \end{theorem}
 
-\TODO{Ensembles de mesures nulles pour Haar}
-
+\TODO{Repréciser définition de mesure de Radon}
+\TODO{Absolue continuité des mesures de Haar entre elles (via caractère modulaire)}
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
-
-\TODO{Notations $\mathscr{L}^p$, $\mathrm{L}^p$, $B$ (fonctions mesurables bornées (pas "presque partout"), sans quotient)}
+\TODO{Notations $\mathscr{L}^p$, $\mathrm{L}^p$}
 
 \section{Premières définitions}
 
@@ -320,7 +302,7 @@ intégrer des fonctions bornées selon des contenus finis.
 \end{remark}
 
 Il est clair que la bijection $I$ de la proposition \ref{content_integration_and_repr} fait correspondre les moyennes 
-sur $(X, \mathcal{A})$ aux contenus de masse 1 et absoluments continuous par rapport à $\mu$. On voudrait maintenant pouvoir exprimer 
+sur $(X, \mathcal{A})$ aux contenus de masse 1 et absoluments continus par rapport à $\mu$. On voudrait maintenant pouvoir exprimer 
 la condition d'invariance par translations, et il nous faut pour cela aborder l'aspect fonctioriel de la construction de $I$.
 
 Soient $(X, \mathcal{A})$, $(Y, \mathcal{B})$ deux espaces mesurables, $m$ un contenu sur $(X, \mathcal{A})$ et $\varphi : X\to Y$ mesurable.
@@ -868,6 +850,8 @@ pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plu
 
 \subsection{Moyennes provenant de fonctions intégrables}
 
+\TODO{ATTENTION pour avoir ${\mathrm{L}^1}^*\simeq\mathrm{L}^\infty$ il faut $\sigma$-finitude !!!!!}
+
 Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}^p$ sont complexes, et
 si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{comme espace vectoriel complexe}. Si
 $E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
@@ -876,7 +860,7 @@ Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\
 Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
 $\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}.
 
-Soit $(X,\mathcal{A},\mu)$ espace mesuré. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
+Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
 induit, par restriction, un plongement isométrique $\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$. 
 En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
 car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
@@ -884,6 +868,8 @@ car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} =
 Le résultat principal quant à ce plongement est que son image est $*$-faiblement dense.
 
 \begin{lemma}
+    Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$.
+
     Munissons l'espace $\mathrm{L}^1(X,\mu)$ de la topologie faible $\sigma(\mathrm{L}^1, \mathrm{L}^\infty) = \sigma\left(\mathrm{L}^1, {\mathrm{L}^1}^*\right)$
     \footnote{Cette égalité provient de ce que ${\mathrm{L}^1}^*\simeq\mathrm{L}^\infty$}, 
     l'espace $\mathrm{L}^\infty(X,\mu)^*$ de la topologie faible-$*$ $\sigma({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$,
@@ -988,7 +974,7 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
         
         Soit donc une telle forme $\varphi$. On considère l'application linéaire $\Psi : E\to k^I$ 
         dont les composantes sont les $\psi_i$, $F\subseteq k^I$ son image, et $\widetilde{\Psi}:E\to F$ l'application surjective induite.
-        On a $\ker\widetilde{\Psi} = \ker\Psi = \bigcap_{i\in I}\ker\psi_i \subseteq \ker \varphi$, donc $\phi$ se factorise 
+        On a $\ker\widetilde{\Psi} = \ker\Psi = \bigcap_{i\in I}\ker\psi_i \subseteq \ker \varphi$, donc $\varphi$ se factorise 
         par $\widetilde{\Psi}$ en $\widetilde{\varphi}:F\to k$, que l'on prolonge en $\widehat{\varphi}:k^I\to k$ de manière arbitraire.
         En notant $e : I\to\C^I$ la base canonique et $e^*$ sa base duale, on a donc $\widehat{\varphi} = \sum_{i\in I} a_i e^*_i$
         pour une certaine famille $a : I\to\C$. Il vient enfin
@@ -1003,8 +989,9 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 \TODO{Réorganiser ?}
 
 \begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
+    \TODO{Cette preuve est fausse !}
     Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ est de mesure non nulle. Il existe alors 
-    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle, de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
+    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle (\TODO{c'est faux}), de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
     $\integral{}{}{\indic_\mathbf{T}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
     donc nulle. La fonction positive $-\indic_\mathbf{T}\varphi$ est d'intégrale nulle, 
     l'inégalité de Markov assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
