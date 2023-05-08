@@ -190,11 +190,11 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 
 \begin{proof}
     Supposons d'abord $\norm{\varphi} = \varphi(1)$, et soit $a\ge 0$ de norme 1. On a donc, pour presque tout $x\in X$, $\set{a(x), 1-a(x)}\subseteq[0,1]$,
-    d'où enfin $\norm{1-a}\le 1$. Mais par ailleurs $\norm{\varphi} = \varphi(a) + \varphi(1-a) \le \varphi(a) + \abs{\varphi(1-a)} \le \varphi(a) + \norm{\varphi}\norm{1 - a}$, et finalement
-    $\varphi(a)\ge \norm{\varphi}(1 - \norm{1-a}) \ge0$. 
+    d'où enfin $\norm{1-a}_{\mathrm{L}^\infty}\le 1$. Mais par ailleurs $\norm{\varphi} = \varphi(a) + \varphi(1-a) \le \varphi(a) + \abs{\varphi(1-a)} \le \varphi(a) + \norm{\varphi}\norm{1 - a}_{\mathrm{L}^\infty}$, et finalement
+    $\varphi(a)\ge \norm{\varphi}(1 - \norm{1-a}_{\mathrm{L}^\infty}) \ge0$. 
 
     Supposons maintenant $\varphi$ positive. Notons déjà qu'on a bien sûr $\norm{\varphi}\ge\abs{\varphi(1)}=\varphi(1)$. Soit donc $a\in\mathrm{L}^\infty(X,\mu)$ quelconque,
-    et notons que $-\norm{a}\cdot1\le a\le\norm{a}\cdot1$, de sorte que $-\norm{a}\varphi(1)\le\varphi(a)\le\norm{a}\varphi(1)$, ce qui conclut.
+    et notons que $-\norm{a}_{\mathrm{L}^\infty}\cdot1\le a\le\norm{a}_{\mathrm{L}^\infty}\cdot1$, de sorte que $-\norm{a}_{\mathrm{L}^\infty}\varphi(1)\le\varphi(a)\le\norm{a}_{\mathrm{L}^\infty}\varphi(1)$, ce qui conclut.
 \end{proof}
 
 \begin{proof}[Démonstration de la proposition \ref{bilateral_of_left}]
