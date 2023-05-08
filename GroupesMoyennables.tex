@@ -805,12 +805,12 @@ permettra de caractériser la moyennabilité par la théorie des représentation
 \begin{theorem}\label{amenable_TFAE}
     Soit $\Gamma$ un groupe topologique séparé et localement compact. Les assertions suivantes sont équivalentes :
     \begin{enumerate}[(i)]
-        \item $\Gamma$ est moyennable
-        \item Il existe une moyenne topologiquement invariante sur $\Gamma$
-        \item $\Gamma$ satisfait la condition de Reiter forte
-        \item $\Gamma$ satisfait la condition de F\o{}lner forte
-        \item $\Gamma$ satisfait la condition de F\o{}lner faible
-        \item $\Gamma$ satisfait la condition de Reiter faible
+        \item $\Gamma$ est moyennable \label{amenable_TFAE/amenable}
+        \item Il existe une moyenne topologiquement invariante sur $\Gamma$ \label{amenable_TFAE/topological_mean}
+        \item $\Gamma$ satisfait la condition de Reiter forte \label{amenable_TFAE/strong_Reiter}
+        \item $\Gamma$ satisfait la condition de F\o{}lner forte \label{amenable_TFAE/strong_Folner}
+        \item $\Gamma$ satisfait la condition de F\o{}lner faible \label{amenable_TFAE/weak_Folner}
+        \item $\Gamma$ satisfait la condition de Reiter faible \label{amenable_TFAE/weak_Reiter}
     \end{enumerate}
 \end{theorem}
 
@@ -950,7 +950,7 @@ Pour conclure, il s'agit de montrer que les deux hypothèses que nous avons fait
 des deux lemmes suivants.
 
 \begin{lemma}\label{dual_of_weak}
-    Soit $E, F$ deux espaces vectoriels (réels ou complexes) en dualité, et supposons $E$ muni de la topologie faible $\sigma(E, F)$ associée à cette dualité. 
+    Soit $E, F$ deux $\K$-espaces vectoriels ($\K\in\set{\R, \C}$) en dualité, et supposons $E$ muni de la topologie faible $\sigma(E, F)$ associée à cette dualité. 
     Alors toute forme linéaire continue sur $E$ est de la forme $x\mapsto\ket{x, y}$ pour un certain $y\in F$.
 \end{lemma}
 
@@ -970,8 +970,37 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     pour la famille des applications $\ket{\blank, y}$, où $y$ parcourt $F$.} $\varepsilon>0$, $I$ fini et $f : I\to F$ tels que
     $\mathbf{V} := \bigcap_{i\in I} \set{x\in E\tq \abs{\ket{x, f_i}}<\varepsilon}\subseteq\mathbf{U}$. 
     
-    Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. \TODO{finir}
+    Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. Si $x\in\bigcap_{i\in I}\ker\psi_i$, on a bien sûr 
+    $x\in\mathbf{V}\subseteq\mathbf{U}$ donc $\abs{\varphi(x)}<1$. Mais on a aussi $\forall t\in\R_+, tx\in\bigcap_{i\in I}\ker\psi_i$, d'où 
+    $\forall t\in\R_+^*, \abs{\varphi(x)}<\frac1t$, d'où $x\in\ker\varphi$ en faisant tendre $t$ vers $0$. 
+    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur le lemme d'algèbre linéaire suivant :
+    \begin{lemma}\label{span_dual_of_ker}
+        Soient $k$ un corps, $E$ un $k$-espace vectoriel, $I$ un ensemble fini et $\psi : I\to E^\sharp$
+        \footnote{On note $E^\sharp$ le dual algébrique de $E$.} une famille de formes linéaires sur $E$.
+        Alors le sous-espace vectoriel de $E^\sharp$ engendré par l'image de $\psi$ est exactement l'ensemble 
+        des formes linéaires $\varphi$ telles que $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$.
+    \end{lemma}
+
+    \begin{proof}[Démonstration du lemme \ref{span_dual_of_ker}]
+        Il est clair que toute combinaison linéaire des $\psi_i$ est nulle sur l'ensemble $\bigcap_{i\in I}\ker\psi_i$.
+        Il s'agit donc de montrer que toute forme linéaire $\varphi$ vérifiant $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$ est effectivement 
+        combinaison linéaire des $\psi_i$. 
+        
+        Soit donc une telle forme $\varphi$. On considère l'application linéaire $\Psi : E\to k^I$ 
+        dont les composantes sont les $\psi_i$, $F\subseteq k^I$ son image, et $\widetilde{\Psi}:E\to F$ l'application surjective induite.
+        On a $\ker\widetilde{\Psi} = \ker\Psi = \bigcap_{i\in I}\ker\psi_i \subseteq \ker \varphi$, donc $\phi$ se factorise 
+        par $\widetilde{\Psi}$ en $\widetilde{\varphi}:F\to k$, que l'on prolonge en $\widehat{\varphi}:k^I\to k$ de manière arbitraire.
+        En notant $e : I\to\C^I$ la base canonique et $e^*$ sa base duale, on a donc $\widehat{\varphi} = \sum_{i\in I} a_i e^*_i$
+        pour une certaine famille $a : I\to\C$. Il vient enfin
+        $\varphi = \widetilde{\varphi}\comp\widetilde{\Psi} = \widehat{\varphi}\comp\Psi = \sum_{i\in I} a_i (e^*_i \comp\Psi) = \sum_{i\in I} a_i\psi_i$,
+        ce qui conclut.
+    \end{proof}
+
+    Finalement, ce lemme fournit  $a : I\to\K$ telle que $\varphi = \sum_{i\in I} a_i\psi_i = \ket{\blank, \sum_{i\in I} a_i f_i}$,
+    ce qui achève la preuve du lemme \ref{dual_of_weak}.
 \end{proof}
+
+\TODO{Réorganiser ?}
 
 \begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
     Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ est de mesure non nulle. Il existe alors 
@@ -1002,7 +1031,9 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 
 \subsection{Démonstration du théorème \ref{amenable_TFAE}} 
 
-\begin{proof}\TODO{}
+\begin{proof}
+    Commençons par montrer \framebox{$(\ref{amenable_TFAE/amenable})\implies(\ref{amenable_TFAE/topological_mean})$}. Soit donc 
+    $m$ une moyenne invariante sur $\Gamma$, et notons $\widetilde{m}$ sa restriction à $UC_b(\Gamma_d)$.
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
