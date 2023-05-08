@@ -821,7 +821,7 @@ La preuve nécessite un certain nombre de résultats et définitions préliminai
 \subsection{L'espace \texorpdfstring{$UC_b(\Gamma_d)$}{des fonctions uniformément continues bornées}}
 
 Nous notons $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_d\to\C$ qui sont bornées et uniformément 
-continues, où $\Gamma_d$ désigne l'espace uniforme obtenu 
+continues, muni de la norme uniforme. Dans cette définition et dans toute la suite, $\Gamma_d$ désigne l'espace uniforme obtenu 
 en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{droite}\footnote{On noterait de même $\Gamma_s$
 le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}.
 Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_d$ le filtre des entourages,
@@ -844,7 +844,7 @@ Où on a pu remplacer $\lambda(g\inv)$ par $\lambda(g)$ en remplaçant $V$ par s
 on note $\mathscr{F}\le \mathscr{G}$ si $\mathscr{F}$ est \emph{plus fin que} $\mathscr{G}$,
 c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. } 
 
-\begin{lemma}
+\begin{lemma}\label{UCB_iff_translate}
     Soit $f\in\ell^\infty(\Gamma)$\footnote{i.e $f$ est bornée \emph{partout}}. $f$ appartient à $UC_b(\Gamma_d)$ \ssi l'application 
     $\fundef{\ev_f\comp\lambda}{\Gamma&\to&\ell^\infty(\Gamma)}{g&\mapsto&\lambda(g)(f)}$
     est continue.
@@ -1033,7 +1033,14 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 
 \begin{proof}
     Commençons par montrer \framebox{$(\ref{amenable_TFAE/amenable})\implies(\ref{amenable_TFAE/topological_mean})$}. Soit donc 
-    $m$ une moyenne invariante sur $\Gamma$, et notons $\widetilde{m}$ sa restriction à $UC_b(\Gamma_d)$.
+    $m$ une moyenne invariante sur $\Gamma$, et notons $\widetilde{m}$ sa restriction à $UC_b(\Gamma_d)$
+    \footnote{On identifie $UC_b(\Gamma_d)$ à son image par l'application 
+    $UC_b(\Gamma_d)\hookrightarrow\mathscr{L}^\infty(\Gamma)\twoheadrightarrow\mathrm{L}^\infty(\Gamma)$, qui est un plongement isométrique car 
+    les normes $\norm{\cdot}_\infty$ et $\norm{\cdot}_{\mathrm{L}^\infty}$ coïncident sur les fonctions 
+    continues.}. Pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ \emph{à support compact}, étudions la fonction
+    $\fundef{\varphi\cdot(\ev_f\comp\lambda)}{\Gamma&\to&UC_b(\Gamma_d)}{g&\mapsto&\varphi(g)\cdot\lambda(g)(f)}$. Le 
+    lemme \ref{UCB_iff_translate} assure que $\ev_f\comp\lambda$ est continue, donc mesurable. 
+    \TODO{Il nous faudrait de la mesurabilité forte !}
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
