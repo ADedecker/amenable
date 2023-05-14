@@ -68,7 +68,9 @@
 \newcommand{\TODO}[1]{{\color{red}TODO :} #1}
 
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ess}{ess}
 \DeclareMathOperator{\Id}{id}
+\DeclareMathOperator{\Supp}{supp}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\Vect}{Vect}
@@ -850,10 +852,10 @@ pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plu
 
 \subsection{Moyennes provenant de fonctions intégrables}
 
-\TODO{ATTENTION pour avoir ${\mathrm{L}^1}^*\simeq\mathrm{L}^\infty$ il faut $\sigma$-finitude !!!!!}
+\TODO{Gérer absence de $\sigma$-finitude}
 
 Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}^p$ sont complexes, et
-si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{comme espace vectoriel complexe}. Si
+si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{sur le corps $\C$}. Si
 $E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
 
 Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
@@ -861,6 +863,7 @@ Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesur
 $\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}.
 
 Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
+\TODO{semifinite}
 induit, par restriction, un plongement isométrique $\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$. 
 En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
 car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
@@ -959,7 +962,8 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. Si $x\in\bigcap_{i\in I}\ker\psi_i$, on a bien sûr 
     $x\in\mathbf{V}\subseteq\mathbf{U}$ donc $\abs{\varphi(x)}<1$. Mais on a aussi $\forall t\in\R_+, tx\in\bigcap_{i\in I}\ker\psi_i$, d'où 
     $\forall t\in\R_+^*, \abs{\varphi(x)}<\frac1t$, d'où $x\in\ker\varphi$ en faisant tendre $t$ vers $0$. 
-    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur le lemme d'algèbre linéaire suivant :
+    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur un lemme usuel d'algèbre linéaire,
+    dont nous redonnons la preuve ci-dessous.
     \begin{lemma}\label{span_dual_of_ker}
         Soient $k$ un corps, $E$ un $k$-espace vectoriel, $I$ un ensemble fini et $\psi : I\to E^\sharp$
         \footnote{On note $E^\sharp$ le dual algébrique de $E$.} une famille de formes linéaires sur $E$.
@@ -967,31 +971,28 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
         des formes linéaires $\varphi$ telles que $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$.
     \end{lemma}
 
-    \begin{proof}[Démonstration du lemme \ref{span_dual_of_ker}]
-        Il est clair que toute combinaison linéaire des $\psi_i$ est nulle sur l'ensemble $\bigcap_{i\in I}\ker\psi_i$.
-        Il s'agit donc de montrer que toute forme linéaire $\varphi$ vérifiant $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$ est effectivement 
-        combinaison linéaire des $\psi_i$. 
-        
-        Soit donc une telle forme $\varphi$. On considère l'application linéaire $\Psi : E\to k^I$ 
-        dont les composantes sont les $\psi_i$, $F\subseteq k^I$ son image, et $\widetilde{\Psi}:E\to F$ l'application surjective induite.
-        On a $\ker\widetilde{\Psi} = \ker\Psi = \bigcap_{i\in I}\ker\psi_i \subseteq \ker \varphi$, donc $\varphi$ se factorise 
-        par $\widetilde{\Psi}$ en $\widetilde{\varphi}:F\to k$, que l'on prolonge en $\widehat{\varphi}:k^I\to k$ de manière arbitraire.
-        En notant $e : I\to\C^I$ la base canonique et $e^*$ sa base duale, on a donc $\widehat{\varphi} = \sum_{i\in I} a_i e^*_i$
-        pour une certaine famille $a : I\to\C$. Il vient enfin
-        $\varphi = \widetilde{\varphi}\comp\widetilde{\Psi} = \widehat{\varphi}\comp\Psi = \sum_{i\in I} a_i (e^*_i \comp\Psi) = \sum_{i\in I} a_i\psi_i$,
-        ce qui conclut.
-    \end{proof}
-
-    Finalement, ce lemme fournit  $a : I\to\K$ telle que $\varphi = \sum_{i\in I} a_i\psi_i = \ket{\blank, \sum_{i\in I} a_i f_i}$,
+    Ce lemme fournit  $a : I\to\K$ telle que $\varphi = \sum_{i\in I} a_i\psi_i = \ket{\blank, \sum_{i\in I} a_i f_i}$,
     ce qui achève la preuve du lemme \ref{dual_of_weak}.
 \end{proof}
 
-\TODO{Réorganiser ?}
+\begin{proof}[Démonstration du lemme \ref{span_dual_of_ker}]
+    Il est clair que toute combinaison linéaire des $\psi_i$ est nulle sur l'ensemble $\bigcap_{i\in I}\ker\psi_i$.
+    Il s'agit donc de montrer que toute forme linéaire $\varphi$ vérifiant $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$ est effectivement 
+    combinaison linéaire des $\psi_i$. 
+    
+    Soit donc une telle forme $\varphi$. On considère l'application linéaire $\Psi : E\to k^I$ 
+    dont les composantes sont les $\psi_i$, $F\subseteq k^I$ son image, et $\widetilde{\Psi}:E\to F$ l'application surjective induite.
+    On a $\ker\widetilde{\Psi} = \ker\Psi = \bigcap_{i\in I}\ker\psi_i \subseteq \ker \varphi$, donc $\varphi$ se factorise 
+    par $\widetilde{\Psi}$ en $\widetilde{\varphi}:F\to k$, que l'on prolonge en $\widehat{\varphi}:k^I\to k$ de manière arbitraire.
+    En notant $e : I\to\C^I$ la base canonique et $e^*$ sa base duale, on a donc $\widehat{\varphi} = \sum_{i\in I} a_i e^*_i$
+    pour une certaine famille $a : I\to\C$. Il vient enfin
+    $\varphi = \widetilde{\varphi}\comp\widetilde{\Psi} = \widehat{\varphi}\comp\Psi = \sum_{i\in I} a_i (e^*_i \comp\Psi) = \sum_{i\in I} a_i\psi_i$,
+    ce qui conclut.
+\end{proof}
 
 \begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
-    \TODO{Cette preuve est fausse !}
     Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ est de mesure non nulle. Il existe alors 
-    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle (\TODO{c'est faux}), de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
+    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle (\TODO{ref : Radon implique semifini}), de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
     $\integral{}{}{\indic_\mathbf{T}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
     donc nulle. La fonction positive $-\indic_\mathbf{T}\varphi$ est d'intégrale nulle, 
     l'inégalité de Markov assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
@@ -1035,6 +1036,136 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 \newpage
 
 \section{Annexes}
+
+\subsection*{Résultats usuels de théorie de la mesure}
+
+Cette section regroupe, avec ou sans démonstration, des résultats de théorie de la mesure utilisés au cours du document.
+Nous nous cantonnons ici strictement aux mesures usuelles ($\sigma$-additives), le cas moins usuel des contenu et de 
+l'intégration associée étant traitée dans le corps du texte. Enfin, nous supposons connus les définitions de tribu et de mesure,
+la construction de l'intégrale associée à une mesure, ainsi que les théorèmes de convergence monotone et dominée.
+Si $(X, \mathcal{A})$ est un espace mesurable, on note $\mathscr{S}(X, \mathcal{A})$ l'ensemble des \emph{fonctions simples}
+sur $X$, c'est à dire des fonctions mesurables $f : (X, \mathcal{A})\to(\C, \Bor(\C))$ d'image finie. 
+
+Avant toute chose, rappelons l'inégalité de Markov et une de ses conséquences élémentaires, qui nous servira à de nombreuses reprises.
+\begin{proposition}\label{markov_and_consequence}
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $f:X\to\overline{\R_+}$ une fonction mesurable positive.
+    On a $\forall a>0, a\cdot\mu\left(f\inv([a, +\infty])\right) \le \integral{}{}{f}{\mu}$. \\
+    Par conséquent, si $\integral{}{}{f}{\mu} = 0$, on a $f =_\mu 0$, où $=_\mu$ désigne la relation 
+    d'égalité $\mu$-presque-partout.
+\end{proposition}
+
+\begin{proof}
+    L'inégalité de Markov est une conséquence directe de la croissance de l'intégrale appliquée à 
+    l'inégalité $a\cdot\indic_{\set{x\tq f(x)\le a}} \le f$. Pour sa conséquence, notons que le petit théorème de convergence monotone donne :
+    \begin{equation*}
+        \mu(f\inv([2^{-n}, +\infty])) \xrightarrow[n\to+\infty]{} \mu\left(\bigcup_{i\in\N} f\inv([2^{-i}, +\infty])\right) = \mu(f\inv(\set{0}\compl))
+    \end{equation*}
+    Mais l'hypothèse $\integral{}{}{f}{\mu} = 0$ implique, \emph{via} l'inégalité de Markov, que pour tout $n\in\N$, $\mu(f\inv([2^{-n}, +\infty]))=0$,
+    ce qui entraîne $f =_\mu 0$.
+\end{proof}
+
+Nous allons maintenant énoncer les résultats fondamentaux sur les espaces $\mathrm{L}^p$. Nous allons en fait considérer une variante subtile de 
+la définition, qui est plus adaptée à l'analyse fonctionelle en ce que l'isométrie $\mathrm{L}^\infty \simeq (\mathrm{L}^1)^*$
+sera valable \emph{sans hypothèse de $\sigma$-finitude}. Pour cela, on introduit la notion suivante.
+
+\begin{definition}
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré, et soit $A\in\parts{X}$. On dit que $A$ est \emph{$\mu$-localement-négligeable} 
+    si, pour tout $B\in\mathcal{A}$ \emph{de mesure finie}, $B\cap A$ est $\mu$-négligeable. \\
+    Par analogie avec le cas des ensembles négligeables, on dit qu'un prédicat $P$ est valable 
+    \emph{$\mu$-localement-presque-partout} si l'ensemble associé est $\mu$-localement-négligeable,
+    et on note $f =_\mu^{loc} g$ si les fonctions $f$ et $g$ sont égales $\mu$-localement-presque-partout.
+    Enfin, on définit le \emph{supremum $\mu$-localement-essentiel} d'une fonction mesurable $f:(X, \mathcal{A})\to(\overline{\R},\Bor(\overline{\R}))$ par 
+    $\sup\ess_\mu^{loc} f := \inf\set{y\tq f\le y\text{ $\mu$-localement-presque-partout}}$.
+\end{definition}
+
+Remarquons directement que, si l'espace mesuré $(X, \mathcal{A}, \mu)$ est $\sigma$-fini, 
+tout ensemble $\mu$-localement-négligeable est en fait $\mu$-négligeable. Cela garantit en particulier que, 
+pour des fonctions intégrables, les relations $=_\mu$ et $=_\mu^{loc}$ coïncident, en vertu du lemme suivant.
+
+\begin{lemma}
+    Soit $f:X\to\C$ intégrable. L'ensemble $\set{x\tq f(x)\ne 0}$ est $\sigma$-fini\footnote{C'est à dire qu'il est $\sigma$-fini comme espace mesuré, 
+    lorsqu'on le munit de la mesure restreinte}. 
+\end{lemma}
+
+\begin{proof}
+    Chaque $\set{x\tq \abs{f(x)}\ge 2^{-n}}$ est de mesure finie par l'inégalité de Markov, et l'union de ses ensembles pour 
+    $n\in\N$ recouvre $\set{x\tq f(x)\ne 0}$.
+\end{proof}
+
+\TODO{Définitions et propriétés des espaces $\mathrm{L}^p$ avec le cette notion de localement négligeable, 
+sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
+
+%Rappelons maintenant les définitions et propriétés usuelles des espaces $\mathrm{L}^p$, d'abord pour $p<+\infty$. Pour $(X, \mathcal{A}, \mu)$ espace mesuré et $p\in[1, +\infty[$, on 
+%note $\mathscr{L}^p(X, \mu)$ l'espace vectoriel semi-normé des fonctions mesurables $f:(X, \mathcal{A})\to(\C, \Bor(\C))$ telles que $\abs{f}^p$ soit intégrable,
+%muni de la seminorme $\norm{\cdot}_{\mathscr{L}^p} : f\mapsto\left(\integral{}{}{\abs{f}^p}{\mu}\right)^{\frac1p}$; on note alors $\mathrm{L}^p(X, \mu)$ l'espace 
+%vectoriel normé associé, c'est à dire le quotient de $\mathscr{L}^p(X, \mu)$ par le sous-espace fermé $\set{f\tq\norm{f}_{\mathscr{L}^p}=0}$,
+%muni de la norme induite notée $\norm{\cdot}_{\mathrm{L}^p}$. Comme il est usuel de le faire dans la littérature, on oublie l'application de 
+%projection sur le quotient : si $f\in\mathscr{L}^p(X, \mu)$, on note aussi $f$ son image dans $\mathrm{L}^p(X, \mu)$.
+%
+%La proposition \ref{markov_and_consequence} assure que l'ensemble $\set{f\tq\norm{f}_{\mathscr{L}^p}=0}$ est exactement l'ensemble des fonctions 
+%$\mu$-négligeables. En effet, la fonction $\abs{f}^p$ étant positive, son intégrale est nulle \ssi
+%$\abs{f}^p =_\mu 0$, ce qui équivaut à $f =_\mu 0$. On peut donc voir $\mathrm{L}^p(X, \mu)$ comme le quotient de 
+%$\mathscr{L}^p(X, \mu)$ par la relation d'égalité $\mu$-presque partout.
+%
+%Le théorème suivant rassemble les résultats dont nous aurons besoin sur les espaces $\mathrm{L}^p$.
+%
+%\begin{theorem}
+%    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $p\in[1, +\infty[$. Notons $q$ l'unique élément de $]1, +\infty]$
+%    vérifiant $\frac1p + \frac1q = 1$.
+%    \begin{enumerate}[(i)]
+%        \item L'espace $\mathscr{S}(X, \mathcal{A})\cap\mathscr{L}^1(X, \mu)$ des fonctions simples intégrables 
+%            est (inclu et) dense dans $\mathscr{L}^p(X, \mu)$. Son image dans $\mathrm{L}^p(X, \mu)$ est donc 
+%            toujours dense.
+%        \item L'espace $\mathrm{L}^p(X, \mu)$ est complet.
+%        \item L'application bilinéaire $\fundef{B}{\mathcal{F}(X, \C)\times\mathcal{F}(X, \C)&\to&\mathcal{F}(X, \C)}{(f, g)&\mapsto&fg}$ 
+%            se restreint et passe au quotient en une application bilinéaire continue $\widetilde{B} : \mathcal{}.
+%    \end{enumerate}
+%\end{theorem}
+
+\begin{definition}
+    Soit $(X, \mathcal{A})$ un espace mesurable. Une mesure $\mu$ sur cet espace est dite \emph{semi-finie} si tout ensemble
+    $A\in\mathcal{A}$ de mesure non-nulle contient un ensemble $B\in\mathcal{A}$ de mesure 
+    \emph{finie} non-nulle.
+\end{definition}
+
+\begin{definition}
+    Soit $X$ un espace topologique localement compact et séparé. Une \emph{mesure de Radon} sur $X$
+    est une mesure $\mu$ sur l'espace mesuré $(X, \Bor(X))$ vérifiant les trois conditions suivantes :
+    \begin{itemize}
+        \item Pour tout $K\subseteq X$ compact, $\mu(X)<+\infty$.
+        \item Régularité extérieure : 
+        \begin{equation*}
+            \forall A\in\Bor(X), \mu(A) = \inf \set{\mu(U) \tq U\text{ ouvert}, A\subseteq U}
+        \end{equation*}
+        \item Régularité intérieure pour les ouverts : 
+        \begin{equation*}
+            \forall U\text{ ouvert}, \mu(U) = \sup \set{\mu(K) \tq K\text{ compact}, K\subseteq U}
+        \end{equation*}
+    \end{itemize}
+\end{definition}
+
+La conjonction des deux conditions de régularité donne, pour tout borélien $A$ de mesure finie et tout $\varepsilon>0$,
+un ouvert $U\supseteq A$ de mesure finie et un compact $K\subseteq U$ tels que $\mu(U)<\mu(A)+\varepsilon$ et 
+$\mu(U)<\mu(K)+\varepsilon$. Bien sûr, on ne peut ici pas supposer $K\subseteq A$, mais cela permet 
+tout de même d'obtenir des résultats intéressants.
+
+On peut notamment appliquer le lemme d'Urysohn, pour obtenir $f:X\to[0,1]$ continue à support compact
+vérifiant $\forall x\in K, f(x) = 1$ et $\Supp f\subseteq U$. On a alors, pour tout $p\in[1, +\infty[$ : 
+\begin{align*}
+    \integral{}{}{\abs{f-\indic_A}^p}{\mu} 
+        &= \integral{A}{}{\abs{f-1}^p}{\mu} + \integral{U\setminus A}{}{\abs{f}^p}{\mu} \\
+        &\le \integral{U}{}{(1-f)^p}{\mu} + \integral{U\setminus A}{}{f^p}{\mu} \\
+        &= \mu(U\setminus K) + \mu(U\setminus A) \\
+        &< 2\varepsilon
+\end{align*}
+On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout ensemble $A$ de mesure finie par des fonctions continues 
+à support compact. Ces indicatrices engendrant un sous-espace dense de $\mathrm{L}^p(X, \mu)$ (\TODO{ref}), on vient de montrer le résultat suivant.
+
+\begin{proposition}
+    Si $\mu$ est de Radon, l'espace $C_c(X)$ est dense dans $\mathrm{L}^p(X, \mu)$ pour tout $p\in[1, +\infty[$.
+\end{proposition}
+
+\TODO{Radon implique semifinie}
 
 \subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
