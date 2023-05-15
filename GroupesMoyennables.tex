@@ -1033,6 +1033,52 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 
 \section{Contenance faible et C*-algèbres}
 
+Dans cette section, on désigne par \og{}représentation de $\Gamma$\fg{} une représentation continue d'un
+groupe topologique $\Gamma$ dans un espace vectoriel topologique complet sur $\C$, et on utilise le terme de \og{}morphisme 
+de représentations\fg{} pour les morphismes associés, c'est à dire les morphismes de représentations abstraites
+qui sont de plus linéaires et continus. Pour une représentation $\pi$, on note $V_\pi$ l'espace 
+vectoriel topologique sous-jacent, et on note encore $\pi : \Gamma\to\mathcal{GL}(V_\pi)$ le morphisme 
+de groupes\footnote{Rappelons qu'il ne s'agit \emph{pas} d'un morphisme de groupes topologiques en général.} associé.
+Enfin, une \emph{représentation unitaire} de $\Gamma$ est la donnée d'une représentation $\pi$ et d'une structure 
+d'espace hilbertien sur $V_\pi$, induisant bien-sûr la topologie originale sur $V_\pi$. Les morphismes de représentations 
+unitaires sont les morphismes de représentations continues entre représentations unitaires.
+
+On veut maintenant caractériser la moyennabilité d'un groupe localement compact (séparé) en termes
+de la théorie des représentations unitaires de ce groupe. 
+
+\TODO{Plan de la section}
+
+Rappelons que, pour deux représentations continues $\pi_1$, $\pi_2$ de $\Gamma$, on note 
+$\pi_1\le\pi_2$ s'il existe un morphisme de représentations de $\pi_1$ vers $\pi_2$ qui soit un plongement
+d'espaces vectoriels topologiques, de sorte que $\pi_1$ s'identifie à une sous-représentation de $\pi_2$.
+On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme\footnote{Cette notation est justifiée par le fait que ces morphismes
+sont exactement les monomorphismes de la catégorie des représentations continues de $\Gamma$.}.
+
+Rappelons aussi que, si $\Gamma$ est localement compact et qu'on fixe une mesure de Haar à gauche $\mu$ sur 
+$\Gamma$, on peut munir l'espace de Banach $\mathrm{L}^1(\Gamma, \mu)$ d'une structure d'algèbre de Banach \emph{via}
+le produit de convolution, défini pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ par 
+\begin{equation*}
+    (f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}
+\end{equation*}
+L'inégalité de Young donne alors $\norm{f_1\ast f_2}_{\mathscr{L}^1} \le \norm{f_1}_{\mathscr{L}^1}\norm{f_2}_{\mathscr{L}^1}$.
+Cela implique tout d'abord que, si $f_1$ ou $f_2$ est presque nulle, $f_2\ast f_2$ l'est aussi, ce qui assure que 
+$\ast$ passe au quotient en $\ast : \mathrm{L}^1 \times\mathrm{L}^1 \to \mathrm{L}^1$, et que l'opération 
+bilinéaire obtenue est bien de norme inférieure à $1$, d'où finalement $\mathrm{L}^1(\Gamma, \mu)$ est bien une algèbre de Banach.
+Enfin, si l'on munit $\mathrm{L}^1(\Gamma, \mu)$ de l'involution $f\mapsto\overline{f\comp\invop}$, qui est bien définie car 
+les mesures de Haar $\invop_*\mu$ et $\mu$ sont absolument continues l'une par rapport à l'autre, on obtient une structure d'algèbre de Banach
+involutive, puisque pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in\Gamma$, on a :
+\begin{align*}
+    (f_1^*\ast f_2^*)(x) 
+        &= \integral{}{}{\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
+        &= \overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \\
+        &= \overline{(f_2\ast f_2)(x\inv)} \\
+        &= (f_2\ast f_1)^*(x)
+\end{align*}
+
+On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{GL}(H)$ du \emph{groupe} $\Gamma$ une
+représentation, toujours notée $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$.
+Considérons alors la fonction 
+
 \newpage
 
 \section{Annexes}
