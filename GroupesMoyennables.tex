@@ -863,7 +863,7 @@ Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesur
 $\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}.
 
 Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
-\TODO{semifinite}
+(\TODO{pk ?})
 induit, par restriction, un plongement isométrique $\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$. 
 En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
 car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
@@ -991,12 +991,12 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 \end{proof}
 
 \begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
-    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ est de mesure non nulle. Il existe alors 
-    $\mathbf{T}\subseteq\mathbf{S}$ de mesure finie non nulle (\TODO{ref : Radon implique semifini}), de sorte que $\indic_\mathbf{T}$ soit positive et intégrable. L'intégrale
-    $\integral{}{}{\indic_\mathbf{T}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
-    donc nulle. La fonction positive $-\indic_\mathbf{T}\varphi$ est d'intégrale nulle, 
-    l'inégalité de Markov assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
-    sur l'ensemble $\mathbf{T}$ de mesure non-nulle.
+    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ n'est \emph{pas} $\mu$-localement-négligeable. Par définition, cela fournit 
+    $\mathbf{T}\in\Bor(X)$ de mesure finie tel que $0<\mu(\mathbf{T}\cap\mathbf{S})<+\infty$, de sorte que $\indic_{\mathbf{T}\cap\mathbf{S}}$ est positive et intégrable. L'intégrale
+    $\integral{}{}{\indic_{\mathbf{T}\cap\mathbf{S}}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
+    donc nulle. La fonction positive $-\indic_{\mathbf{T}\cap\mathbf{S}}\varphi$ est d'intégrale nulle, 
+    l'inégalité de Markov \ref{markov_and_consequence} assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
+    sur l'ensemble $\mathbf{T}\cap\mathbf{S}$ de mesure non-nulle.
 \end{proof}
 
 %,
@@ -1122,11 +1122,11 @@ sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
 %    \end{enumerate}
 %\end{theorem}
 
-\begin{definition}
-    Soit $(X, \mathcal{A})$ un espace mesurable. Une mesure $\mu$ sur cet espace est dite \emph{semi-finie} si tout ensemble
-    $A\in\mathcal{A}$ de mesure non-nulle contient un ensemble $B\in\mathcal{A}$ de mesure 
-    \emph{finie} non-nulle.
-\end{definition}
+%\begin{definition}
+%    Soit $(X, \mathcal{A})$ un espace mesurable. Une mesure $\mu$ sur cet espace est dite \emph{semi-finie} si tout ensemble
+%    $A\in\mathcal{A}$ de mesure non-nulle contient un ensemble $B\in\mathcal{A}$ de mesure 
+%    \emph{finie} non-nulle.
+%\end{definition}
 
 \begin{definition}
     Soit $X$ un espace topologique localement compact et séparé. Une \emph{mesure de Radon} sur $X$
