@@ -98,6 +98,8 @@
 
 \TODO{Réorganiser cette section}
 
+Par convention, les produits scalaires sont linéaires à gauche.
+
 Conformément à la convention dans le monde anglophone, et pour éviter toute confusion, nous dirons qu'un espace topologique
 $X$ est \emph{compact} s'il vérifie la propriété de Borel-Lebesgue, sans hypothèse de séparation. 
 Nous dirons que $X$ est \emph{localement compact} si, pour tout $x\in X$, le filtre $\nhds_x$ des voisinages de $x$ admet
@@ -1061,12 +1063,15 @@ le produit de convolution, défini pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ 
     (f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}
 \end{equation*}
 L'inégalité de Young donne alors $\norm{f_1\ast f_2}_{\mathscr{L}^1} \le \norm{f_1}_{\mathscr{L}^1}\norm{f_2}_{\mathscr{L}^1}$.
-Cela implique tout d'abord que, si $f_1$ ou $f_2$ est presque nulle, $f_2\ast f_2$ l'est aussi, ce qui assure que 
-$\ast$ passe au quotient en $\ast : \mathrm{L}^1 \times\mathrm{L}^1 \to \mathrm{L}^1$, et que l'opération 
+Cela implique tout d'abord que, si $f_1$ ou $f_2$ est presque nulle, $f_2\ast f_2$ l'est aussi, et donc que
+$\ast$ passe au quotient en $\ast : \mathrm{L}^1 \times\mathrm{L}^1 \to \mathrm{L}^1$, puis que l'opération 
 bilinéaire obtenue est bien de norme inférieure à $1$, d'où finalement $\mathrm{L}^1(\Gamma, \mu)$ est bien une algèbre de Banach.
-Enfin, si l'on munit $\mathrm{L}^1(\Gamma, \mu)$ de l'involution $f\mapsto\overline{f\comp\invop}$, qui est bien définie car 
-les mesures de Haar $\invop_*\mu$ et $\mu$ sont absolument continues l'une par rapport à l'autre, on obtient une structure d'algèbre de Banach
-involutive, puisque pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in\Gamma$, on a :
+Vérifions enfin qu'il s'agit d'une algèbre de Banach involutive pour l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
+$\invop_*\mu\ll\mu$. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
+\begin{align*}
+    \norm{f^*}_{\mathrm{L}^1} = \text{\TODO{calculer}} = \norm{f}_{\mathrm{L}^1}
+\end{align*}
+La (semi)-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
 \begin{align*}
     (f_1^*\ast f_2^*)(x) 
         &= \integral{}{}{\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
@@ -1076,8 +1081,24 @@ involutive, puisque pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in\Gamma$
 \end{align*}
 
 On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{GL}(H)$ du \emph{groupe} $\Gamma$ une
-représentation, toujours notée $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$.
-Considérons alors la fonction 
+représentation, toujours notée $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
+
+Pour $f\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in V_\pi$, on définit une forme linéaire $\underline{\pi}(f)(x)$ sur $V_\pi^*$ par 
+$\underline{\pi}(f)(x)(\varphi) := \integral{}{}{f(g)\cdot\varphi(\pi(g)(x))}{\mu(g)}$, cette intégrale étant finie car $f$ est
+intégrable et $\forall g, \abs{\varphi(\pi(g)(x))}\le\norm{\varphi}\norm{x}$. Par l'inégalité de Hölder, on a donc 
+\begin{equation*}
+    \forall\varphi\in V_\pi^*, \norm{\underline{\pi}(f)(x)(\varphi)}\le\norm{f}_{\mathrm{L}^1}\norm{\varphi}\norm{x}
+\end{equation*}
+Cela assure que la forme linéaire $\underline{\pi}(f)(x)$ est continue, on a ainsi défini un élément de $V_\pi^{**}$. 
+Comme $V_\pi$ est un espace de Hilbert, l'isométrie $\ev:V_\pi\to V_\pi^{**}$ est surjectiv, et on pose alors $\pi(f)(x) := \ev\inv(\underline{\pi}(f)(x))$. 
+Autrement dit, en exploitant l'isomorphisme semi-linéaire $V_\pi\simeq V_\pi^*$ fourni par le théorème de représentation de Riesz, 
+$\pi(f)(x)$ est l'unique élément de $V_\pi$ tel que :
+\begin{equation*}
+    \forall y\in V_\pi, \ket{\pi(f)(x), y} = \integral{}{}{f(g)\ket{\pi(g)(x), y}}{\mu(g)}
+\end{equation*}
+De plus, on a vu que $\norm{\pi(f)(x)} = \norm{\underline{\pi}(f)(x)} \le \norm{f}_{\mathrm{L}^1}\norm{x}$. 
+On a donc $\pi(f)\in\mathcal{L}(V_\pi)$ et $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mathcal{L}(V_\pi)$ est continue de norme inférieure à $1$.
+Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Banach involutives, il s'agit donc de montrer...
 
 \newpage
 
@@ -1109,6 +1130,8 @@ Avant toute chose, rappelons l'inégalité de Markov et une de ses conséquences
     Mais l'hypothèse $\integral{}{}{f}{\mu} = 0$ implique, \emph{via} l'inégalité de Markov, que pour tout $n\in\N$, $\mu(f\inv([2^{-n}, +\infty]))=0$,
     ce qui entraîne $f =_\mu 0$.
 \end{proof}
+
+\subsubsection*{Espaces \texorpdfstring{$\mathrm{L}^p$}{L\textsuperscript{p}}}
 
 Nous allons maintenant énoncer les résultats fondamentaux sur les espaces $\mathrm{L}^p$. Nous allons en fait considérer une variante subtile de 
 la définition, qui est plus adaptée à l'analyse fonctionelle en ce que l'isométrie $\mathrm{L}^\infty \simeq (\mathrm{L}^1)^*$
@@ -1174,6 +1197,8 @@ sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
 %    \emph{finie} non-nulle.
 %\end{definition}
 
+\subsubsection*{Mesures de Radon}
+
 \begin{definition}
     Soit $X$ un espace topologique localement compact et séparé. Une \emph{mesure de Radon} sur $X$
     est une mesure $\mu$ sur l'espace mesuré $(X, \Bor(X))$ vérifiant les trois conditions suivantes :
@@ -1207,11 +1232,43 @@ vérifiant $\forall x\in K, f(x) = 1$ et $\Supp f\subseteq U$. On a alors, pour 
 On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout ensemble $A$ de mesure finie par des fonctions continues 
 à support compact. Ces indicatrices engendrant un sous-espace dense de $\mathrm{L}^p(X, \mu)$ (\TODO{ref}), on vient de montrer le résultat suivant.
 
-\begin{proposition}
+\begin{proposition}\label{cont_supp_compact_dense_Lp}
     Si $\mu$ est de Radon, l'espace $C_c(X)$ est dense dans $\mathrm{L}^p(X, \mu)$ pour tout $p\in[1, +\infty[$.
 \end{proposition}
 
-\TODO{Radon implique semifinie}
+\subsubsection*{Un petit peu d'intégration vectorielle}
+
+\TODO{Décrire intégration de Bochner}
+
+%\begin{lemma}\label{strong_measurable_of_tendsto}
+%    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré, $E$ un espace de Banach, et $\varphi : (X, \mathcal{A})\to(E, \Bor(E))$
+%    une fonction mesurable. Si de plus $\varphi$ est limite presque-partout d'une suite
+%    de fonctions \emph{fortement mesurables}, alors $\varphi$ est fortement mesurable.
+%\end{lemma}
+%
+%\begin{proof}
+%    \TODO{}
+%\end{proof}
+
+En pratique, nous utiliserons le critère suivant pour montrer la mesurabilité forte.
+
+\begin{theorem}\label{strong_measurable_crit}
+    Soit $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$,
+    $E$ un $\K$-espace de Banach, pour $\K\in\set{\R, \C}$, et $f:X\to E$ une fonction continue. 
+    \begin{enumerate}[(i)]
+        \item\label{strong_measurable_of_compact} Si $X$ est compact, alors $f$ est fortement mesurable.
+        \item\label{strong_measurable_of_L1} Pour toute fonction $\varphi : X\to\K$ intégrable, la fonction $\varphi\cdot f$ est fortement mesurable.
+    \end{enumerate}
+\end{theorem}
+
+Notons d'ailleurs que, dans le cas $(ii)$, l'intégrabilité est immédiate une fois la mesurabilité forte établie, 
+puisque l'inégalité de Hölder pour les fonctions scalaires $\varphi$ et $\norm{\cdot}\comp f$ assure que 
+$\norm{\cdot}\comp(\varphi f)$ est intégrable avec $\norm{\varphi f}_{\mathrm{L}^1} = \integral{}{}{\abs{\varphi(x)}\norm{f(x)}}{\mu(x)} \le \norm{\varphi}_{\mathrm{L}^1}\norm{f}_\infty$.
+
+\begin{proof}
+    Montrons d'abord que $(\ref{strong_measurable_of_compact})$ entraîne $(\ref{strong_measurable_of_L1})$.
+    \TODO{finir}
+\end{proof}
 
 \subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
