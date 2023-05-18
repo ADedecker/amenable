@@ -758,7 +758,7 @@ $n\mapsto\left(\gamma\mapsto\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\math
 
 On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de manière similaire.
 
-\begin{lemma}
+\begin{lemma}\label{Reiter_filter_of_cond}
     $\Gamma$ admet un filtre faiblement de Reiter \ssi il satisfait la 
     \emph{condition de Reiter faible} :
     \begin{equation*}\label{weak_Reiter_cond}
@@ -784,6 +784,7 @@ Avant d'en arriver au résultat crucial de cette partie, introduisons une derni�
 \begin{equation*}
     \forall f\in\mathrm{L}^\infty(\Gamma), \forall\varphi\in\mathrm{L}^1_{1, +}(\Gamma), m(\varphi*f) = m(f)
 \end{equation*}
+\TODO{Renvoi vers propriétés et def de la convolution}
 
 Le théorème suivant assure que toutes les notions définies dans cette partie sont en fait équivalentes à la moyennabilité ! À travers la condition de Reiter, il nous 
 permettra de caractériser la moyennabilité par la théorie des représentations dans la partie suivante.
@@ -836,7 +837,7 @@ c'est à dire si $\mathscr{G}\subseteq \mathscr{F}$. }
     est continue.
 \end{lemma}
 
-On donne une démonstration directe en se basant sur la caractérisation \ref{UCB_explicit_cara}, mais on 
+On donne une démonstration directe en se basant sur la caractérisation $(\ref{UCB_explicit_cara})$, mais on 
 pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plus général, démontré en annexe.
 
 \begin{proof}
@@ -852,13 +853,77 @@ pourrait aussi utiliser le théorème \ref{uniform_continuous_iff_postcomp}, plu
     Cela conclut la preuve du lemme.
 \end{proof}
 
-\subsection{Moyennes provenant de fonctions intégrables}
+Maintenant qu'on dispose de plusieurs caractérisations agréables, vérifions que $UC_b(\Gamma_d)$ est bien un espace de Banach.
 
-\TODO{Gérer absence de $\sigma$-finitude}
+\begin{proposition}\label{UCB_complete}
+    $UC_b(\Gamma_d)$ est fermé dans $\ell^\infty(\Gamma)$, donc complet.
+\end{proposition}
+
+Encore une fois, on donne une preuve concrète basée sur le lemme \ref{UCB_iff_translate}, et on renvoie au théorème \TODO{\ref{uniform_limit_of_uniform_cont}}
+en annexe pour le résultat général.
+
+\begin{proof}
+    Soit $F:\N\to UC_b(\Gamma_d)$ une suite convergente dans $\ell^\infty(\Gamma)$, de limite $f$.
+    Il s'agit de montrer que $f$ est uniformément continue. Notons que, pour tout $g\in\Gamma$, on a $\norm{\lambda(g)(f) - \lambda(g)(F_n)}_\infty = \norm{f - F_n}_\infty$.
+    Or $\norm{f - F_n}_\infty\xrightarrow[n\to+\infty]{}0$, donc on a montré que la suite de fonctions $\ev_{F_n}\comp\lambda$ converge 
+    uniformément vers $\ev_f\comp\lambda$. Chaque $\ev_{F_n}\comp\lambda$ étant continue en vertu du lemme \ref{UCB_iff_translate},
+    sa limite l'est également, et une deuxième application du lemme \ref{UCB_iff_translate} conclut.
+\end{proof}
+
+Terminons par le résultat suivant, qui justifie que l'on s'intéresse à cet espace.
+
+\begin{proposition}\label{conv_UCB}
+    La convolée $\varphi\ast f$ de $\varphi\in\mathscr{L}^1(\Gamma)$ et $f\in\mathscr{L}^\infty(\Gamma)$, qui existe et appartient à $\ell^\infty(\Gamma)$ par l'inégalité de Young (\TODO{ref}),
+    appartient en fait à $UC_b(\Gamma_d)$.
+
+    Par conséquent, l'opérateur de convolution $\ast:\mathrm{L}^1(\Gamma)\times\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$
+    se factorise à travers $UC_b(\Gamma_d)\hookrightarrow\mathrm{L}^\infty(\Gamma)$ en 
+    $\ast:\mathrm{L}^1(\Gamma)\times\mathrm{L}^\infty(\Gamma)\to UC_b(\Gamma_d)$ encore bilinéaire continue de norme inférieure à $1$.
+\end{proposition}
+
+Il est clair que le deuxième point découle du premier puisque les normes $\norm{\cdot}_\infty$ et $\norm{\cdot}_{\mathrm{L}^\infty}$ coïncident 
+sur $UC_b(\Gamma_d)$, de sorte que la composée $UC_b(\Gamma_d)\hookrightarrow\mathscr{L}^\infty(\Gamma)\twoheadrightarrow\mathrm{L}^\infty(\Gamma)$
+est encore un plongement isométrique. Dorénavant, on identifiera d'ailleurs $UC_b(\Gamma_d)$ à son image dans $\mathrm{L}^\infty(\Gamma)$.
+
+Il s'agit donc de montrer le premier point.
+
+\begin{proof}
+    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ (\TODO{faut-il la remontrer ? Raisonnement par densité}) assure que 
+    $\fundef{\ev_\varphi\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma)}{g&\mapsto&\lambda(g)(\varphi)}$ est continue, ce qui fournit 
+    un voisinage $V\in\nhds_1^\Gamma$ tel que $\forall g\in V, \norm{\lambda(g)(\varphi) - \varphi}_1<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^\infty}}$. Or, pour $g, x\in \Gamma$ quelconques, on a :
+    \begin{align*}
+        \lambda(g)(\varphi\ast f)(x)
+            &= (\varphi\ast f)(g\inv x) \\
+            &= \integral{}{}{\varphi(h)f(h\inv g\inv x)}{\mu(h)} \\
+            &= \integral{}{}{\varphi(g\inv h)f(h\inv x)}{\mu(h)} \\
+            &= (\lambda(g)(\varphi)\ast f)(x)
+    \end{align*}
+    Pour $g\in V$, on a finalement :
+    \begin{align*}
+        \norm{\lambda(g)(\varphi\ast f) - \varphi\ast f}_\infty 
+            &= \norm{(\lambda(g)(\varphi) - \varphi)\ast f}_\infty \\
+            &\le \norm{\lambda(g)(\varphi) - \varphi}_1\norm{f}_{\mathrm{L}^\infty} \\
+            &< \varepsilon
+    \end{align*}
+    Cela conclut.
+\end{proof}
+
+%\begin{proof}
+%    Soit $f\in\ell^\infty(\Gamma)$ adhérent à $UC_b(\Gamma_d)$. Il s'agit de montrer que $f$ satisfait $(\ref{UCB_explicit_cara})$.
+%    Soit donc $\varepsilon>0$. Par hypothèse, il existe une fonction $\widetilde{f}\in UC_b(\Gamma_d)$ avec 
+%    $\norm{f-\widetilde{f}}_\infty<\frac{\varepsilon}{3}$. Or $\widetilde{f}$ vérifie $(\ref{UCB_explicit_cara})$, ce qui fournit $V\in\nhds_1^\Gamma$
+%    tel que $\forall g\in V, \norm{\lambda(g)(\widetilde{f}) - \widetilde{f}}<\frac{\varepsilon}{3}$. Pour $g\in V$, on a donc 
+%    $\lambda$
+%\end{proof}
+
+\subsection{Moyennes provenant de fonctions intégrables}
 
 Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}^p$ sont complexes, et
 si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{sur le corps $\C$}. Si
 $E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
+
+Rappelons aussi que, grâce à la définition choisie de $\mathrm{L}^\infty$ (\TODO{ref}), l'isomorphisme $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$
+est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\sigma$-fini (\TODO{ref}).
 
 Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
 Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
@@ -964,8 +1029,7 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. Si $x\in\bigcap_{i\in I}\ker\psi_i$, on a bien sûr 
     $x\in\mathbf{V}\subseteq\mathbf{U}$ donc $\abs{\varphi(x)}<1$. Mais on a aussi $\forall t\in\R_+, tx\in\bigcap_{i\in I}\ker\psi_i$, d'où 
     $\forall t\in\R_+^*, \abs{\varphi(x)}<\frac1t$, d'où $x\in\ker\varphi$ en faisant tendre $t$ vers $0$. 
-    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur un lemme usuel d'algèbre linéaire,
-    dont nous redonnons la preuve ci-dessous.
+    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur un lemme usuel d'algèbre linéaire.
     \begin{lemma}\label{span_dual_of_ker}
         Soient $k$ un corps, $E$ un $k$-espace vectoriel, $I$ un ensemble fini et $\psi : I\to E^\sharp$
         \footnote{On note $E^\sharp$ le dual algébrique de $E$.} une famille de formes linéaires sur $E$.
@@ -977,7 +1041,18 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     ce qui achève la preuve du lemme \ref{dual_of_weak}.
 \end{proof}
 
-\begin{proof}[Démonstration du lemme \ref{span_dual_of_ker}]
+\begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
+    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ n'est \emph{pas} $\mu$-localement-négligeable. Par définition, cela fournit 
+    $\mathbf{T}\in\Bor(X)$ de mesure finie tel que $0<\mu(\mathbf{T}\cap\mathbf{S})<+\infty$, de sorte que $\indic_{\mathbf{T}\cap\mathbf{S}}$ est positive et intégrable. L'intégrale
+    $\integral{}{}{\indic_{\mathbf{T}\cap\mathbf{S}}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
+    donc nulle. La fonction positive $-\indic_{\mathbf{T}\cap\mathbf{S}}\varphi$ est d'intégrale nulle, 
+    l'inégalité de Markov \ref{markov_and_consequence} assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
+    sur l'ensemble $\mathbf{T}\cap\mathbf{S}$ de mesure non-nulle.
+\end{proof}
+
+Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_dual_of_ker}.
+
+\begin{proof}
     Il est clair que toute combinaison linéaire des $\psi_i$ est nulle sur l'ensemble $\bigcap_{i\in I}\ker\psi_i$.
     Il s'agit donc de montrer que toute forme linéaire $\varphi$ vérifiant $\ker\varphi\supseteq\bigcap_{i\in I}\ker\psi_i$ est effectivement 
     combinaison linéaire des $\psi_i$. 
@@ -990,15 +1065,6 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     pour une certaine famille $a : I\to\C$. Il vient enfin
     $\varphi = \widetilde{\varphi}\comp\widetilde{\Psi} = \widehat{\varphi}\comp\Psi = \sum_{i\in I} a_i (e^*_i \comp\Psi) = \sum_{i\in I} a_i\psi_i$,
     ce qui conclut.
-\end{proof}
-
-\begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
-    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ n'est \emph{pas} $\mu$-localement-négligeable. Par définition, cela fournit 
-    $\mathbf{T}\in\Bor(X)$ de mesure finie tel que $0<\mu(\mathbf{T}\cap\mathbf{S})<+\infty$, de sorte que $\indic_{\mathbf{T}\cap\mathbf{S}}$ est positive et intégrable. L'intégrale
-    $\integral{}{}{\indic_{\mathbf{T}\cap\mathbf{S}}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
-    donc nulle. La fonction positive $-\indic_{\mathbf{T}\cap\mathbf{S}}\varphi$ est d'intégrale nulle, 
-    l'inégalité de Markov \ref{markov_and_consequence} assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
-    sur l'ensemble $\mathbf{T}\cap\mathbf{S}$ de mesure non-nulle.
 \end{proof}
 
 %,
@@ -1023,14 +1089,70 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
 
 \begin{proof}
     Commençons par montrer \framebox{$(\ref{amenable_TFAE/amenable})\implies(\ref{amenable_TFAE/topological_mean})$}. Soit donc 
-    $m$ une moyenne invariante sur $\Gamma$, et notons $\widetilde{m}$ sa restriction à $UC_b(\Gamma_d)$
-    \footnote{On identifie $UC_b(\Gamma_d)$ à son image par l'application 
-    $UC_b(\Gamma_d)\hookrightarrow\mathscr{L}^\infty(\Gamma)\twoheadrightarrow\mathrm{L}^\infty(\Gamma)$, qui est un plongement isométrique car 
-    les normes $\norm{\cdot}_\infty$ et $\norm{\cdot}_{\mathrm{L}^\infty}$ coïncident sur les fonctions 
-    continues.}. Pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ \emph{à support compact}, étudions la fonction
-    $\fundef{\varphi\cdot(\ev_f\comp\lambda)}{\Gamma&\to&UC_b(\Gamma_d)}{g&\mapsto&\varphi(g)\cdot\lambda(g)(f)}$. Le 
-    lemme \ref{UCB_iff_translate} assure que $\ev_f\comp\lambda$ est continue, donc mesurable. 
-    \TODO{Il nous faudrait de la mesurabilité forte !}
+    $m$ une moyenne invariante sur $\Gamma$. La première étape est de remarquer que, sans avoir à modifier la moyenne 
+    $m$, on a déjà $m(\varphi\ast f) = m(f)$ pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathrm{L}^1_{1, +}(\Gamma)$.
+    Notons donc $\widetilde{m}$ la restriction de $m$ à $UC_b(\Gamma_d)$.
+
+    Pour voir cela, fixons $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1(\Gamma)$, que nous ne supposons pas encore positive normalisée.
+    Supposons dans un premier temps que $\varphi$ est continue à support compact. Le lemme \ref{UCB_iff_translate} assure 
+    alors que la fonction $\ev_f\comp\lambda:\Gamma\to UC_b(\Gamma_d)\hookrightarrow\ell^\infty(\Gamma)$ est continue,
+    de sorte que la fonction $\varphi\cdot(\ev_f\comp\lambda)$, à valeurs dans l'espace de Banach $UC_b(\Gamma_d)$, est continue à support compact.
+    Le théorème \ref{strong_measurable_crit} et la remarque qui suit assurent donc que cette fonction est fortement mesurable et intégrable.
+    Notons que les applications $\ev_x:UC_b(\Gamma_d)\to\C$ pour $x\in\Gamma$ sont bien sûr des formes linéaires continues, de sorte que $\forall x\in\Gamma$ :
+    \begin{align*}
+        \left(\integral{}{}{\varphi(g)\lambda(g)(f)}{\mu(g)}\right)(x) 
+            &= \ev_x\left(\integral{}{}{\varphi(g)\lambda(g)(f)}{\mu(g)}\right) \\
+            &= \integral{}{}{\ev_x(\varphi(g)\lambda(g)(f))}{\mu(g)} \\
+            &= \integral{}{}{\varphi(g)f(g\inv x)}{\mu(g)} \\
+            &= (\varphi\ast f)(x)
+    \end{align*}
+    De plus $\varphi\ast f\in UC_b(\Gamma_d)$, et $\widetilde{m}$ est une forme linéaire continue sur cet espace, d'où :
+    \begin{align*}
+        \widetilde{m}(\varphi\ast f) 
+            &= \widetilde{m}\left(\integral{}{}{\varphi(g)\lambda(g)(f)}{\mu(g)}\right) \\
+            &= \integral{}{}{\widetilde{m}(\varphi(g)\lambda(g)(f))}{\mu(g)} \\
+            &= \integral{}{}{\varphi(g)\widetilde{m}(f)}{\mu(g)} \\
+            &= \widetilde{m}(f)\integral{}{}{\varphi}{\mu}
+    \end{align*}
+    Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution (\TODO{ref}), 
+    de $\widetilde{m}$ et de l'intégration, que l'égalité $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)\integral{}{}{\varphi}{\mu}$ est valable 
+    pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ (et toujours pour 
+    $f\in UC_b(\Gamma_d)$), on a $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)$.
+    
+    Revenons maintenant au cas général, et fixons $\mathscr{F}$ un filtre d'approximation de l'unité 
+    dans $\mathscr{L}^1_{1, +}(\Gamma)$, de sorte que pour tout $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$, la fonction 
+    $\psi\mapsto\varphi\ast\psi$ converge selon $\mathscr{F}$ vers $\varphi$ en norme $\mathrm{L}^1$. 
+    Si on se donne de plus $f\in\mathscr{L}^\infty(\Gamma)$, on a donc que la fonction $\psi\mapsto(\varphi\ast\psi)\ast f = \varphi\ast(\psi\ast f)$
+    converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1_{1, +}(\Gamma)$, on
+    a $\psi\ast f\in UC_b(\Gamma_d)$ (proposition \ref{conv_UCB}), donc $\widetilde{m}(\varphi\ast(\psi\ast f)) = \widetilde{m}(\psi\ast f)$,
+    de sorte que le nombre $\widetilde{m}(\varphi\ast f)$ est limite selon $\mathscr{F}$ de $\psi\mapsto\widetilde{m}(\psi\ast f)$ et 
+    ne dépend donc pas de $\varphi$. On a ainsi montré que $\forall\varphi, \varphi'\in\mathscr{L}^1_{1, +}(\Gamma), \widetilde{m}(\varphi\ast f) = \widetilde{m}(\varphi'\ast f)$.
+
+    Choisissons alors $\varphi_0\in\mathscr{L}^1_{1, +}(\Gamma)$, par exemple en posant $\varphi_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
+    $U$ voisinage compact de $1$, et posons $\fundef{n}{\mathrm{L}^\infty(\Gamma)&\to&\C}{f&\mapsto&\widetilde{m}(\varphi_0\ast f)}$. Il s'agit bien d'une 
+    forme linéaire continue et positive car la convolée de fonctions positives est positive, et on a $n(1)=\widetilde{m}(\varphi_0\ast 1) = \widetilde{m}\left(\left(\integral{}{}{\varphi_0}{\mu}\right)\cdot 1\right) = \widetilde{m}(1) = 1$.
+    Reste à vérifier que la moyenne $n$ est bien topologiquement invariante. Soit donc $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ quelconque, et calculons :
+    \begin{align*}
+        n(\varphi\ast f) 
+            &= \widetilde{m}(\varphi_0\ast\varphi\ast f) \\
+            &= \widetilde{m}(\varphi\ast f) \quad\text{car } \varphi\ast f\in UC_b(\Gamma_d)\\
+            &= \widetilde{m}(\varphi_0\ast f) \quad\text{par l'indépendance en $\varphi$ de $\widetilde{m}(\varphi\ast f)$} \\
+            &= n(f)
+    \end{align*}
+    Cela conclut cette première implication. 
+
+    Montrons maintenant \framebox{$(\ref{amenable_TFAE/topological_mean})\implies(\ref{amenable_TFAE/strong_Reiter})$}. \TODO{}
+
+    Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. \TODO{}
+
+    L'implication \framebox{$(\ref{amenable_TFAE/strong_Folner})\implies(\ref{amenable_TFAE/weak_Folner})$} est évidente.
+    De plus, on a déjà vu que tout filtre de Reiter faible permet de définir un filtre de F\o{}lner faible. Au vu des lemmes 
+    \ref{Folner_filter_of_cond} et \ref{Reiter_filter_of_cond}, cela entraîne l'implication 
+    \framebox{$(\ref{amenable_TFAE/weak_Folner})\implies(\ref{amenable_TFAE/weak_Reiter})$}. 
+
+    Il reste donc à montrer \framebox{$(\ref{amenable_TFAE/weak_Reiter})\implies(\ref{amenable_TFAE/amenable})$}. On a déjà vu comment 
+    adapter la preuve du théorème \ref{amenable_of_Folner} pour montrer la moyennabilité d'un groupe muni d'un filtre de Reiter 
+    faible, mais on va en profiter pour donner une autre construction. \TODO{}
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
@@ -1236,6 +1358,21 @@ On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout e
     Si $\mu$ est de Radon, l'espace $C_c(X)$ est dense dans $\mathrm{L}^p(X, \mu)$ pour tout $p\in[1, +\infty[$.
 \end{proposition}
 
+%Enfin, on dispose du critère suivant pour restreindre des mesures de Radon.
+%
+%\begin{proposition}
+%    Soit $X$ un espace localement compact et séparé, $\mu$ une mesure de Radon sur $X$, et $Y\in\Bor(X)$ d'intérieur non vide. 
+%    On munit $Y$ de la topologie induite, et on note $i:Y\hookrightarrow X$ l'application 
+%    d'inclusion qui est un plongement d'espaces mesurables puisque $\Bor(Y) = i^*\Bor(X)$ et $i$ est injective. 
+%     
+%    Supposons que $Y$ est encore localement compact (c'est notamment le cas si $Y$ est ouvert ou fermé). Alors la mesure 
+%    $i^*\mu:A\mapsto \mu(i(A))$, bien définie sur $\Bor(Y)$ car $i$ est un plongement mesurable, est une mesure de Radon sur $Y$.
+%\end{proposition}
+%
+%\begin{proof}
+%    
+%\end{proof}
+
 \subsubsection*{Un petit peu d'intégration vectorielle}
 
 \TODO{Décrire intégration de Bochner}
@@ -1254,21 +1391,43 @@ En pratique, nous utiliserons le critère suivant pour montrer la mesurabilité 
 
 \begin{theorem}\label{strong_measurable_crit}
     Soit $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$,
-    $E$ un $\K$-espace de Banach, pour $\K\in\set{\R, \C}$, et $f:X\to E$ une fonction continue. 
-    \begin{enumerate}[(i)]
-        \item\label{strong_measurable_of_compact} Si $X$ est compact, alors $f$ est fortement mesurable.
-        \item\label{strong_measurable_of_L1} Pour toute fonction $\varphi : X\to\K$ intégrable, la fonction $\varphi\cdot f$ est fortement mesurable.
-    \end{enumerate}
+    $E$ un $\K$-espace de Banach, pour $\K\in\set{\R, \C}$. Toute fonction $f:X\to E$ continue à support compact est
+    fortement mesurable.
 \end{theorem}
 
-Notons d'ailleurs que, dans le cas $(ii)$, l'intégrabilité est immédiate une fois la mesurabilité forte établie, 
-puisque l'inégalité de Hölder pour les fonctions scalaires $\varphi$ et $\norm{\cdot}\comp f$ assure que 
-$\norm{\cdot}\comp(\varphi f)$ est intégrable avec $\norm{\varphi f}_{\mathrm{L}^1} = \integral{}{}{\abs{\varphi(x)}\norm{f(x)}}{\mu(x)} \le \norm{\varphi}_{\mathrm{L}^1}\norm{f}_\infty$.
+Notons d'ailleurs que l'intégrabilité est immédiate une fois la mesurabilité forte établie, 
+puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à support compact donc intégrable.
 
 \begin{proof}
-    Montrons d'abord que $(\ref{strong_measurable_of_compact})$ entraîne $(\ref{strong_measurable_of_L1})$.
-    \TODO{finir}
+    Munissons le compact $K:=\Supp f$ de son unique structure d'espace uniforme, pour laquelle $f$ est automatiquement 
+    uniformément continue en vertu du théorème de Heine. La (pré)compacité de l'espace métrique $f(K)$ fournit, 
+    pour chaque $n\in\N^*$, un ensemble fini $S_n\subseteq K$ tel que $f(K)\subseteq\bigcup_{x\in S_n}B(f(x), 2^{-n})$.
+
+    Pour $n$ fixé, choisissons une bijection $\alpha_n : \card{S_n} \to S_n$, où l'on identifie $\card{S_n}$ à l'ensemble 
+    $\left\llbracket0, \card{S_n}-1\right\rrbracket$. On définit alors $\chi_n:K\to S_n$ par
+    \begin{equation*}
+        \forall x\in K, \chi_n(x)=\alpha_n\left(\min\set{k\in\card{S_n}\tq f(x)\in B(f(\alpha_n(k)), 2^{-n})}\right)
+    \end{equation*}
+    Autrement dit, $\chi_n$ est l'unique fonction vérifiant 
+    \begin{equation*}
+        \forall k\in\card{S_n}, \chi_n\inv(\alpha_n(k)) = f\inv\left(B(f(\alpha_n(k)), 2^{-n})\setminus\left(\bigcup_{i<k}B(f(\alpha_n(i)), 2^{-n})\right)\right)
+    \end{equation*}
+    Cela montre que les fibres de $\chi_n$ sont boréliennes, donc que $\chi_n$ est mesurable, et que :
+    \begin{align*}
+        \forall x\in S_n, \forall y\in\chi_n\inv(x), \norm{f(x)-f(y)}<2^{-n}
+    \end{align*}
+    On peut donc définir $\psi_n : X\to E$ par ${\psi_n}_{|K\compl}=0$ et ${\psi_n}_{|K}=f\comp\chi_n$, qui est bien une fonction 
+    mesurable (par mesurabilité de l'ensemble $K$, et des fonctions $f$ et $\chi_n$) et d'image finie 
+    inclue dans $\set{0}\cup f(S_n)$. On a enfin 
+    $\forall n\in\N, \norm{\psi_n - f}_\infty \le 2^{-n}$, ce qui assure que la suite $\psi$ converge vers $f$ uniformément, 
+    et donc en particulier $\mu$-presque-partout. Cela conclut.
 \end{proof}
+
+\begin{remark}
+    On aurait aussi pu remarquer que l'espace métrique $f(X) = \set{0}\cup f(K)$ est compact donc séparable,
+    et conclure en appliquant le théorème de mesurabilité de Pettis, qui assure qu'une fonction à valeurs dans un Banach 
+    qui est mesurable et d'image séparable est automatiquement fortement mesurable.
+\end{remark}
 
 \subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
