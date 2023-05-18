@@ -96,7 +96,7 @@
 
 \section*{Conventions et remarques préliminaires}
 
-\TODO{Réorganiser cette section}
+\TODO{Réorganiser cette section, déplacer certaines choses en annexe}
 
 Par convention, les produits scalaires sont linéaires à gauche.
 
@@ -118,7 +118,7 @@ si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous di
 sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
 
 Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
-Radon sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
+Radon \emph{non nulle} sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
 utiliserons à de nombreuses reprises.
 
 \begin{theorem}\label{theorem_Haar}
@@ -1191,14 +1191,17 @@ bilinéaire obtenue est bien de norme inférieure à $1$, d'où finalement $\mat
 Vérifions enfin qu'il s'agit d'une algèbre de Banach involutive pour l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
 $\invop_*\mu\ll\mu$. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
 \begin{align*}
-    \norm{f^*}_{\mathrm{L}^1} = \text{\TODO{calculer}} = \norm{f}_{\mathrm{L}^1}
+    \norm{f^*}_{\mathrm{L}^1} 
+        &= \integral{}{}{\abs{\Delta(g)\overline{f(g)}}}{(\invop_*\mu)(g)} \\
+        &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
+        &= \norm{f}_{\mathrm{L}^1}
 \end{align*}
 La (semi)-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
 \begin{align*}
     (f_1^*\ast f_2^*)(x) 
-        &= \integral{}{}{\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
-        &= \overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \\
-        &= \overline{(f_2\ast f_2)(x\inv)} \\
+        &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
+        &= \Delta(x\inv)\overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/continuous_group_hom})})}\\
+        &= \Delta(x\inv)\overline{(f_2\ast f_2)(x\inv)} \\
         &= (f_2\ast f_1)^*(x)
 \end{align*}
 
@@ -1212,7 +1215,7 @@ intégrable et $\forall g, \abs{\varphi(\pi(g)(x))}\le\norm{\varphi}\norm{x}$. P
     \forall\varphi\in V_\pi^*, \norm{\underline{\pi}(f)(x)(\varphi)}\le\norm{f}_{\mathrm{L}^1}\norm{\varphi}\norm{x}
 \end{equation*}
 Cela assure que la forme linéaire $\underline{\pi}(f)(x)$ est continue, on a ainsi défini un élément de $V_\pi^{**}$. 
-Comme $V_\pi$ est un espace de Hilbert, l'isométrie $\ev:V_\pi\to V_\pi^{**}$ est surjectiv, et on pose alors $\pi(f)(x) := \ev\inv(\underline{\pi}(f)(x))$. 
+Comme $V_\pi$ est un espace de Hilbert, l'isométrie $\ev:V_\pi\to V_\pi^{**}$ est surjective, et on pose alors $\pi(f)(x) := \ev\inv(\underline{\pi}(f)(x))$. 
 Autrement dit, en exploitant l'isomorphisme semi-linéaire $V_\pi\simeq V_\pi^*$ fourni par le théorème de représentation de Riesz, 
 $\pi(f)(x)$ est l'unique élément de $V_\pi$ tel que :
 \begin{equation*}
@@ -1428,6 +1431,21 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
     et conclure en appliquant le théorème de mesurabilité de Pettis, qui assure qu'une fonction à valeurs dans un Banach 
     qui est mesurable et d'image séparable est automatiquement fortement mesurable.
 \end{remark}
+
+\subsection*{Rappels d'intégration sur les groupes localements compacts : caractère modulaire et mesure de Haar}
+
+\TODO{Explications et rappels des définitions, pour le moment je mets juste des résultats en vrac}
+
+\begin{proposition}\label{modular_character}
+    Soit $G$ un groupe topologique séparé et localement compact, et $\mu$ une mesure de Haar.
+    \begin{enumerate}[(i)]
+        \item\label{modular_character/def} Par définition, on a $\forall g\in G, {r_g}_*\mu = \Delta(g)\mu$.
+        \item\label{modular_character/indep} $\Delta$ est indépendant du choix de la mesure de Haar $\mu$.
+        \item\label{modular_character/continuous_group_hom} $\Delta:G\to\R_+^*$ est un morphisme de groupes topologiques.
+        \item\label{modular_character/right_haar} $\frac{1}{\Delta}\mu$ est de Haar à droite.
+        \item\label{modular_character/inv_change_of_variable} $\invop_*\mu = \frac{1}{\Delta}\mu$
+    \end{enumerate}
+\end{proposition}
 
 \subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
