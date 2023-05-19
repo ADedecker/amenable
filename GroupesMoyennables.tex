@@ -642,7 +642,8 @@ des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\ga
 C'est une application bien définie car tout élément de $\mathfrak{K}_+(\Gamma)$ est de mesure finie non-nulle,
 et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
-Un filtre $\mathscr{F}$ sur $\mathfrak{K}_+(\Gamma)$ est dit \emph{faiblement de F\o{}lner} si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
+Un filtre $\mathscr{F}$ sur $\mathfrak{K}_+(\Gamma)$ est dit \emph{faiblement de F\o{}lner} s'il est non-trivial\footnote{Cela signifie que $\varnothing\notin\mathscr{F}$,
+ou encore que $\mathscr{F}\ne\parts(X)$.} et si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
 de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence simple sur $\mathcal{F}(\Gamma, \R_+)$. 
 Si la convergence est uniforme sur les compacts, on parle de filtre \emph{fortement de F\o{}lner}.
 Une suite $K:\N\to\mathfrak{K}_+(\Gamma)$ est \emph{faiblement (resp. fortement) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
@@ -655,7 +656,7 @@ Notons que si $\Gamma$ est discret,
 la topologie de la convergence compacte coïncide avec celle de la convergence simple, de sorte que tout filtre 
 faiblement de F\o{}lner est automatiquement fortement de F\o{}lner.
 De plus, les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
-et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre $\mathscr{F}$
+et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre non-trivial $\mathscr{F}$
 est donc de F\o{}lner si et seulement si, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
 converge vers $0$ selon le filtre $\mathscr{F}$. De même, une suite $F:\N\to\finparts^*(\Gamma)$
 est de F\o{}lner \ssi pour tout $\gamma\in\Gamma$, la suite $n\mapsto\frac{\card{\gamma F_n\triangle F_n}}{\card{F_n}}$ converge 
@@ -747,9 +748,9 @@ Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\
 
 Notons $\mathscr{L}^1_{1,+}(\Gamma)$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1_{1, +}(\Gamma)$ son image dans 
 $\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1_{1, +}(\Gamma)\to\mathcal{F}(\Gamma, \R_+)$, définie par
-par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$.
+par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$.
 
-Un filtre $\mathscr{F}$ sur $\mathrm{L}^1_{1, +}(\Gamma)$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
+Un filtre $\mathscr{F}$ sur $\mathrm{L}^1_{1, +}(\Gamma)$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) s'il est non-trivial et si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
 topologie de la convergence simple (resp. uniforme sur les compacts) sur $\mathcal{F}(\Gamma, \R_+)$. 
 Une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est \emph{faiblement de Reiter} (resp \emph{fortement de Reiter}) si le filtre $\varphi_*\nhds_{+\infty}^\N$ est faiblement (resp. fortement) de Reiter. Comme $\mathfrak{r}_*\varphi_*\nhds_{+\infty}^\N = (\mathfrak{r}\comp \varphi)_*\nhds_{+\infty}^\N$,
 une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est donc faiblement (resp. fortement) de Reiter \ssi la suite de fonctions
@@ -937,7 +938,7 @@ car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} =
 
 Le résultat principal quant à ce plongement est que son image est $*$-faiblement dense.
 
-\begin{lemma}
+\begin{lemma}\label{dense_in_means}
     Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$.
 
     Munissons l'espace $\mathrm{L}^1(X,\mu)$ de la topologie faible $\sigma(\mathrm{L}^1, \mathrm{L}^\infty) = \sigma\left(\mathrm{L}^1, {\mathrm{L}^1}^*\right)$
@@ -984,13 +985,13 @@ Le résultat principal quant à ce plongement est que son image est $*$-faibleme
         &= \Re\ket{\iota(u), \varphi} - \ket{u, a} \\
         &= \Re g(\iota(u)) - a\ket{u, 1} \\
         &= f(\iota(u)) - a \\
-        &> 0
+        &\ge 0
 \end{align*}
 \footnotetext{Cette égalité provient de ce que $u$ est à valeurs réelles.}Tout élément positif de $\mathrm{L}^1(X, \mu)$ étant nul ou multiple positif d'un élément de $\mathrm{L}^1_{1, +}(X, \mu)$
 \footnote{Plus précisément, si $u\in\mathrm{L}^1(X,\mu)$ est positif et non nul, on a $\integral{}{}{u}{\mu}=\norm{u}_{\mathrm{L}^1}\ne 0$. On peut alors poser 
 $\widetilde{u}:=\frac1{\integral{}{}{u}{\mu}}\cdot u\in\mathrm{L}^1_{1, +}(X, \mu)$, de sorte que
 $u = \left(\integral{}{}{u}{\mu}\right)\cdot\widetilde{u}$.}, cette inégalité s'étend à tout $u\in\mathrm{L}^1(X, \mu)$ positif. 
-Autrement dit, $\Re\varphi$ est positive \emph{lorsqu'elle est vue comme forme linéaire sur $\mathrm{L}^1(X, \mu)$}. Si l'on admet
+Autrement dit, $\Re\varphi-a$ est positive \emph{lorsqu'elle est vue comme forme linéaire sur $\mathrm{L}^1(X, \mu)$}. Si l'on admet
 que $\Re\varphi - a$ est en fait positive au sens usuel, on obtient directement une contradiction avec la positivité de $m$, puisque : 
 \begin{align*}
     m(\Re\varphi - a) 
@@ -1124,7 +1125,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     $\psi\mapsto\varphi\ast\psi$ converge selon $\mathscr{F}$ vers $\varphi$ en norme $\mathrm{L}^1$. 
     Si on se donne de plus $f\in\mathscr{L}^\infty(\Gamma)$, on a donc que la fonction $\psi\mapsto(\varphi\ast\psi)\ast f = \varphi\ast(\psi\ast f)$
     converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1_{1, +}(\Gamma)$, on
-    a $\psi\ast f\in UC_b(\Gamma_d)$ (proposition \ref{conv_UCB}), donc $\widetilde{m}(\varphi\ast(\psi\ast f)) = \widetilde{m}(\psi\ast f)$,
+    a $\psi\ast f\in UC_b(\Gamma_d)$ (proposition \ref{conv_UCB}), donc $\widetilde{m}(\varphi\ast\psi\ast f) = \widetilde{m}(\psi\ast f)$,
     de sorte que le nombre $\widetilde{m}(\varphi\ast f)$ est limite selon $\mathscr{F}$ de $\psi\mapsto\widetilde{m}(\psi\ast f)$ et 
     ne dépend donc pas de $\varphi$. On a ainsi montré que $\forall\varphi, \varphi'\in\mathscr{L}^1_{1, +}(\Gamma), \widetilde{m}(\varphi\ast f) = \widetilde{m}(\varphi'\ast f)$.
 
@@ -1152,7 +1153,26 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
 
     Il reste donc à montrer \framebox{$(\ref{amenable_TFAE/weak_Reiter})\implies(\ref{amenable_TFAE/amenable})$}. On a déjà vu comment 
     adapter la preuve du théorème \ref{amenable_of_Folner} pour montrer la moyennabilité d'un groupe muni d'un filtre de Reiter 
-    faible, mais on va en profiter pour donner une autre construction. \TODO{}
+    faible, mais on va en profiter pour donner une autre construction. Supposons donc que $\Gamma$ satisfait la condition de Reiter faible,
+    et soit $\mathscr{F}$ un filtre faiblement de Reiter sur $\mathrm{L}^1_{1, +}(\Gamma)$, dont l'existence est assurée par le lemme
+    \ref{Reiter_filter_of_cond}. Comme $\mathscr{F}$ est non-trivial, il est plus grossier qu'un certain ultrafiltre $\mathscr{U}$. 
+
+    Comme au lemme \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
+    les parties $\mathrm{L}^1_{1, +}(\Gamma)$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
+    $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1_{1, +}(\Gamma)\hookrightarrow \mathcal{M}(\Gamma)$
+    les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact (lemme \TODO{\ref{compact_setof_means}}),
+    l'ultrafiltre $\widetilde{\iota}_*\mathscr{U}$ sur $\mathcal{M}(\Gamma)$ converge vers une certaine moyenne $m$. Il s'agit de montrer que $m$ est invariante,
+    soit donc $\gamma\in\Gamma$. Par définition d'un filtre de Reiter faible, la fonction $\ev_\gamma\comp\mathfrak{r}:\varphi\mapsto\norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$
+    converge vers $0$ selon $\mathscr{F}$, et donc selon $\mathscr{U}$. Autrement dit la 
+    fonction $(\lambda(\gamma\inv)-\id)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge vers $0$ selon $\mathscr{U}$
+    en norme $\mathrm{L}^1$, donc pour la topologie faible, et par conséquent $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge 
+    aussi vers $0$ selon $\mathscr{U}$ dans $\mathrm{L}^\infty(\Gamma)^*$. Or, pour tout
+    $\varphi\in\mathrm{L}^1_(\Gamma)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
+    $\iota\comp\lambda(\gamma\inv) = \transpose{(\lambda(\gamma))}\comp\iota$.
+    La transposée de l'isométrie $\lambda(\gamma):\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$ est continue 
+    pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
+    converge aussi vers $m\comp\lambda(\gamma)-m$ selon $\mathscr{U}$.
+    $\mathscr{U}$ étant non-trivial et $\mathrm{L}^\infty(\Gamma)^*$ séparé, on a $m\comp\lambda(\gamma)-m = 0$, ce qui conclut.
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
