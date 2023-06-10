@@ -66,6 +66,7 @@
 \newcommand{\parts}{\mathfrak{P}}
 \newcommand{\finparts}{\mathfrak{P}_{\mathrm{fin}}}
 \newcommand{\TODO}[1]{{\color{red}TODO :} #1}
+\newcommand{\wle}{\preccurlyeq}
 
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\ess}{ess}
@@ -74,7 +75,7 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\Vect}{Vect}
-\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ima}{im}
 \DeclareMathOperator{\solset}{Sol}
 \DeclareMathOperator{\Sp}{Sp}
 
@@ -667,15 +668,15 @@ Avant d'aller plus loin, donnons un critère plus simple pour l'existence de fil
 \begin{lemma}\label{Folner_filter_of_cond}
     $\Gamma$ admet un filtre faiblement de F\o{}lner \ssi il satisfait la 
     \emph{condition de F\o{}lner faible} :
-    \begin{equation*}\label{weak_Folner_cond}
+    \begin{equation}\label{weak_Folner_cond}\tag{WF}
         \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathfrak{K}_+(\Gamma), 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
-    \end{equation*}
+    \end{equation}
     Il admet de un filtre fortement de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner forte} : 
-    \begin{equation*}\label{strong_Folner_cond}
+    \begin{equation}\label{strong_Folner_cond}\tag{SF}
         \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall\gamma\in A, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
-    \end{equation*}
+    \end{equation}
 
     \TODO{Dans quel cas a-t-on des suites ?}
     %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
@@ -762,15 +763,15 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
 \begin{lemma}\label{Reiter_filter_of_cond}
     $\Gamma$ admet un filtre faiblement de Reiter \ssi il satisfait la 
     \emph{condition de Reiter faible} :
-    \begin{equation*}\label{weak_Reiter_cond}
+    \begin{equation}\label{weak_Reiter_cond}\tag{WR}
         \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1_{1,+}(\Gamma), 
-        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
-    \end{equation*}
+        \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
+    \end{equation}
     Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
-    \begin{equation*}\label{strong_Reiter_cond}
-        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \varphi\in\mathscr{L}^1_{1,+}(\Gamma), \forall\gamma\in A, 
-        \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
-    \end{equation*}
+    \begin{equation}\label{strong_Reiter_cond}\tag{SR}
+        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists\varphi\in\mathscr{L}^1_{1,+}(\Gamma), \forall\gamma\in A, 
+        \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
+    \end{equation}
 
     \TODO{Dans quel cas a-t-on des suites ?}
     %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
@@ -795,10 +796,10 @@ permettra de caractériser la moyennabilité par la théorie des représentation
     \begin{enumerate}[(i)]
         \item $\Gamma$ est moyennable \label{amenable_TFAE/amenable}
         \item Il existe une moyenne topologiquement invariante sur $\Gamma$ \label{amenable_TFAE/topological_mean}
-        \item $\Gamma$ satisfait la condition de Reiter forte \label{amenable_TFAE/strong_Reiter}
-        \item $\Gamma$ satisfait la condition de F\o{}lner forte \label{amenable_TFAE/strong_Folner}
-        \item $\Gamma$ satisfait la condition de F\o{}lner faible \label{amenable_TFAE/weak_Folner}
-        \item $\Gamma$ satisfait la condition de Reiter faible \label{amenable_TFAE/weak_Reiter}
+        \item $\Gamma$ satisfait la condition de Reiter forte \label{amenable_TFAE/strong_Reiter} \eqref{strong_Reiter_cond}
+        \item $\Gamma$ satisfait la condition de F\o{}lner forte \label{amenable_TFAE/strong_Folner} \eqref{strong_Folner_cond}
+        \item $\Gamma$ satisfait la condition de F\o{}lner faible \label{amenable_TFAE/weak_Folner} \eqref{weak_Folner_cond}
+        \item $\Gamma$ satisfait la condition de Reiter faible \label{amenable_TFAE/weak_Reiter} \eqref{weak_Reiter_cond}
     \end{enumerate}
 \end{theorem}
 
@@ -1172,7 +1173,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     La transposée de l'isométrie $\lambda(\gamma):\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$ est continue 
     pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
     converge aussi vers $m\comp\lambda(\gamma)-m$ selon $\mathscr{U}$.
-    $\mathscr{U}$ étant non-trivial et $\mathrm{L}^\infty(\Gamma)^*$ séparé, on a $m\comp\lambda(\gamma)-m = 0$, ce qui conclut.
+    $\mathscr{U}$ étant non-trivial et $\mathrm{L}^\infty(\Gamma)^*$ séparé, on a $m\comp\lambda(\gamma)-m = 0$ par unicité de la limite, ce qui conclut.
 \end{proof}
 
 \section{Contenance faible et C*-algèbres}
@@ -1216,7 +1217,7 @@ $\invop_*\mu\ll\mu$. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a :
         &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
         &= \norm{f}_{\mathrm{L}^1}
 \end{align*}
-La (semi)-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
+La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
 \begin{align*}
     (f_1^*\ast f_2^*)(x) 
         &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
@@ -1225,7 +1226,7 @@ La (semi)-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f
         &= (f_2\ast f_1)^*(x)
 \end{align*}
 
-On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{GL}(H)$ du \emph{groupe} $\Gamma$ une
+On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{U}(V_\pi)$ du \emph{groupe} $\Gamma$ une
 représentation, toujours notée $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
 
 Pour $f\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in V_\pi$, on définit une forme linéaire $\underline{\pi}(f)(x)$ sur $V_\pi^*$ par 
@@ -1244,6 +1245,144 @@ $\pi(f)(x)$ est l'unique élément de $V_\pi$ tel que :
 De plus, on a vu que $\norm{\pi(f)(x)} = \norm{\underline{\pi}(f)(x)} \le \norm{f}_{\mathrm{L}^1}\norm{x}$. 
 On a donc $\pi(f)\in\mathcal{L}(V_\pi)$ et $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mathcal{L}(V_\pi)$ est continue de norme inférieure à $1$.
 Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Banach involutives, il s'agit donc de montrer...
+
+\TODO{Continuer}
+
+\begin{remark}\label{L1_repr_Cc}
+    Pour $f\in C_c(\Gamma)$ et $x\in V_\pi$, la fonction $g\mapsto f(g)\pi(g)(x)\in V_\pi$ est continue à support compact,
+    donc fortement intégrable en vertu du théorème \ref{strong_measurable_crit} et de la remarque qui l'accompagne. 
+    Par continuité du produit scalaire, on a alors $\forall y\in V_\pi$ : 
+    \begin{equation*}
+        \ket{\integral{}{}{f(g)\pi(g)(x)}{\mu(g)}, y} = \integral{}{}{f(g)\ket{\pi(g)(x), y}}{\mu(g)} = \ket{\pi(f)(x), y}
+    \end{equation*}
+    Autrement dit, $\pi(f)(x) = \integral{}{}{f(g)\pi(g)(x)}{\mu(g)}$.
+\end{remark}
+
+\begin{theorem}\label{amenable_weak_contain}
+    On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma))$
+    les représentations triviales et régulières gauches de $\Gamma$. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}[(i)]
+        \item\label{amenable_weak_contain/amenable} $\Gamma$ est moyennable
+        \item\label{amenable_weak_contain/weak_almost_invariant} $\forall\varepsilon>0, \forall \gamma\in\Gamma, \exists\xi\in \mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1 \land \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
+        \item\label{amenable_weak_contain/strong_almost_invariant} $\forall\varepsilon>0, \forall K\in\mathfrak{K}(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1 \land \forall \gamma\in K, \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
+        \item\label{amenable_weak_contain/weak_contain} $\indic_\Gamma\wle\lambda_\Gamma$
+        \item\label{amenable_weak_contain/norm_eq_two} $\forall\gamma\in\Gamma, \norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} = 2$
+        \item\label{amenable_weak_contain/one_mem_spectrum} $\forall\gamma\in\Gamma, 1\in\Sp(\lambda_\Gamma(\gamma))$
+    \end{enumerate}
+\end{theorem}
+
+\TODO{commentaires}
+
+\begin{definition}
+    Soit $E$ un espace de Banach complexe et $T\in\mathcal{L}(E)$. 
+    On appelle \emph{spectre approché de $T$} l'ensemble $\sigma(T) := \set{\lambda\in\C\tq\forall\varepsilon>0, \exists\xi\in E, \norm{\xi}=1\land\norm{T(\xi)-\lambda\xi}<\varepsilon}$.
+\end{definition}
+
+\begin{proof}
+    On va montrer $(\ref{amenable_weak_contain/weak_almost_invariant})
+        \implies(\ref{amenable_weak_contain/amenable})
+        \implies(\ref{amenable_weak_contain/strong_almost_invariant})
+        \implies(\ref{amenable_weak_contain/weak_contain})
+        \implies(\ref{amenable_weak_contain/norm_eq_two})
+        \implies(\ref{amenable_weak_contain/one_mem_spectrum})
+        \implies(\ref{amenable_weak_contain/weak_almost_invariant})$.
+    
+    Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
+    de Reiter faible \eqref{weak_Reiter_cond}. 
+    Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma)$ unitaire vérifiant $\norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
+    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1_{1, +}(\Gamma)$, qui vérifie \TODO{finir}
+
+    On montre similairement \TODO{\framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$}} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
+
+    Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
+    et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
+    $\lambda_\gamma$ de $\mathrm{L}^1(\Gamma, \mu)$\footnote{Contrairement au cas des représentations de groupes topologiques, 
+    une représentation d'une algèbre de Banach involutive est continue \ssi le morphisme sous-jacent est continu.}, il suffit en fait de montrer le résultat pour $f\in C_c(\Gamma)$, ce que nous supposons désormais.
+    Nous allons montrer $\abs{\integral{}{}{f}{\mu}}^2\in\Sp\left(\lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)\right)$, ce qui entraîne bien :
+    \begin{equation*}
+        \norm{\indic_\Gamma(f)}^2=\abs{\integral{}{}{f}{\mu}}^2\le\norm{\lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)} = \norm{\lambda_\Gamma(f)}^2
+    \end{equation*}
+    Par l'absurde, on suppose donc $T := \abs{\integral{}{}{f}{\mu}}^2 - \lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)$ inversible, ce qui fournit $\varepsilon>0$
+    tel que $\forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{T(\xi)}\ge\varepsilon\norm{\xi}$.
+    Pour $\xi\in\mathrm{L}^2(\Gamma, \mu)$, la remarque \ref{L1_repr_Cc} donne :
+    \begin{align*}
+        \lambda_\Gamma(f)^*\left(\lambda_\Gamma(f)(\xi)\right) 
+            &= \lambda_\Gamma(f^*)\left(\integral{}{}{f(g)\lambda(g)(\xi)}{\mu(g)}\right) \\
+            &= \integral{}{}{f(g)\lambda_\Gamma(f^*)\Big(\lambda(g)(\xi)\Big)}{\mu(g)} \\
+            &= \integral{}{}{f(g)\integral{}{}{f^*(h)\lambda(hg)(\xi)}{\mu(h)}}{\mu(g)} \\
+            &= \integral{}{}{\integral{}{}{f(g)\overline{f(h)}\lambda(h\inv g)(\xi)}{\mu(h)}}{\mu(g)}\quad\text{\TODO{explications}}
+    \end{align*} 
+    D'autre part, on a :
+    \begin{align*}
+        \abs{\integral{}{}{f}{\mu}}^2 
+            &= \left(\integral{}{}{f}{\mu}\right)\left(\integral{}{}{\overline{f}}{\mu}\right) \\
+            &= \integral{}{}{\integral{}{}{f(g)\overline{f(h)}}{\mu(g)}}{\mu(h)}
+    \end{align*}
+    On a donc pour tout $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire :
+    \begin{align*}
+        \varepsilon 
+            &\le \norm{\integral{}{}{\integral{}{}{f(g)\overline{f(h)}(\xi - \lambda(h\inv g)(\xi))}{\mu(h)}}{\mu(g)}}_{\mathrm{L}^2} \\
+            &\le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)}
+    \end{align*}
+    Mais, si l'on note $K$ le support de $f$ et que l'on applique $(\ref{amenable_weak_contain/strong_almost_invariant})$ au réel $\frac{\varepsilon}{\norm{f}_{\mathrm{L}^1}^2}$ et au compact $K\inv K$,
+    on obtient $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire tel que $\sup_{\gamma\in K\inv K} \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^1}^2}$, d'où :
+    \begin{equation*}
+        \varepsilon
+            \le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)} 
+            < \varepsilon
+    \end{equation*}
+    D'où la contradiction recherchée.
+
+    Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, choisissons une fonction 
+    $f\in\mathscr{L}^2(\Gamma)_{1, +}$
+
+    Montrons finalement \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$}. Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$,
+    et raisonnons par l'absurde en supposant $\forall \xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon$.
+    Autrement dit, si l'on note $S:=\lambda(\gamma) - \Id$, on a $\forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{S(\xi)}_{\mathrm{L}^2}\ge\varepsilon\norm{\xi}_{\mathrm{L}^2}$.
+    Posons alors $T := S^*\comp S$, et montrons que $T$ est inversible. Tout d'abord, l'inégalité de Cauchy-Schwartz donne :
+    \begin{equation*}
+        \norm{T(\xi)}\norm{\xi}\geq\ket{S^*(S(\xi)), \xi}=\norm{S(\xi)}^2\geq\varepsilon^2\norm{\xi}^2
+    \end{equation*}
+    D'où $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$. Cela assure que l'image de $T$ est complète (\TODO{ref}) donc fermée,
+    et également que $T$ est injective. Mais $T$ est autoadjoint, donc $\Ima T = \closure{\Ima T} = (\ker T)^\perp = \mathrm{L}^2(\Gamma, \mu)$, i.e $T$ est bijectif,
+    donc inversible par l'inégalité $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$\footnote{Ou bien par le théorème de l'application ouverte.}.
+    Or, on a :
+    \begin{equation*}
+        T = (\lambda(\gamma)-\Id)^*\comp(\lambda(\gamma)-\Id) = \lambda(\gamma\inv\gamma)+\Id-(\lambda(\gamma) + \lambda(\gamma)^*) = 2-(\lambda(\gamma) + \lambda(\gamma)^*)
+    \end{equation*}
+    Donc $\Sp T = 2-\Sp(\lambda(\gamma) + \lambda(\gamma)^*)$. Comme $T$ est positif et $0\notin\Sp T$
+    on a $\Sp T\subseteq\R_+^*$ d'où $\Sp(\lambda(\gamma) + \lambda(\gamma)^*)\subseteq]-\infty, 2[$. Or l'opérateur $\lambda(\gamma)+\lambda(\gamma)^*$ est autoadjoint
+    \TODO{Ça ne marche pas !}
+\end{proof}
+
+%\begin{proposition}
+%    Soit $\pi$ une représentation unitaire non-nulle du groupe localement compact $\Gamma$. La représentation triviale $\indic_\Gamma$ de $\Gamma$
+%    est faiblement contenue dans $\pi$ \ssi $\forall\varepsilon>0, \forall K\in\mathfrak{K}(\Gamma), \exists\xi\in V_\pi, \norm{\xi} = 1 \land \forall g\in K, \norm{\pi(g)(\xi) - \xi}<\varepsilon$.
+%\end{proposition}
+%
+%Lorsque cette condition est vérifiée, on dit que $\pi$ \emph{admet presque des vecteurs invariants}.
+%
+%\begin{lemma}
+%    $\pi$ admet presque des vecteurs invariants \ssi $\forall\varepsilon>0, \forall f\in\mathscr{L}^1_{1, +}(\Gamma)\cap C_c(\Gamma), \exists\xi\in V_\pi, 
+%        \norm{\xi} = 1\land \norm{f\cdot (\ev_\xi\comp\pi - \xi)}_{\mathrm{L}^1}<\varepsilon$, cette dernière expression étant bien définie 
+%        en vertu du théorème \ref{strong_measurable_crit} appliquée à la fonction $g\mapsto f(g)(\pi(g)(\xi) - \xi)$ continue à support compact.
+%\end{lemma}
+%
+%\begin{proof}
+%    En supposant d'abord que $\pi$ admet presque des vecteurs invariants, soient $\varepsilon>0$ et $f\in\mathscr{L}^1_{1, +}(\Gamma)\cap C_c(\Gamma)$,
+%    et notons $K := \Supp f$. L'hypothèse fournit alors $\xi\in V_\pi$ de norme $1$ tel que $\forall g\in K, \norm{\pi(g)(\xi) - \xi}<\varepsilon$. De 
+%    manière immédiate, on a donc $\norm{f\cdot (\ev_\xi\comp\pi - \xi)}_{\mathrm{L}^1} = \integral{}{}{f(g)\norm{\pi(g)(\xi) - \xi}}{\mu(g)} < \varepsilon\integral{}{}{f}{\mu} = \varepsilon$.
+%
+%    Supposons désormais le contraire, ce qui fournit des $\varepsilon$ et $K$ tels que : 
+%    \begin{equation*}
+%        \forall\xi\in V_\pi, \norm{\xi} = 1\implies\exists g\in K, \norm{\pi(g)(\xi) - \xi}\geq\varepsilon
+%    \end{equation*}
+%\end{proof}
+%
+%\begin{proof}
+%    Commençons par étudier la négation du critère qui nous intéresse, à savoir 
+%    $\exists\varepsilon>0, \exists K\in\mathfrak{K}(\Gamma), \forall\xi\in V_\pi, \norm{\xi} = 1 \implies \exists g\in K, \norm{\pi(g)(\xi) - \xi}\geq\varepsilon$.
+%\end{proof}
 
 \newpage
 
@@ -1302,7 +1441,7 @@ pour des fonctions intégrables, les relations $=_\mu$ et $=_\mu^{loc}$ coïncid
 \end{lemma}
 
 \begin{proof}
-    Chaque $\set{x\tq \abs{f(x)}\ge 2^{-n}}$ est de mesure finie par l'inégalité de Markov, et l'union de ses ensembles pour 
+    Chaque $\set{x\tq \abs{f(x)}\ge 2^{-n}}$ est de mesure finie par l'inégalité de Markov, et l'union de ces ensembles pour 
     $n\in\N$ recouvre $\set{x\tq f(x)\ne 0}$.
 \end{proof}
 
@@ -1424,7 +1563,7 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
 \begin{proof}
     Munissons le compact $K:=\Supp f$ de son unique structure d'espace uniforme, pour laquelle $f$ est automatiquement 
     uniformément continue en vertu du théorème de Heine. La (pré)compacité de l'espace métrique $f(K)$ fournit, 
-    pour chaque $n\in\N^*$, un ensemble fini $S_n\subseteq K$ tel que $f(K)\subseteq\bigcup_{x\in S_n}B(f(x), 2^{-n})$.
+    pour chaque $n\in\N$, un ensemble fini $S_n\subseteq K$ tel que $f(K)\subseteq\bigcup_{x\in S_n}B(f(x), 2^{-n})$.
 
     Pour $n$ fixé, choisissons une bijection $\alpha_n : \card{S_n} \to S_n$, où l'on identifie $\card{S_n}$ à l'ensemble 
     $\left\llbracket0, \card{S_n}-1\right\rrbracket$. On définit alors $\chi_n:K\to S_n$ par
