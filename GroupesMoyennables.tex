@@ -14,6 +14,7 @@
 \usepackage{faktor}
 \usepackage{enumerate}
 \usepackage{xcolor}
+\usepackage{lipsum}
 \usepackage{tikz, tkz-tab, tikz-cd}
 \usepackage[T1]{fontenc}
 
@@ -1273,10 +1274,100 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
 
 \TODO{commentaires}
 
+Au vu de l'assertion $(\ref{amenable_weak_contain/one_mem_spectrum})$, il est assez naturel d'interpréter le point
+$(\ref{amenable_weak_contain/weak_almost_invariant})$ comme l'existence de \og{}vecteurs propres approchés\fg{} pour la valeur propre $1$.
+Cela nous ammène à introduire la notion standard de \emph{spectre approché} d'un opérateur.
+
 \begin{definition}
     Soit $E$ un espace de Banach complexe et $T\in\mathcal{L}(E)$. 
     On appelle \emph{spectre approché de $T$} l'ensemble $\sigma(T) := \set{\lambda\in\C\tq\forall\varepsilon>0, \exists\xi\in E, \norm{\xi}=1\land\norm{T(\xi)-\lambda\xi}<\varepsilon}$.
 \end{definition}
+
+Notons en particulier que l'assertion $\lambda\notin\sigma(T)$ s'écrit encore :
+\begin{equation*}
+    \exists\varepsilon>0, \forall\xi\in E, \norm{\xi}=1\implies \norm{T(\xi)-\lambda\xi}\geq\varepsilon
+\end{equation*}
+Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérateur $T - \lambda$, comme l'exprime le lemme suivant :
+
+\begin{lemma}\label{EVT_emb_TFAE}
+    Soient $E$ un espace de Banach, $F$ un espace vectoriel normé, et $T\in\mathcal{L}(E, F)$. Les assertions suivantes sont équivalentes :
+    \begin{enumerate}[(i)]
+        \item $T$ est un isomorphisme sur son image, i.e un plongement d'espaces vectoriels topologiques \label{EVT_emb_TFAE/emb}
+        \item $T$ est injectif et d'image complète \label{EVT_emb_TFAE/closed_range_inj}
+        \item $\exists\varepsilon>0, \forall x\in E, \norm{T(x)}\geq\varepsilon\norm{x}$ \label{EVT_emb_TFAE/lower_bound_norm}
+        \item $\exists\varepsilon>0, \forall x\in E, \norm{x} = 1 \implies \norm{T(x)}\geq\varepsilon$ \label{EVT_emb_TFAE/lower_bound_norm'}
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof} 
+    L'implication $(\ref{EVT_emb_TFAE/emb}) \implies(\ref{EVT_emb_TFAE/closed_range_inj})$ découle de ce que les isomorphismes linéaires 
+    continus entre espaces vectoriels normés sont bi-lipschitziens, et préservent donc la complétude\footnote{On peut aussi donner un argument plus général, 
+    valable pour un isomorphisme linéaire $L$ entre des espaces vectoriels topologiques métrisables $A$ et $B$. En effet, cette hypothèse assure
+    que les structures uniformes sur $A$ et $B$ provenant de leur structure métrique coïncident avec les 
+    structures uniformes (gauche ou droite) associées aux groupes topologiques sous-jacents, et l'isomorphisme de groupes 
+    topologiques $L$ est automatiquement un isomorphisme entre ces structures uniformes, qui préserve donc la complétude.}.
+    L'implication réciproque $(\ref{EVT_emb_TFAE/closed_range_inj}) \implies(\ref{EVT_emb_TFAE/emb})$ est alors une conséquence immédiate du
+    théorème d'isomorphisme de Banach, qui assure que la co-restriction de $T$ à son image est un isomorphisme 
+    car bijective, linéaire et continue entre espaces de Banach.
+
+    Il est clair que $(\ref{EVT_emb_TFAE/lower_bound_norm}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm'})$, il reste donc à montrer $(\ref{EVT_emb_TFAE/emb}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm})$. Notons que $(\ref{EVT_emb_TFAE/lower_bound_norm})$ implique
+    immédiatement que $T$ est injectif, et donc une bijection sur son image. En notant $S:\Ima T\to E$ l'inverse (a priori seulement linéaire) de $T$ co-restreint à son image, 
+    il s'agit donc de montrer que la continuité de $S$ équivaut à $(\ref{EVT_emb_TFAE/lower_bound_norm})$. Or :
+    \begin{align*}
+        S\text{ est continu }
+            &\iff \exists C>0, \forall y\in\Ima T, \norm{S(y)} \le C\norm{y} \\
+            &\iff \exists C>0, \forall x\in E, C\inv\norm{x} \le \norm{T(x)} \\
+            &\iff \exists\varepsilon>0, \forall x\in E, \varepsilon\norm{x} \le \norm{T(x)}
+    \end{align*}
+    Cela conclut.
+        %\item[\framebox{$(\ref{EVT_emb_TFAE/emb}) \implies(\ref{EVT_emb_TFAE/lower_bound_norm})$}]
+        %Notons $S\in\mathcal{L}(\Ima T, E)$ l'inverse de $T$ co-restreint à son image, et vérifions que $\varepsilon := \norm{S}\inv$ convient.
+        %Soit donc $x\in E$. On a $S(T(x)) = x$ par définition, d'où $\norm{x} \leq \norm{S}\norm{T(x)}$, ce qui donne bien $\varepsilon\norm{x}\leq\norm{T(x)}$.
+        %\item[\framebox{$(\ref{EVT_emb_TFAE/lower_bound_norm}) \implies(\ref{EVT_emb_TFAE/closed_range_inj})$}]
+        %Soit $\varepsilon>0$ tel que fournit par l'hypothèse $(\ref{EVT_emb_TFAE/lower_bound_norm})$.
+        %L'injectivité est immédaite, car si $x\in E$ est tel que $\norm{T(x)} = 0$ on a nécessairement $\norm{x} = 0$. Soit maintenant 
+        %une suite de Cauchy $u:\N\to\Ima T$, que nous écrivons sous la forme $T\comp v$ pour une suite 
+        %$v:\N\to E$. Notons que $v$ est encore de Cauchy. En effet, pour $\delta>0$ quelconque, l'hypothèse sur 
+        %$u$ fournit $N\in\N$ tel que $\forall p, q \geq N, \norm{u_p - u_q} < \delta\varepsilon$.
+        %On a donc 
+\end{proof}
+
+Nous utiliserons à de nombreuses reprises le lemme \ref{EVT_emb_TFAE} pour caractériser le spectre approché d'un opérateur $T$,
+puisque son complémentaire $\sigma(T)\compl$ est précisément l'ensemble des $\lambda$ tels que $T-\lambda$ vérifie les 
+conditions équivalentes de ce lemme. En particulier, cela nous permet de démontrer le résultat fondamental suivant :
+
+\begin{lemma}\label{approx_spectrum_facts}
+    Soient $H$ un espace de Hilbert complexe et $T\in\mathcal{L}(H)$. 
+    \begin{enumerate}[(i)]
+        \item Pour $T$ quelconque, on a $\sigma(T)\subseteq\Sp(T)$ \label{approx_spectrum_facts/subset}
+        \item Si $T$ est unitaire, $\sigma(T)\cap\R = \Sp(T)\cap\R$ \label{approx_spectrum_facts/eq_of_unitary}
+        \item Si $T$ est autoadjoint, $\sigma(T) = \Sp(T)$ \label{approx_spectrum_facts/eq_of_hermitian}
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Si $\lambda\in\sigma(T)$, le lemme \ref{EVT_emb_TFAE} assure que $T-\lambda$ n'est \emph{pas} un isomorphisme sur son image, et donc que 
+    $T-\lambda$ n'est pas inversible. Ceci montre le point $(\ref{approx_spectrum_facts/subset})$.
+
+    Pour montrer $(\ref{approx_spectrum_facts/eq_of_unitary})$ et $(\ref{approx_spectrum_facts/eq_of_hermitian})$, remarquons que dans les deux cas
+    on a $\sigma(T)\cap\R = \sigma(T^*)\cap\R$. Si $T$ est autoadjoint c'est immédiat, vérifions le pour $T$ unitaire. Soient $\lambda\in\R$ que l'on
+    suppose appartenir à $\sigma(T)$, et $\varepsilon>0$. Par hypothèse on a $\norm{T(\xi) - \lambda\xi}<\varepsilon$ pour un certain $\xi$ de norme $1$,
+    ce qui entraîne $\xi - T^*(\lambda\xi)<\varepsilon$, et donc $\norm{T^*(\xi) - \lambda\inv\xi}<\varepsilon\abs{\lambda}\inv$. Or $\lambda\in\sigma(T)\subseteq\Sp(T)\subseteq\mathbb{S}_1$
+    car $T$ est unitaire, et $\lambda\in\R$ donc $\lambda\in\set{-1, 1}$. On a donc en fait $\norm{T^*(\xi) - \lambda\xi}<\varepsilon$, ce qui 
+    assure que $\lambda\in\sigma(T^*)$. Cela montre $\sigma(T)\cap\R\subseteq\sigma(T^*)\cap\R$, et
+    l'inclusion réciproque vient en appliquant ce résultat à l'opérateur unitaire $T^*$.
+
+    Montrons alors, toujours pour $T$ unitaire ou autoadjoint, que $\sigma(T)\cap\R \supseteq \Sp(T)\cap\R$. Soit pour cela un réel $\lambda$
+    n'appartenant \emph{pas} à $\sigma(T)$, de sorte que $T-\lambda$ soit injectif et d'image fermée (lemme \ref{EVT_emb_TFAE}). 
+    Comme $\sigma(T)\cap\R = \sigma(T^*)\cap\R$, on a aussi $\lambda\notin\sigma(T^*)$, d'où le même résultat pour $T^* - \lambda = (T-\lambda)^*$. Or, 
+    l'injectivité de $(T-\lambda)^*$ assure que l'image de $T-\lambda$ est dense. Cette image étant fermée, on a $T-\lambda$ surjectif et injectif,
+    donc inversible par le théorème d'isomorphisme de Banach, d'où $\lambda\notin\Sp(T)$. 
+
+    On a donc montré $\sigma(T)\cap\R = \Sp(T)\cap\R$. Cela conclut la preuve de $(\ref{approx_spectrum_facts/eq_of_unitary})$,
+    et pour conclure celle de $(\ref{approx_spectrum_facts/eq_of_hermitian})$ il suffit de se rappeler que pour $T$ autoadjoint on a $\sigma(T) \subseteq \Sp(T) \subseteq\R$.
+\end{proof}
+
+Nous avons désormais tous les outils nécessaires à la preuve du théorème \ref{amenable_weak_contain}.
 
 \begin{proof}
     On va montrer $(\ref{amenable_weak_contain/weak_almost_invariant})
@@ -1333,26 +1424,68 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
     \end{equation*}
     D'où la contradiction recherchée.
 
-    Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, choisissons une fonction 
-    $f\in\mathscr{L}^2(\Gamma)_{1, +}$
+    Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, commençons par remarquer 
+    que l'inégalité $\norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2$ est automatiquement vérifée, il s'agit donc de montrer l'intégalité 
+    inverse. 
+    \TODO{commentaire cas discret}
+    %Notons que si $\Gamma$ est discret, on peut directement appliquer $(\ref{amenable_weak_contain/weak_contain})$ à la fonction $f := \delta_\gamma + \delta_{\gamma\inv}$,
+    %d'intégrale 
+    Fixons pour cela une fonction 
+    $f_0\in\mathscr{L}^1(\Gamma)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
+    un voisinage compact $U$ de $1$.}. Soit alors $\gamma\in\Gamma$ quelconque, et considérons les opérateurs $T := \lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$,
+    et $S := \lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
+    \begin{equation*}
+        \forall f\in\mathrm{L}^1(\Gamma), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
+    \end{equation*}
+    Notons que, pour tout $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\integral{}{}{f}{\mu}$.
+    Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = 2^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
+    assure que l'on a, toujours pour $n\in\N$ quelconque :
+    \begin{equation*}
+        2^n = \integral{}{}{S^n(f_0)}{\mu} = \norm{\indic_\Gamma(S^n(f_0))} \leq \norm{\lambda_\Gamma(S^n(f_0))} = \norm{T^n \comp \lambda_\Gamma(f_0)} \le \norm{T}^n \norm{\lambda_\Gamma(f_0)}
+    \end{equation*}
+    La suite géométrique positive $n\mapsto\left(\frac{2}{\norm{T}}\right)^n$ est donc bornée supérieurement par $\norm{\lambda_\Gamma(f_0)}$, ce qui assure que $\frac{2}{\norm{T}} \leq 1$,
+    et donc $2\leq\norm{T}$ comme attendu.
 
-    Montrons finalement \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$}. Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$,
-    et raisonnons par l'absurde en supposant $\forall \xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon$.
-    Autrement dit, si l'on note $S:=\lambda(\gamma) - \Id$, on a $\forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{S(\xi)}_{\mathrm{L}^2}\ge\varepsilon\norm{\xi}_{\mathrm{L}^2}$.
-    Posons alors $T := S^*\comp S$, et montrons que $T$ est inversible. Tout d'abord, l'inégalité de Cauchy-Schwartz donne :
-    \begin{equation*}
-        \norm{T(\xi)}\norm{\xi}\geq\ket{S^*(S(\xi)), \xi}=\norm{S(\xi)}^2\geq\varepsilon^2\norm{\xi}^2
-    \end{equation*}
-    D'où $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$. Cela assure que l'image de $T$ est complète (\TODO{ref}) donc fermée,
-    et également que $T$ est injective. Mais $T$ est autoadjoint, donc $\Ima T = \closure{\Ima T} = (\ker T)^\perp = \mathrm{L}^2(\Gamma, \mu)$, i.e $T$ est bijectif,
-    donc inversible par l'inégalité $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$\footnote{Ou bien par le théorème de l'application ouverte.}.
-    Or, on a :
-    \begin{equation*}
-        T = (\lambda(\gamma)-\Id)^*\comp(\lambda(\gamma)-\Id) = \lambda(\gamma\inv\gamma)+\Id-(\lambda(\gamma) + \lambda(\gamma)^*) = 2-(\lambda(\gamma) + \lambda(\gamma)^*)
-    \end{equation*}
-    Donc $\Sp T = 2-\Sp(\lambda(\gamma) + \lambda(\gamma)^*)$. Comme $T$ est positif et $0\notin\Sp T$
-    on a $\Sp T\subseteq\R_+^*$ d'où $\Sp(\lambda(\gamma) + \lambda(\gamma)^*)\subseteq]-\infty, 2[$. Or l'opérateur $\lambda(\gamma)+\lambda(\gamma)^*$ est autoadjoint
-    \TODO{Ça ne marche pas !}
+    On va maintenant montrer \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/one_mem_spectrum})$}, soit donc $\gamma\in\Gamma$ et notons 
+    $U := \lambda_\Gamma(\gamma)$. Conservons aussi la notation $T := U + U^*$. L'opérateur $T$ étant autoadjoint, son spectre est réel 
+    et sa norme est égal à son rayon spectral, de sorte que $\set{-2, 2}\cap\Sp(T)\ne\varnothing$. On va maintenant 
+    mettre en relation le spectre de $U$ et le spectre de $T$, à l'aide du calcul fonctionnel continu de l'opérateur unitaire (donc normal) $U$.
+    En effet, si l'on note $X \in C(\Sp U) = C(\Sp U, \C)$ l'application d'inclusion, on sait que $X(U) = U$ et $\overline{X}(U) = U^*$, d'où
+    $(2\Re(X))(U) = (X + \overline{X})(U) = U + U^* = T$ par linéarité du calcul fonctionnel. Le spectre de $T$ est donc l'image 
+    du spectre de $U$ par l'application $z\mapsto2\Re(z)$, ce qui fournit $z\in\Sp(U)$ tel que $2\Re(z)\in\set{-2, 2}$ ou encore $\Re(z)\in\set{-1, 1}$. 
+    Mais $z\in\Sp(U)\subseteq\overline{B}(0, 1)$, donc cela n'est possible que si $z\in\set{-1, 1}$.
+
+    Si $z=1$ on a fini. Supposons donc $-1\in\Sp(U)$, et montrons qu'on a aussi $1\in\Sp(U)$ dans ce cas.
+    Comme $U$ est unitaire, on peut en fait travailler avec le spectre approché en vertu du lemme \ref{approx_spectrum_facts}. Soit 
+    donc $\varepsilon>0$, et appliquons l'hypothèse $-1\in\sigma(U)$ pour obtenir un $\xi\in\mathscr{L}^2(\Gamma)$ tel que $\norm{\xi}_{\mathrm{L}^2} = 1$ et $\norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L^2}} < \varepsilon$.
+    La fonction $\abs{\xi} = \abs{\cdot}\comp\xi$ est encore de carré intégrable avec $\norm{\abs{\xi}}_{\mathrm{L}^2} = \norm{\xi}_{\mathrm{L}^2} = 1$. Or, pour $x\in\Gamma$ quelconque, 
+    la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{- \xi(x)}} \leq \abs{\xi(\gamma\inv x) + \xi(x)}$. En intégrant le carré de ces inégalités,
+    on obtient $\norm{\lambda_\Gamma(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2} < \varepsilon$,
+    ce qui assure que $1\in\sigma(\lambda_\Gamma(\gamma))$.
+
+    Enfin, l'implication \framebox{$(\ref{amenable_weak_contain/one_mem_spectrum})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$} découle directement du lemme \ref{approx_spectrum_facts}.
+    En effet les opérateurs $\lambda_\Gamma(\gamma)$ sont tous unitaires, donc $(\ref{amenable_weak_contain/one_mem_spectrum})$ assure que 
+    $1$ est dans le spectre approché de chacun des $\lambda_\Gamma(\gamma)$, ce qui signifie précisément que $(\ref{amenable_weak_contain/weak_almost_invariant})$ est vérifié.
+
+
+
+    %Montrons finalement \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$}. Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$,
+    %et raisonnons par l'absurde en supposant $\forall \xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon$.
+    %Autrement dit, si l'on note $S:=\lambda(\gamma) - \Id$, on a $\forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{S(\xi)}_{\mathrm{L}^2}\ge\varepsilon\norm{\xi}_{\mathrm{L}^2}$.
+    %Posons alors $T := S^*\comp S$, et montrons que $T$ est inversible. Tout d'abord, l'inégalité de Cauchy-Schwartz donne :
+    %\begin{equation*}
+    %    \norm{T(\xi)}\norm{\xi}\geq\ket{S^*(S(\xi)), \xi}=\norm{S(\xi)}^2\geq\varepsilon^2\norm{\xi}^2
+    %\end{equation*}
+    %D'où $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$. Cela assure que l'image de $T$ est complète (\TODO{ref}) donc fermée,
+    %et également que $T$ est injective. Mais $T$ est autoadjoint, donc $\Ima T = \closure{\Ima T} = (\ker T)^\perp = \mathrm{L}^2(\Gamma, \mu)$, i.e $T$ est bijectif,
+    %donc inversible par l'inégalité $\forall\xi, \norm{T(\xi)}\geq\varepsilon^2\norm{\xi}$\footnote{Ou bien par le théorème de l'application ouverte.}.
+    %Or, on a :
+    %\begin{equation*}
+    %    T = (\lambda(\gamma)-\Id)^*\comp(\lambda(\gamma)-\Id) = \lambda(\gamma\inv\gamma)+\Id-(\lambda(\gamma) + \lambda(\gamma)^*) = 2-(\lambda(\gamma) + \lambda(\gamma)^*)
+    %\end{equation*}
+    %Donc $\Sp T = 2-\Sp(\lambda(\gamma) + \lambda(\gamma)^*)$. Comme $T$ est positif et $0\notin\Sp T$
+    %on a $\Sp T\subseteq\R_+^*$ d'où $\Sp(\lambda(\gamma) + \lambda(\gamma)^*)\subseteq]-\infty, 2[$. Or l'opérateur $\lambda(\gamma)+\lambda(\gamma)^*$ est autoadjoint
+    %\TODO{Ça ne marche pas !}
 \end{proof}
 
 %\begin{proposition}
