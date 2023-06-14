@@ -100,16 +100,15 @@
 
 \TODO{Réorganiser cette section, déplacer certaines choses en annexe}
 
-Par convention, les produits scalaires sont linéaires à gauche.
+Par convention, les produits scalaires sur le corps $\C$ sont supposés linéaires en le premier argument.
 
 Conformément à la convention dans le monde anglophone, et pour éviter toute confusion, nous dirons qu'un espace topologique
 $X$ est \emph{compact} s'il vérifie la propriété de Borel-Lebesgue, sans hypothèse de séparation. 
 Nous dirons que $X$ est \emph{localement compact} si, pour tout $x\in X$, le filtre $\nhds_x$ des voisinages de $x$ admet
-une \textbf{base} formée d'ensembles compacts. Si $X$ est séparé, on retrouve que $X$ est localement compact 
-\ssi tout point admet \textbf{un} voisinage compact.
+une \emph{base} formée d'ensembles compacts. Si $X$ est séparé, on retrouve que $X$ est localement compact 
+\ssi tout point admet \emph{un} voisinage compact. 
 
-\paragraph{}
-Si $G$ est un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, $r_g$ les applications de tranlations:
+Pour $G$ un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, $r_g$ les applications de translation :
 \begin{equation*}
     \fundef{\invop = (\blank)\inv}{G&\to& G}{x&\mapsto& x\inv}\text{;}\quad\fundef{\ell_g=(g\blank)}{G&\to& G}{x&\mapsto& gx}\text{;}\quad\fundef{r_g=(\blank g)}{G&\to& G}{x&\mapsto& xg}
 \end{equation*}
@@ -162,14 +161,14 @@ de Haar sont absolument continues les unes par rapport aux autres, et donc défi
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
-    Supposons qu'il existe une moyenne $m$ sur $\Gamma$, invariante par translations \emph{à gauche}.
+    Supposons qu'il existe une moyenne $m$ sur $(\Gamma, \Bor(\Gamma), \mu)$, invariante par translations \emph{à gauche}.
     Alors $\Gamma$ est un groupe moyennable.
 \end{proposition} 
 
 Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 
 \begin{lemma}\label{positive_iff_norm}
-    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $\varphi:\mathrm{L}^\infty(X,\mu)\to\C$ une forme linéaire. 
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $\varphi:\mathrm{L}^\infty(X,\mu)\to\C$ une forme linéaire \emph{non nécessairement continue}. 
     On a l'équivalence :
     \begin{equation*}
         \norm{\varphi} = \varphi(1) \iff \forall a \ge 0, \varphi(a) \geq 0
@@ -177,9 +176,9 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 \end{lemma}
 
 \begin{proof}
-    Supposons d'abord $\norm{\varphi} = \varphi(1)$, et soit $a\ge 0$ de norme 1. On a donc, pour presque tout $x\in X$, $\set{a(x), 1-a(x)}\subseteq[0,1]$,
+    Supposons d'abord $\norm{\varphi} = \varphi(1)$, et soit $a\ge 0$ de norme 1. On a donc, pour localement presque tout $x\in X$, $\set{a(x), 1-a(x)}\subseteq[0,1]$,
     d'où enfin $\norm{1-a}_{\mathrm{L}^\infty}\le 1$. Mais par ailleurs $\norm{\varphi} = \varphi(a) + \varphi(1-a) \le \varphi(a) + \abs{\varphi(1-a)} \le \varphi(a) + \norm{\varphi}\norm{1 - a}_{\mathrm{L}^\infty}$, et finalement
-    $\varphi(a)\ge \norm{\varphi}(1 - \norm{1-a}_{\mathrm{L}^\infty}) \ge0$. 
+    $\varphi(a)\ge \norm{\varphi}\left(1 - \norm{1-a}_{\mathrm{L}^\infty}\right) \ge0$. 
 
     Supposons maintenant $\varphi$ positive. Notons déjà qu'on a bien sûr $\norm{\varphi}\ge\abs{\varphi(1)}=\varphi(1)$. Soit donc $a\in\mathrm{L}^\infty(X,\mu)$ quelconque,
     et notons que $-\norm{a}_{\mathrm{L}^\infty}\cdot1\le a\le\norm{a}_{\mathrm{L}^\infty}\cdot1$, de sorte que $-\norm{a}_{\mathrm{L}^\infty}\varphi(1)\le\varphi(a)\le\norm{a}_{\mathrm{L}^\infty}\varphi(1)$, ce qui conclut.
@@ -187,11 +186,11 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 
 \begin{proof}[Démonstration de la proposition \ref{bilateral_of_left}]
     Il s'agit donc de construire une \emph{autre} moyenne $n$ sur $\Gamma$ qui soit cette-fois invariante des deux côtés.
-    Posons d'abord, pour $f\in\mathrm{L}^\infty(\Gamma)$ quelconque, $\fundef{\widehat{f}}{\Gamma&\to&\C}{g&\mapsto&m(f\comp r_g)}$. On a 
-    $\forall g\in\Gamma, \abs{\widehat{f}(g)} \le \norm{f\comp r_g}_{\mathrm{L}^\infty} = \norm{f}_{\mathrm{L}^\infty}$ par le lemme \ref{positive_iff_norm}, 
+    Posons d'abord, pour $f\in\mathrm{L}^\infty(\Gamma)$ quelconque, $\fundef{\widehat{f}}{\Gamma&\to&\C}{g&\mapsto&m(f\comp r_g)}$. Le lemme \ref{positive_iff_norm}
+    montre que $m$ est continue de norme $m(1) = 1$. Cela entraîne
+    $\forall g\in\Gamma, \abs{\widehat{f}(g)} \le \norm{f\comp r_g}_{\mathrm{L}^\infty} = \norm{f}_{\mathrm{L}^\infty}$, 
     donc $\widehat{f}\in B(\Gamma)\subseteq\mathscr{L}^\infty(\Gamma)$.
-    Posons alors $n(f) := m\left(\widehat{f}\comp\invop\right)$
-    \footnote{Le fait que $\widehat{f}\comp\invop$ soit bornée presque partout provient de ce que $\widehat{f}$ est bornée \emph{partout}.}.
+    Posons alors $n(f) := m\left(\widehat{f}\comp\invop\right)$, qui est bien défini car $\widehat{f}$ est bornée \emph{partout}.
 
     Notons que, pour $f, f_1, f_2\in\mathrm{L}^\infty(\Gamma)$ et $g, x\in\Gamma$, on a :
     \begin{gather*}
@@ -224,16 +223,27 @@ celle des groupes moyennables. Cependant, nous disposons bien d'un théorème de
 \og{}intégrales\fg{}, à condition d'affaiblir la condition de $\sigma$-additivité des mesures.
 
 Un \emph{contenu} sur un espace mesurable $(X, \mathcal{A})$\footnote{On trouve dans la littérature des définitions de \emph{contenu} autorisant $\mathcal{A}$ à n'être qu'une algèbre d'ensembles,
-mais nous supposerons toujours qu'il s'agit d'une $\sigma$-algèbre.} est une fonction $m:\mathcal{A}\to\closure{\R_+}$ vérifiant $m(\varnothing) = 0$
+mais nous supposerons toujours qu'il s'agit d'une $\sigma$-algèbre.} est une fonction $m:\mathcal{A}\to\closure{\R}_+$ vérifiant $m(\varnothing) = 0$
 et $m(A_1\cup A_2) = m(A_1) + m(A_2)$ pour $A_1, A_2\in\mathcal{A}$ disjoints. Les mesures sur $(X, \mathcal{A})$
 sont donc exactement les contenus $\sigma$-additifs. Notons tout de suite que les contenus ne donnent pas lieu à 
 une théorie de l'intégration intéressante : en effet, en l'absence du théorème de convergence monotone, il n'est pas clair que l'intégrale 
 des fonctions positives \footnote{On rappelle que l'intégrale d'une fonction positive $f$ est définie comme la borne supérieure des 
-intégrales des fonctions simples positives inférieures à $f$} soit additive ! On a par contre le résultat suivant en se retreignant à
-intégrer des fonctions bornées selon des contenus finis.
+intégrales des fonctions simples positives inférieures à $f$} soit additive ! \TODO{Est-ce que c'est vrai ?} 
+On a tout de même un résultat positif si l'on se restreint
+intégrer des fonctions bornées selon des contenus finis, comme énoncé dans la proposition \ref{content_integration_and_repr} ci-dessous.
+
+\begin{definition}
+    Soit $(X, \mathcal{A})$ un espace mesurable, $m$ et $n$ deux contenus sur $(X, \mathcal{A})$.
+    On dit que $m$ est \emph{absolument continu} par rapport à $n$, que l'on note $m \ll n$, si tout 
+    ensemble $n$-localement négligeable est $m$-localement négligeable, la définition de négligeabilité 
+    locale pour les contenus étant identique à celle donnée en \ref{loc_negligible} pour les mesures. 
+
+    Dans le cas où $m$ est fini (i.e $m(X)<+\infty$), cela revient à demander que tout $A\in\mathcal{A}$
+    $n$-localement négligeable vérifie $m(A) = 0$.
+\end{definition}
 
 \begin{proposition}\label{content_integration_and_repr}
-    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $m$ un contenu fini\footnote{i.e. $m(X)<+\infty$} sur $(X, \mathcal{A})$ \emph{absolument continu par rapport
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $m$ un contenu fini sur $(X, \mathcal{A})$ \emph{absolument continu par rapport
     à} $\mu$. Il existe alors une unique forme linéaire positive $I_m : \mathrm{L}^\infty(X, \mu)\to\C$ vérifiant $I_m(\indic_A) = m(A)$ pour tout
     $A\in\mathcal{A}$. 
 
@@ -264,7 +274,7 @@ intégrer des fonctions bornées selon des contenus finis.
     le résultat à chacune de ces fonctions. 
 
     Pour $m$ contenu fini avec $m\ll\mu$, posons $\fundef{\widehat{I}_m}{\C^{(\mathcal{A})}&\to&\C}{\delta_A&\mapsto&m(A)}$.
-    Soit $\alpha\in\ker\Theta$, i.e tel que $f := \sum_{A\in\mathcal{A}} \alpha_A\indic_A =_\mu 0$. Considérons alors l'ensemble 
+    Soit $\alpha\in\ker\Theta$, i.e tel que $f := \sum_{A\in\mathcal{A}} \alpha_A\indic_A =_\mu^{loc} 0$. Considérons alors l'ensemble 
     fini $\mathcal{S}:=\alpha\inv\left(\set{0}\compl\right)\subseteq\mathcal{A}$ des $A$ tels que $\alpha_A\ne 0$, et la fonction 
     $\epsilon:X\to 2^\mathcal{S}$\footnote{On identifie 2 à l'ensemble $\set{0, 1}$} dont la composante selon $A\in\mathcal{S}$
     est l'indicatrice de $A$. Notons que chaque $A\in\mathcal{S}$ est l'union disjointe des $\epsilon\inv(b)$ pour $b\in2^\mathcal{S}$, $b(A) = 1$.
@@ -277,8 +287,8 @@ intégrer des fonctions bornées selon des contenus finis.
             &= \sum_{b\in2^\mathcal{S}} m(\epsilon\inv(b)) \sum_{A\in\mathcal{S}} \alpha_A b(A)
     \end{align*}
     Or, pour chaque $b\in2^\mathcal{S}$, la fonction $f$ est constante de valeur $\sum_{A\in\mathcal{S}} \alpha_A b(A)$ sur l'ensemble 
-    $\epsilon\inv(b)$. Comme $f$ est $\mu$-presque nulle, cela implique qu'on a ou bien $\sum_{A\in\mathcal{S}} \alpha_A b(A)=0$ ou bien $\mu(\epsilon\inv(b)) = m(\epsilon\inv(b)) = 0$,
-    ce qui assure finalement que $\widehat{I}_m(\alpha) = 0$.
+    $\epsilon\inv(b)$. Comme $f$ est $\mu$-localement presque nulle, cela implique qu'on a ou bien $\sum_{A\in\mathcal{S}} \alpha_A b(A)=0$ ou bien $\epsilon\inv(b)$ est $\mu$-localement-négligeable et donc $m(\epsilon\inv(b)) = 0$.
+    Cela assure finalement que $\widehat{I}_m(\alpha) = 0$.
 
     On a donc montré que $\ker\Theta\subseteq\ker\widehat{I}_m$. $\widehat{I}_m$ se factorise donc à travers la surjection $\Theta$ en
     $\widetilde{I}_m:\mathrm{S}(X, \mu)\to\C$ linéaire vérifiant $\forall A\in\mathcal{A}, \widetilde{I}_m(\indic_A) = m(A)$. De plus, pour 
@@ -294,9 +304,9 @@ intégrer des fonctions bornées selon des contenus finis.
     positives.
 
     Reste à montrer la bijectivité de $m\mapsto I_m$. L'injectivité est immédiate, la formule $m(A) = I_m(\indic_A)$ déterminant
-    entièrement $m$. Soit donc $T : \mathrm{L}^\infty(X, \mu)\to\C$ une forme linéaire positive quelconque, posons $\fundef{m}{\mathcal{A}&\to&\closure{\R_+}}{A&\mapsto&T(\indic_A)}$.
-    Il est clair que $m$ est alors un contenu, et la définition assure que $m\ll\mu$ car l'indicatrice d'un borélien de $\mu$-mesure nulle 
-    est nulle dans $\mathrm{L}^\infty(X,\mu)$. Comme $T$ est positive et vérifie $\forall A\in\mathcal{A}, m(A)=T(\indic_A)$, l'unicité 
+    entièrement $m$. Soit donc $T : \mathrm{L}^\infty(X, \mu)\to\C$ une forme linéaire positive quelconque, posons $\fundef{m}{\mathcal{A}&\to&\closure{\R}_+}{A&\mapsto&T(\indic_A)}$.
+    Il est clair que $m$ est alors un contenu, et la définition assure que $m\ll\mu$ car l'indicatrice d'un borélien $\mu$-localement négligeable
+    est nulle dans $\mathrm{L}^\infty(X,\mu)$. Comme $T$ est positive et $\forall A\in\mathcal{A}, m(A)=T(\indic_A)$, l'unicité 
     démontrée précédemment assure que $T = I_m$, ce qui conclut.
 \end{proof}
 
@@ -314,11 +324,9 @@ la condition d'invariance par translations, et il nous faut pour cela aborder l'
 Soient $(X, \mathcal{A})$, $(Y, \mathcal{B})$ deux espaces mesurables, $m$ un contenu sur $(X, \mathcal{A})$ et $\varphi : X\to Y$ mesurable.
 On définit alors le \emph{contenu image} de $m$ par $\varphi$ par $\fundef{\varphi_* m}{\mathcal{B}&\to&\closure{\R_+}}{B&\mapsto&m(\varphi\inv(B))}$.
 Il est clair qu'il s'agit encore d'un contenu. Si de plus $X$ et $Y$ sont munis de mesures $\mu$ et $\nu$, et si on a 
-$m\ll\mu$ et $\varphi_*m\ll\nu$
-\footnote{Autrement dit, la préimage par $\varphi$ de tout ensemble $\nu$-négligeable est $\mu$-négligeable. Cette condition assure que la précomposition 
-par $\varphi$ est une opération bien définie de $\mathrm{L}^\infty(Y, \nu)$ vers $\mathrm{L}^\infty(X, \mu)$. Enfin, si $\varphi_*\mu\ll\nu$, cette condition découle de l'hypothèse $m\ll\mu$, 
-puisque $\varphi_*m\ll \varphi_*\mu\ll\nu$}
-, alors :
+$m\ll\mu$ et $\varphi_*\mu\ll\nu$
+\footnote{Autrement dit, la préimage par $\varphi$ de tout ensemble $\nu$-localement négligeable est $\mu$-localement négligeable. Cette condition assure que la précomposition 
+par $\varphi$ est une opération bien définie de $\mathrm{L}^\infty(Y, \nu)$ vers $\mathrm{L}^\infty(X, \mu)$. }, alors :
 \begin{equation*}
     \forall B\in\mathcal{B}, I_{\varphi_*m}(\indic_B) = m(\varphi\inv(B)) = I_m(\indic_{\varphi\inv(B)}) = I_m(\indic_B\comp \varphi)
 \end{equation*}
@@ -488,14 +496,15 @@ Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa 
 \end{lemma}
 
 \begin{proof}
-    Supposons d'abord qu'on ait $1 =_\mu \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
-    $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_{\mathrm{L}^\infty}}$ est donc $\mu$-négligeable,
-    et par conséquent $T := \bigcup_{n\in\N}\gamma^{-n}S$ l'est aussi. $T\compl$ est donc non-vide, choisissons alors $t\in T\compl$. On a alors 
-    $\forall n\in\N, \norm{f}_{\mathrm{L}^\infty}\geq \abs{f(\gamma^{-n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
+    Supposons d'abord qu'on ait $1 =_\mu^{loc} \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
+    $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_{\mathrm{L}^\infty}}$ est donc $\mu$-localement négligeable,
+    et par conséquent $T := \bigcup_{n\in\N}\gamma^{-n}S$ l'est aussi. $T\compl$ est donc non-vide\footnote{On peut par exemple considérer un voisinage compact $K$
+    de l'origine, qui est de mesure finie non-nulle. L'intersection $K\cap T$ étant $\mu$-négligeable, on en déduit que $K\setminus T$ est non-vide.}, choisissons alors $t\in T\compl$. On a alors 
+    $\forall n\in\N, \norm{f}_{\mathrm{L}^\infty}\geq \abs{f(\gamma^{n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
     %\TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
     %vraie que presque partout !}
 
-    Pour le cas général, on suppose cette fois $1 =_\mu \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
+    Pour le cas général, on suppose cette fois $1 =_\mu^{loc} \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
     $f : I\to \mathscr{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
     un élément), muni de la mesure de Haar produit $\nu:=\mu^{\otimes I}$, et la fonction : 
     \begin{equation*}
@@ -954,7 +963,7 @@ Le résultat principal quant à ce plongement est que son image est $*$-faibleme
 \end{lemma}
 
 \begin{proof}
-    Notons que, pour tous $f\in\mathscr{L}^1(X, \mu), \varphi\in\mathscr{L}^\infty(X, \mu)$, on a, pour les dualités usuelles 
+    Notons que, pour toutes $f\in\mathscr{L}^1(X, \mu)$, $\varphi\in\mathscr{L}^\infty(X, \mu)$, on a, pour les dualités usuelles 
     $({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$ et $(\mathrm{L}^1, \mathrm{L}^\infty)$ :
     \begin{equation*}
         \ket{\iota(f), \varphi} = \iota(f)(\varphi) = \integral{}{}{f\varphi}{\mu} = \ket{f, \varphi}
@@ -994,7 +1003,7 @@ Le résultat principal quant à ce plongement est que son image est $*$-faibleme
 $\widetilde{u}:=\frac1{\integral{}{}{u}{\mu}}\cdot u\in\mathrm{L}^1_{1, +}(X, \mu)$, de sorte que
 $u = \left(\integral{}{}{u}{\mu}\right)\cdot\widetilde{u}$.}, cette inégalité s'étend à tout $u\in\mathrm{L}^1(X, \mu)$ positif. 
 Autrement dit, $\Re\varphi-a$ est positive \emph{lorsqu'elle est vue comme forme linéaire sur $\mathrm{L}^1(X, \mu)$}. Si l'on admet
-que $\Re\varphi - a$ est en fait positive au sens usuel, on obtient directement une contradiction avec la positivité de $m$, puisque : 
+que $\Re\varphi - a$ est en fait positive en tant qu'élément de $\mathrm{L}^\infty(X, \mu)$, on obtient directement une contradiction avec la positivité de $m$, puisque : 
 \begin{align*}
     m(\Re\varphi - a) 
         &= m(\varphi - a) - \i m(\Im\varphi) \\
@@ -1015,8 +1024,8 @@ des deux lemmes suivants.
 
 \begin{lemma}\label{positive_of_positive_form}
     Soit $\varphi\in\mathscr{L}^\infty(X, \mu)$. Si l'intégrale $\integral{}{}{f\varphi}{\mu}$ est positive 
-    pour toute fonction $f\in\mathscr{L}^1(X, \mu)$ positive $\mu$-presque partout, alors $\varphi$ est 
-    positive $\mu$-presque partout.
+    pour toute fonction $f\in\mathscr{L}^1(X, \mu)$ positive $\mu$-localement-presque-partout, alors $\varphi$ est 
+    positive $\mu$-localement-presque-partout.
 \end{lemma}
 
 Le lemme \ref{dual_of_weak} assure ainsi que l'on peut toujours écrire $g=\ev_\varphi$,
@@ -1169,7 +1178,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     fonction $(\lambda(\gamma\inv)-\id)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge vers $0$ selon $\mathscr{U}$
     en norme $\mathrm{L}^1$, donc pour la topologie faible, et par conséquent $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge 
     aussi vers $0$ selon $\mathscr{U}$ dans $\mathrm{L}^\infty(\Gamma)^*$. Or, pour tout
-    $\varphi\in\mathrm{L}^1_(\Gamma)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
+    $\varphi\in\mathrm{L}^1(\Gamma)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
     $\iota\comp\lambda(\gamma\inv) = \transpose{(\lambda(\gamma))}\comp\iota$.
     La transposée de l'isométrie $\lambda(\gamma):\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$ est continue 
     pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
@@ -1274,6 +1283,8 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
 
 \TODO{commentaires}
 
+\subsection{Quelques résultats de théorie spectrale}
+
 Au vu de l'assertion $(\ref{amenable_weak_contain/one_mem_spectrum})$, il est assez naturel d'interpréter le point
 $(\ref{amenable_weak_contain/weak_almost_invariant})$ comme l'existence de \og{}vecteurs propres approchés\fg{} pour la valeur propre $1$.
 Cela nous ammène à introduire la notion standard de \emph{spectre approché} d'un opérateur.
@@ -1332,7 +1343,7 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
         %On a donc 
 \end{proof}
 
-Nous utiliserons à de nombreuses reprises le lemme \ref{EVT_emb_TFAE} pour caractériser le spectre approché d'un opérateur $T$,
+Le lemme \ref{EVT_emb_TFAE} permet de caractériser le spectre approché d'un opérateur $T$,
 puisque son complémentaire $\sigma(T)\compl$ est précisément l'ensemble des $\lambda$ tels que $T-\lambda$ vérifie les 
 conditions équivalentes de ce lemme. En particulier, cela nous permet de démontrer le résultat fondamental suivant :
 
@@ -1352,7 +1363,7 @@ conditions équivalentes de ce lemme. En particulier, cela nous permet de démon
     Pour montrer $(\ref{approx_spectrum_facts/eq_of_unitary})$ et $(\ref{approx_spectrum_facts/eq_of_hermitian})$, remarquons que dans les deux cas
     on a $\sigma(T)\cap\R = \sigma(T^*)\cap\R$. Si $T$ est autoadjoint c'est immédiat, vérifions le pour $T$ unitaire. Soient $\lambda\in\R$ que l'on
     suppose appartenir à $\sigma(T)$, et $\varepsilon>0$. Par hypothèse on a $\norm{T(\xi) - \lambda\xi}<\varepsilon$ pour un certain $\xi$ de norme $1$,
-    ce qui entraîne $\xi - T^*(\lambda\xi)<\varepsilon$, et donc $\norm{T^*(\xi) - \lambda\inv\xi}<\varepsilon\abs{\lambda}\inv$. Or $\lambda\in\sigma(T)\subseteq\Sp(T)\subseteq\mathbb{S}_1$
+    ce qui entraîne $\norm{\xi - T^*(\lambda\xi)}<\varepsilon$, et donc $\norm{T^*(\xi) - \lambda\inv\xi}<\varepsilon\abs{\lambda}\inv$. Or $\lambda\in\sigma(T)\subseteq\Sp(T)\subseteq\mathbb{S}_1$
     car $T$ est unitaire, et $\lambda\in\R$ donc $\lambda\in\set{-1, 1}$. On a donc en fait $\norm{T^*(\xi) - \lambda\xi}<\varepsilon$, ce qui 
     assure que $\lambda\in\sigma(T^*)$. Cela montre $\sigma(T)\cap\R\subseteq\sigma(T^*)\cap\R$, et
     l'inclusion réciproque vient en appliquant ce résultat à l'opérateur unitaire $T^*$.
@@ -1368,6 +1379,8 @@ conditions équivalentes de ce lemme. En particulier, cela nous permet de démon
 \end{proof}
 
 Nous avons désormais tous les outils nécessaires à la preuve du théorème \ref{amenable_weak_contain}.
+
+\subsection{Preuve du théorème \ref{amenable_weak_contain}}
 
 \begin{proof}
     On va montrer $(\ref{amenable_weak_contain/weak_almost_invariant})
@@ -1387,7 +1400,7 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
 
     Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
     et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
-    $\lambda_\gamma$ de $\mathrm{L}^1(\Gamma, \mu)$\footnote{Contrairement au cas des représentations de groupes topologiques, 
+    $\lambda_\Gamma$ de $\mathrm{L}^1(\Gamma, \mu)$\footnote{Contrairement au cas des représentations de groupes topologiques, 
     une représentation d'une algèbre de Banach involutive est continue \ssi le morphisme sous-jacent est continu.}, il suffit en fait de montrer le résultat pour $f\in C_c(\Gamma)$, ce que nous supposons désormais.
     Nous allons montrer $\abs{\integral{}{}{f}{\mu}}^2\in\Sp\left(\lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)\right)$, ce qui entraîne bien :
     \begin{equation*}
@@ -1398,10 +1411,10 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     Pour $\xi\in\mathrm{L}^2(\Gamma, \mu)$, la remarque \ref{L1_repr_Cc} donne :
     \begin{align*}
         \lambda_\Gamma(f)^*\left(\lambda_\Gamma(f)(\xi)\right) 
-            &= \lambda_\Gamma(f^*)\left(\integral{}{}{f(g)\lambda(g)(\xi)}{\mu(g)}\right) \\
-            &= \integral{}{}{f(g)\lambda_\Gamma(f^*)\Big(\lambda(g)(\xi)\Big)}{\mu(g)} \\
-            &= \integral{}{}{f(g)\integral{}{}{f^*(h)\lambda(hg)(\xi)}{\mu(h)}}{\mu(g)} \\
-            &= \integral{}{}{\integral{}{}{f(g)\overline{f(h)}\lambda(h\inv g)(\xi)}{\mu(h)}}{\mu(g)}\quad\text{\TODO{explications}}
+            &= \lambda_\Gamma(f^*)\left(\integral{}{}{f(g)\lambda_\Gamma(g)(\xi)}{\mu(g)}\right) \\
+            &= \integral{}{}{f(g)\lambda_\Gamma(f^*)\Big(\lambda_\Gamma(g)(\xi)\Big)}{\mu(g)} \\
+            &= \integral{}{}{f(g)\integral{}{}{f^*(h)\lambda_\Gamma(hg)(\xi)}{\mu(h)}}{\mu(g)} \\
+            &= \integral{}{}{\integral{}{}{f(g)\overline{f(h)}\lambda_\Gamma(h\inv g)(\xi)}{\mu(h)}}{\mu(g)}\quad\text{\TODO{explications}}
     \end{align*} 
     D'autre part, on a :
     \begin{align*}
@@ -1412,32 +1425,46 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     On a donc pour tout $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire :
     \begin{align*}
         \varepsilon 
-            &\le \norm{\integral{}{}{\integral{}{}{f(g)\overline{f(h)}(\xi - \lambda(h\inv g)(\xi))}{\mu(h)}}{\mu(g)}}_{\mathrm{L}^2} \\
-            &\le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)}
+            &\le \norm{\integral{}{}{\integral{}{}{f(g)\overline{f(h)}(\xi - \lambda_\Gamma(h\inv g)(\xi))}{\mu(h)}}{\mu(g)}}_{\mathrm{L}^2} \\
+            &\le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda_\Gamma(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)}
     \end{align*}
     Mais, si l'on note $K$ le support de $f$ et que l'on applique $(\ref{amenable_weak_contain/strong_almost_invariant})$ au réel $\frac{\varepsilon}{\norm{f}_{\mathrm{L}^1}^2}$ et au compact $K\inv K$,
-    on obtient $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire tel que $\sup_{\gamma\in K\inv K} \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^1}^2}$, d'où :
+    on obtient $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire tel que $\sup_{\gamma\in K\inv K} \norm{\lambda_\Gamma(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^1}^2}$, d'où :
     \begin{equation*}
         \varepsilon
-            \le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)} 
+            \le \integral{}{}{\integral{}{}{\abs{f(g)}\abs{f(h)}\norm{\xi - \lambda_\Gamma(h\inv g)(\xi)}_{\mathrm{L}^2}}{\mu(h)}}{\mu(g)} 
             < \varepsilon
     \end{equation*}
     D'où la contradiction recherchée.
 
-    Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, commençons par remarquer 
+    Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, donnons nous 
+    un $\gamma\in\Gamma$ quelconque, et commençons par remarquer 
     que l'inégalité $\norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2$ est automatiquement vérifée, il s'agit donc de montrer l'intégalité 
-    inverse. 
-    \TODO{commentaire cas discret}
-    %Notons que si $\Gamma$ est discret, on peut directement appliquer $(\ref{amenable_weak_contain/weak_contain})$ à la fonction $f := \delta_\gamma + \delta_{\gamma\inv}$,
-    %d'intégrale 
-    Fixons pour cela une fonction 
-    $f_0\in\mathscr{L}^1(\Gamma)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
-    un voisinage compact $U$ de $1$.}. Soit alors $\gamma\in\Gamma$ quelconque, et considérons les opérateurs $T := \lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$,
+    inverse. Commençons par donner une preuve pour $\Gamma$ discret, qui nous éclairera pour la suite, et pour simplifier supposons
+    que $\mu$ donne masse $1$ aux singletons. Il suffit alors d'appliquer $(\ref{amenable_weak_contain/weak_contain})$
+    à la fonction $f := \delta_\gamma + \delta_{\gamma\inv}\in\mathscr{L}^1(\Gamma)_{+}$ pour obtenir :
+    \begin{equation*}
+        2 = \abs{\integral{}{}{f}{\mu}} = \abs{\indic_\Gamma(f)} \le \norm{\lambda_\Gamma(f)} = \norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2
+    \end{equation*}
+
+    Revenons maintenant au cas général. On pourrait être tenté de se ramener au raisonnement précédent 
+    en approchant la \emph{mesure} $\delta_\gamma + \delta_{\gamma\inv}$ par des fonctions intégrables,
+    une telle approximation s'obtenant aisément à partir d'une approximation de l'unité. Cependant,
+    on se heurte alors au fait que la fonction $\lambda_\Gamma : \Gamma \to \mathcal{U}(\mathrm{L}^2(\Gamma, \mu))$
+    n'est \emph{a priori} pas continue, ce qui rend inutilisable l'hypothèse de concentration de la masse : 
+    même si $f\in\mathscr{L}^1(\Gamma, \mu)$ a sa masse concentrée autour de $\gamma$ et $\gamma\inv$,
+    rien ne dit que $\lambda_\Gamma(f)$ sera proche de $\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. 
+    \footnote{Il est d'ailleurs intéressant que de remarquer que le morphisme $\lambda_\Gamma$ est bien continu
+    si $\Gamma$ est discret, ce qui explique pourquoi la preuve fonctionne dans ce cas.}
+
+    La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
+    Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
+    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$
     et $S := \lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
     \begin{equation*}
         \forall f\in\mathrm{L}^1(\Gamma), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
     \end{equation*}
-    Notons que, pour tout $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\integral{}{}{f}{\mu}$.
+    Notons que, pour toute $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\integral{}{}{f}{\mu}$.
     Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = 2^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
     assure que l'on a, toujours pour $n\in\N$ quelconque :
     \begin{equation*}
@@ -1448,7 +1475,7 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
 
     On va maintenant montrer \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/one_mem_spectrum})$}, soit donc $\gamma\in\Gamma$ et notons 
     $U := \lambda_\Gamma(\gamma)$. Conservons aussi la notation $T := U + U^*$. L'opérateur $T$ étant autoadjoint, son spectre est réel 
-    et sa norme est égal à son rayon spectral, de sorte que $\set{-2, 2}\cap\Sp(T)\ne\varnothing$. On va maintenant 
+    et sa norme est égale à son rayon spectral, de sorte que $\set{-2, 2}\cap\Sp(T)\ne\varnothing$. On va maintenant 
     mettre en relation le spectre de $U$ et le spectre de $T$, à l'aide du calcul fonctionnel continu de l'opérateur unitaire (donc normal) $U$.
     En effet, si l'on note $X \in C(\Sp U) = C(\Sp U, \C)$ l'application d'inclusion, on sait que $X(U) = U$ et $\overline{X}(U) = U^*$, d'où
     $(2\Re(X))(U) = (X + \overline{X})(U) = U + U^* = T$ par linéarité du calcul fonctionnel. Le spectre de $T$ est donc l'image 
@@ -1519,9 +1546,9 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
 
 \newpage
 
-\section{Annexes}
+\appendix
 
-\subsection*{Résultats usuels de théorie de la mesure}
+\section{Résultats usuels de théorie de la mesure}
 
 Cette section regroupe, avec ou sans démonstration, des résultats de théorie de la mesure utilisés au cours du document.
 Nous nous cantonnons ici strictement aux mesures usuelles ($\sigma$-additives), le cas moins usuel des contenu et de 
@@ -1532,7 +1559,7 @@ sur $X$, c'est à dire des fonctions mesurables $f : (X, \mathcal{A})\to(\C, \Bo
 
 Avant toute chose, rappelons l'inégalité de Markov et une de ses conséquences élémentaires, qui nous servira à de nombreuses reprises.
 \begin{proposition}\label{markov_and_consequence}
-    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $f:X\to\overline{\R_+}$ une fonction mesurable positive.
+    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $f:X\to\overline{\R}_+$ une fonction mesurable positive.
     On a $\forall a>0, a\cdot\mu\left(f\inv([a, +\infty])\right) \le \integral{}{}{f}{\mu}$. \\
     Par conséquent, si $\integral{}{}{f}{\mu} = 0$, on a $f =_\mu 0$, où $=_\mu$ désigne la relation 
     d'égalité $\mu$-presque-partout.
@@ -1548,13 +1575,13 @@ Avant toute chose, rappelons l'inégalité de Markov et une de ses conséquences
     ce qui entraîne $f =_\mu 0$.
 \end{proof}
 
-\subsubsection*{Espaces \texorpdfstring{$\mathrm{L}^p$}{L\textsuperscript{p}}}
+\subsection*{Espaces \texorpdfstring{$\mathrm{L}^p$}{L\textsuperscript{p}}}
 
 Nous allons maintenant énoncer les résultats fondamentaux sur les espaces $\mathrm{L}^p$. Nous allons en fait considérer une variante subtile de 
 la définition, qui est plus adaptée à l'analyse fonctionelle en ce que l'isométrie $\mathrm{L}^\infty \simeq (\mathrm{L}^1)^*$
 sera valable \emph{sans hypothèse de $\sigma$-finitude}. Pour cela, on introduit la notion suivante.
 
-\begin{definition}
+\begin{definition}\label{loc_negligible}
     Soit $(X, \mathcal{A}, \mu)$ un espace mesuré, et soit $A\in\parts{X}$. On dit que $A$ est \emph{$\mu$-localement-négligeable} 
     si, pour tout $B\in\mathcal{A}$ \emph{de mesure finie}, $B\cap A$ est $\mu$-négligeable. \\
     Par analogie avec le cas des ensembles négligeables, on dit qu'un prédicat $P$ est valable 
@@ -1614,7 +1641,7 @@ sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
 %    \emph{finie} non-nulle.
 %\end{definition}
 
-\subsubsection*{Mesures de Radon}
+\subsection*{Mesures de Radon}
 
 \begin{definition}
     Soit $X$ un espace topologique localement compact et séparé. Une \emph{mesure de Radon} sur $X$
@@ -1668,7 +1695,7 @@ On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout e
 %    
 %\end{proof}
 
-\subsubsection*{Un petit peu d'intégration vectorielle}
+\subsection*{Un petit peu d'intégration vectorielle}
 
 \TODO{Décrire intégration de Bochner}
 
@@ -1724,7 +1751,10 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
     qui est mesurable et d'image séparable est automatiquement fortement mesurable.
 \end{remark}
 
-\subsection*{Rappels d'intégration sur les groupes localements compacts : caractère modulaire et mesure de Haar}
+\section{Intégration sur les groupes localement compacts}
+
+\subsection*{Mesures de Haar}
+\subsection*{Caractère modulaire}
 
 \TODO{Explications et rappels des définitions, pour le moment je mets juste des résultats en vrac}
 
@@ -1739,6 +1769,9 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
     \end{enumerate}
 \end{proposition}
 
+\subsection*{Convolution}
+
+\section{Quelques résultats sur les espaces uniformes}
 \subsection*{Sur la convergence uniforme des translatées d'une fonction}
 
 Soient $X$ un ensemble et $Y$ un espace uniforme. On note $\mathcal{F}_u(X, Y)$ l'ensemble des 
