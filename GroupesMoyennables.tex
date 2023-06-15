@@ -491,36 +491,73 @@ Plus précisément, toujours pour $\Gamma$ groupe localement compact et séparé
 $\mathrm{L}^\infty(\Gamma)$ engendré par les classes de fonctions de la forme $\lambda(g)(f) - f$ pour $f\in \mathrm{L}^\infty(\Gamma)$. 
 Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa restriction à $L_0(\Gamma)$ est nulle. 
 
-\begin{lemma}
+\begin{lemma}\label{one_not_mem_L0}
     $1\notin L_0(\Gamma)$
 \end{lemma}
 
 \begin{proof}
-    Supposons d'abord qu'on ait $1 =_\mu^{loc} \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
+    Traitons d'abord le cas $1 =_\mu^{loc} \lambda(\gamma)(f) - f$ pour certains $\gamma\in\Gamma$ et 
     $f\in \mathscr{L}^\infty(\Gamma)$. L'ensemble $S:=\set{x\tq f(\gamma\inv x)\ne 1+f(x)}\cup\set{x\tq\abs{f(x)}>\norm{f}_{\mathrm{L}^\infty}}$ est donc $\mu$-localement négligeable,
     et par conséquent $T := \bigcup_{n\in\N}\gamma^{-n}S$ l'est aussi. $T\compl$ est donc non-vide\footnote{On peut par exemple considérer un voisinage compact $K$
     de l'origine, qui est de mesure finie non-nulle. L'intersection $K\cap T$ étant $\mu$-négligeable, on en déduit que $K\setminus T$ est non-vide.}, choisissons alors $t\in T\compl$. On a alors 
     $\forall n\in\N, \norm{f}_{\mathrm{L}^\infty}\geq \abs{f(\gamma^{n}t)} = \abs{f(t) + n}$, ce qui est impossible puisque $\abs{f(t) + n}\xrightarrow[n\to+\infty]{}+\infty$.
-    %\TODO{Cet argument ne marche pas si l'égalité $\indic = \lambda(\gamma)(f) - f$ n'est 
-    %vraie que presque partout !}
-
-    Pour le cas général, on suppose cette fois $1 =_\mu^{loc} \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
-    $f : I\to \mathscr{L}^\infty(\Gamma)$. On considère alors le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
-    un élément), muni de la mesure de Haar produit $\nu:=\mu^{\otimes I}$, et la fonction : 
+    
+    Plus généralement, supposons maintenant $1 =_\mu^{loc} \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
+    $f : I\to \mathscr{L}^\infty(\Gamma)$, et ajoutons l'hypothèse supplémentaire que $\Gamma$ est $\sigma$-compact. 
+    En particulier la mesure $\mu$ est alors $\sigma$-finie, et on peut donc munir le groupe séparé et localement compact $\Gamma^I$ (dont $\gamma : i\mapsto \gamma_i$ est
+    un élément) de la mesure produit $\nu:=\mu^{\otimes I}$. Il est clair que la mesure $\nu$ ainsi formée est encore 
+    de Radon et invariante (à gauche si $\mu$ est invariante à gauche, à droite si $\mu$ est invariante à droite), et donc une mesure de Haar sur $\Gamma^I$. On considère alors la fonction :
     \begin{equation*}
         \fundef{F}{\Gamma^I&\to&\C}{x&\mapsto&\frac{1}{\card{I}}\sum_{i\in I}f_i(x_i)}
     \end{equation*}
-    $F$ est mesurable, et la majoration
-    $\abs{F(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}$, valable pour presque tout $x\in\Gamma^I$
-    \footnote{Notons $S_i:=\set{x\in\Gamma\tq \abs{f_i(x)}>\norm{f}_{\mathrm{L}^\infty}}$ et $T:=\set{x\in\Gamma^I\tq \abs{F(x)}>\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}}$. 
-        On a clairement $T\subseteq\bigcup_{i\in I}\pi_i\inv(S_i)$, où $\pi_i:\Gamma^I\to\Gamma$ désigne la $i$-ème projection. \\
-        Or $\mu^{\otimes I}(\pi_i\inv(S_i)) = \mu^{\otimes I}(\Gamma\times\dots\times S_i\times\dots\times\Gamma)=\mu(\Gamma)\times\dots\times\mu(S_i)\times\dots\times\mu(\Gamma)=0$ puisque $\mu(S_i)=0$.
-        Donc $T$ est bien $\mu^{\otimes I}$-négligeable.},
-    assure que $F\in \mathscr{L}^\infty(\Gamma^I)$. 
-    Enfin, $1 =_{\nu} \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
+    $F$ est clairement mesurable, vérifions maintenant que la majoration $\abs{F(x)}\le\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}$
+    est valable pour $\nu$-presque tout $x\in\Gamma^I$\footnote{On travaille avec des espaces mesurés $\sigma$-finis, donc 
+    les ensembles localement négligeables sont exactement les ensembles négligeables.}. 
+
+    Posons $S_i:=\set{x\in\Gamma\tq \abs{f_i(x)}>\norm{f}_{\mathrm{L}^\infty}}$ et $T:=\set{x\in\Gamma^I\tq \abs{F(x)}>\frac1{\card{I}}\sum_i\norm{f_i}_{\mathrm{L}^\infty}}$. 
+    On a clairement $T\subseteq\bigcup_{i\in I}\pi_i\inv(S_i)$, où $\pi_i:\Gamma^I\to\Gamma$ désigne la $i$-ème projection. 
+    Or $\mu^{\otimes I}(\pi_i\inv(S_i)) = \mu^{\otimes I}(\Gamma\times\dots\times S_i\times\dots\times\Gamma)=\mu(\Gamma)\times\dots\times\mu(S_i)\times\dots\times\mu(\Gamma)=0$ puisque $\mu(S_i)=0$.
+    Donc $T$ est bien $\mu^{\otimes I}$-négligeable.
+    Cela assure que $F\in \mathscr{L}^\infty(\Gamma^I)$. 
+    On montre similairement que $1 =_{\nu} \lambda(\gamma)(F) - F$, ce qui nous ramène au cas déjà traité. 
+
+    Pour conclure, il reste à montrer qu'on peut toujours se ramener à $\Gamma$ $\sigma$-compact. 
+    On utilise pour cela le lemme suivant :
+    \begin{lemma}\label{exists_sigma_compact_subgroup}
+        Soit $\Gamma$ un groupe topologique séparé et localement compact. Toute partie compacte de $\Gamma$ est contenue dans un sous-groupe ouvert $\Gamma'$ de $\Gamma$ qui est $\sigma$-compact.
+        De plus, la restriction à un tel $\Gamma'$ de toute mesure de Haar $\mu$ sur $\Gamma$
+        est une mesure de Haar sur $\Gamma'$.
+    \end{lemma}
+    Une fois ce lemme acquis, supposons encore $1 =_\mu^{loc} \sum_{i\in I} (\lambda(\gamma_i)(f_i) - f_i)$ pour $I$ fini, $\gamma : I \to\Gamma$ et
+    $f : I\to \mathscr{L}^\infty(\Gamma)$. Donnons nous un sous-groupe ouvert et $\sigma$-compact $\Gamma'$ contenant tous les $\gamma_i$, $\mu'$
+    la restriction de $\mu$ à $\Gamma'$, et $\fundef{\widetilde{f}}{I&\to&\mathscr{L}^\infty(\Gamma')}{i&\mapsto&{f_i}_{|\Gamma'}}$.
+    Comme la trace sur $\Gamma'$ d'un ensemble $\mu$-localement négligeable est $\mu'$-localement négligeable, on a 
+    que chaque $\widetilde{f}_i$ est bien un élément de $\mathscr{L}^\infty(\Gamma')$, ainsi que 
+    l'égalité $1 =_{\mu'}^{loc} \sum_{i\in I} (\lambda(\gamma_i)(\widetilde{f}_i) - \widetilde{f}_i)$, ce
+    qui nous ramène au cas précédemment traité. Cela conclut la preuve.
 \end{proof}
 
-On peut alors considérer l'espace $L(\Gamma) := \C\cdot 1 \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
+\begin{proof}[Démonstration du lemme \ref{exists_sigma_compact_subgroup}]
+    Soit $K$ une partie compacte quelconque de $\Gamma$. Choisissons $T$ un voisinage compact de l'origine, 
+    et posons $S := (K\cup T) \cup (K\cup T)\inv$, qui est un voisinage symétrique compact de l'origine 
+    contenant $K$. Vérifions que $\Gamma' := \bigcup_{n\in\N^*} S^n$ convient. Tout d'abord, la suite de compact $S^n$ 
+    est croissante, car $S$ contient $1$, donc tout $x\in S^n$ vérifie aussi $x = x\cdot 1\in S^{n+1}$. Cela assure que 
+    $\Gamma'$ est $\sigma$-compact. De plus, il est clair qu'il s'agit d'un sous-groupe de $\Gamma'$ : chaque $S^n$ est
+    symmétrique ce qui assure la stabilité par inverse, et si $x\in S^p, y\in S^q$ on a $xy \in S^{p+q}$. L'inclusion $S\subseteq\Gamma'$ 
+    montre que $\Gamma'$ est un voisinage de l'origine donc ouvert, et également que $T\subseteq\Gamma'$.
+
+    Soit maintenant un sous-groupe ouvert $\Gamma'$ de $\Gamma$ quelconque. Notons tout d'abord que 
+    $\Gamma'$ est borélien, donc la restriction de $\mu$ à $\Gamma'$ est bien définie, et localement compact 
+    (séparé) comme ouvert d'un espace localement compact. Notons d'abord que $\mu'$ est bien de Radon. La 
+    finitude sur les compacts est acquise, ainsi que la régularité intérieure puisque les ouverts de 
+    $\Gamma'$ sont ouverts dans $\Gamma$. Pour la régularité supérieure, il suffit de remarquer que si 
+    $B\subseteq\Gamma'$ est borélien (dans $\Gamma'$ donc dans $\Gamma$) et si $U\supseteq A$ est un ouvert de 
+    $\Gamma$ tel que $\mu(U)$ soit proche de $\mu(A)$, alors $U\cap\Gamma'\supseteq A$ est un ouvert de 
+    $\Gamma'$ tel que $\mu'(U)$ est encore plus proche de $\mu'(A) = \mu(A)$. Enfin l'invariance par translation de 
+    $\mu'$ (du même côté que $\mu$ bien sûr) est évidente, ce qui conclut.
+\end{proof}
+
+Le lemme \ref{one_not_mem_L0} nous permet de considérer l'espace $L(\Gamma) := \C\cdot 1 \oplus L_0(\Gamma)$, qui est intéressant en ce qu'il permet de caractériser entièrement
 les moyennes à gauche sur $\Gamma$, au sens du théorème suivant.
 
 \begin{theorem}\label{left_mean_iff}
@@ -533,7 +570,7 @@ les moyennes à gauche sur $\Gamma$, au sens du théorème suivant.
 \end{theorem}
 
 En remarquant que $\forall c\in\C, \forall f\in L_0(\Gamma), \widetilde{T}(c + f) = c$, et qu'on a toujours 
-$\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(\indic) = 1$, on obtient le critère de moyennabilité suivant:
+$\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(1) = 1$, on obtient le critère de moyennabilité suivant:
 
 \begin{corollary}\label{amenable_iff_L0}
     $\Gamma$ est moyennable \ssi $\forall c\in\C, \forall f\in L_0(\Gamma), \abs{c}\le\norm{c + f}_{\mathrm{L}^\infty}$.
@@ -594,7 +631,7 @@ Donnons maintenant, toujours à l'aide du critère \ref{amenable_iff_L0}, notre 
 
 Présentée ainsi, la preuve précédente peut sembler très spécifique à $\Z$ et peu généralisable. Pourtant, l'idée clé 
 est simplement de considérer une \og{}moyenne\fg{} d'inégalités de la forme $-M\le c + u(\gamma\inv x) - u(x)\le M$, 
-ce qui peut tout à fait se généraliser à un groupe discret quelconque. 
+ce qui peut tout à fait se généraliser, \emph{a minima} pour un groupe discret quelconque. 
 
 Les obstacles sont donc la forme spécifique de $L_0(\Z)$ et le recours à une suite extraite pour forcer la convergence des $u_{n+1}-u_n$. Nous allons voir 
 qu'il est possible de les contourner.
@@ -630,11 +667,9 @@ qu'il est possible de les contourner.
     En passant à la limite dans l'inégalité (\ref{Z_amenable_eq2}), on obtient donc $-M\le c\le M$, ce qui conclut.
 \end{proof}
 
-Notons que, dans cette deuxième démonstration, l'hypothèse $\Gamma=\Z$ n'a été utilisée que pour établir l'existence d'une suite $F:\N\to\finparts^*(\Z)$ 
-    \footnote{On note $\parts(X)$ (resp. $\parts^*(X)$) l'ensemble des parties (resp. parties non-vides) de $X$, et $\finparts(X)$ (resp $\finparts^*(X)$) 
-    l'ensemble des parties finies (resp. parties finies non-vides) de $X$.}
-de parties finies non-vides de $\Z$,
-telle que $\forall n\in\Z, \frac{\card{(F_N-n)\triangle F_N}}{\card{F_N}} \xrightarrow[N\to+\infty]{} 0$. 
+Notons que, dans cette deuxième démonstration, l'hypothèse $\Gamma=\Z$ n'a été utilisée que pour établir l'existence d'une suite $F$ 
+de parties finies non-vides de $\Z$
+telle que $\frac{\card{(F_N-n)\triangle F_N}}{\card{F_N}} \xrightarrow[N\to+\infty]{} 0$ pour tout $n\in\Z$. 
 
 Dans le cas général, la mesure de Haar $\mu$ va remplacer le cardinal, et on va donc s'intéresser aux réels $\frac{\mu(\gamma F \triangle F)}{\mu(F)}$ 
 pour $F$ partie compacte de $\Gamma$ et $\gamma\in\Gamma$, et à leur comportement asymptotique
@@ -643,13 +678,18 @@ lorsque $F$ est grand. C'est l'objet de la partie suivante.
 \section{Conditions de F\o{}lner et de Reiter}
 
 Dans cette section, $\Gamma$ est un groupe topologique séparé et localement compact, et on fixe 
-$\mu$ une mesure de Haar à gauche sur $\Gamma$.
+$\mu$ une mesure de Haar \emph{à gauche} sur $\Gamma$. On prendra garde à ce que, contrairement au chapitre précédent,
+nous travaillerons à partir de maintenant avec des espaces et des objets dépendants du choix de la mesure de Haar,
+notamment pour des questions de normalisation. Évidemment cela nous soulève pas de difficulté majeure et 
+le lecteur pourra aisément deviner comment se comportent ces objets par changement de la mesure.
+
+Pour $X$ un ensemble quelconque, notons $\parts(X)$ (resp. $\parts^*(X)$) l'ensemble des parties (resp. parties non-vides) de $X$, et $\finparts(X)$ (resp $\finparts^*(X)$) 
+l'ensemble des parties finies (resp. parties finies non-vides) de $X$. Si maintenant $X$ est un espace topologique, 
+on note aussi $\mathfrak{K}(X)$ (resp. $\mathfrak{K}^*(X)$, resp. $\mathfrak{K}_+(X)$) l'ensemble des parties compactes 
+(resp. compactes non-vides, resp. compactes d'intérieur non-vide) de $X$. 
 
 On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathfrak{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
-$\mathfrak{K}_+(\Gamma)$
-\footnote{On note $\mathfrak{K}(X)$ (resp. $\mathfrak{K}^*(X)$, resp. $\mathfrak{K}_+(X)$) l'ensemble des parties compactes 
-(resp. compactes non-vides, resp. compactes d'intérieur non-vide) d'un espace topologique $X$. }
-des parties compactes de $\Gamma$ d'intérieur non vide par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
+$\mathfrak{K}_+(\Gamma)$ par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
 C'est une application bien définie car tout élément de $\mathfrak{K}_+(\Gamma)$ est de mesure finie non-nulle,
 et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
@@ -740,7 +780,7 @@ de lier la moyennabilité à la \emph{croissance} d'un groupe finiment engendré
 
 Cependant, pour établir la théorie, il sera utile de travailler avec une condition un peu plus flexible. Pour voir cela, reprenons une dernière fois la preuve
 précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{amenable_of_Folner_eq1} sur un compact, observons ce qui se passe 
-lorsqu'on considère une moyenne pondérée par une fonction $\varphi\in\mathscr{L}^1(\Gamma)$, positive et de masse $1$ (le cas déjà traité correspondant à $\varphi=\frac1{\mu(K)}\indic_K$).
+lorsqu'on considère une moyenne pondérée par une fonction $\varphi\in\mathscr{L}^1(\Gamma, \mu)$, positive et de masse $1$ (le cas déjà traité correspondant à $\varphi=\frac1{\mu(K)}\indic_K$).
 On obtient alors:
 \begin{equation*}\label{intuition_Reiter_eq1}
     -M \le c + \sum_i \integral{}{}{\varphi(x)\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
@@ -753,18 +793,16 @@ Pour $i$ fixé, on a alors :
         &\le \norm{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}_{\mathrm{L}^1} \\
         &\le \norm{f_i}_{\mathrm{L}^\infty} \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}
 \end{align*}
-Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.
+Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.\\
 
-\paragraph{}
-
-Notons $\mathscr{L}^1_{1,+}(\Gamma)$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1_{1, +}(\Gamma)$ son image dans 
-$\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1_{1, +}(\Gamma)\to\mathcal{F}(\Gamma, \R_+)$, définie par
+Notons $\mathscr{L}^1(\Gamma, \mu)_{1,+}$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ son image dans 
+$\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1(\Gamma, \mu)_{1, +}\to\mathcal{F}(\Gamma, \R_+)$, définie par
 par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$.
 
-Un filtre $\mathscr{F}$ sur $\mathrm{L}^1_{1, +}(\Gamma)$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) s'il est non-trivial et si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
+Un filtre $\mathscr{F}$ sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) s'il est non-trivial et si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
 topologie de la convergence simple (resp. uniforme sur les compacts) sur $\mathcal{F}(\Gamma, \R_+)$. 
-Une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est \emph{faiblement de Reiter} (resp \emph{fortement de Reiter}) si le filtre $\varphi_*\nhds_{+\infty}^\N$ est faiblement (resp. fortement) de Reiter. Comme $\mathfrak{r}_*\varphi_*\nhds_{+\infty}^\N = (\mathfrak{r}\comp \varphi)_*\nhds_{+\infty}^\N$,
-une suite $\varphi:\N\to\mathrm{L}^1_{1, +}(\Gamma)$ est donc faiblement (resp. fortement) de Reiter \ssi la suite de fonctions
+Une suite $\varphi:\N\to\mathrm{L}^1(\Gamma, \mu)_{1, +}$ est \emph{faiblement de Reiter} (resp \emph{fortement de Reiter}) si le filtre $\varphi_*\nhds_{+\infty}^\N$ est faiblement (resp. fortement) de Reiter. Comme $\mathfrak{r}_*\varphi_*\nhds_{+\infty}^\N = (\mathfrak{r}\comp \varphi)_*\nhds_{+\infty}^\N$,
+une suite $\varphi:\N\to\mathrm{L}^1(\Gamma, \mu)_{1, +}$ est donc faiblement (resp. fortement) de Reiter \ssi la suite de fonctions
 $n\mapsto\left(\gamma\mapsto\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}\right)$ converge vers $0$ simplement 
 (resp. uniformément sur tout compact).
 
@@ -774,12 +812,12 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
     $\Gamma$ admet un filtre faiblement de Reiter \ssi il satisfait la 
     \emph{condition de Reiter faible} :
     \begin{equation}\label{weak_Reiter_cond}\tag{WR}
-        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1_{1,+}(\Gamma), 
+        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, 
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
     Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
     \begin{equation}\label{strong_Reiter_cond}\tag{SR}
-        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists\varphi\in\mathscr{L}^1_{1,+}(\Gamma), \forall\gamma\in A, 
+        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, \forall\gamma\in A, 
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
 
@@ -788,13 +826,13 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
 \end{lemma}
 
 Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\mathfrak{K}_+(\Gamma)$, l'application 
-$\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1_{1,+}(\Gamma)$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
+$\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1(\Gamma, \mu)_{1,+}$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
 Si $\mathscr{F}$ est un filtre de F\o{}lner fort (resp. faible), $\chi_*\mathscr{F}$ est donc un filtre de Reiter fort (resp. faible).
 
 Avant d'en arriver au résultat crucial de cette partie, introduisons une dernière notion. Une moyenne $m$ sur $\Gamma$ est dite 
 \emph{topologiquement invariante (à gauche)} si :
 \begin{equation*}
-    \forall f\in\mathrm{L}^\infty(\Gamma), \forall\varphi\in\mathrm{L}^1_{1, +}(\Gamma), m(\varphi*f) = m(f)
+    \forall f\in\mathrm{L}^\infty(\Gamma), \forall\varphi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}, m(\varphi*f) = m(f)
 \end{equation*}
 \TODO{Renvoi vers propriétés et def de la convolution}
 
@@ -815,7 +853,7 @@ permettra de caractériser la moyennabilité par la théorie des représentation
 
 La preuve nécessite un certain nombre de résultats et définitions préliminaires, que nous détaillons maintenant. 
 
-\TODO{Dans les sections suivantes, motiver les résultats à l'avance. Ou bien les mettre dans la preuve et faire les preuves des lemmes ensuite.}
+\TODO{Dans les sections suivantes, ajouter un peu de motivation}
 
 \subsection{L'espace \texorpdfstring{$UC_b(\Gamma_d)$}{des fonctions uniformément continues bornées}}
 
@@ -1102,7 +1140,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
 \begin{proof}
     Commençons par montrer \framebox{$(\ref{amenable_TFAE/amenable})\implies(\ref{amenable_TFAE/topological_mean})$}. Soit donc 
     $m$ une moyenne invariante sur $\Gamma$. La première étape est de remarquer que, sans avoir à modifier la moyenne 
-    $m$, on a déjà $m(\varphi\ast f) = m(f)$ pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathrm{L}^1_{1, +}(\Gamma)$.
+    $m$, on a déjà $m(\varphi\ast f) = m(f)$ pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}$.
     Notons donc $\widetilde{m}$ la restriction de $m$ à $UC_b(\Gamma_d)$.
 
     Pour voir cela, fixons $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1(\Gamma)$, que nous ne supposons pas encore positive normalisée.
@@ -1128,22 +1166,22 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     \end{align*}
     Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution (\TODO{ref}), 
     de $\widetilde{m}$ et de l'intégration, que l'égalité $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)\integral{}{}{\varphi}{\mu}$ est valable 
-    pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ (et toujours pour 
+    pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ (et toujours pour 
     $f\in UC_b(\Gamma_d)$), on a $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)$.
     
     Revenons maintenant au cas général, et fixons $\mathscr{F}$ un filtre d'approximation de l'unité 
-    dans $\mathscr{L}^1_{1, +}(\Gamma)$, de sorte que pour tout $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$, la fonction 
+    dans $\mathscr{L}^1(\Gamma, \mu)_{1, +}$, de sorte que pour tout $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, la fonction 
     $\psi\mapsto\varphi\ast\psi$ converge selon $\mathscr{F}$ vers $\varphi$ en norme $\mathrm{L}^1$. 
     Si on se donne de plus $f\in\mathscr{L}^\infty(\Gamma)$, on a donc que la fonction $\psi\mapsto(\varphi\ast\psi)\ast f = \varphi\ast(\psi\ast f)$
-    converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1_{1, +}(\Gamma)$, on
+    converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, on
     a $\psi\ast f\in UC_b(\Gamma_d)$ (proposition \ref{conv_UCB}), donc $\widetilde{m}(\varphi\ast\psi\ast f) = \widetilde{m}(\psi\ast f)$,
     de sorte que le nombre $\widetilde{m}(\varphi\ast f)$ est limite selon $\mathscr{F}$ de $\psi\mapsto\widetilde{m}(\psi\ast f)$ et 
-    ne dépend donc pas de $\varphi$. On a ainsi montré que $\forall\varphi, \varphi'\in\mathscr{L}^1_{1, +}(\Gamma), \widetilde{m}(\varphi\ast f) = \widetilde{m}(\varphi'\ast f)$.
+    ne dépend donc pas de $\varphi$. On a ainsi montré que $\forall\varphi, \varphi'\in\mathscr{L}^1(\Gamma, \mu)_{1, +}, \widetilde{m}(\varphi\ast f) = \widetilde{m}(\varphi'\ast f)$.
 
-    Choisissons alors $\varphi_0\in\mathscr{L}^1_{1, +}(\Gamma)$, par exemple en posant $\varphi_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
+    Choisissons alors $\varphi_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, par exemple en posant $\varphi_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
     $U$ voisinage compact de $1$, et posons $\fundef{n}{\mathrm{L}^\infty(\Gamma)&\to&\C}{f&\mapsto&\widetilde{m}(\varphi_0\ast f)}$. Il s'agit bien d'une 
     forme linéaire continue et positive car la convolée de fonctions positives est positive, et on a $n(1)=\widetilde{m}(\varphi_0\ast 1) = \widetilde{m}\left(\left(\integral{}{}{\varphi_0}{\mu}\right)\cdot 1\right) = \widetilde{m}(1) = 1$.
-    Reste à vérifier que la moyenne $n$ est bien topologiquement invariante. Soit donc $\varphi\in\mathscr{L}^1_{1, +}(\Gamma)$ quelconque, et calculons :
+    Reste à vérifier que la moyenne $n$ est bien topologiquement invariante. Soit donc $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ quelconque, et calculons :
     \begin{align*}
         n(\varphi\ast f) 
             &= \widetilde{m}(\varphi_0\ast\varphi\ast f) \\
@@ -1165,23 +1203,23 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     Il reste donc à montrer \framebox{$(\ref{amenable_TFAE/weak_Reiter})\implies(\ref{amenable_TFAE/amenable})$}. On a déjà vu comment 
     adapter la preuve du théorème \ref{amenable_of_Folner} pour montrer la moyennabilité d'un groupe muni d'un filtre de Reiter 
     faible, mais on va en profiter pour donner une autre construction. Supposons donc que $\Gamma$ satisfait la condition de Reiter faible,
-    et soit $\mathscr{F}$ un filtre faiblement de Reiter sur $\mathrm{L}^1_{1, +}(\Gamma)$, dont l'existence est assurée par le lemme
+    et soit $\mathscr{F}$ un filtre faiblement de Reiter sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, dont l'existence est assurée par le lemme
     \ref{Reiter_filter_of_cond}. Comme $\mathscr{F}$ est non-trivial, il est plus grossier qu'un certain ultrafiltre $\mathscr{U}$. 
 
     Comme au lemme \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
-    les parties $\mathrm{L}^1_{1, +}(\Gamma)$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
-    $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1_{1, +}(\Gamma)\hookrightarrow \mathcal{M}(\Gamma)$
+    les parties $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
+    $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1(\Gamma, \mu)_{1, +}\hookrightarrow \mathcal{M}(\Gamma)$
     les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact (lemme \TODO{\ref{compact_setof_means}}),
     l'ultrafiltre $\widetilde{\iota}_*\mathscr{U}$ sur $\mathcal{M}(\Gamma)$ converge vers une certaine moyenne $m$. Il s'agit de montrer que $m$ est invariante,
     soit donc $\gamma\in\Gamma$. Par définition d'un filtre de Reiter faible, la fonction $\ev_\gamma\comp\mathfrak{r}:\varphi\mapsto\norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$
     converge vers $0$ selon $\mathscr{F}$, et donc selon $\mathscr{U}$. Autrement dit la 
-    fonction $(\lambda(\gamma\inv)-\id)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge vers $0$ selon $\mathscr{U}$
-    en norme $\mathrm{L}^1$, donc pour la topologie faible, et par conséquent $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)}$ converge 
+    fonction $(\lambda(\gamma\inv)-\id)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}}$ converge vers $0$ selon $\mathscr{U}$
+    en norme $\mathrm{L}^1$, donc pour la topologie faible, et par conséquent $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}}$ converge 
     aussi vers $0$ selon $\mathscr{U}$ dans $\mathrm{L}^\infty(\Gamma)^*$. Or, pour tout
     $\varphi\in\mathrm{L}^1(\Gamma)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
     $\iota\comp\lambda(\gamma\inv) = \transpose{(\lambda(\gamma))}\comp\iota$.
     La transposée de l'isométrie $\lambda(\gamma):\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$ est continue 
-    pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1_{1, +}(\Gamma)} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
+    pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
     converge aussi vers $m\comp\lambda(\gamma)-m$ selon $\mathscr{U}$.
     $\mathscr{U}$ étant non-trivial et $\mathrm{L}^\infty(\Gamma)^*$ séparé, on a $m\comp\lambda(\gamma)-m = 0$ par unicité de la limite, ce qui conclut.
 \end{proof}
@@ -1394,7 +1432,7 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
     de Reiter faible \eqref{weak_Reiter_cond}. 
     Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma)$ unitaire vérifiant $\norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
-    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1_{1, +}(\Gamma)$, qui vérifie \TODO{finir}
+    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie \TODO{finir}
 
     On montre similairement \TODO{\framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$}} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
 
@@ -1458,7 +1496,7 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     si $\Gamma$ est discret, ce qui explique pourquoi la preuve fonctionne dans ce cas.}
 
     La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
-    Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
+    Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
     un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$
     et $S := \lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
     \begin{equation*}
@@ -1523,13 +1561,13 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
 %Lorsque cette condition est vérifiée, on dit que $\pi$ \emph{admet presque des vecteurs invariants}.
 %
 %\begin{lemma}
-%    $\pi$ admet presque des vecteurs invariants \ssi $\forall\varepsilon>0, \forall f\in\mathscr{L}^1_{1, +}(\Gamma)\cap C_c(\Gamma), \exists\xi\in V_\pi, 
+%    $\pi$ admet presque des vecteurs invariants \ssi $\forall\varepsilon>0, \forall f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}\cap C_c(\Gamma), \exists\xi\in V_\pi, 
 %        \norm{\xi} = 1\land \norm{f\cdot (\ev_\xi\comp\pi - \xi)}_{\mathrm{L}^1}<\varepsilon$, cette dernière expression étant bien définie 
 %        en vertu du théorème \ref{strong_measurable_crit} appliquée à la fonction $g\mapsto f(g)(\pi(g)(\xi) - \xi)$ continue à support compact.
 %\end{lemma}
 %
 %\begin{proof}
-%    En supposant d'abord que $\pi$ admet presque des vecteurs invariants, soient $\varepsilon>0$ et $f\in\mathscr{L}^1_{1, +}(\Gamma)\cap C_c(\Gamma)$,
+%    En supposant d'abord que $\pi$ admet presque des vecteurs invariants, soient $\varepsilon>0$ et $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}\cap C_c(\Gamma)$,
 %    et notons $K := \Supp f$. L'hypothèse fournit alors $\xi\in V_\pi$ de norme $1$ tel que $\forall g\in K, \norm{\pi(g)(\xi) - \xi}<\varepsilon$. De 
 %    manière immédiate, on a donc $\norm{f\cdot (\ev_\xi\comp\pi - \xi)}_{\mathrm{L}^1} = \integral{}{}{f(g)\norm{\pi(g)(\xi) - \xi}}{\mu(g)} < \varepsilon\integral{}{}{f}{\mu} = \varepsilon$.
 %
