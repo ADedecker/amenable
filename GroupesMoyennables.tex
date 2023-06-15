@@ -987,7 +987,7 @@ car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} =
 
 Le résultat principal quant à ce plongement est que son image est $*$-faiblement dense.
 
-\begin{lemma}\label{dense_in_means}
+\begin{theorem}\label{dense_in_means}
     Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$.
 
     Munissons l'espace $\mathrm{L}^1(X,\mu)$ de la topologie faible $\sigma(\mathrm{L}^1, \mathrm{L}^\infty) = \sigma\left(\mathrm{L}^1, {\mathrm{L}^1}^*\right)$
@@ -998,7 +998,7 @@ Le résultat principal quant à ce plongement est que son image est $*$-faibleme
     L'application $\iota:\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$ est alors un plongement d'espaces 
     vectoriels topologiques, et le plongement topologique induit $\widetilde{\iota}:\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$
     est d'image dense. 
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
     Notons que, pour toutes $f\in\mathscr{L}^1(X, \mu)$, $\varphi\in\mathscr{L}^\infty(X, \mu)$, on a, pour les dualités usuelles 
@@ -1191,7 +1191,17 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     \end{align*}
     Cela conclut cette première implication. 
 
-    Montrons maintenant \framebox{$(\ref{amenable_TFAE/topological_mean})\implies(\ref{amenable_TFAE/strong_Reiter})$}. \TODO{}
+    Montrons maintenant \framebox{$(\ref{amenable_TFAE/topological_mean})\implies(\ref{amenable_TFAE/strong_Reiter})$}. Soit donc $m$ une moyenne topologiquement invariante.
+    Le théorème \ref{dense_in_means} fournit un filtre $\mathscr{F}$ sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$
+    tel que $\widetilde{\iota}_*\mathscr{F}$ converge vers $m$ pour la topologie faible-$*$ sur $\mathcal{M}(\Gamma)$.
+    L'invariance topologique de $m$ assure donc que, pour toutes $\varphi\in\mathscr{L}^1(\Gamma)_{1, +}$ et 
+    $f\in\mathscr{L}^\infty(\Gamma)$, la fonction $\ket{\blank, \varphi\ast f - f}$ converge vers $0$ selon $\mathscr{F}$.
+    Or, pour toute $\psi\in\mathscr{L}^1(\Gamma)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \TODO{}),
+    donc :
+    \begin{equation}
+        \forall\varphi\in\mathscr{L}^1(\Gamma)_{1, +}, \forall f\in\mathscr{L}^\infty(\Gamma), \ket{\varphi\ast\psi - \psi, f}\xrightarrow[\psi\to\mathscr{F}]{}0
+    \end{equation}
+    \TODO{finir}
 
     Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. \TODO{}
 
@@ -1206,7 +1216,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     et soit $\mathscr{F}$ un filtre faiblement de Reiter sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, dont l'existence est assurée par le lemme
     \ref{Reiter_filter_of_cond}. Comme $\mathscr{F}$ est non-trivial, il est plus grossier qu'un certain ultrafiltre $\mathscr{U}$. 
 
-    Comme au lemme \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
+    Comme au théorème \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
     les parties $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
     $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1(\Gamma, \mu)_{1, +}\hookrightarrow \mathcal{M}(\Gamma)$
     les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact (lemme \TODO{\ref{compact_setof_means}}),
