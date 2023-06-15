@@ -977,15 +977,19 @@ est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\
 
 Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
 Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
-$\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}.
+$\mathcal{M}(\Gamma):=\mathcal{M}(\Gamma, \mu)$\footnote{Rappelons que cet ensemble ne dépend pas du choix de $\mu$.}. Notons déjà que cet ensemble est
+$\ast$-faiblement compact. En effet, le théorème de Banach-Alaoglu assure que la boule unité fermée $\mathbb{B}$
+de $\left(\mathrm{L}^\infty(X, \mu)\right)^*$ est compacte pour la topologie faible-$*$ $\sigma({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$,
+et $\mathcal{M}(X, \mu)$ n'est autre que l'ensemble des $m\in\mathbb{B}$ telles que $m(1) = 1$ (lemme \ref{positive_iff_norm}),
+qui est $*$-faiblement fermé dans $\mathbb{B}$ et donc $*$-faiblement compact.
 
-Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$. Le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$
-(\TODO{pk ?})
-induit, par restriction, un plongement isométrique $\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$. 
+Considérons désormais $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$, et 
+étudions désormais le sous-ensemble des moyennes provenant de fonctions intégrables \emph{via} le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$.
+Notons déjà que ce plongement se restreint en $\mathrm{L}^1(X, \mu)_{1, +}\hookrightarrow \mathcal{M}(X, \mu)$.
 En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
 car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
 
-Le résultat principal quant à ce plongement est que son image est $*$-faiblement dense.
+Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrightarrow \mathcal{M}(X, \mu)$ est que son image est $*$-faiblement dense.
 
 \begin{theorem}\label{dense_in_means}
     Soit $X$ espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$.
@@ -1079,7 +1083,8 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     Pour chaque $i\in I$, notons donc $\psi_i$ la forme linéaire $\ket{\blank, f_i}$. Si $x\in\bigcap_{i\in I}\ker\psi_i$, on a bien sûr 
     $x\in\mathbf{V}\subseteq\mathbf{U}$ donc $\abs{\varphi(x)}<1$. Mais on a aussi $\forall t\in\R_+, tx\in\bigcap_{i\in I}\ker\psi_i$, d'où 
     $\forall t\in\R_+^*, \abs{\varphi(x)}<\frac1t$, d'où $x\in\ker\varphi$ en faisant tendre $t$ vers $0$. 
-    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur un lemme usuel d'algèbre linéaire.
+    On a donc montré $\bigcap_{i\in I}\ker\psi_i\subseteq\ker\varphi$. Pour conclure, on va s'appuyer sur un lemme usuel d'algèbre linéaire, dont nous redonnons
+    une preuve ci-dessous.
     \begin{lemma}\label{span_dual_of_ker}
         Soient $k$ un corps, $E$ un $k$-espace vectoriel, $I$ un ensemble fini et $\psi : I\to E^\sharp$
         \footnote{On note $E^\sharp$ le dual algébrique de $E$.} une famille de formes linéaires sur $E$.
@@ -1090,17 +1095,6 @@ tandis que le lemme \ref{positive_of_positive_form} assure la positivité de $\R
     Ce lemme fournit  $a : I\to\K$ telle que $\varphi = \sum_{i\in I} a_i\psi_i = \ket{\blank, \sum_{i\in I} a_i f_i}$,
     ce qui achève la preuve du lemme \ref{dual_of_weak}.
 \end{proof}
-
-\begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
-    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ n'est \emph{pas} $\mu$-localement-négligeable. Par définition, cela fournit 
-    $\mathbf{T}\in\Bor(X)$ de mesure finie tel que $0<\mu(\mathbf{T}\cap\mathbf{S})<+\infty$, de sorte que $\indic_{\mathbf{T}\cap\mathbf{S}}$ est positive et intégrable. L'intégrale
-    $\integral{}{}{\indic_{\mathbf{T}\cap\mathbf{S}}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
-    donc nulle. La fonction positive $-\indic_{\mathbf{T}\cap\mathbf{S}}\varphi$ est d'intégrale nulle, 
-    l'inégalité de Markov \ref{markov_and_consequence} assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
-    sur l'ensemble $\mathbf{T}\cap\mathbf{S}$ de mesure non-nulle.
-\end{proof}
-
-Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_dual_of_ker}.
 
 \begin{proof}
     Il est clair que toute combinaison linéaire des $\psi_i$ est nulle sur l'ensemble $\bigcap_{i\in I}\ker\psi_i$.
@@ -1115,6 +1109,46 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     pour une certaine famille $a : I\to\C$. Il vient enfin
     $\varphi = \widetilde{\varphi}\comp\widetilde{\Psi} = \widehat{\varphi}\comp\Psi = \sum_{i\in I} a_i (e^*_i \comp\Psi) = \sum_{i\in I} a_i\psi_i$,
     ce qui conclut.
+\end{proof}
+
+\begin{proof}[Démonstration du lemme \ref{positive_of_positive_form}]
+    Supposons que l'ensemble $\mathbf{S} := \set{x\in X\tq\varphi(x)<0}$ n'est \emph{pas} $\mu$-localement-négligeable. Par définition, cela fournit 
+    $\mathbf{T}\in\Bor(X)$ de mesure finie tel que $0<\mu(\mathbf{T}\cap\mathbf{S})<+\infty$, de sorte que $\indic_{\mathbf{T}\cap\mathbf{S}}$ est positive et intégrable. L'intégrale
+    $\integral{}{}{\indic_{\mathbf{T}\cap\mathbf{S}}\varphi}{\mu}$ est donc positive par hypothèse, et négative comme intégrale d'une fonction négative,
+    donc nulle. La fonction positive $-\indic_{\mathbf{T}\cap\mathbf{S}}\varphi$ est d'intégrale nulle, 
+    l'inégalité de Markov \ref{markov_and_consequence} assure donc qu'elle est nulle presque partout, ce qui contredit le fait qu'elle est non-nulle 
+    sur l'ensemble $\mathbf{T}\cap\mathbf{S}$ de mesure non-nulle.
+\end{proof}
+
+Pour conclure cette partie, nous allons donner une autre conséquence du lemme \ref{dual_of_weak} qui servira 
+à montrer le théorème \ref{amenable_TFAE}.
+
+\begin{proposition}\label{weak_convex_closed}
+    Soit $(E, \mathcal{T})$ un $\K$-espace vectoriel topologique localement convexe, où $\K\in\set{\R, \C}$. Les ensembles convexes fermés pour la topologie 
+    $\sigma(E, E^*)$ sont exactement les ensembles convexes fermés pour $\mathcal{T}$.
+\end{proposition}
+
+\begin{proof}
+    On dit qu'une partie de $E$ est un \emph{demi-espace fermé} si elle s'écrit sous la forme $\set{x\in E\tq \Re f(x)\leq a}$ pour 
+    $f\in E^*$ et $a\in\R$.
+    Le lemme \ref{dual_of_weak} assure que $\sigma(E^*, E)$ et $\mathcal{T}$ définissent le même ensemble de formes linéaires continues,
+    et donc les mêmes demi-espaces fermés. Ces deux topologies étant localement convexes, la proposition découle donc du lemme suivant.
+\end{proof}
+
+\begin{lemma}
+    Soit $E$ un $\K$-espace vectoriel topologique localement convexe, où $\K\in\set{\R, \C}$. Toute partie 
+    convexe fermée de $E$ est l'intersection des demi-espaces fermés qui le contiennent.
+\end{lemma}
+
+\begin{proof}
+    Soit $F$ un convexe fermé, il est clair que $F$ est contenu dans l'intersection des demi-espaces fermés qui le contiennent.
+    Soit donc $x\notin F$, et montrons qu'il existe au moins un demi-espace fermé contenant $F$ mais pas $x$. 
+    Pour $\K=\R$ c'est une conséquence immédiate du théorème de séparation de Hahn-Banach. Pour $\K=\C$
+    c'est le cas aussi, mais il faut un petit argument supplémentaire\footnote{Sauf si on utilise les versions complexes 
+    du théorème de séparation, mais on préfère ici se cantonner au cas réel, plus standard.}. Le théorème 
+    de séparation \emph{réel} fournit toujours une forme $\R$-linéaire continue $f:\floor{E}\to\R$ et un réel $a$ tel que $f(x)>a$
+    et $\forall y\in F, f(y)<a$. Il suffit alors d'écrire $f = \Re g$ où $\fundef{g}{\mathrm{L}^\infty(X,\mu)^* &\to& \C}{x&\mapsto&f(x)-\i f(\i x)}$ est $\C$-linéaire et continue,
+    et le demi-espace fermé associé à $g$ et $a$ contient bien $F$ mais pas $x$. 
 \end{proof}
 
 %,
@@ -1192,15 +1226,30 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     Cela conclut cette première implication. 
 
     Montrons maintenant \framebox{$(\ref{amenable_TFAE/topological_mean})\implies(\ref{amenable_TFAE/strong_Reiter})$}. Soit donc $m$ une moyenne topologiquement invariante.
-    Le théorème \ref{dense_in_means} fournit un filtre $\mathscr{F}$ sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$
+    Le théorème \ref{dense_in_means} fournit un filtre $\mathscr{F}$ non-trivial sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$
     tel que $\widetilde{\iota}_*\mathscr{F}$ converge vers $m$ pour la topologie faible-$*$ sur $\mathcal{M}(\Gamma)$.
     L'invariance topologique de $m$ assure donc que, pour toutes $\varphi\in\mathscr{L}^1(\Gamma)_{1, +}$ et 
     $f\in\mathscr{L}^\infty(\Gamma)$, la fonction $\ket{\blank, \varphi\ast f - f}$ converge vers $0$ selon $\mathscr{F}$.
     Or, pour toute $\psi\in\mathscr{L}^1(\Gamma)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \TODO{}),
     donc :
-    \begin{equation}
+    \begin{equation}\label{amenable_TFAE/eq1}
         \forall\varphi\in\mathscr{L}^1(\Gamma)_{1, +}, \forall f\in\mathscr{L}^\infty(\Gamma), \ket{\varphi\ast\psi - \psi, f}\xrightarrow[\psi\to\mathscr{F}]{}0
     \end{equation}
+    Considérons maintenant l'espace vectoriel $E := \mathcal{F}(\mathrm{L}^1(\Gamma)_{1, +}, \mathrm{L}^1(\Gamma))$ muni de la topologie 
+    produit des topologies normiques. $E$ est alors localement convexe, et la topologie faible $\sigma(E, E^*)$ sur $E$
+    coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma)$ (\TODO{explication ?}). Notons $\Sigma\subseteq E$ l'ensemble convexe formé
+    des fonctions de la forme $\fundef{A_\psi}{\mathrm{L}^1(\Gamma)_{1, +}&\to&\mathrm{L}^1(\Gamma)}{\varphi&\mapsto&\varphi\ast\psi - \psi}$ pour $\psi\in\mathrm{L}^1(\Gamma)_{1, +}$.
+    \eqref{amenable_TFAE/eq1} montre que $0$ est adhérent à $\Sigma$ pour le produit des topologies faibles, 
+    donc pour la topologie faible sur $E$, et donc aussi pour la topologie originale de $E$ d'après la proposition \ref{weak_convex_closed}.
+    Mais nous avons en plus que chaque $A_\psi$ est $1$-lipschitzienne par l'inégalité de Young, donc l'ensemble
+    $\Sigma$ est équicontinu, donc son adhérence simple coïncide avec son adhérence pour la convergence compacte.
+    $0$ est donc limite uniforme sur les compacts d'éléments de $\Sigma$, ce qui fournit un nouveau filtre $\mathscr{G}$ non-trivial sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ 
+    tel que $A:\psi\mapsto A_\psi$ converge vers $0$ selon $\mathscr{G}$ uniformément sur les compacts. Autrement dit :
+    \begin{equation}
+        \forall K\in\mathfrak{K}(\mathrm{L}^1(\Gamma)_{1, +}), \sup_{\varphi\in K}\norm{\varphi\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0
+    \end{equation}
+
+    Nous avons désormais tous les outils nécessaires pour montrer $(\ref{amenable_TFAE/strong_Reiter})$. Soient $\varepsilon>0$ et $A\in\mathfrak{K}(\Gamma)$.
     \TODO{finir}
 
     Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. \TODO{}
@@ -1219,7 +1268,7 @@ Par soucis de complétude, donnons tout de même une preuve du lemme \ref{span_d
     Comme au théorème \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
     les parties $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
     $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1(\Gamma, \mu)_{1, +}\hookrightarrow \mathcal{M}(\Gamma)$
-    les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact (lemme \TODO{\ref{compact_setof_means}}),
+    les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact,
     l'ultrafiltre $\widetilde{\iota}_*\mathscr{U}$ sur $\mathcal{M}(\Gamma)$ converge vers une certaine moyenne $m$. Il s'agit de montrer que $m$ est invariante,
     soit donc $\gamma\in\Gamma$. Par définition d'un filtre de Reiter faible, la fonction $\ev_\gamma\comp\mathfrak{r}:\varphi\mapsto\norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$
     converge vers $0$ selon $\mathscr{F}$, et donc selon $\mathscr{U}$. Autrement dit la 
