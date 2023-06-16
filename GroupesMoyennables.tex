@@ -1245,12 +1245,23 @@ Pour conclure cette partie, nous allons donner une autre conséquence du lemme \
     $\Sigma$ est équicontinu, donc son adhérence simple coïncide avec son adhérence pour la convergence compacte.
     $0$ est donc limite uniforme sur les compacts d'éléments de $\Sigma$, ce qui fournit un nouveau filtre $\mathscr{G}$ non-trivial sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ 
     tel que $A:\psi\mapsto A_\psi$ converge vers $0$ selon $\mathscr{G}$ uniformément sur les compacts. Autrement dit :
-    \begin{equation}
-        \forall K\in\mathfrak{K}(\mathrm{L}^1(\Gamma)_{1, +}), \sup_{\varphi\in K}\norm{\varphi\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0
+    \begin{equation}\label{amenable_TFAE/eq2}
+        \forall K\in\mathfrak{K}(\mathrm{L}^1(\Gamma, \mu)_{1, +}), \sup_{\varphi\in K}\norm{\varphi\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0
     \end{equation}
 
     Nous avons désormais tous les outils nécessaires pour montrer $(\ref{amenable_TFAE/strong_Reiter})$. Soient $\varepsilon>0$ et $A\in\mathfrak{K}(\Gamma)$.
-    \TODO{finir}
+    Posons alors $Q := A\cup\set{1}$, qui est toujours compact, et choisissons $\varphi_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$. La continuité de la représentation régulière $\lambda$ sur 
+    $\mathrm{L}^1(\Gamma)$ assure que l'application $\fundef{\ev_{\varphi_0}\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma, \mu)_{1, +}}{g&\mapsto&\lambda(g)(\varphi)}$ est continue. 
+    L'ensemble $K := (\ev_{\varphi_0}\comp\lambda)(Q)$ est donc un compact de $\mathrm{L}^1(\Gamma, \mu)_{1, +}$. \eqref{amenable_TFAE/eq2} donne donc 
+    que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0$, ce qui fournit, par nontrivialité 
+    de $\mathscr{G}$, un $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ tel que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} < \halfilon$. Posons enfin $\varphi := \varphi_0\ast\psi$.
+    On a alors $\lambda(g)(\varphi) = \lambda(g)(\varphi_0)\ast\psi$ pour tout $g\in\Gamma$ (\TODO{ref}). Il vient finalement, pour tout $g\in A\subseteq Q$ : 
+    \begin{equation*}
+        \norm{\lambda(g)(\varphi) - \varphi}_{\mathrm{L}^1} \leq    
+            \norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} + \norm{\lambda(1)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1}
+            < 2\halfilon = \varepsilon
+    \end{equation*}
+    Cela montre bien que $\Gamma$ satisfait la condition de Reiter forte \eqref{strong_Reiter_cond}.
 
     Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. \TODO{}
 
