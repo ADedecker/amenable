@@ -212,25 +212,66 @@ Commençons par prouver le lemme suivant, qui sera utile en lui-même.
 Les premiers exemples de groupes moyennables sont les groupes compacts séparés (et en particulier les groupes finis discrets).
 En effet, si l'on note $\mu$ la mesure de Haar normalisée d'un tel groupe, l'intégration selon $\mu$ fournit une moyenne invariante. 
 
-Au vu de cet exemple, il peut être tentant de supposer que toute moyenne est donnée par l'intégration pour une mesure 
+Donnons tout de suite un contre-exemple, qui fut fondamental dans le développement historique de la théorie.
+
+\begin{theorem}\label{not_amenable_F2}
+    Le groupe libre en deux générateurs $F_2$ (muni de la topologie discrète) n'est pas moyennable.
+\end{theorem}
+
+\begin{proof}
+    Notons $a, b$ les deux générateurs. Pour $m$ mot réduit en $\set{a, b, a\inv, b\inv}$, notons 
+    $S(m)$ l'ensemble des $g\in F_2$ dont l'écriture (unique) comme mot réduit
+    commence par $m$. On a par exemple $ab\in S(a)$ mais $a a\inv b \notin S(a)$ car le mot réduit associé 
+    à $a a\inv b$ est $b$.
+
+    Remarquons que $a\inv S(a) = S(a\inv)\compl$. En effet, si $m$ est un mot réduit ne commençant pas par $a\inv$, 
+    $am$ est un mot réduit commençant par $a$. Réciproquement si $am$ est un mot réduit alors $m$ est réduit et ne commence 
+    pas par $a\inv$.
+
+    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe une moyenne $m$ sur 
+    $F_2$ invariante par translations. On a alors :
+    \begin{gather*}
+        m\left(\indic_{S(a)}\right) + m\left(\indic_{S(a\inv)}\right) = m\left(\lambda(a\inv)(\indic_{S(a)}) + \indic_{S(a\inv)}\right) = m\left(\indic_{a\inv S(a)} + \indic_{S(a\inv)}\right) = 1 \\
+        m\left(\indic_{S(b)}\right) + m\left(\indic_{S(b\inv)}\right) = m\left(\lambda(b\inv)(\indic_{S(b)}) + \indic_{S(b\inv)}\right) = m\left(\indic_{b\inv S(b)} + \indic_{S(b\inv)}\right) = 1 \\
+    \end{gather*}
+    Mais les ensembles $S(a)$, $S(a\inv)$, $S(b)$ et $S(b\inv)$ sont disjoints, donc :
+    \begin{equation*}
+        1 = m(1) \ge m\left(\indic_{S(a)} + \indic_{S(a\inv)} + \indic_{S(b)} + \indic_{S(b\inv)}\right) = 2
+    \end{equation*} 
+    D'où contradiction.
+\end{proof}
+
+\TODO{Mentionner importance historique ?}
+
+Il est intéressant de noter que, dans cette preuve, nous n'avons besoin d'évaluer la moyenne que sur des fonctions indicatrices.
+Cette remarque ainsi que le cas des groupes compacts suggèrent que l'on peut aussi voir une moyenne comme fonction 
+définie sur des parties de $\Gamma$, de manière similaire à une mesure. On retrouverait alors le point de vue \og{}forme 
+linéaire positive\fg{} par une forme d'intégration.
+
+Une hypothèse optimiste mais naturelle serait que toute moyenne est donnée par l'intégration pour une mesure 
 de Radon. En fait, si c'était le cas, la notion de moyennabilité ne serait pas très intéressante :
 en effet, si $\mu$ est une mesure de Radon sur $\Gamma$ telle que $f\mapsto\integral{}{}{f}{\mu}$ soit une moyenne bien définie et invariante,
 alors $\mu$ est automatiquement une mesure de Haar de masse $1$, et le théorème \ref{theorem_Haar} assure qu'une telle mesure n'existe que si
 $\Gamma$ est compact. Les groupes moyennables seraient donc exactement les groupes compacts !
 
-Évidemment ce n'est pas le cas, et nous montrerons en temps voulu que la classe des groupes moyennables est bien plus grande que 
-celle des groupes moyennables. Cependant, nous disposons bien d'un théorème de représentation des moyennes comme des
+Évidemment ce n'est pas le cas, et le théorème \ref{Z_amenable} de moyennabilité de $\Z$ montrera que la classe des groupes moyennables est plus grande que 
+celle des groupes compacts. Cependant, nous disposons bien d'un théorème de représentation des moyennes comme des
 \og{}intégrales\fg{}, à condition d'affaiblir la condition de $\sigma$-additivité des mesures.
 
 Un \emph{contenu} sur un espace mesurable $(X, \mathcal{A})$\footnote{On trouve dans la littérature des définitions de \emph{contenu} autorisant $\mathcal{A}$ à n'être qu'une algèbre d'ensembles,
 mais nous supposerons toujours qu'il s'agit d'une $\sigma$-algèbre.} est une fonction $m:\mathcal{A}\to\closure{\R}_+$ vérifiant $m(\varnothing) = 0$
 et $m(A_1\cup A_2) = m(A_1) + m(A_2)$ pour $A_1, A_2\in\mathcal{A}$ disjoints. Les mesures sur $(X, \mathcal{A})$
-sont donc exactement les contenus $\sigma$-additifs. Notons tout de suite que les contenus ne donnent pas lieu à 
-une théorie de l'intégration intéressante : en effet, en l'absence du théorème de convergence monotone, il n'est pas clair que l'intégrale 
-des fonctions positives \footnote{On rappelle que l'intégrale d'une fonction positive $f$ est définie comme la borne supérieure des 
-intégrales des fonctions simples positives inférieures à $f$} soit additive ! \TODO{Est-ce que c'est vrai ?} 
-On a tout de même un résultat positif si l'on se restreint
-intégrer des fonctions bornées selon des contenus finis, comme énoncé dans la proposition \ref{content_integration_and_repr} ci-dessous.
+sont donc exactement les contenus $\sigma$-additifs. 
+
+Nous allons à présent développer la théorie de l'intégration des fonctions \emph{bornées} selon un contenu \emph{fini}. Il convient de noter que,
+même si nous utiliserons le symbole $\int$, cette théorie ne jouit pas des propriétés agréables de l'intégration de Lebesgue,
+le défaut de $\sigma$-additivité se traduisant par l'absence des théorèmes de convergence monotone et dominée.
+%Notons tout de suite que les contenus ne donnent pas lieu à 
+%une théorie de l'intégration intéressante : en effet, en l'absence du théorème de convergence monotone, il n'est pas clair que l'intégrale 
+%des fonctions positives \footnote{On rappelle que l'intégrale d'une fonction positive $f$ est définie comme la borne supérieure des 
+%intégrales des fonctions simples positives inférieures à $f$} soit additive ! \TODO{Est-ce que c'est vrai ?} 
+%On a tout de même un résultat positif si l'on se restreint
+%intégrer des fonctions bornées selon des contenus finis, comme énoncé dans la proposition \ref{content_integration_and_repr} ci-dessous.
 
 \begin{definition}
     Soit $(X, \mathcal{A})$ un espace mesurable, $m$ et $n$ deux contenus sur $(X, \mathcal{A})$.
@@ -346,37 +387,6 @@ on vient donc de montrer le résultat suivant.
     Un groupe localement compact séparé $\Gamma$ est moyennable \ssi il admet un contenu de masse $1$ et invariant 
     (resp. invariant à gauche, resp. invariant à droite).
 \end{proposition}
-
-Utilisons tout de suite ce critère concret pour donner un premier exemple de groupe \emph{non}-moyennable.
-
-\begin{theorem}\label{not_amenable_F2}
-    Le groupe libre en deux générateurs $F_2$ (muni de la topologie discrète) n'est pas moyennable.
-\end{theorem}
-
-\begin{proof}
-    Notons $a, b$ les deux générateurs. Pour $m$ mot réduit en $\set{a, b, a\inv, b\inv}$, notons 
-    $S(m)$ l'ensemble des $g\in F_2$ dont l'écriture (unique) comme mot réduit
-    commence par $m$. On a par exemple $ab\in S(a)$ mais $a a\inv b \notin S(a)$ car le mot réduit associé 
-    à $a a\inv b$ est $b$.
-
-    Remarquons que $a\inv S(a) = S(a\inv)\compl$. En effet, si $m$ est un mot réduit ne commençant pas par $a\inv$, 
-    $am$ est un mot réduit commençant par $a$. Réciproquement si $am$ est un mot réduit alors $m$ est réduit et ne commence 
-    pas par $a\inv$. \TODO{est-ce que c'est assez clair ?}
-
-    On montre de même que $b\inv S(b) = S(b\inv)\compl$. Supposons alors qu'il existe un contenu $m$ sur 
-    $F_2$ de masse 1 et invariant par translation. On a alors :
-    \begin{gather*}
-        m(S(a)) + m(S(a\inv)) = m(a\inv S(a)\ \amalg\ S(a\inv)) = 1 \\
-        m(S(b)) + m(S(b\inv)) = m(b\inv S(b)\ \amalg\ S(b\inv)) = 1
-    \end{gather*}
-    Mais les ensembles $S(a)$, $S(a\inv)$, $S(b)$ et $S(b\inv)$ sont disjoints, donc :
-    \begin{equation*}
-        1 = m(F_2) \ge m(S(a)) + m(S(a\inv)) + m(S(b)) + m(S(b\inv)) = 2
-    \end{equation*} 
-    D'où contradiction.
-\end{proof}
-
-\TODO{Mentionner importance historique ?}
 
 %\paragraph{}
 %
