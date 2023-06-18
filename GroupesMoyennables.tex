@@ -719,25 +719,40 @@ Avant d'aller plus loin, donnons un critère plus simple pour l'existence de fil
     $\Gamma$ admet un filtre faiblement de F\o{}lner \ssi il satisfait la 
     \emph{condition de F\o{}lner faible} :
     \begin{equation}\label{weak_Folner_cond}\tag{WF}
-        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists K\in\mathfrak{K}_+(\Gamma), 
+        \forall\varepsilon>0, \forall S\in\finparts(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall \gamma\in S, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
     \end{equation}
-    Il admet de un filtre fortement de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner forte} : 
+    Si de plus $\Gamma$ est dénombrable, cette condition est équivalente à l'existence d'une \emph{suite} faiblement de F\o{}lner.
+
+    $\Gamma$ admet un filtre fortement de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner forte} : 
     \begin{equation}\label{strong_Folner_cond}\tag{SF}
         \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall\gamma\in A, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
     \end{equation}
-
-    \TODO{Dans quel cas a-t-on des suites ?}
-    %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
+    Si de plus $\Gamma$ est $\sigma$-compact, cette condition est équivalente à l'existence s'une \emph{suite} fortement de F\o{}lner.
 \end{lemma}
 
 \begin{proof}
-    \TODO{}
+    Les ensembles de la forme $\set{f \in \mathcal{F}(\Gamma, \R_+) \tq \forall\gamma\in S, f(\gamma) < \varepsilon}$, pour $S$ fini et $\varepsilon>0$, 
+    forment une base de voisinage de la fonction nulle dans $\mathcal{F}(\Gamma, \R_+)$ muni de la topologie produit. \eqref{weak_Folner_cond} exprime donc 
+    le fait que $0$ est adhérent à l'image de $\mathfrak{f}$ pour cette topologie, ce qui est équivalent avec 
+    l'existence d'un filtre $\mathscr{F}$ non-trivial sur $\mathfrak{K}_+(\Gamma)$ tel que $\mathfrak{f}_*\mathscr{F}$ converge vers $0$
+    simplement. C'est précisément la définition d'un filtre de F\o{}lner faible.
+    De plus, si $\Gamma$ est dénombrable, la topologie produit sur $\mathcal{F}(\Gamma, \R_+)$ est à base dénombrable de voisinages,
+    donc l'adhérence séquentielle de l'image de $\mathfrak{f}$ égale son adhérence, ce qui fournit la caractérisation séquentielle recherchée.
+
+    La deuxième partie du théorème se prouve similairement, en obesrvant que les ensembles de la forme 
+    $\set{f \in \mathcal{F}(\Gamma, \R_+) \tq \forall\gamma\in A, f(\gamma) < \varepsilon}$, pour $A$ compact et $\varepsilon>0$, 
+    forment une base de voisinage de la fonction nulle pour la topologie de la convergence compacte, et en notant que cette 
+    topologie est à base dénombrable de voisinages lorsque $\Gamma$ est $\sigma$-compact.
 \end{proof}
 
-%\TODO{Quelle est la bonne topologie à mettre sur $\mathcal{F}(\Gamma, \R_+)$ pour la définition de filtre de F\o{}lner : convergence simple ou compacte ?
-%    En tout cas la convergence simple suffit à faire marcher le théorème suivant.}
+\begin{remark}
+    On verra au théorème \ref{amenable_TFAE} que les conditions \eqref{weak_Folner_cond} et \eqref{strong_Folner_cond} sont en fait équivalentes.
+    Cela donne un critère plus intéressant pour l'existence d'une suite de F\o{}lner faible : si $\Gamma$ 
+    est $\sigma$-compact et vérifie \eqref{weak_Folner_cond}, il vérifie aussi \eqref{strong_Folner_cond} et admet 
+    donc une suite de F\o{}lner forte, qui est automatiquement une suite de F\o{}lner faible.
+\end{remark}
 
 Comme anoncé, on peut alors généraliser le théorème \ref{Z_amenable} à tout groupe muni d'un filtre faiblement de F\o{}lner,
 en adaptant directement la deuxième preuve de ce théorème.
@@ -776,7 +791,7 @@ en adaptant directement la deuxième preuve de ce théorème.
 \end{proof}
 
 La condition de F\o{}lner est très intéressante pour exprimer la moyennabilité de groupes discrets en termes combinatoires. Elle permet ainsi 
-de lier la moyennabilité à la \emph{croissance} d'un groupe finiment engendré. \TODO{Dire quelques mots de plus ?} 
+de lier la moyennabilité à la \emph{croissance} d'un groupe finiment engendré. %\TODO{Dire quelques mots de plus ?} 
 
 Cependant, pour établir la théorie, il sera utile de travailler avec une condition un peu plus flexible. Pour voir cela, reprenons une dernière fois la preuve
 précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{amenable_of_Folner_eq1} sur un compact, observons ce qui se passe 
@@ -812,7 +827,7 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
     $\Gamma$ admet un filtre faiblement de Reiter \ssi il satisfait la 
     \emph{condition de Reiter faible} :
     \begin{equation}\label{weak_Reiter_cond}\tag{WR}
-        \forall\varepsilon>0, \forall \gamma\in\Gamma, \exists \varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, 
+        \forall\varepsilon>0, \forall S\in\finparts(\Gamma), \exists \varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, \forall \gamma\in S,
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
     Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
@@ -821,13 +836,19 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
 
-    \TODO{Dans quel cas a-t-on des suites ?}
+    %\TODO{Dans quel cas a-t-on des suites ?}
     %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
 \end{lemma}
 
 Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\mathfrak{K}_+(\Gamma)$, l'application 
 $\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1(\Gamma, \mu)_{1,+}$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
 Si $\mathscr{F}$ est un filtre de F\o{}lner fort (resp. faible), $\chi_*\mathscr{F}$ est donc un filtre de Reiter fort (resp. faible).
+
+\begin{remark}
+    On verra au théorème \ref{amenable_TFAE} que les deux conditions de Reiter sont équivalentes entre elles et avec les deux condition de 
+    F\o{}lner. Comme une suite de F\o{}lner induit une suite de Reiter, on pourra déduire du lemme \ref{Folner_filter_of_cond} que \eqref{weak_Reiter_cond} implique l'existence d'une suite de Reiter 
+    forte (donc faible) à condition que $\Gamma$ soit $\sigma$-compact.
+\end{remark}
 
 Avant d'en arriver au résultat crucial de cette partie, introduisons une dernière notion. Une moyenne $m$ sur $\Gamma$ est dite 
 \emph{topologiquement invariante (à gauche)} si :
@@ -938,7 +959,8 @@ est encore un plongement isométrique. Dorénavant, on identifiera d'ailleurs $U
 Il s'agit donc de montrer le premier point.
 
 \begin{proof}
-    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ (\TODO{faut-il la remontrer ? Raisonnement par densité}) assure que 
+    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ %(\TODO{faut-il la remontrer ? Raisonnement par densité}) 
+    assure que 
     $\fundef{\ev_\varphi\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma)}{g&\mapsto&\lambda(g)(\varphi)}$ est continue, ce qui fournit 
     un voisinage $V\in\nhds_1^\Gamma$ tel que $\forall g\in V, \norm{\lambda(g)(\varphi) - \varphi}_1<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^\infty}}$. Or, pour $g, x\in \Gamma$ quelconques, on a :
     \begin{align*}
@@ -1169,6 +1191,11 @@ Pour conclure cette partie, nous allons donner une autre conséquence du lemme \
 %    De plus, si 
 %}.
 
+\subsection{Un lemme d'intégration}
+
+Terminons cette présentation des prérequis du théorème \ref{amenable_TFAE} par un petit lemme d'intégration,
+qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref{strong_Folner_cond}$. \TODO{}
+
 \subsection{Démonstration du théorème \ref{amenable_TFAE}} 
 
 \begin{proof}
@@ -1381,11 +1408,11 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
     les représentations triviales et régulières gauches de $\Gamma$. Les assertions suivantes sont équivalentes :
     \begin{enumerate}[(i)]
         \item\label{amenable_weak_contain/amenable} $\Gamma$ est moyennable
-        \item\label{amenable_weak_contain/weak_almost_invariant} $\forall\varepsilon>0, \forall \gamma\in\Gamma, \exists\xi\in \mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1 \land \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
+        \item\label{amenable_weak_contain/weak_almost_invariant} $\forall\varepsilon>0, \forall F\in\finparts(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma), \forall \gamma\in F, \norm{\xi}_{\mathrm{L}^2} = 1 \land \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
         \item\label{amenable_weak_contain/strong_almost_invariant} $\forall\varepsilon>0, \forall K\in\mathfrak{K}(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1 \land \forall \gamma\in K, \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
         \item\label{amenable_weak_contain/weak_contain} $\indic_\Gamma\wle\lambda_\Gamma$
-        \item\label{amenable_weak_contain/norm_eq_two} $\forall\gamma\in\Gamma, \norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} = 2$
-        \item\label{amenable_weak_contain/one_mem_spectrum} $\forall\gamma\in\Gamma, 1\in\Sp(\lambda_\Gamma(\gamma))$
+        \item\label{amenable_weak_contain/norm_eq_two} $\forall F\in\finparts(\Gamma), \norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} = 2\card{F}$
+        %\item\label{amenable_weak_contain/one_mem_spectrum} $\forall\gamma\in\Gamma, 1\in\Sp(\lambda_\Gamma(\gamma))$
     \end{enumerate}
 \end{theorem}
 
@@ -1393,9 +1420,7 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
 
 \subsection{Quelques résultats de théorie spectrale}
 
-Au vu de l'assertion $(\ref{amenable_weak_contain/one_mem_spectrum})$, il est assez naturel d'interpréter le point
-$(\ref{amenable_weak_contain/weak_almost_invariant})$ comme l'existence de \og{}vecteurs propres approchés\fg{} pour la valeur propre $1$.
-Cela nous ammène à introduire la notion standard de \emph{spectre approché} d'un opérateur.
+Nous aurons besoin de la notion standard de \emph{spectre approché} d'un opérateur.
 
 \begin{definition}
     Soit $E$ un espace de Banach complexe et $T\in\mathcal{L}(E)$. 
@@ -1416,6 +1441,7 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
         \item $\exists\varepsilon>0, \forall x\in E, \norm{T(x)}\geq\varepsilon\norm{x}$ \label{EVT_emb_TFAE/lower_bound_norm}
         \item $\exists\varepsilon>0, \forall x\in E, \norm{x} = 1 \implies \norm{T(x)}\geq\varepsilon$ \label{EVT_emb_TFAE/lower_bound_norm'}
     \end{enumerate}
+    De plus, ces conditions sont toujours vérifiées si $E=F$ est un espace de Hilbert et $T$ vérifie $\exists\varepsilon>0, \forall x\in E, \norm{x} = 1 \implies \abs{\ket{T(x), x}}\ge\varepsilon$.
 \end{lemma}
 
 \begin{proof} 
@@ -1429,7 +1455,7 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
     théorème d'isomorphisme de Banach, qui assure que la co-restriction de $T$ à son image est un isomorphisme 
     car bijective, linéaire et continue entre espaces de Banach.
 
-    Il est clair que $(\ref{EVT_emb_TFAE/lower_bound_norm}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm'})$, il reste donc à montrer $(\ref{EVT_emb_TFAE/emb}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm})$. Notons que $(\ref{EVT_emb_TFAE/lower_bound_norm})$ implique
+    Il est clair que $(\ref{EVT_emb_TFAE/lower_bound_norm}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm'})$, montrons donc $(\ref{EVT_emb_TFAE/emb}) \iff(\ref{EVT_emb_TFAE/lower_bound_norm})$. Notons que $(\ref{EVT_emb_TFAE/lower_bound_norm})$ implique
     immédiatement que $T$ est injectif, et donc une bijection sur son image. En notant $S:\Ima T\to E$ l'inverse (a priori seulement linéaire) de $T$ co-restreint à son image, 
     il s'agit donc de montrer que la continuité de $S$ équivaut à $(\ref{EVT_emb_TFAE/lower_bound_norm})$. Or :
     \begin{align*}
@@ -1438,7 +1464,6 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
             &\iff \exists C>0, \forall x\in E, C\inv\norm{x} \le \norm{T(x)} \\
             &\iff \exists\varepsilon>0, \forall x\in E, \varepsilon\norm{x} \le \norm{T(x)}
     \end{align*}
-    Cela conclut.
         %\item[\framebox{$(\ref{EVT_emb_TFAE/emb}) \implies(\ref{EVT_emb_TFAE/lower_bound_norm})$}]
         %Notons $S\in\mathcal{L}(\Ima T, E)$ l'inverse de $T$ co-restreint à son image, et vérifions que $\varepsilon := \norm{S}\inv$ convient.
         %Soit donc $x\in E$. On a $S(T(x)) = x$ par définition, d'où $\norm{x} \leq \norm{S}\norm{T(x)}$, ce qui donne bien $\varepsilon\norm{x}\leq\norm{T(x)}$.
@@ -1449,6 +1474,10 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
         %$v:\N\to E$. Notons que $v$ est encore de Cauchy. En effet, pour $\delta>0$ quelconque, l'hypothèse sur 
         %$u$ fournit $N\in\N$ tel que $\forall p, q \geq N, \norm{u_p - u_q} < \delta\varepsilon$.
         %On a donc 
+
+    Enfin, supposons que $E=F$ est un espace de Hilbert, et que, pour un certain $\varepsilon>0$, on a $\forall x\in E, \norm{x} = 1 \implies \abs{\ket{T(x), x}}\ge\varepsilon$.
+    Il suffit alors d'appliquer l'inégalité de Cauchy-Schwartz : pour tout $\xi$ unitaire, on a $\varepsilon\le\abs{\ket{T(x), x}}\le\norm{T(x)}$. La condition $(\ref{EVT_emb_TFAE/lower_bound_norm'})$
+    est donc vérifiée.
 \end{proof}
 
 Le lemme \ref{EVT_emb_TFAE} permet de caractériser le spectre approché d'un opérateur $T$,
@@ -1486,22 +1515,34 @@ conditions équivalentes de ce lemme. En particulier, cela nous permet de démon
     et pour conclure celle de $(\ref{approx_spectrum_facts/eq_of_hermitian})$ il suffit de se rappeler que pour $T$ autoadjoint on a $\sigma(T) \subseteq \Sp(T) \subseteq\R$.
 \end{proof}
 
-Nous avons désormais tous les outils nécessaires à la preuve du théorème \ref{amenable_weak_contain}.
+%Nous avons désormais tous les outils nécessaires à la preuve du théorème \ref{amenable_weak_contain}.
 
 \subsection{Preuve du théorème \ref{amenable_weak_contain}}
 
+Commençons par un petit lemme qui sera crucial.
+
+\begin{lemma}\label{abs_trick}
+    Soit $\xi\in\mathscr{L}^2(\Gamma, \mu)$. La fonction $\abs{\xi} := \abs{\cdot}\comp\xi \in\mathscr{L}^2(\Gamma, \mu)$ est de même norme 
+    que $\xi$, et on a $\forall\gamma\in\Gamma, \norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$
+\end{lemma}
+
 \begin{proof}
+    Il est clair que $\norm{\abs{\xi}}_{\mathrm{L}^2} = \norm{\xi}_{\mathrm{L}^2}$. Pour $x\in\Gamma$ quelconque, 
+    la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{- \xi(x)}} \leq \abs{\xi(\gamma\inv x) + \xi(x)}$. En intégrant le carré de ces inégalités,
+    on obtient $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L}^2}$.
+\end{proof}
+
+\begin{proof}[Démonstration du théorème \ref{amenable_weak_contain}]
     On va montrer $(\ref{amenable_weak_contain/weak_almost_invariant})
         \implies(\ref{amenable_weak_contain/amenable})
         \implies(\ref{amenable_weak_contain/strong_almost_invariant})
         \implies(\ref{amenable_weak_contain/weak_contain})
         \implies(\ref{amenable_weak_contain/norm_eq_two})
-        \implies(\ref{amenable_weak_contain/one_mem_spectrum})
         \implies(\ref{amenable_weak_contain/weak_almost_invariant})$.
     
     Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
     de Reiter faible \eqref{weak_Reiter_cond}. 
-    Soient donc $\varepsilon>0$ et $\gamma\in\Gamma$, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma)$ unitaire vérifiant $\norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
+    Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma)$ unitaire vérifiant $\forall\gamma\in F, \norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
     Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie \TODO{finir}
 
     On montre similairement \TODO{\framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$}} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
@@ -1509,7 +1550,8 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
     et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
     $\lambda_\Gamma$ de $\mathrm{L}^1(\Gamma, \mu)$\footnote{Contrairement au cas des représentations de groupes topologiques, 
-    une représentation d'une algèbre de Banach involutive est continue \ssi le morphisme sous-jacent est continu.}, il suffit en fait de montrer le résultat pour $f\in C_c(\Gamma)$, ce que nous supposons désormais.
+    les représentation continues d'algèbres de Banach involutives sont exactement les représentations algébriques telles que le 
+    morphisme sous-jacent est continu}, il suffit en fait de montrer le résultat pour $f\in C_c(\Gamma)$, ce que nous supposons désormais.
     Nous allons montrer $\abs{\integral{}{}{f}{\mu}}^2\in\Sp\left(\lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)\right)$, ce qui entraîne bien :
     \begin{equation*}
         \norm{\indic_\Gamma(f)}^2=\abs{\integral{}{}{f}{\mu}}^2\le\norm{\lambda_\Gamma(f)^*\comp \lambda_\Gamma(f)} = \norm{\lambda_\Gamma(f)}^2
@@ -1546,61 +1588,88 @@ Nous avons désormais tous les outils nécessaires à la preuve du théorème \r
     D'où la contradiction recherchée.
 
     Pour montrer l'implication \framebox{$(\ref{amenable_weak_contain/weak_contain})\implies(\ref{amenable_weak_contain/norm_eq_two})$}, donnons nous 
-    un $\gamma\in\Gamma$ quelconque, et commençons par remarquer 
-    que l'inégalité $\norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2$ est automatiquement vérifée, il s'agit donc de montrer l'intégalité 
+    $F\in\finparts(\Gamma)$ quelconque, et commençons par remarquer 
+    que l'inégalité $\norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} \le 2\card{F}$ est automatiquement vérifée, il s'agit donc de montrer l'inégalité 
     inverse. Commençons par donner une preuve pour $\Gamma$ discret, qui nous éclairera pour la suite, et pour simplifier supposons
     que $\mu$ donne masse $1$ aux singletons. Il suffit alors d'appliquer $(\ref{amenable_weak_contain/weak_contain})$
-    à la fonction $f := \delta_\gamma + \delta_{\gamma\inv}\in\mathscr{L}^1(\Gamma)_{+}$ pour obtenir :
+    à la fonction $f := \sum_{\gamma\in F}\delta_\gamma + \delta_{\gamma\inv}\in\mathscr{L}^1(\Gamma)_{+}$ pour obtenir :
     \begin{equation*}
-        2 = \abs{\integral{}{}{f}{\mu}} = \abs{\indic_\Gamma(f)} \le \norm{\lambda_\Gamma(f)} = \norm{\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2
+        2\card{F} = \abs{\integral{}{}{f}{\mu}} = \abs{\indic_\Gamma(f)} \le \norm{\lambda_\Gamma(f)} = \norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2\card{F}
     \end{equation*}
 
     Revenons maintenant au cas général. On pourrait être tenté de se ramener au raisonnement précédent 
-    en approchant la \emph{mesure} $\delta_\gamma + \delta_{\gamma\inv}$ par des fonctions intégrables,
+    en approchant la \emph{mesure} $\sum_{\gamma\in F}\delta_\gamma + \delta_{\gamma\inv}$ par des fonctions intégrables,
     une telle approximation s'obtenant aisément à partir d'une approximation de l'unité. Cependant,
     on se heurte alors au fait que la fonction $\lambda_\Gamma : \Gamma \to \mathcal{U}(\mathrm{L}^2(\Gamma, \mu))$
     n'est \emph{a priori} pas continue, ce qui rend inutilisable l'hypothèse de concentration de la masse : 
-    même si $f\in\mathscr{L}^1(\Gamma, \mu)$ a sa masse concentrée autour de $\gamma$ et $\gamma\inv$,
-    rien ne dit que $\lambda_\Gamma(f)$ sera proche de $\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. 
+    même si $f\in\mathscr{L}^1(\Gamma, \mu)$ a sa masse concentrée autour des points de $F\cup F\inv$,
+    rien ne dit que $\lambda_\Gamma(f)$ sera proche de $\sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. 
     \footnote{Il est d'ailleurs intéressant que de remarquer que le morphisme $\lambda_\Gamma$ est bien continu
     si $\Gamma$ est discret, ce qui explique pourquoi la preuve fonctionne dans ce cas.}
 
-    La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
+    La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
     Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
-    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$
-    et $S := \lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
+    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$
+    et $S := \sum_{\gamma\in F}\lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
     \begin{equation*}
         \forall f\in\mathrm{L}^1(\Gamma), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
     \end{equation*}
-    Notons que, pour toute $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\integral{}{}{f}{\mu}$.
-    Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = 2^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
+    Notons que, pour toute $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\card{F}\integral{}{}{f}{\mu}$.
+    Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = (2\card{F})^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
     assure que l'on a, toujours pour $n\in\N$ quelconque :
     \begin{equation*}
-        2^n = \integral{}{}{S^n(f_0)}{\mu} = \norm{\indic_\Gamma(S^n(f_0))} \leq \norm{\lambda_\Gamma(S^n(f_0))} = \norm{T^n \comp \lambda_\Gamma(f_0)} \le \norm{T}^n \norm{\lambda_\Gamma(f_0)}
+        (2\card{F})^n = \integral{}{}{S^n(f_0)}{\mu} = \norm{\indic_\Gamma(S^n(f_0))} \leq \norm{\lambda_\Gamma(S^n(f_0))} = \norm{T^n \comp \lambda_\Gamma(f_0)} \le \norm{T}^n \norm{\lambda_\Gamma(f_0)}
     \end{equation*}
-    La suite géométrique positive $n\mapsto\left(\frac{2}{\norm{T}}\right)^n$ est donc bornée supérieurement par $\norm{\lambda_\Gamma(f_0)}$, ce qui assure que $\frac{2}{\norm{T}} \leq 1$,
-    et donc $2\leq\norm{T}$ comme attendu.
+    La suite géométrique positive $n\mapsto\left(\frac{2\card{F}}{\norm{T}}\right)^n$ est donc bornée supérieurement par $\norm{\lambda_\Gamma(f_0)}$, ce qui assure que $\frac{2\card{F}}{\norm{T}} \leq 1$,
+    et donc $2\card{F}\leq\norm{T}$ comme attendu.
 
-    On va maintenant montrer \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/one_mem_spectrum})$}, soit donc $\gamma\in\Gamma$ et notons 
-    $U := \lambda_\Gamma(\gamma)$. Conservons aussi la notation $T := U + U^*$. L'opérateur $T$ étant autoadjoint, son spectre est réel 
-    et sa norme est égale à son rayon spectral, de sorte que $\set{-2, 2}\cap\Sp(T)\ne\varnothing$. On va maintenant 
-    mettre en relation le spectre de $U$ et le spectre de $T$, à l'aide du calcul fonctionnel continu de l'opérateur unitaire (donc normal) $U$.
-    En effet, si l'on note $X \in C(\Sp U) = C(\Sp U, \C)$ l'application d'inclusion, on sait que $X(U) = U$ et $\overline{X}(U) = U^*$, d'où
-    $(2\Re(X))(U) = (X + \overline{X})(U) = U + U^* = T$ par linéarité du calcul fonctionnel. Le spectre de $T$ est donc l'image 
-    du spectre de $U$ par l'application $z\mapsto2\Re(z)$, ce qui fournit $z\in\Sp(U)$ tel que $2\Re(z)\in\set{-2, 2}$ ou encore $\Re(z)\in\set{-1, 1}$. 
-    Mais $z\in\Sp(U)\subseteq\overline{B}(0, 1)$, donc cela n'est possible que si $z\in\set{-1, 1}$.
+    Montrons enfin \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$}. Soient donc $\varepsilon>0, F\in\finparts(\Gamma)$, et 
+    raisonnons par l'absurde en supposant :
+    \begin{equation}\label{amenable_weak_contain/eq1}
+        \forall\xi\in\mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon
+    \end{equation}
+    Notons que cette hypothèse entraîne également :
+    \begin{equation}\label{amenable_weak_contain/eq2}
+        \forall\xi\in\mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2}\geq\varepsilon
+    \end{equation}
+    En effet, pour $\xi\in\mathscr{L}^2(\Gamma)$ unitaire, on peut appliquer \eqref{amenable_weak_contain/eq1} à $\abs\xi$ pour obtenir un $\gamma\in F$ tel que $\norm{\lambda_\Gamma(\gamma)(\abs\xi) - \abs\xi}_{\mathrm{L}^2}\geq\varepsilon$.
+    Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick}, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
 
-    Si $z=1$ on a fini. Supposons donc $-1\in\Sp(U)$, et montrons qu'on a aussi $1\in\Sp(U)$ dans ce cas.
-    Comme $U$ est unitaire, on peut en fait travailler avec le spectre approché en vertu du lemme \ref{approx_spectrum_facts}. Soit 
-    donc $\varepsilon>0$, et appliquons l'hypothèse $-1\in\sigma(U)$ pour obtenir un $\xi\in\mathscr{L}^2(\Gamma)$ tel que $\norm{\xi}_{\mathrm{L}^2} = 1$ et $\norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L^2}} < \varepsilon$.
-    La fonction $\abs{\xi} = \abs{\cdot}\comp\xi$ est encore de carré intégrable avec $\norm{\abs{\xi}}_{\mathrm{L}^2} = \norm{\xi}_{\mathrm{L}^2} = 1$. Or, pour $x\in\Gamma$ quelconque, 
-    la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{- \xi(x)}} \leq \abs{\xi(\gamma\inv x) + \xi(x)}$. En intégrant le carré de ces inégalités,
-    on obtient $\norm{\lambda_\Gamma(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2} < \varepsilon$,
-    ce qui assure que $1\in\sigma(\lambda_\Gamma(\gamma))$.
+    Pour $\rho\in\set{\pm1}$, considérons $U_\rho := \sum_{\gamma\in F}(\lambda_\Gamma(\gamma) - \rho\id)^*(\lambda_\Gamma(\gamma) - \rho\id) = 2\rho\card{F} - T$, 
+    où l'on note toujours $T = \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. Notons que chaque $U_\rho$ est inversible. 
+    En effet, \eqref{amenable_weak_contain/eq1} et \eqref{amenable_weak_contain/eq2} montrent que, quelle que soit la valeur de $\rho$, 
+    on a pour tout $\xi\in\mathrm{L}^2(\Gamma)$ unitaire :
+    \begin{equation*}
+        \varepsilon^2\leq\sum_{\gamma\in F}\norm{\lambda_\Gamma(\gamma)(\xi) - \rho\xi}_{\mathrm{L}^2}^2 = \ket{U_\rho(\xi), \xi}
+    \end{equation*}
+    Le lemme \ref{EVT_emb_TFAE} assure alors que $U_\rho$ est injectif et d'image complète. Mais $U_\rho$ est autoadjoint, donc 
+    son injectivité implique qu'il est d'image dense. Il vient que $U_\rho$ est bijectif, donc inversible par le théorème d'isomorphisme de Banach,
+    et ce toujours pour $\rho\in\set{\pm1}$ quelconque.
 
-    Enfin, l'implication \framebox{$(\ref{amenable_weak_contain/one_mem_spectrum})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$} découle directement du lemme \ref{approx_spectrum_facts}.
-    En effet les opérateurs $\lambda_\Gamma(\gamma)$ sont tous unitaires, donc $(\ref{amenable_weak_contain/one_mem_spectrum})$ assure que 
-    $1$ est dans le spectre approché de chacun des $\lambda_\Gamma(\gamma)$, ce qui signifie précisément que $(\ref{amenable_weak_contain/weak_almost_invariant})$ est vérifié.
+    Or $U_\rho = 2\rho\card{F} - T$, donc par définition du spectre on a $\Sp(T)\cap\set{\pm2\card{F}}=\varnothing$. Mais $T$ est autoadjoint,
+    et de norme $2\card{F}$ d'après $(\ref{amenable_weak_contain/norm_eq_two})$. Donc $\rho(T) = 2\card{F}$, d'où $\Sp(T)\cap\set{\pm2\card{F}}\neq\varnothing$
+    puisque $\Sp(T)\subseteq\R$. Cela nous donne la contradiction recherchée.
+
+    %On va maintenant montrer \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/one_mem_spectrum})$}, soit donc $\gamma\in\Gamma$ et notons 
+    %$U := \lambda_\Gamma(\gamma)$. Conservons aussi la notation $T := U + U^*$. L'opérateur $T$ étant autoadjoint, son spectre est réel 
+    %et sa norme est égale à son rayon spectral, de sorte que $\set{-2, 2}\cap\Sp(T)\ne\varnothing$. On va maintenant 
+    %mettre en relation le spectre de $U$ et le spectre de $T$, à l'aide du calcul fonctionnel continu de l'opérateur unitaire (donc normal) $U$.
+    %En effet, si l'on note $X \in C(\Sp U) = C(\Sp U, \C)$ l'application d'inclusion, on sait que $X(U) = U$ et $\overline{X}(U) = U^*$, d'où
+    %$(2\Re(X))(U) = (X + \overline{X})(U) = U + U^* = T$ par linéarité du calcul fonctionnel. Le spectre de $T$ est donc l'image 
+    %du spectre de $U$ par l'application $z\mapsto2\Re(z)$, ce qui fournit $z\in\Sp(U)$ tel que $2\Re(z)\in\set{-2, 2}$ ou encore $\Re(z)\in\set{-1, 1}$. 
+    %Mais $z\in\Sp(U)\subseteq\overline{B}(0, 1)$, donc cela n'est possible que si $z\in\set{-1, 1}$.
+%
+    %Si $z=1$ on a fini. Supposons donc $-1\in\Sp(U)$, et montrons qu'on a aussi $1\in\Sp(U)$ dans ce cas.
+    %Comme $U$ est unitaire, on peut en fait travailler avec le spectre approché en vertu du lemme \ref{approx_spectrum_facts}. Soit 
+    %donc $\varepsilon>0$, et appliquons l'hypothèse $-1\in\sigma(U)$ pour obtenir un $\xi\in\mathscr{L}^2(\Gamma)$ tel que $\norm{\xi}_{\mathrm{L}^2} = 1$ et $\norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L^2}} < \varepsilon$.
+    %La fonction $\abs{\xi} = \abs{\cdot}\comp\xi$ est encore de carré intégrable avec $\norm{\abs{\xi}}_{\mathrm{L}^2} = \norm{\xi}_{\mathrm{L}^2} = 1$. Or, pour $x\in\Gamma$ quelconque, 
+    %la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{- \xi(x)}} \leq \abs{\xi(\gamma\inv x) + \xi(x)}$. En intégrant le carré de ces inégalités,
+    %on obtient $\norm{\lambda_\Gamma(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2} < \varepsilon$,
+    %ce qui assure que $1\in\sigma(\lambda_\Gamma(\gamma))$.
+%
+    %Enfin, l'implication \framebox{$(\ref{amenable_weak_contain/one_mem_spectrum})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$} découle directement du lemme \ref{approx_spectrum_facts}.
+    %En effet les opérateurs $\lambda_\Gamma(\gamma)$ sont tous unitaires, donc $(\ref{amenable_weak_contain/one_mem_spectrum})$ assure que 
+    %$1$ est dans le spectre approché de chacun des $\lambda_\Gamma(\gamma)$, ce qui signifie précisément que $(\ref{amenable_weak_contain/weak_almost_invariant})$ est vérifié.
 
 
 
