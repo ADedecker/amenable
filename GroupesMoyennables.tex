@@ -122,16 +122,6 @@ Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologiqu
 Radon \emph{non nulle} sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
 utiliserons à de nombreuses reprises.
 
-\begin{theorem}\label{theorem_Haar}
-    Tout groupe topologique $G$ séparé et localement compact admet une mesure de Haar à gauche, unique à multiplication par un réel strictement 
-    positif près. 
-    
-    Si $\mu$ est une telle mesure, tout ouvert $U$ non-vide de $G$ est de mesure strictement positive,
-    et $\mu(G)<+\infty$ \ssi G est compact.
-
-    Enfin, si $G$ est compact, les mesures de Haar à gauche sont exactement les mesures de Haar à droite.
-\end{theorem}
-
 \TODO{Repréciser définition de mesure de Radon}
 \TODO{Absolue continuité des mesures de Haar entre elles (via caractère modulaire)}
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
@@ -558,7 +548,7 @@ Il est alors clair qu'une moyenne sur $\Gamma$ est invariante à gauche \ssi sa 
     montre que $\Gamma'$ est un voisinage de l'origine donc ouvert, et également que $T\subseteq\Gamma'$.
 
     Soit maintenant un sous-groupe ouvert $\Gamma'$ de $\Gamma$ quelconque. Notons tout d'abord que 
-    $\Gamma'$ est borélien, donc la restriction de $\mu$ à $\Gamma'$ est bien définie, et localement compact 
+    $\Gamma'$ est borélien, donc la restriction de $\mu$ à $\Gamma'$ est bien définie, et $\Gamma$ est localement compact 
     (séparé) comme ouvert d'un espace localement compact. Notons d'abord que $\mu'$ est bien de Radon. La 
     finitude sur les compacts est acquise, ainsi que la régularité intérieure puisque les ouverts de 
     $\Gamma'$ sont ouverts dans $\Gamma$. Pour la régularité supérieure, il suffit de remarquer que si 
@@ -941,8 +931,8 @@ Maintenant qu'on dispose de plusieurs caractérisations agréables, vérifions q
     $UC_b(\Gamma_d)$ est fermé dans $\ell^\infty(\Gamma)$, donc complet.
 \end{proposition}
 
-Encore une fois, on donne une preuve concrète basée sur le lemme \ref{UCB_iff_translate}, et on renvoie au théorème \TODO{\ref{uniform_limit_of_uniform_cont}}
-en annexe pour le résultat général.
+Encore une fois, on donne une preuve concrète basée sur le lemme \ref{UCB_iff_translate}. 
+%, et on renvoie au théorème \TODO{\ref{uniform_limit_of_uniform_cont}} en annexe pour le résultat général.
 
 \begin{proof}
     Soit $F:\N\to UC_b(\Gamma_d)$ une suite convergente dans $\ell^\infty(\Gamma)$, de limite $f$.
@@ -1236,7 +1226,8 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
             &= \integral{}{}{\varphi(g)\widetilde{m}(f)}{\mu(g)} \\
             &= \widetilde{m}(f)\integral{}{}{\varphi}{\mu}
     \end{align*}
-    Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution (\TODO{ref}), 
+    Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution, 
+    %(\TODO{ref}) 
     de $\widetilde{m}$ et de l'intégration, que l'égalité $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)\integral{}{}{\varphi}{\mu}$ est valable 
     pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ (et toujours pour 
     $f\in UC_b(\Gamma_d)$), on a $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)$.
@@ -1941,13 +1932,33 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
 
 \section{Intégration sur les groupes localement compacts}
 
+On fixe un groupe topologique $G$ séparé et localement compact.
+
 \subsection*{Mesures de Haar}
+
+Une \emph{mesure de Haar à gauche (resp. à droite)} sur $G$
+est une mesure de Radon $\mu$ vérifiant $\forall g\in G, {\ell_g}_*\mu = \mu$ (resp. ${r_g}_*\mu = \mu$).
+
+Le théorème fondamental concernant ces mesures, que nous utilisons tout au long de ce document, est le suivant :
+\begin{theorem}\label{theorem_Haar}
+    Tout groupe topologique $G$ séparé et localement compact admet une mesure de Haar à gauche, unique à multiplication par un réel strictement 
+    positif près. 
+    
+    Si $\mu$ est une telle mesure, tout ouvert $U$ non-vide de $G$ est de mesure strictement positive,
+    et $\mu(G)<+\infty$ \ssi G est compact.
+
+    Enfin, si $G$ est compact, les mesures de Haar à gauche sont exactement les mesures de Haar à droite.
+\end{theorem}
+
 \subsection*{Caractère modulaire}
 
-\TODO{Explications et rappels des définitions, pour le moment je mets juste des résultats en vrac}
+Soit $\mu$ une mesure de Haar à gauche sur $G$. On vérifie aisément que, pour tout $g\in G$, la
+mesure de Radon ${r_g}_*\mu$ est encore de Haar à gauche, ce qui fournit un un réel positif $\Delta(g)$ tel que 
+${r_g}_*\mu = \Delta(g)\mu$. La fonction $\Delta$ ainsi définie est le \emph{caractère modulaire} de $G$,
+et ses propriétés sont résumées par la propriété suivante :
 
 \begin{proposition}\label{modular_character}
-    Soit $G$ un groupe topologique séparé et localement compact, et $\mu$ une mesure de Haar.
+    Soit $G$ un groupe topologique séparé et localement compact, et $\mu$ une mesure de Haar à gauche.
     \begin{enumerate}[(i)]
         \item\label{modular_character/def} Par définition, on a $\forall g\in G, {r_g}_*\mu = \Delta(g)\mu$.
         \item\label{modular_character/indep} $\Delta$ est indépendant du choix de la mesure de Haar $\mu$.
