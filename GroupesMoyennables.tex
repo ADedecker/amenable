@@ -17,6 +17,7 @@
 \usepackage{lipsum}
 \usepackage{tikz, tkz-tab, tikz-cd}
 \usepackage[T1]{fontenc}
+\usepackage[nottoc, notlof, notlot]{tocbibind}
 
 \newtheorem{theorem}{Théorème}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -673,7 +674,7 @@ de parties finies non-vides de $\Z$
 telle que $\frac{\card{(F_N-n)\triangle F_N}}{\card{F_N}} \xrightarrow[N\to+\infty]{} 0$ pour tout $n\in\Z$. 
 
 Dans le cas général, la mesure de Haar $\mu$ va remplacer le cardinal, et on va donc s'intéresser aux réels $\frac{\mu(\gamma F \triangle F)}{\mu(F)}$ 
-pour $F$ partie compacte de $\Gamma$ et $\gamma\in\Gamma$, et à leur comportement asymptotique
+pour $F$ partie borélienne de $\Gamma$ de mesure finie et $\gamma\in\Gamma$, et à leur comportement asymptotique
 lorsque $F$ est grand. C'est l'objet de la partie suivante.
 
 \section{Conditions de F\o{}lner et de Reiter}
@@ -686,28 +687,27 @@ le lecteur pourra aisément deviner comment se comportent ces objets par changem
 
 Pour $X$ un ensemble quelconque, notons $\parts(X)$ (resp. $\parts^*(X)$) l'ensemble des parties (resp. parties non-vides) de $X$, et $\finparts(X)$ (resp $\finparts^*(X)$) 
 l'ensemble des parties finies (resp. parties finies non-vides) de $X$. Si maintenant $X$ est un espace topologique, 
-on note aussi $\mathfrak{K}(X)$ (resp. $\mathfrak{K}^*(X)$, resp. $\mathfrak{K}_+(X)$) l'ensemble des parties compactes 
-(resp. compactes non-vides, resp. compactes d'intérieur non-vide) de $X$. 
+on note aussi $\mathfrak{K}(X)$ l'ensemble des parties compactes de $X$, et si $\mu$ est une mesure borélienne sur 
+$X$ on note $\Bor_+(X, \mu)$ l'ensemble des boréliens de $X$ de mesure finie non-nulle. 
 
-On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \mathfrak{K}_+(\Gamma) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
-$\mathfrak{K}_+(\Gamma)$ par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
-C'est une application bien définie car tout élément de $\mathfrak{K}_+(\Gamma)$ est de mesure finie non-nulle,
-et il est clair qu'elle ne dépend pas de la normalisation choisie pour la mesure de Haar.
+On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \Bor{K}_+(\Gamma, \mu) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
+$\Bor_+(\Gamma, \mu)$ par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
+Il est clair que cette application ne dépend pas de la normalisation choisie pour la mesure de Haar.
 
-Un filtre $\mathscr{F}$ sur $\mathfrak{K}_+(\Gamma)$ est dit \emph{faiblement de F\o{}lner} s'il est non-trivial\footnote{Cela signifie que $\varnothing\notin\mathscr{F}$,
+Un filtre $\mathscr{F}$ sur $\Bor_+(\Gamma, \mu)$ est dit \emph{faiblement de F\o{}lner} s'il est non-trivial\footnote{Cela signifie que $\varnothing\notin\mathscr{F}$,
 ou encore que $\mathscr{F}\ne\parts(X)$.} et si le filtre $\mathfrak{f}_*\mathscr{F}$ image directe 
 de $\mathscr{F}$ par l'application de F\o{}lner converge vers $0$ pour la topologie de la convergence simple sur $\mathcal{F}(\Gamma, \R_+)$. 
 Si la convergence est uniforme sur les compacts, on parle de filtre \emph{fortement de F\o{}lner}.
-Une suite $K:\N\to\mathfrak{K}_+(\Gamma)$ est \emph{faiblement (resp. fortement) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
+Une suite $K:\N\to\Bor_+(\Gamma, \mu)$ est \emph{faiblement (resp. fortement) de F\o{}lner} si le filtre $K_*\nhds_{+\infty}^\N$, image directe par $K$ du filtre des
 voisinages de l'infini dans $\N$, est faiblement (resp. fortement) de F\o{}lner. Comme $\mathfrak{f}_*K_*\nhds_{+\infty}^\N = (\mathfrak{f}\comp K)_*\nhds_{+\infty}^\N$,
-une suite $K:\N\to\mathfrak{K}_+(\Gamma)$ est donc faiblement (resp. fortement) de F\o{}lner \ssi la suite de fonctions
+une suite $K:\N\to\Bor_+(\Gamma, \mu)$ est donc faiblement (resp. fortement) de F\o{}lner \ssi la suite de fonctions
 $n\mapsto\left(\gamma\mapsto\frac{\mu(\gamma K_n\triangle K_n)}{\mu(K_n)}\right)$ converge vers $0$ simplement 
 (resp. uniformément sur tout compact).
 
 Notons que si $\Gamma$ est discret, 
 la topologie de la convergence compacte coïncide avec celle de la convergence simple, de sorte que tout filtre 
 faiblement de F\o{}lner est automatiquement fortement de F\o{}lner.
-De plus, les parties compactes d'intérieur non vide sont exactement les parties finies non-vides,
+De plus, les éléments de $\Bor_+(\Gamma, \mu)$ sont exactement les parties finies non-vides,
 et la mesure de Haar s'identifie (à un scalaire près) à la mesure de comptage. Dans ce cas, un filtre non-trivial $\mathscr{F}$
 est donc de F\o{}lner si et seulement si, pour tout $\gamma\in\Gamma$, la fonction $F\mapsto \frac{\card{\gamma F\triangle F}}{\card{F}}$ 
 converge vers $0$ selon le filtre $\mathscr{F}$. De même, une suite $F:\N\to\finparts^*(\Gamma)$
@@ -720,14 +720,14 @@ Avant d'aller plus loin, donnons un critère plus simple pour l'existence de fil
     $\Gamma$ admet un filtre faiblement de F\o{}lner \ssi il satisfait la 
     \emph{condition de F\o{}lner faible} :
     \begin{equation}\label{weak_Folner_cond}\tag{WF}
-        \forall\varepsilon>0, \forall S\in\finparts(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall \gamma\in S, 
+        \forall\varepsilon>0, \forall S\in\finparts(\Gamma), \exists K\in\Bor_+(\Gamma, \mu), \forall \gamma\in S, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
     \end{equation}
     Si de plus $\Gamma$ est dénombrable, cette condition est équivalente à l'existence d'une \emph{suite} faiblement de F\o{}lner.
 
     $\Gamma$ admet un filtre fortement de F\o{}lner \ssi il satisfait la \emph{condition de F\o{}lner forte} : 
     \begin{equation}\label{strong_Folner_cond}\tag{SF}
-        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists K\in\mathfrak{K}_+(\Gamma), \forall\gamma\in A, 
+        \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists K\in\Bor_+(\Gamma, \mu), \forall\gamma\in A, 
         \frac{\mu(\gamma K\triangle K)}{\mu(K)}<\varepsilon
     \end{equation}
     Si de plus $\Gamma$ est $\sigma$-compact, cette condition est équivalente à l'existence s'une \emph{suite} fortement de F\o{}lner.
@@ -737,12 +737,12 @@ Avant d'aller plus loin, donnons un critère plus simple pour l'existence de fil
     Les ensembles de la forme $\set{f \in \mathcal{F}(\Gamma, \R_+) \tq \forall\gamma\in S, f(\gamma) < \varepsilon}$, pour $S$ fini et $\varepsilon>0$, 
     forment une base de voisinage de la fonction nulle dans $\mathcal{F}(\Gamma, \R_+)$ muni de la topologie produit. \eqref{weak_Folner_cond} exprime donc 
     le fait que $0$ est adhérent à l'image de $\mathfrak{f}$ pour cette topologie, ce qui est équivalent avec 
-    l'existence d'un filtre $\mathscr{F}$ non-trivial sur $\mathfrak{K}_+(\Gamma)$ tel que $\mathfrak{f}_*\mathscr{F}$ converge vers $0$
+    l'existence d'un filtre $\mathscr{F}$ non-trivial sur $\Bor_+(\Gamma, \mu)$ tel que $\mathfrak{f}_*\mathscr{F}$ converge vers $0$
     simplement. C'est précisément la définition d'un filtre de F\o{}lner faible.
     De plus, si $\Gamma$ est dénombrable, la topologie produit sur $\mathcal{F}(\Gamma, \R_+)$ est à base dénombrable de voisinages,
     donc l'adhérence séquentielle de l'image de $\mathfrak{f}$ égale son adhérence, ce qui fournit la caractérisation séquentielle recherchée.
 
-    La deuxième partie du théorème se prouve similairement, en obesrvant que les ensembles de la forme 
+    La deuxième partie du théorème se prouve similairement, en observant que les ensembles de la forme 
     $\set{f \in \mathcal{F}(\Gamma, \R_+) \tq \forall\gamma\in A, f(\gamma) < \varepsilon}$, pour $A$ compact et $\varepsilon>0$, 
     forment une base de voisinage de la fonction nulle pour la topologie de la convergence compacte, et en notant que cette 
     topologie est à base dénombrable de voisinages lorsque $\Gamma$ est $\sigma$-compact.
@@ -771,7 +771,7 @@ en adaptant directement la deuxième preuve de ce théorème.
     \begin{equation}\label{amenable_of_Folner_eq1}
         -M \le c + \sum_i (f_i(\gamma_i\inv x) - f_i(x)) \le M
     \end{equation}
-    En moyennant ces inégalités sur un $K\in\mathfrak{K}_+(\Gamma)$ quelconque, on obtient:
+    En moyennant ces inégalités sur un $K\in\Bor_+(\Gamma, \mu)$ quelconque, on obtient:
     \begin{equation}\label{amenable_of_Folner_eq2}
         -M \le c + \sum_i \frac1{\mu(K)} \integral{K}{}{\left(f_i(\gamma_i\inv x) - f_i(x)\right)}{\mu(x)} \le M
     \end{equation}
@@ -795,7 +795,7 @@ La condition de F\o{}lner est très intéressante pour exprimer la moyennabilit�
 de lier la moyennabilité à la \emph{croissance} d'un groupe finiment engendré. %\TODO{Dire quelques mots de plus ?} 
 
 Cependant, pour établir la théorie, il sera utile de travailler avec une condition un peu plus flexible. Pour voir cela, reprenons une dernière fois la preuve
-précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{amenable_of_Folner_eq1} sur un compact, observons ce qui se passe 
+précédente. Plutôt que de prendre une moyenne uniforme des inégalités \ref{amenable_of_Folner_eq1} sur un borélien de mesure finie, observons ce qui se passe 
 lorsqu'on considère une moyenne pondérée par une fonction $\varphi\in\mathscr{L}^1(\Gamma, \mu)$, positive et de masse $1$ (le cas déjà traité correspondant à $\varphi=\frac1{\mu(K)}\indic_K$).
 On obtient alors:
 \begin{equation*}\label{intuition_Reiter_eq1}
@@ -833,7 +833,7 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
     \end{equation}
     Si de plus $\Gamma$ est dénombrable, cette condition est équivalente à l'existence d'une \emph{suite} faiblement de Reiter.
 
-    $\Gamma$ admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
+    $\Gamma$ admet un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
     \begin{equation}\label{strong_Reiter_cond}\tag{SR}
         \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, \forall\gamma\in A, 
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
@@ -841,7 +841,7 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
     Si de plus $\Gamma$ est $\sigma$-compact, cette condition est équivalente à l'existence s'une \emph{suite} fortement de Reiter.
 \end{lemma}
 
-Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\mathfrak{K}_+(\Gamma)$, l'application 
+Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\Bor_+(\Gamma, \mu)$, l'application 
 $\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1(\Gamma, \mu)_{1,+}$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
 Si $\mathscr{F}$ est un filtre de F\o{}lner fort (resp. faible), $\chi_*\mathscr{F}$ est donc un filtre de Reiter fort (resp. faible).
 
@@ -884,7 +884,7 @@ Nous notons $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_d\to\C$ qui sont
 continues, muni de la norme uniforme. Dans cette définition et dans toute la suite, $\Gamma_d$ désigne l'espace uniforme obtenu 
 en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{droite}\footnote{On noterait de même $\Gamma_s$
 le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}\footnote{La convention \og{}gauche/droite\fg{} 
-dans cette définition est parfois renversée. Nous adoptons la convention de Bourbaki.}.
+dans cette définition est parfois renversée. Nous adoptons la convention de \cite[Bourbaki, \textit{Topologie Générale}]{bourbaki2007topologie}}.
 Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_d$ le filtre des entourages,
 est définie par l'égalité $\mathcal{U}\Gamma_d=(\divop_d)^*\nhds_1^\Gamma$, pour 
 $\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x y\inv}$\footnote{Dans le cas de la structure 
@@ -1213,7 +1213,23 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     qui est bien $\sigma$-fini en vertu du lemme \ref{presupp_sigma_finite}. Il est alors clair que les deux membres 
     de l'égalité peuvent se calculer indifféremment sur $X$ ou sur $Y$.
 
-    Supposons donc $(X, \mathcal{A}, \mu)$ $\sigma$-fini, et notons $\indic_t := \indic_{[t, +\infty[}$ pour chaque $t\geq0$
+    Supposons donc $(X, \mathcal{A}, \mu)$ $\sigma$-fini, et notons $\indic_t := \indic_{[t, +\infty[}$ pour chaque $t\geq0$.
+    Notons que, pour tous $s, s'\geq0$, on a :
+    \begin{equation*}
+        \integral{\R_+}{}{\abs{\indic_t(s) - \indic_t(s')}}{\mu(t)} = \integral{\R_+}{}{\abs{\indic_s(t) - \indic_s'(t)}}{\mu(t)}  = \abs{s - s'}
+    \end{equation*}
+    En particulier, pour tout $x\in X$, on a :
+    \begin{equation*}
+        \abs{f(x) - f'(x)} = \integral{\R_+}{}{\abs{\indic_t(f(x)) - \indic_t(f'(x))}}{t}
+    \end{equation*}
+    Le théorème de Fubini donne alors :
+    \begin{align*}
+        \norm{f - f'}_{\mathrm{L}^1} 
+            &= \integral{X}{}{\abs{f(x) - f'(x)}}{\mu(x)} \\
+            &= \integral{X}{}{\integral{\R_+}{}{\abs{\indic_t(f(x)) - \indic_t(f'(x))}}{t}}{\mu(x)} \\
+            &= \integral{\R_+}{}{\norm{\indic_t\comp f - \indic_t\comp f'}_{\mathrm{L}^1}}{t} \\
+            &= \integral{\R_+}{}{\mu(E_t\triangle E'_t)}{t}
+    \end{align*}
 \end{proof}
 
 \subsection{Démonstration du théorème \ref{amenable_TFAE}} 
@@ -1312,8 +1328,8 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
 
     Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. Soient $\varepsilon>0$
     et $A\subseteq\Gamma$ un compact. Soit aussi $B$ un voisinage compact de l'origine, de sorte que $Q := A\cup B$ et $K := Q\cdot Q$ sont encore des voisinages compacts de l'origine.
-    $(\ref{amenable_TFAE/strong_Reiter})$ fournit alors $f\in\mathscr{L}^1(\Gamma, \mu)$ tel que $\forall g\in K, \norm{\lambda(g)(f) - f}_{\mathrm{L}^1} < \frac{\varepsilon\mu(Q)}{2\mu(K)}$.
-    En particulier, on a $\integral{K}{}{\norm{\lambda(g)(f) - f}_{\mathrm{L}^1}}{\mu(g)} \leq \halfilon\mu(Q)$.
+    $(\ref{amenable_TFAE/strong_Reiter})$ fournit alors $f\in\mathscr{L}^1(\Gamma, \mu)$ tel que $\forall g\in K, \norm{\lambda(g)(f) - f}_{\mathrm{L}^1} < \frac{\varepsilon\mu(Q)}{4\mu(K)}$.
+    En particulier, on a $\integral{K}{}{\norm{\lambda(g)(f) - f}_{\mathrm{L}^1}}{\mu(g)} \leq \frac\varepsilon4\mu(Q)$.
 
     Posons alors $E_t := \set{x\tq f(x)\geq t}$ pour chaque $t\geq0$, et remarquons que 
     $\forall g\in\Gamma, gE_t = \set{x\tq \lambda(g)(f)(x) \geq t}$. Par le lemme \ref{folner_key}, on a donc :
@@ -1322,9 +1338,39 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     \end{equation*}
     Par le théorème de Fubini, on a alors :
     \begin{equation*}
-        \halfilon\mu(Q) \geq \integral{K}{}{\integral{\R_+}{}{\mu(gE_t\triangle E_t)}{t}}{\mu(g)} = \integral{\R_+}{}{\mu(E_t)\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)}}{t}
+        \frac\varepsilon4\mu(Q) \geq \integral{K}{}{\integral{\R_+}{}{\mu(gE_t\triangle E_t)}{t}}{\mu(g)} = \integral{\R_+}{}{\mu(E_t)\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)}}{t}
     \end{equation*}
-    \TODO{}
+    Montrons alors qu'il existe $t>0$ tel que $\mu(E_t)>0$ et $\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)} \leq\frac\varepsilon3\mu(Q)$. Si ce n'était pas le cas, on aurait
+    $\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)} >\frac\varepsilon3\mu(Q)$ dès que $\mu(E_t)>0$ (et $t>0$). Comme 
+    $\integral{\R_+^*}{}{\mu(E_t)}{t} = \norm{f}_{\mathrm{L}^1} = 1$, on aurait alors :
+    \begin{equation*}
+        \integral{\R_+}{}{\mu(E_t)\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)}}{t}\geq\frac\varepsilon3\mu(Q)>\frac\varepsilon4\mu(Q)
+    \end{equation*} 
+    Ce qui est une contradiction. 
+
+    Soit donc un tel $t>0$. Notons que, par l'inégalité de Markov \ref{markov_and_consequence}, 
+    l'intégrabilité de $f$ entraîne aussi $\mu(E_t)<+\infty$. Montrons que $E_t\in\Bor_+(\Gamma, \mu)$ convient.
+    Considérons pour cela l'ensemble $C:=\set{g\in K\tq \frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}\leq\varepsilon}$.
+    Toujours par l'inégalité de Markov, on a $\mu(K\setminus C)\leq\frac{\mu(Q)}{3}<\frac{\mu(Q)}{2}$.
+
+    Soient maintenant $x_1, x_2\in C$. On a $x_1x_2\inv E_t\triangle E_t\subseteq(x_1x_2\inv E_t\triangle x_1E_t)\cup(x_1 E_t\triangle E_t)$,
+    d'où :
+    \begin{align*}
+        \mu(x_1x_2\inv E_t\triangle E_t) 
+            &\leq \mu(x_2\inv E_t\triangle E_t) + \mu(x_1E_t\triangle E_t) \\
+            &= \mu(x_2 E_t\triangle E_t) + \mu(x_1E_t\triangle E_t) \\
+            &\leq 2\varepsilon\mu(E_t)
+    \end{align*}
+    Pour conclure, il suffit donc de montrer que $A\subseteq Q\subseteq C\cdot C\inv$. La première inclusion est claire, soit donc $x\in Q$.
+    Clairement $xQ\subseteq xK\cap K$, d'où $\mu(xK\cap K)\geq\mu(Q)$. Il vient :
+    \begin{align*}
+        \mu(Q)  
+            &\leq \mu(xK\cap K) \\
+            &\leq \mu(xC\cap C) + \mu(K\setminus C) + \mu(x(K\setminus C)) \\
+            &= \mu(xC\cap C) + 2\mu(K\setminus C) \\
+            &< \mu(xC\cap C) + \mu(Q) 
+    \end{align*}
+    On a donc $\mu(xC\cap C)>0$, i.e $x\in C\cdot C\inv$. Ceci conclut.
 
     L'implication \framebox{$(\ref{amenable_TFAE/strong_Folner})\implies(\ref{amenable_TFAE/weak_Folner})$} est évidente.
     De plus, on a déjà vu que tout filtre de Reiter faible permet de définir un filtre de F\o{}lner faible. Au vu des lemmes 
@@ -1766,8 +1812,9 @@ Commençons par un petit lemme qui sera crucial.
 
 Cette section regroupe, avec ou sans démonstration, des résultats de théorie de la mesure utilisés au cours du document.
 Nous nous cantonnons ici strictement aux mesures usuelles ($\sigma$-additives), le cas moins usuel des contenu et de 
-l'intégration associée étant traitée dans le corps du texte. Enfin, nous supposons connus les définitions de tribu et de mesure,
-la construction de l'intégrale associée à une mesure, ainsi que les théorèmes de convergence monotone et dominée.
+l'intégration associée étant traitée dans le corps du texte. 
+%Enfin, nous supposons connus les définitions de tribu et de mesure,
+%la construction de l'intégrale associée à une mesure, ainsi que les théorèmes de convergence monotone et dominée.
 Si $(X, \mathcal{A})$ est un espace mesurable, on note $\mathscr{S}(X, \mathcal{A})$ l'ensemble des \emph{fonctions simples}
 sur $X$, c'est à dire des fonctions mesurables $f : (X, \mathcal{A})\to(\C, \Bor(\C))$ d'image finie. 
 
@@ -2187,5 +2234,12 @@ du lemme suivant.
 
     Ceci conclut la preuve du lemme, ainsi que celle du théorème \ref{uniform_continuous_iff_postcomp}.
 \end{proof}
+
+\clearpage
+
+\nocite{*}
+
+\bibliographystyle{plain}
+\bibliography{GroupesMoyennables}
 
 \end{document}
