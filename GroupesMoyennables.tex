@@ -341,7 +341,7 @@ le défaut de $\sigma$-additivité se traduisant par l'absence des théorèmes d
     démontrée précédemment assure que $T = \integral{}{}{\blank}{m}$, ce qui conclut.
 \end{proof}
 
-%\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
+\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
 
 \begin{remark}
     Dans le cas où $m$ est une mesure finie, l'unicité assure que la forme $\integral{}{}{\blank}{m}$ construite ci-dessus coïncide bien avec l'intégrale usuelle
@@ -831,32 +831,33 @@ On a aussi un analogue du lemme \ref{Folner_filter_of_cond}, qui se prouve de ma
         \forall\varepsilon>0, \forall S\in\finparts(\Gamma), \exists \varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, \forall \gamma\in S,
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
-    Il admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
+    Si de plus $\Gamma$ est dénombrable, cette condition est équivalente à l'existence d'une \emph{suite} faiblement de Reiter.
+
+    $\Gamma$ admet de un filtre fortement de Reiter \ssi il satisfait la \emph{condition de Reiter forte} : 
     \begin{equation}\label{strong_Reiter_cond}\tag{SR}
         \forall\varepsilon>0, \forall A\in\mathfrak{K}(\Gamma), \exists\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1,+}, \forall\gamma\in A, 
         \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}<\varepsilon
     \end{equation}
-
-    %\TODO{Dans quel cas a-t-on des suites ?}
-    %Si de plus $\Gamma$ est dénombrable, cette condition est équivalent à l'existence d'une suite de F\o{}lner.
+    Si de plus $\Gamma$ est $\sigma$-compact, cette condition est équivalente à l'existence s'une \emph{suite} fortement de Reiter.
 \end{lemma}
 
 Comme prévu, tout filtre de F\o{}lner fort (resp. faible) induit un filtre de Reiter fort (resp. faible). En effet, pour $K\in\mathfrak{K}_+(\Gamma)$, l'application 
 $\chi_K:=\frac1{\mu(K)}\indic_K$ appartient à $\mathscr{L}^1(\Gamma, \mu)_{1,+}$, et on a $\mathfrak{r}(\chi_K) = \mathfrak{f}(K)$.
 Si $\mathscr{F}$ est un filtre de F\o{}lner fort (resp. faible), $\chi_*\mathscr{F}$ est donc un filtre de Reiter fort (resp. faible).
 
-\begin{remark}
-    On verra au théorème \ref{amenable_TFAE} que les deux conditions de Reiter sont équivalentes entre elles et avec les deux condition de 
-    F\o{}lner. Comme une suite de F\o{}lner induit une suite de Reiter, on pourra déduire du lemme \ref{Folner_filter_of_cond} que \eqref{weak_Reiter_cond} implique l'existence d'une suite de Reiter 
-    forte (donc faible) à condition que $\Gamma$ soit $\sigma$-compact.
-\end{remark}
+%\begin{remark}
+%    On verra au théorème \ref{amenable_TFAE} que les deux conditions de Reiter sont équivalentes entre elles et avec les deux condition de 
+%    F\o{}lner. Comme une suite de F\o{}lner induit une suite de Reiter, on pourra déduire du lemme \ref{Folner_filter_of_cond} que \eqref{weak_Reiter_cond} implique l'existence d'une suite de Reiter 
+%    forte (donc faible) à condition que $\Gamma$ soit $\sigma$-compact.
+%\end{remark}
 
 Avant d'en arriver au résultat crucial de cette partie, introduisons une dernière notion. Une moyenne $m$ sur $\Gamma$ est dite 
 \emph{topologiquement invariante (à gauche)} si :
 \begin{equation*}
     \forall f\in\mathrm{L}^\infty(\Gamma), \forall\varphi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}, m(\varphi*f) = m(f)
 \end{equation*}
-\TODO{Renvoi vers propriétés et def de la convolution}
+On renvoie à l'annexe \ref{appendix_integration} pour les propriétés de la convolution sur les groupes localement
+compacts, et notamment à l'inégalité de Young \ref{young} qui assure que la définition ci-dessus est bien formée.
 
 Le théorème suivant assure que toutes les notions définies dans cette partie sont en fait équivalentes à la moyennabilité ! À travers la condition de Reiter, il nous 
 permettra de caractériser la moyennabilité par la théorie des représentations dans la partie suivante.
@@ -882,7 +883,8 @@ La preuve nécessite un certain nombre de résultats et définitions préliminai
 Nous notons $UC_b(\Gamma_d)$ l'ensemble des fonctions $f:\Gamma_d\to\C$ qui sont bornées et uniformément 
 continues, muni de la norme uniforme. Dans cette définition et dans toute la suite, $\Gamma_d$ désigne l'espace uniforme obtenu 
 en munissant le groupe topologique $\Gamma$ de sa structure uniforme \emph{droite}\footnote{On noterait de même $\Gamma_s$
-le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}.
+le groupe topologique $\Gamma$ muni de sa structure uniforme \emph{gauche}.}\footnote{La convention \og{}gauche/droite\fg{} 
+dans cette définition est parfois renversée. Nous adoptions la convention de Bourbaki.}.
 Rappelons que cette structure uniforme, dont nous noterons $\mathcal{U}\Gamma_d$ le filtre des entourages,
 est définie par l'égalité $\mathcal{U}\Gamma_d=(\divop_d)^*\nhds_1^\Gamma$, pour 
 $\fundef{\divop_d}{\Gamma\times\Gamma&\to&\Gamma}{(x, y)&\mapsto&x y\inv}$\footnote{Dans le cas de la structure 
@@ -945,7 +947,7 @@ Encore une fois, on donne une preuve concrète basée sur le lemme \ref{UCB_iff_
 Terminons par le résultat suivant, qui justifie que l'on s'intéresse à cet espace.
 
 \begin{proposition}\label{conv_UCB}
-    La convolée $\varphi\ast f$ de $\varphi\in\mathscr{L}^1(\Gamma)$ et $f\in\mathscr{L}^\infty(\Gamma)$, qui existe et appartient à $\ell^\infty(\Gamma)$ par l'inégalité de Young (\TODO{ref}),
+    La convolée $\varphi\ast f$ de $\varphi\in\mathscr{L}^1(\Gamma)$ et $f\in\mathscr{L}^\infty(\Gamma)$, qui existe et appartient à $\ell^\infty(\Gamma)$ par l'inégalité de Young \ref{young},
     appartient en fait à $UC_b(\Gamma_d)$.
 
     Par conséquent, l'opérateur de convolution $\ast:\mathrm{L}^1(\Gamma)\times\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$
@@ -960,7 +962,7 @@ est encore un plongement isométrique. Dorénavant, on identifiera d'ailleurs $U
 Il s'agit donc de montrer le premier point.
 
 \begin{proof}
-    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ %(\TODO{faut-il la remontrer ? Raisonnement par densité}) 
+    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ \TODO{faut-il la remontrer ? Raisonnement par densité}
     assure que 
     $\fundef{\ev_\varphi\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma)}{g&\mapsto&\lambda(g)(\varphi)}$ est continue, ce qui fournit 
     un voisinage $V\in\nhds_1^\Gamma$ tel que $\forall g\in V, \norm{\lambda(g)(\varphi) - \varphi}_1<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^\infty}}$. Or, pour $g, x\in \Gamma$ quelconques, on a :
@@ -995,8 +997,8 @@ Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}
 si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{sur le corps $\C$}. Si
 $E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
 
-Rappelons aussi que, grâce à la définition choisie de $\mathrm{L}^\infty$ (\TODO{ref}), l'isomorphisme $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$
-est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\sigma$-fini (\TODO{ref}).
+Rappelons aussi que, grâce à la définition choisie de $\mathrm{L}^\infty$ \TODO{ref}, l'isomorphisme $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$
+est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\sigma$-fini \TODO{ref}.
 
 Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
 Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
@@ -1243,8 +1245,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
             &= \integral{}{}{\varphi(g)\widetilde{m}(f)}{\mu(g)} \\
             &= \widetilde{m}(f)\integral{}{}{\varphi}{\mu}
     \end{align*}
-    Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution, 
-    %(\TODO{ref}) 
+    Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution (théorème \ref{young}),
     de $\widetilde{m}$ et de l'intégration, que l'égalité $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)\integral{}{}{\varphi}{\mu}$ est valable 
     pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ (et toujours pour 
     $f\in UC_b(\Gamma_d)$), on a $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)$.
@@ -1253,7 +1254,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     dans $\mathscr{L}^1(\Gamma, \mu)_{1, +}$, de sorte que pour tout $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, la fonction 
     $\psi\mapsto\varphi\ast\psi$ converge selon $\mathscr{F}$ vers $\varphi$ en norme $\mathrm{L}^1$. 
     Si on se donne de plus $f\in\mathscr{L}^\infty(\Gamma)$, on a donc que la fonction $\psi\mapsto(\varphi\ast\psi)\ast f = \varphi\ast(\psi\ast f)$
-    converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, on
+    (proposition \ref{conv_assoc}) converge selon $\mathscr{F}$ vers $\varphi\ast f$ dans $\mathrm{L}^\infty(\Gamma)$. Mais pour tout $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, on
     a $\psi\ast f\in UC_b(\Gamma_d)$ (proposition \ref{conv_UCB}), donc $\widetilde{m}(\varphi\ast\psi\ast f) = \widetilde{m}(\psi\ast f)$,
     de sorte que le nombre $\widetilde{m}(\varphi\ast f)$ est limite selon $\mathscr{F}$ de $\psi\mapsto\widetilde{m}(\psi\ast f)$ et 
     ne dépend donc pas de $\varphi$. On a ainsi montré que $\forall\varphi, \varphi'\in\mathscr{L}^1(\Gamma, \mu)_{1, +}, \widetilde{m}(\varphi\ast f) = \widetilde{m}(\varphi'\ast f)$.
@@ -1276,14 +1277,14 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     tel que $\widetilde{\iota}_*\mathscr{F}$ converge vers $m$ pour la topologie faible-$*$ sur $\mathcal{M}(\Gamma)$.
     L'invariance topologique de $m$ assure donc que, pour toutes $\varphi\in\mathscr{L}^1(\Gamma)_{1, +}$ et 
     $f\in\mathscr{L}^\infty(\Gamma)$, la fonction $\ket{\blank, \varphi\ast f - f}$ converge vers $0$ selon $\mathscr{F}$.
-    Or, pour toute $\psi\in\mathscr{L}^1(\Gamma)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \TODO{}),
+    Or, pour toute $\psi\in\mathscr{L}^1(\Gamma)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \ref{ket_conv}),
     donc :
     \begin{equation}\label{amenable_TFAE/eq1}
         \forall\varphi\in\mathscr{L}^1(\Gamma)_{1, +}, \forall f\in\mathscr{L}^\infty(\Gamma), \ket{\varphi\ast\psi - \psi, f}\xrightarrow[\psi\to\mathscr{F}]{}0
     \end{equation}
     Considérons maintenant l'espace vectoriel $E := \mathcal{F}(\mathrm{L}^1(\Gamma)_{1, +}, \mathrm{L}^1(\Gamma))$ muni de la topologie 
     produit des topologies normiques. $E$ est alors localement convexe, et la topologie faible $\sigma(E, E^*)$ sur $E$
-    coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma)$ (\TODO{explication ?}). Notons $\Sigma\subseteq E$ l'ensemble convexe formé
+    coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma)$ \TODO{explication ?}. Notons $\Sigma\subseteq E$ l'ensemble convexe formé
     des fonctions de la forme $\fundef{A_\psi}{\mathrm{L}^1(\Gamma)_{1, +}&\to&\mathrm{L}^1(\Gamma)}{\varphi&\mapsto&\varphi\ast\psi - \psi}$ pour $\psi\in\mathrm{L}^1(\Gamma)_{1, +}$.
     \eqref{amenable_TFAE/eq1} montre que $0$ est adhérent à $\Sigma$ pour le produit des topologies faibles, 
     donc pour la topologie faible sur $E$, et donc aussi pour la topologie originale de $E$ d'après la proposition \ref{weak_convex_closed}.
@@ -1301,7 +1302,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     L'ensemble $K := (\ev_{\varphi_0}\comp\lambda)(Q)$ est donc un compact de $\mathrm{L}^1(\Gamma, \mu)_{1, +}$. \eqref{amenable_TFAE/eq2} donne donc 
     que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0$, ce qui fournit, par nontrivialité 
     de $\mathscr{G}$, un $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ tel que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} < \halfilon$. Posons enfin $\varphi := \varphi_0\ast\psi$.
-    On a alors $\lambda(g)(\varphi) = \lambda(g)(\varphi_0)\ast\psi$ pour tout $g\in\Gamma$ (\TODO{ref}). Il vient finalement, pour tout $g\in A\subseteq Q$ : 
+    On a alors $\lambda(g)(\varphi) = \lambda(g)(\varphi_0)\ast\psi$ pour tout $g\in\Gamma$ (lemme \ref{translate_conv}). Il vient finalement, pour tout $g\in A\subseteq Q$ : 
     \begin{equation*}
         \norm{\lambda(g)(\varphi) - \varphi}_{\mathrm{L}^1} \leq    
             \norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} + \norm{\lambda(1)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1}
@@ -1377,35 +1378,35 @@ d'espaces vectoriels topologiques, de sorte que $\pi_1$ s'identifie à une sous-
 On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme\footnote{Cette notation est justifiée par le fait que ces morphismes
 sont exactement les monomorphismes de la catégorie des représentations continues de $\Gamma$.}.
 
-Rappelons aussi que, si $\Gamma$ est localement compact et qu'on fixe une mesure de Haar à gauche $\mu$ sur 
-$\Gamma$, on peut munir l'espace de Banach $\mathrm{L}^1(\Gamma, \mu)$ d'une structure d'algèbre de Banach \emph{via}
-le produit de convolution, défini pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ par 
-\begin{equation*}
-    (f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}
-\end{equation*}
-L'inégalité de Young donne alors $\norm{f_1\ast f_2}_{\mathscr{L}^1} \le \norm{f_1}_{\mathscr{L}^1}\norm{f_2}_{\mathscr{L}^1}$.
-Cela implique tout d'abord que, si $f_1$ ou $f_2$ est presque nulle, $f_2\ast f_2$ l'est aussi, et donc que
-$\ast$ passe au quotient en $\ast : \mathrm{L}^1 \times\mathrm{L}^1 \to \mathrm{L}^1$, puis que l'opération 
-bilinéaire obtenue est bien de norme inférieure à $1$, d'où finalement $\mathrm{L}^1(\Gamma, \mu)$ est bien une algèbre de Banach.
-Vérifions enfin qu'il s'agit d'une algèbre de Banach involutive pour l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
-$\invop_*\mu\ll\mu$. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
-\begin{align*}
-    \norm{f^*}_{\mathrm{L}^1} 
-        &= \integral{}{}{\abs{\Delta(g)\overline{f(g)}}}{(\invop_*\mu)(g)} \\
-        &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
-        &= \norm{f}_{\mathrm{L}^1}
-\end{align*}
-La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
-\begin{align*}
-    (f_1^*\ast f_2^*)(x) 
-        &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
-        &= \Delta(x\inv)\overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/continuous_group_hom})})}\\
-        &= \Delta(x\inv)\overline{(f_2\ast f_2)(x\inv)} \\
-        &= (f_2\ast f_1)^*(x)
-\end{align*}
+%Rappelons aussi que, si $\Gamma$ est localement compact et qu'on fixe une mesure de Haar à gauche $\mu$ sur 
+%$\Gamma$, on peut munir l'espace de Banach $\mathrm{L}^1(\Gamma, \mu)$ d'une structure d'algèbre de Banach \emph{via}
+%le produit de convolution, défini pour $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$ par 
+%\begin{equation*}
+%    (f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}
+%\end{equation*}
+%L'inégalité de Young donne alors $\norm{f_1\ast f_2}_{\mathscr{L}^1} \le \norm{f_1}_{\mathscr{L}^1}\norm{f_2}_{\mathscr{L}^1}$.
+%Cela implique tout d'abord que, si $f_1$ ou $f_2$ est presque nulle, $f_2\ast f_2$ l'est aussi, et donc que
+%$\ast$ passe au quotient en $\ast : \mathrm{L}^1 \times\mathrm{L}^1 \to \mathrm{L}^1$, puis que l'opération 
+%bilinéaire obtenue est bien de norme inférieure à $1$, d'où finalement $\mathrm{L}^1(\Gamma, \mu)$ est bien une algèbre de Banach.
+%Vérifions enfin qu'il s'agit d'une algèbre de Banach involutive pour l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
+%$\invop_*\mu\ll\mu$. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
+%\begin{align*}
+%    \norm{f^*}_{\mathrm{L}^1} 
+%        &= \integral{}{}{\abs{\Delta(g)\overline{f(g)}}}{(\invop_*\mu)(g)} \\
+%        &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
+%        &= \norm{f}_{\mathrm{L}^1}
+%\end{align*}
+%La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
+%\begin{align*}
+%    (f_1^*\ast f_2^*)(x) 
+%        &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
+%        &= \Delta(x\inv)\overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/continuous_group_hom})})}\\
+%        &= \Delta(x\inv)\overline{(f_2\ast f_2)(x\inv)} \\
+%        &= (f_2\ast f_1)^*(x)
+%\end{align*}
 
 On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{U}(V_\pi)$ du \emph{groupe} $\Gamma$ une
-représentation, toujours notée $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
+représentation, notée $\mathrm{L}^1(\pi)$ ou encore $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
 
 Pour $f\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in V_\pi$, on définit une forme linéaire $\underline{\pi}(f)(x)$ sur $V_\pi^*$ par 
 $\underline{\pi}(f)(x)(\varphi) := \integral{}{}{f(g)\cdot\varphi(\pi(g)(x))}{\mu(g)}$, cette intégrale étant finie car $f$ est
@@ -1884,7 +1885,7 @@ vérifiant $\forall x\in K, f(x) = 1$ et $\Supp f\subseteq U$. On a alors, pour 
         &< 2\varepsilon
 \end{align*}
 On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout ensemble $A$ de mesure finie par des fonctions continues 
-à support compact. Ces indicatrices engendrant un sous-espace dense de $\mathrm{L}^p(X, \mu)$ (\TODO{ref}), on vient de montrer le résultat suivant.
+à support compact. Ces indicatrices engendrant un sous-espace dense de $\mathrm{L}^p(X, \mu)$ \TODO{ref}, on vient de montrer le résultat suivant.
 
 \begin{proposition}\label{cont_supp_compact_dense_Lp}
     Si $\mu$ est de Radon, l'espace $C_c(X)$ est dense dans $\mathrm{L}^p(X, \mu)$ pour tout $p\in[1, +\infty[$.
@@ -1961,7 +1962,7 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
     qui est mesurable et d'image séparable est automatiquement fortement mesurable.
 \end{remark}
 
-\section{Intégration sur les groupes localement compacts}
+\section{Intégration sur les groupes localement compacts}\label{appendix_integration}
 
 On fixe un groupe topologique $G$ séparé et localement compact.
 
@@ -2000,13 +2001,97 @@ et ses propriétés sont résumées par la propriété suivante :
 \end{proposition}
 
 Nous utilisons la propriété $(\ref{modular_character/inv_change_of_variable})$ à de nombreuses reprises
-pour effectuer des changements de variables de la forme $g\mapsto g\inv$. C'est notamment fondamental pour développer 
-la théorie de la convolution sur un groupe topologique localement compact.
+pour effectuer des changements de variables de la forme $g\mapsto g\inv$. 
 
 \subsection*{Convolution}
 
-\section{Quelques résultats sur les espaces uniformes}
-\subsection*{Sur la convergence uniforme des translatées d'une fonction}
+Fixons $\mu$ une mesure de Haar à gauche sur $G$. Étant données deux fonctions $f_1, f_2 : G\to\C$ mesurables, 
+on introduit leur convolution $(f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}$, du moins lorsque cela a du sens.
+Plus précisément, on dit que $f_1$ et $f_2$ sont \emph{convolables en $x\in\Gamma$} lorsque $(f_1\ast f_2)(x)$ est bien défini,
+et qu'elles sont \emph{convolables} si elles sont convolables en $\mu$-localement-presque-tout $x\in\Gamma$.
+On prolonge alors la fonction partielle $f_1\ast f_2$ en posant $(f_1\ast f_2)(x) := 0$ si $f_1$ et $f_2$
+ne sont pas convolables en $x$. Commençons par énoncer un résultat élémentaire.
+
+\begin{lemma}\label{translate_conv}
+    Soient $f_1, f_2 : G\to\C$ deux fonctions mesurables convolables, et $g\in G$. Alors $\lambda(g)(f_1)$ est
+    convolable avec $f_2$, et on a $\lambda(g)(f_1\ast f_2) =_{\mu}^{loc} \lambda(g)(f_1)\ast f_2$.
+\end{lemma}
+
+\begin{proof}
+    Si $x\in G$ est tel que $f_1$ et $f_2$ sont convolables en $x$, on a :
+    \begin{align*}
+        \lambda(g)(f_1\ast f_2)(x) 
+            &= \integral{}{}{f_1(h)f_2(h\inv g\inv x)}{\mu(h)} \\
+            &= \integral{}{}{f_1(g\inv h)f_2(h\inv x)}{\mu(h)} 
+    \end{align*}
+    $\lambda(g)(f_1)$ et $f_2$ sont donc convolables en $x$, avec $(\lambda(g)(f_1)\ast f_2)(x) = \lambda(g)(f_1\ast f_2)(x)$.
+\end{proof}
+
+Les deux résultats suivants se prouvent de manière analogue au cas $G = \R^d$, à condition toutefois que 
+$G$ soit $\sigma$-compact pour disposer du théorème de Fubini. Ils restent vrais sans cette hypothèse,
+à l'aide de résultats tels que \ref{exists_sigma_compact_subgroup} qui permettent de se ramener au cas $\sigma$-compact,
+mais nous ne le ferons pas ici. 
+
+\begin{theorem}[Inégalité de Young]\label{young}
+    Soient $p, q, r\in[1, +\infty]$ tels que $\frac1p + \frac1q = 1 + \frac1r$, $f_1\in\mathscr{L}^p(\Gamma, \mu)$,
+    $f_2\in\mathscr{L}^q(\Gamma, \mu)$. Alors $f_1$ et $f_2$ sont convolables, $f_1\ast f_2\in\mathscr{L}^r(\Gamma, \mu)$,
+    et $\norm{f_1\ast f_2}_{\mathrm{L}^r} \leq \norm{f_1}_{\mathrm{L}^p} \norm{f_2}_{\mathrm{L}^q}$. En particulier, 
+    la convolution descend en $\ast : \mathrm{L}^p \times \mathrm{L}^q \to \mathrm{L}^r$ bilinéaire continue de norme inférieure à $1$.
+
+    De plus, pour $r = +\infty$, $f_1$ et $f_2$ sont en fait convolables \emph{partout}, et leur convolée 
+    est bornée \emph{partout}, avec $\norm{f_1\ast f_2}_{\ell^\infty} \leq \norm{f_1}_{\mathrm{L}^p} \norm{f_2}_{\mathrm{L}^q}$.
+\end{theorem}
+
+\begin{proposition}[Associativité]\label{conv_assoc}
+    Soient $p\in[1, +\infty]$, $\varphi, \psi \in\mathscr{L}^1(G, \mu)$ et $f\in\mathscr{L}^p(G, \mu)$.
+    On a $(\varphi \ast \psi) \ast f =_{\mu}^{loc} \varphi \ast (\psi \ast f)$.
+\end{proposition}
+
+Ces deux résultats assurent notamment que, muni de la convolution, l'espace $\mathrm{L}^1(G, \mu)$
+est une algèbre de Banach associative. Vérifions maintenant que l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
+$\invop_*\mu\ll\mu$, fait de $\mathrm{L}^1(G, \mu)$ une algèbre de Banach involutive. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
+\begin{align*}
+    \norm{f^*}_{\mathrm{L}^1} 
+        &= \integral{}{}{\abs{\Delta(g)\overline{f(g)}}}{(\invop_*\mu)(g)} \\
+        &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
+        &= \norm{f}_{\mathrm{L}^1}
+\end{align*}
+La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
+\begin{align*}
+    (f_1^*\ast f_2^*)(x) 
+        &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
+        &= \Delta(x\inv)\overline{\integral{}{}{f_1(g\inv x\inv) f_2(g)}{\mu(g)}} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/continuous_group_hom})})}\\
+        &= \Delta(x\inv)\overline{(f_2\ast f_2)(x\inv)} \\
+        &= (f_2\ast f_1)^*(x)
+\end{align*}
+
+Terminons par un petit lemme utile dans le corps de ce document. 
+
+\begin{lemma}\label{ket_conv}
+    Soient $\varphi, \psi\in\mathscr{L}^1(\Gamma, \mu)$ et $f\in\mathscr{L}^\infty(\Gamma)$. 
+    On a $\ket{\psi, \varphi\ast f} = \ket{\varphi^*\ast\psi, f}$.
+\end{lemma}
+
+\begin{proof}
+    On vérifie directement, et \emph{sans utiliser le théorème de Fubini} :
+    \begin{align*}
+        \ket{\psi, \varphi\ast f} 
+            &= \integral{}{}{\psi(x)\integral{}{}{\varphi(g)f(g\inv x)}{\mu(g)}}{\mu(x)} \\
+            &= \integral{}{}{\integral{}{}{\psi(x)\varphi^*(g)f(g x)}{\mu(g)}}{\mu(x)} \\
+            &= \integral{}{}{\integral{}{}{\psi(g\inv x)\varphi^*(g)f(x)}{\mu(g)}}{\mu(x)} \\
+            &= \ket{\varphi^*\ast\psi, f} 
+    \end{align*}
+\end{proof}
+
+%\begin{proof}
+%    Si $G$ est $\sigma$-compact, la preuve est identique à la preuve usuelle pour $G = \R^n$. Voyons donc comment s'y ramener.
+%
+%    Tout d'abord, si $p, q, r$ sont tous finis, on commence par montrer le résultat pour les fonctions continues à support compact.
+%    On applique pour cela le lemme \ref{exists_sigma_compact_subgroup}, appliqué à l'union des supports des fonctions en jeu,
+%    pour se ramener à un groupe $\sigma$-compact.
+%\end{proof}
+
+\section{Sur la convergence uniforme des translatées d'une fonction}
 
 Soient $X$ un ensemble et $Y$ un espace uniforme. On note $\mathcal{F}_u(X, Y)$ l'ensemble des 
 fonctions de $X$ dans $Y$ muni de la structure uniforme de la convergence uniforme, dont le filtre des entourages 
