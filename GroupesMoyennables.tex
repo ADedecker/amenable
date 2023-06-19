@@ -285,10 +285,10 @@ le défaut de $\sigma$-additivité se traduisant par l'absence des théorèmes d
 
 \begin{proposition}\label{content_integration_and_repr}
     Soit $(X, \mathcal{A}, \mu)$ un espace mesuré et $m$ un contenu fini sur $(X, \mathcal{A})$ \emph{absolument continu par rapport
-    à} $\mu$. Il existe alors une unique forme linéaire positive $I_m : \mathrm{L}^\infty(X, \mu)\to\C$ vérifiant $I_m(\indic_A) = m(A)$ pour tout
+    à} $\mu$. Il existe alors une unique forme linéaire positive $\integral{}{}{\blank}{m} : \mathrm{L}^\infty(X, \mu)\to\C$ vérifiant $\integral{}{}{\indic_A}{m} = m(A)$ pour tout
     $A\in\mathcal{A}$. 
 
-    De plus, l'application $m\mapsto I_m$ est une bijection de l'ensemble des contenus finis absoluments continus par rapport à $\mu$
+    De plus, l'application $I : m\mapsto \integral{}{}{\blank}{m}$ est une bijection de l'ensemble des contenus finis absoluments continus par rapport à $\mu$
     sur l'ensemble des formes linéaires positives sur $\mathrm{L}^\infty(X, \mu)$.
 \end{proposition}
 
@@ -338,29 +338,30 @@ le défaut de $\sigma$-additivité se traduisant par l'absence des théorèmes d
         \abs{\widetilde{I}_m(f)} = \abs{\sum_{z\in f(X)} zm(f\inv(z))} \le \sum_{z\in f(X)} \norm{f}_{\mathrm{L}^\infty} m(f\inv(z)) = \norm{f}_{\mathrm{L}^\infty} m(X)
     \end{equation*}
     Comme par ailleurs $\widetilde{I}_m(1)=m(X)$, on a donc $\widetilde{I}_m$ continue de norme exactement $m(X)$.
-    Par le théorème de prolongement des applications uniformément continues, elle se prolonge donc de manière unique en $I_m : \mathrm{L}^\infty(X, \mu)\to\C$
-    linéaire continue de même norme $m(X) = I_m(1)$. Le lemme \ref{positive_iff_norm} assure alors que $I_m$ est positive, et convient donc. 
-    L'unicité de $I_m$ est alors 
-    immédiate, la formule $m(A) = I_m(\indic_A)$ imposant la valeur sur $\mathrm{S}(X, \mu)$, puis sur $\mathrm{L}^\infty(X, \mu)$ par densité et continuité des formes linéaires 
+    Par le théorème de prolongement des applications uniformément continues, elle se prolonge donc de manière unique en $\integral{}{}{\blank}{m} : \mathrm{L}^\infty(X, \mu)\to\C$
+    linéaire continue de même norme $m(X) = \integral{}{}{1}{m}$. Le lemme \ref{positive_iff_norm} assure alors que $\integral{}{}{\blank}{m}$ est positive, et convient donc. 
+    L'unicité de $\integral{}{}{\blank}{m}$ est alors 
+    immédiate, la formule $m(A) = \integral{}{}{\indic_A}{m}$ imposant la valeur sur $\mathrm{S}(X, \mu)$, puis sur $\mathrm{L}^\infty(X, \mu)$ par densité et continuité des formes linéaires 
     positives.
 
-    Reste à montrer la bijectivité de $m\mapsto I_m$. L'injectivité est immédiate, la formule $m(A) = I_m(\indic_A)$ déterminant
+    Reste à montrer la bijectivité de $I:m\mapsto \integral{}{}{\blank}{m}$. L'injectivité est immédiate, la formule $m(A) = \integral{}{}{\indic_A}{m}$ déterminant
     entièrement $m$. Soit donc $T : \mathrm{L}^\infty(X, \mu)\to\C$ une forme linéaire positive quelconque, posons $\fundef{m}{\mathcal{A}&\to&\closure{\R}_+}{A&\mapsto&T(\indic_A)}$.
     Il est clair que $m$ est alors un contenu, et la définition assure que $m\ll\mu$ car l'indicatrice d'un borélien $\mu$-localement négligeable
     est nulle dans $\mathrm{L}^\infty(X,\mu)$. Comme $T$ est positive et $\forall A\in\mathcal{A}, m(A)=T(\indic_A)$, l'unicité 
-    démontrée précédemment assure que $T = I_m$, ce qui conclut.
+    démontrée précédemment assure que $T = \integral{}{}{\blank}{m}$, ce qui conclut.
 \end{proof}
 
-\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
+%\TODO{Commentaire sur lien avec construction de l'intégrale de Bochner ?}
 
 \begin{remark}
-    Dans le cas où $m$ est une mesure finie, l'unicité assure que la forme $I_m$ n'est autre que l'intégrale par rapport à $m$, ou plus précisément sa précomposition
+    Dans le cas où $m$ est une mesure finie, l'unicité assure que la forme $\integral{}{}{\blank}{m}$ construite ci-dessus coïncide bien avec l'intégrale usuelle
+    par rapport à $m$, ou plus précisément sa précomposition
     par l'application naturelle $\mathrm{L}^\infty(X, \mu)\to\mathrm{L}^\infty(X, m)\hookrightarrow\mathrm{L}^1(X, m)$.
 \end{remark}
 
 Il est clair que la bijection $I$ de la proposition \ref{content_integration_and_repr} fait correspondre les moyennes 
 sur $(X, \mathcal{A})$ aux contenus de masse 1 et absoluments continus par rapport à $\mu$. On voudrait maintenant pouvoir exprimer 
-la condition d'invariance par translations, et il nous faut pour cela aborder l'aspect fonctioriel de la construction de $I$.
+la condition d'invariance par translations, et il nous faut pour cela aborder l'aspect fonctioriel de l'intégration.
 
 Soient $(X, \mathcal{A})$, $(Y, \mathcal{B})$ deux espaces mesurables, $m$ un contenu sur $(X, \mathcal{A})$ et $\varphi : X\to Y$ mesurable.
 On définit alors le \emph{contenu image} de $m$ par $\varphi$ par $\fundef{\varphi_* m}{\mathcal{B}&\to&\closure{\R_+}}{B&\mapsto&m(\varphi\inv(B))}$.
@@ -369,16 +370,16 @@ $m\ll\mu$ et $\varphi_*\mu\ll\nu$
 \footnote{Autrement dit, la préimage par $\varphi$ de tout ensemble $\nu$-localement négligeable est $\mu$-localement négligeable. Cette condition assure que la précomposition 
 par $\varphi$ est une opération bien définie de $\mathrm{L}^\infty(Y, \nu)$ vers $\mathrm{L}^\infty(X, \mu)$. }, alors :
 \begin{equation*}
-    \forall B\in\mathcal{B}, I_{\varphi_*m}(\indic_B) = m(\varphi\inv(B)) = I_m(\indic_{\varphi\inv(B)}) = I_m(\indic_B\comp \varphi)
+    \forall B\in\mathcal{B}, \integral{}{}{\indic_B}{\varphi_*m} = m(\varphi\inv(B)) = \integral{}{}{\indic_{\varphi\inv(B)}}{m} = \integral{}{}{\indic_B\comp\varphi}{m}
 \end{equation*}
-La forme linéaire $\funlam{\mathrm{L}^\infty(Y, \nu)&\to&\C}{f&\mapsto&I_m(f\comp\varphi)}$ étant par ailleurs positive, l'unicité dans la proposition
-\ref{content_integration_and_repr} assure qu'elle est égale à $I_{\varphi_*m}$, de sorte que :
+La forme linéaire $\funlam{\mathrm{L}^\infty(Y, \nu)&\to&\C}{f&\mapsto&\integral{}{}{f\comp\varphi}{m}}$ étant par ailleurs positive, l'unicité dans la proposition
+\ref{content_integration_and_repr} assure qu'elle est égale à $\integral{}{}{\blank}{\varphi_*m}$, de sorte que :
 \begin{equation*}
-    \forall f\in\mathrm{L}^\infty(Y, \nu), I_{\varphi_*m}(f) = I_m(f\comp\varphi)
+    \forall f\in\mathrm{L}^\infty(Y, \nu), \integral{}{}{f}{\varphi_*m} = \integral{}{}{f\comp\varphi}{m}
 \end{equation*}
 
 En revenant au cas d'un groupe séparé localement compact $\Gamma$ muni d'une mesure de Haar $\mu$, 
-cette dernière égalité montre que $I_m$ est une moyenne invariante à gauche (resp. à droite) \ssi 
+cette dernière égalité montre que l'intégration par rapport à $m$ est une moyenne invariante à gauche (resp. à droite) \ssi 
 $m$ est de masse $1$ et $\forall g\in\Gamma, {\ell_g}_*m = m$ (resp. ${r_g}_*m = m$). On dira qu'un tel 
 contenu est \emph{invariant à gauche} (resp. \emph{à droite}) s'il vérifie cette dernière condition, et 
 \emph{invariant} s'il est invariant à gauche et à droite. En prenant en compte la proposition \ref{bilateral_of_left},
