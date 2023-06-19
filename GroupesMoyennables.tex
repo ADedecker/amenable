@@ -811,8 +811,8 @@ Pour $i$ fixé, on a alors :
 \end{align*}
 Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.\\
 
-Notons $\mathscr{L}^1(\Gamma, \mu)_{1,+}$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma)$ positives et de masse $1$, et $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ son image dans 
-$\mathrm{L}^1(\Gamma)$. On s'intéresse à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1(\Gamma, \mu)_{1, +}\to\mathcal{F}(\Gamma, \R_+)$, définie par
+Notons $\mathscr{L}^1(\Gamma, \mu)_{1,+}$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma, \mu)$ positives et de masse $1$, et $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ son image dans 
+$\mathrm{L}^1(\Gamma, \mu)$. On s'intéresse désormais à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1(\Gamma, \mu)_{1, +}\to\mathcal{F}(\Gamma, \R_+)$, définie par
 par $\mathfrak{r}(\varphi)(\gamma) = \norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$.
 
 Un filtre $\mathscr{F}$ sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ est dit \emph{faiblement de Reiter} (resp. \emph{fortement de Reiter}) s'il est non-trivial et si le filtre $\mathfrak{r}_*\mathscr{F}$ converge vers $0$ pour la 
@@ -947,12 +947,12 @@ Encore une fois, on donne une preuve concrète basée sur le lemme \ref{UCB_iff_
 Terminons par le résultat suivant, qui justifie que l'on s'intéresse à cet espace.
 
 \begin{proposition}\label{conv_UCB}
-    La convolée $\varphi\ast f$ de $\varphi\in\mathscr{L}^1(\Gamma)$ et $f\in\mathscr{L}^\infty(\Gamma)$, qui existe et appartient à $\ell^\infty(\Gamma)$ par l'inégalité de Young \ref{young},
+    La convolée $\varphi\ast f$ de $\varphi\in\mathscr{L}^1(\Gamma, \mu)$ et $f\in\mathscr{L}^\infty(\Gamma)$, qui existe et appartient à $\ell^\infty(\Gamma)$ par l'inégalité de Young \ref{young},
     appartient en fait à $UC_b(\Gamma_d)$.
 
-    Par conséquent, l'opérateur de convolution $\ast:\mathrm{L}^1(\Gamma)\times\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$
+    Par conséquent, l'opérateur de convolution $\ast:\mathrm{L}^1(\Gamma, \mu)\times\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$
     se factorise à travers $UC_b(\Gamma_d)\hookrightarrow\mathrm{L}^\infty(\Gamma)$ en 
-    $\ast:\mathrm{L}^1(\Gamma)\times\mathrm{L}^\infty(\Gamma)\to UC_b(\Gamma_d)$ encore bilinéaire continue de norme inférieure à $1$.
+    $\ast:\mathrm{L}^1(\Gamma, \mu)\times\mathrm{L}^\infty(\Gamma)\to UC_b(\Gamma_d)$ encore bilinéaire continue de norme inférieure à $1$.
 \end{proposition}
 
 Il est clair que le deuxième point découle du premier puisque les normes $\norm{\cdot}_\infty$ et $\norm{\cdot}_{\mathrm{L}^\infty}$ coïncident 
@@ -962,9 +962,9 @@ est encore un plongement isométrique. Dorénavant, on identifiera d'ailleurs $U
 Il s'agit donc de montrer le premier point.
 
 \begin{proof}
-    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma)$ \TODO{faut-il la remontrer ? Raisonnement par densité}
+    On utilise la caractérisation $(\ref{UCB_explicit_cara})$. Soit donc $\varepsilon>0$. La continuité de la représentation régulière $\lambda$ de $\Gamma$ sur $\mathrm{L}^1(\Gamma, \mu)$ \TODO{faut-il la remontrer ? Raisonnement par densité}
     assure que 
-    $\fundef{\ev_\varphi\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma)}{g&\mapsto&\lambda(g)(\varphi)}$ est continue, ce qui fournit 
+    $\fundef{\ev_\varphi\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma, \mu)}{g&\mapsto&\lambda(g)(\varphi)}$ est continue, ce qui fournit 
     un voisinage $V\in\nhds_1^\Gamma$ tel que $\forall g\in V, \norm{\lambda(g)(\varphi) - \varphi}_1<\frac{\varepsilon}{\norm{f}_{\mathrm{L}^\infty}}$. Or, pour $g, x\in \Gamma$ quelconques, on a :
     \begin{align*}
         \lambda(g)(\varphi\ast f)(x)
@@ -1011,7 +1011,7 @@ qui est $*$-faiblement fermé dans $\mathbb{B}$ et donc $*$-faiblement compact.
 Considérons désormais $X$ un espace topologique séparé et localement compact muni d'une mesure de Radon $\mu$, et 
 étudions désormais le sous-ensemble des moyennes provenant de fonctions intégrables \emph{via} le plongement isométrique usuel $\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$.
 Notons déjà que ce plongement se restreint en $\mathrm{L}^1(X, \mu)_{1, +}\hookrightarrow \mathcal{M}(X, \mu)$.
-En effet, il est clair que, pour $f\in\mathscr{L}^1_{1, +}(X, \mu)$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
+En effet, il est clair que, pour $f\in\mathscr{L}^1(X, \mu)_{1, +}$, la forme linéaire $\funlam{\mathscr{L}^\infty(X,\mu)&\to&\C}{ \varphi &\mapsto&\integral{}{}{f\varphi}{\mu}}$ est une moyenne,
 car elle est positive et $\integral{}{}{f\cdot 1}{\mu} = \integral{}{}{f}{\mu} = 1$.
 
 Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrightarrow \mathcal{M}(X, \mu)$ est que son image est $*$-faiblement dense.
@@ -1022,10 +1022,10 @@ Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrigh
     Munissons l'espace $\mathrm{L}^1(X,\mu)$ de la topologie faible $\sigma(\mathrm{L}^1, \mathrm{L}^\infty) = \sigma\left(\mathrm{L}^1, {\mathrm{L}^1}^*\right)$
     \footnote{Cette égalité provient de ce que ${\mathrm{L}^1}^*\simeq\mathrm{L}^\infty$}, 
     l'espace $\mathrm{L}^\infty(X,\mu)^*$ de la topologie faible-$*$ $\sigma({\mathrm{L}^\infty}^*, \mathrm{L}^\infty)$,
-    et les parties $\mathrm{L}^1_{1, +}(X, \mu)$, $\mathcal{M}(X, \mu)$ des topologies induites respectives.
+    et les parties $\mathrm{L}^1(X, \mu)_{1, +}$, $\mathcal{M}(X, \mu)$ des topologies induites respectives.
 
     L'application $\iota:\mathrm{L}^1(X,\mu)\hookrightarrow\mathrm{L}^\infty(X,\mu)^*$ est alors un plongement d'espaces 
-    vectoriels topologiques, et le plongement topologique induit $\widetilde{\iota}:\mathrm{L}^1_{1, +}(X, \mu)\hookrightarrow \mathcal{M}(X, \mu)$
+    vectoriels topologiques, et le plongement topologique induit $\widetilde{\iota}:\mathrm{L}^1(X, \mu)_{1, +}\hookrightarrow \mathcal{M}(X, \mu)$
     est d'image dense. 
 \end{theorem}
 
@@ -1038,11 +1038,11 @@ Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrigh
     Cela assure que $\iota$ est effectivement un plongement topologique pour les topologies faibles associées à ces dualités,
     et donc un plongement d'espaces vectoriels topologiques par linéarité.
 
-    La partie importante est donc la densité, qui va reposer crucialement sur la convexité de $\mathrm{L}^1_{1, +}(X, \mu)$ et sur le théorème de séparation de Hahn-Banach.
-    Notre objectif est de montrer l'inclusion $\mathcal{M}(X, \mu)\subseteq\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$ (l'adhérence étant prise dans 
+    La partie importante est donc la densité, qui va reposer crucialement sur la convexité de $\mathrm{L}^1(X, \mu)_{1, +}$ et sur le théorème de séparation de Hahn-Banach.
+    Notre objectif est de montrer l'inclusion $\mathcal{M}(X, \mu)\subseteq\closure{\iota(\mathrm{L}^1(X, \mu)_{1, +})}$ (l'adhérence étant prise dans 
     ${\mathrm{L}^\infty(X,\mu)}^*$ pour la topologie faible-$*$). On suppose donc que ce n'est pas le cas, ce qui fournit
-    $m\in\mathcal{M}(X, \mu)$ tel que $m\notin\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$. Appliquons alors le théorème de séparation de
-    Hahn-Banach au compact (séparé) convexe $\set{m}$ et au fermé convexe $\closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}$
+    $m\in\mathcal{M}(X, \mu)$ tel que $m\notin\closure{\iota(\mathrm{L}^1(X, \mu)_{1, +})}$. Appliquons alors le théorème de séparation de
+    Hahn-Banach au compact (séparé) convexe $\set{m}$ et au fermé convexe $\closure{\iota(\mathrm{L}^1(X, \mu)_{1, +})}$
     de l'espace localement convexe \emph{réel} $\floor{\mathrm{L}^\infty(X,\mu)^*}$
     \footnote{L'espace vectoriel réel sous-jacent à un espace localement convexe complexe
     est par définition localement convexe. } 
@@ -1051,12 +1051,12 @@ Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrigh
     pour une famille d'applications linéaires à valeurs dans l'espace localement convexe $\K$, où $\K\in\set{\R, \C}$ 
     désigne le corps des scalaires. }. 
     Cela fournit une forme $\R$-linéaire continue $f : \floor{\mathrm{L}^\infty(X,\mu)^*} \to \R$ et un réel 
-    $a$ tel que $f(m)<a$ et $\forall x\in \closure{\iota(\mathrm{L}^1_{1, +}(X, \mu))}, f(x)>a$. 
+    $a$ tel que $f(m)<a$ et $\forall x\in \closure{\iota(\mathrm{L}^1(X, \mu)_{1, +})}, f(x)>a$. 
     %En particulier, par le théorème des 
     %valeurs intermédiaires, $a = f(\alpha)$ pour un certain $\alpha\in\mathrm{L}^\infty(X,\mu)^*$.
 
     Écrivons alors $f=\Re g$ où $\fundef{g}{\mathrm{L}^\infty(X,\mu)^* &\to& \C}{x&\mapsto&f(x)-\i f(\i x)}$ est $\C$-linéaire et continue, et 
-    supposons que $g$ est de la forme $\ev_\varphi$ pour $\varphi\in\mathrm{L}^\infty(X, \mu)$. On a alors, pour $u\in\mathrm{L}^1_{1, +}(X, \mu)$ :
+    supposons que $g$ est de la forme $\ev_\varphi$ pour $\varphi\in\mathrm{L}^\infty(X, \mu)$. On a alors, pour $u\in\mathrm{L}^1(X, \mu)_{1, +}$ :
 \begin{align*}
     \ket{u, \Re\varphi - a} 
         &= \Re\ket{u, \varphi - a}\footnotemark \\
@@ -1065,9 +1065,9 @@ Le résultat principal quant au plongement $\mathrm{L}^1(X, \mu)_{1, +}\hookrigh
         &= f(\iota(u)) - a \\
         &\ge 0
 \end{align*}
-\footnotetext{Cette égalité provient de ce que $u$ est à valeurs réelles.}Tout élément positif de $\mathrm{L}^1(X, \mu)$ étant nul ou multiple positif d'un élément de $\mathrm{L}^1_{1, +}(X, \mu)$
+\footnotetext{Cette égalité provient de ce que $u$ est à valeurs réelles.}Tout élément positif de $\mathrm{L}^1(X, \mu)$ étant nul ou multiple positif d'un élément de $\mathrm{L}^1(X, \mu)_{1, +}$
 \footnote{Plus précisément, si $u\in\mathrm{L}^1(X,\mu)$ est positif et non nul, on a $\integral{}{}{u}{\mu}=\norm{u}_{\mathrm{L}^1}\ne 0$. On peut alors poser 
-$\widetilde{u}:=\frac1{\integral{}{}{u}{\mu}}\cdot u\in\mathrm{L}^1_{1, +}(X, \mu)$, de sorte que
+$\widetilde{u}:=\frac1{\integral{}{}{u}{\mu}}\cdot u\in\mathrm{L}^1(X, \mu)_{1, +}$, de sorte que
 $u = \left(\integral{}{}{u}{\mu}\right)\cdot\widetilde{u}$.}, cette inégalité s'étend à tout $u\in\mathrm{L}^1(X, \mu)$ positif. 
 Autrement dit, $\Re\varphi-a$ est positive \emph{lorsqu'elle est vue comme forme linéaire sur $\mathrm{L}^1(X, \mu)$}. Si l'on admet
 que $\Re\varphi - a$ est en fait positive en tant qu'élément de $\mathrm{L}^\infty(X, \mu)$, on obtient directement une contradiction avec la positivité de $m$, puisque : 
@@ -1224,7 +1224,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     $m$, on a déjà $m(\varphi\ast f) = m(f)$ pour $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}$.
     Notons donc $\widetilde{m}$ la restriction de $m$ à $UC_b(\Gamma_d)$.
 
-    Pour voir cela, fixons $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1(\Gamma)$, que nous ne supposons pas encore positive normalisée.
+    Pour voir cela, fixons $f\in UC_b(\Gamma_d)$ et $\varphi\in\mathscr{L}^1(\Gamma, \mu)$, que nous ne supposons pas encore positive normalisée.
     Supposons dans un premier temps que $\varphi$ est continue à support compact. Le lemme \ref{UCB_iff_translate} assure 
     alors que la fonction $\ev_f\comp\lambda:\Gamma\to UC_b(\Gamma_d)\hookrightarrow\ell^\infty(\Gamma)$ est continue,
     de sorte que la fonction $\varphi\cdot(\ev_f\comp\lambda)$, à valeurs dans l'espace de Banach $UC_b(\Gamma_d)$, est continue à support compact.
@@ -1247,7 +1247,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     \end{align*}
     Cette égalité étant valable pour tout $\varphi\in C_c(\Gamma)$, le lemme \ref{cont_supp_compact_dense_Lp} entraîne, par continuité de la convolution (théorème \ref{young}),
     de $\widetilde{m}$ et de l'intégration, que l'égalité $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)\integral{}{}{\varphi}{\mu}$ est valable 
-    pour toute $\varphi\in\mathscr{L}^1(\Gamma)$. En particulier, pour $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ (et toujours pour 
+    pour toute $\varphi\in\mathscr{L}^1(\Gamma, \mu)$. En particulier, pour $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ (et toujours pour 
     $f\in UC_b(\Gamma_d)$), on a $\widetilde{m}(\varphi\ast f) = \widetilde{m}(f)$.
     
     Revenons maintenant au cas général, et fixons $\mathscr{F}$ un filtre d'approximation de l'unité 
@@ -1275,17 +1275,17 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     Montrons maintenant \framebox{$(\ref{amenable_TFAE/topological_mean})\implies(\ref{amenable_TFAE/strong_Reiter})$}. Soit donc $m$ une moyenne topologiquement invariante.
     Le théorème \ref{dense_in_means} fournit un filtre $\mathscr{F}$ non-trivial sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$
     tel que $\widetilde{\iota}_*\mathscr{F}$ converge vers $m$ pour la topologie faible-$*$ sur $\mathcal{M}(\Gamma)$.
-    L'invariance topologique de $m$ assure donc que, pour toutes $\varphi\in\mathscr{L}^1(\Gamma)_{1, +}$ et 
+    L'invariance topologique de $m$ assure donc que, pour toutes $\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ et 
     $f\in\mathscr{L}^\infty(\Gamma)$, la fonction $\ket{\blank, \varphi\ast f - f}$ converge vers $0$ selon $\mathscr{F}$.
-    Or, pour toute $\psi\in\mathscr{L}^1(\Gamma)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \ref{ket_conv}),
+    Or, pour toute $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, on a $\ket{\psi, \varphi\ast f - f} = \ket{\varphi^*\ast\psi - \psi, f}$ (lemme \ref{ket_conv}),
     donc :
     \begin{equation}\label{amenable_TFAE/eq1}
-        \forall\varphi\in\mathscr{L}^1(\Gamma)_{1, +}, \forall f\in\mathscr{L}^\infty(\Gamma), \ket{\varphi\ast\psi - \psi, f}\xrightarrow[\psi\to\mathscr{F}]{}0
+        \forall\varphi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}, \forall f\in\mathscr{L}^\infty(\Gamma), \ket{\varphi\ast\psi - \psi, f}\xrightarrow[\psi\to\mathscr{F}]{}0
     \end{equation}
-    Considérons maintenant l'espace vectoriel $E := \mathcal{F}(\mathrm{L}^1(\Gamma)_{1, +}, \mathrm{L}^1(\Gamma))$ muni de la topologie 
+    Considérons maintenant l'espace vectoriel $E := \mathcal{F}(\mathrm{L}^1(\Gamma, \mu)_{1, +}, \mathrm{L}^1(\Gamma, \mu))$ muni de la topologie 
     produit des topologies normiques. $E$ est alors localement convexe, et la topologie faible $\sigma(E, E^*)$ sur $E$
-    coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma)$ \TODO{explication ?}. Notons $\Sigma\subseteq E$ l'ensemble convexe formé
-    des fonctions de la forme $\fundef{A_\psi}{\mathrm{L}^1(\Gamma)_{1, +}&\to&\mathrm{L}^1(\Gamma)}{\varphi&\mapsto&\varphi\ast\psi - \psi}$ pour $\psi\in\mathrm{L}^1(\Gamma)_{1, +}$.
+    coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma, \mu)$. \TODO{explication ?} Notons $\Sigma\subseteq E$ l'ensemble convexe formé
+    des fonctions de la forme $\fundef{A_\psi}{\mathrm{L}^1(\Gamma, \mu)_{1, +}&\to&\mathrm{L}^1(\Gamma, \mu)}{\varphi&\mapsto&\varphi\ast\psi - \psi}$ pour $\psi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}$.
     \eqref{amenable_TFAE/eq1} montre que $0$ est adhérent à $\Sigma$ pour le produit des topologies faibles, 
     donc pour la topologie faible sur $E$, et donc aussi pour la topologie originale de $E$ d'après la proposition \ref{weak_convex_closed}.
     Mais nous avons en plus que chaque $A_\psi$ est $1$-lipschitzienne par l'inégalité de Young, donc l'ensemble
@@ -1298,7 +1298,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
 
     Nous avons désormais tous les outils nécessaires pour montrer $(\ref{amenable_TFAE/strong_Reiter})$. Soient $\varepsilon>0$ et $A\in\mathfrak{K}(\Gamma)$.
     Posons alors $Q := A\cup\set{1}$, qui est toujours compact, et choisissons $\varphi_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$. La continuité de la représentation régulière $\lambda$ sur 
-    $\mathrm{L}^1(\Gamma)$ assure que l'application $\fundef{\ev_{\varphi_0}\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma, \mu)_{1, +}}{g&\mapsto&\lambda(g)(\varphi)}$ est continue. 
+    $\mathrm{L}^1(\Gamma, \mu)$ assure que l'application $\fundef{\ev_{\varphi_0}\comp\lambda}{\Gamma&\to&\mathrm{L}^1(\Gamma, \mu)_{1, +}}{g&\mapsto&\lambda(g)(\varphi)}$ est continue. 
     L'ensemble $K := (\ev_{\varphi_0}\comp\lambda)(Q)$ est donc un compact de $\mathrm{L}^1(\Gamma, \mu)_{1, +}$. \eqref{amenable_TFAE/eq2} donne donc 
     que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} \xrightarrow[\psi\to\mathscr{G}]{} 0$, ce qui fournit, par nontrivialité 
     de $\mathscr{G}$, un $\psi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ tel que $\sup_{g\in Q}\norm{\lambda(g)(\varphi_0)\ast\psi - \psi}_{\mathrm{L}^1} < \halfilon$. Posons enfin $\varphi := \varphi_0\ast\psi$.
@@ -1337,9 +1337,9 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     et soit $\mathscr{F}$ un filtre faiblement de Reiter sur $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, dont l'existence est assurée par le lemme
     \ref{Reiter_filter_of_cond}. Comme $\mathscr{F}$ est non-trivial, il est plus grossier qu'un certain ultrafiltre $\mathscr{U}$. 
 
-    Comme au théorème \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
+    Comme au théorème \ref{dense_in_means}, on munit les espaces $\mathrm{L}^1(\Gamma, \mu)$ et $\mathrm{L}^\infty(\Gamma)^*$ des topologies faible et faible-$*$,
     les parties $\mathrm{L}^1(\Gamma, \mu)_{1, +}$, $\mathcal{M}(\Gamma)$ des topologies induites respectives, et on note alors
-    $\iota:\mathrm{L}^1(\Gamma)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1(\Gamma, \mu)_{1, +}\hookrightarrow \mathcal{M}(\Gamma)$
+    $\iota:\mathrm{L}^1(\Gamma, \mu)\hookrightarrow\mathrm{L}^\infty(\Gamma)^*$ et $\widetilde{\iota}:\mathrm{L}^1(\Gamma, \mu)_{1, +}\hookrightarrow \mathcal{M}(\Gamma)$
     les plongements topologiques usuels. L'espace topologique $\mathcal{M}(\Gamma)$ étant alors compact,
     l'ultrafiltre $\widetilde{\iota}_*\mathscr{U}$ sur $\mathcal{M}(\Gamma)$ converge vers une certaine moyenne $m$. Il s'agit de montrer que $m$ est invariante,
     soit donc $\gamma\in\Gamma$. Par définition d'un filtre de Reiter faible, la fonction $\ev_\gamma\comp\mathfrak{r}:\varphi\mapsto\norm{\lambda(\gamma\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$
@@ -1347,7 +1347,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     fonction $(\lambda(\gamma\inv)-\id)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}}$ converge vers $0$ selon $\mathscr{U}$
     en norme $\mathrm{L}^1$, donc pour la topologie faible, et par conséquent $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}}$ converge 
     aussi vers $0$ selon $\mathscr{U}$ dans $\mathrm{L}^\infty(\Gamma)^*$. Or, pour tout
-    $\varphi\in\mathrm{L}^1(\Gamma)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
+    $\varphi\in\mathrm{L}^1(\Gamma, \mu)$, on a $\iota(\lambda(\gamma\inv)(\varphi))=\iota(\varphi)\comp\lambda(\gamma)$, de sorte que 
     $\iota\comp\lambda(\gamma\inv) = \transpose{(\lambda(\gamma))}\comp\iota$.
     La transposée de l'isométrie $\lambda(\gamma):\mathrm{L}^\infty(\Gamma)\to\mathrm{L}^\infty(\Gamma)$ est continue 
     pour la topologie faible-$*$, donc l'application $(\iota\comp\lambda(\gamma\inv)-\iota)_{|\mathrm{L}^1(\Gamma, \mu)_{1, +}} = \transpose{(\lambda(\gamma))}\comp\widetilde{\iota} - \widetilde{\iota}$
@@ -1375,8 +1375,11 @@ de la théorie des représentations unitaires de ce groupe.
 Rappelons que, pour deux représentations continues $\pi_1$, $\pi_2$ de $\Gamma$, on note 
 $\pi_1\le\pi_2$ s'il existe un morphisme de représentations de $\pi_1$ vers $\pi_2$ qui soit un plongement
 d'espaces vectoriels topologiques, de sorte que $\pi_1$ s'identifie à une sous-représentation de $\pi_2$.
-On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme\footnote{Cette notation est justifiée par le fait que ces morphismes
-sont exactement les monomorphismes de la catégorie des représentations continues de $\Gamma$.}.
+On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme.
+
+% C'est faux :
+%\footnote{Cette notation est justifiée par le fait que ces morphismes
+%sont exactement les monomorphismes de la catégorie des représentations continues de $\Gamma$.}.
 
 %Rappelons aussi que, si $\Gamma$ est localement compact et qu'on fixe une mesure de Haar à gauche $\mu$ sur 
 %$\Gamma$, on peut munir l'espace de Banach $\mathrm{L}^1(\Gamma, \mu)$ d'une structure d'algèbre de Banach \emph{via}
@@ -1438,12 +1441,12 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
 \end{remark}
 
 \begin{theorem}\label{amenable_weak_contain}
-    On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma))$
+    On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma, \mu))$
     les représentations triviales et régulières gauches de $\Gamma$. Les assertions suivantes sont équivalentes :
     \begin{enumerate}[(i)]
         \item\label{amenable_weak_contain/amenable} $\Gamma$ est moyennable
-        \item\label{amenable_weak_contain/weak_almost_invariant} $\forall\varepsilon>0, \forall F\in\finparts(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma), \forall \gamma\in F, \norm{\xi}_{\mathrm{L}^2} = 1 \land \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
-        \item\label{amenable_weak_contain/strong_almost_invariant} $\forall\varepsilon>0, \forall K\in\mathfrak{K}(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1 \land \forall \gamma\in K, \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
+        \item\label{amenable_weak_contain/weak_almost_invariant} $\forall\varepsilon>0, \forall F\in\finparts(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma, \mu), \forall \gamma\in F, \norm{\xi}_{\mathrm{L}^2} = 1 \land \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
+        \item\label{amenable_weak_contain/strong_almost_invariant} $\forall\varepsilon>0, \forall K\in\mathfrak{K}(\Gamma), \exists\xi\in \mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1 \land \forall \gamma\in K, \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$
         \item\label{amenable_weak_contain/weak_contain} $\indic_\Gamma\wle\lambda_\Gamma$
         \item\label{amenable_weak_contain/norm_eq_two} $\forall F\in\finparts(\Gamma), \norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} = 2\card{F}$
         %\item\label{amenable_weak_contain/one_mem_spectrum} $\forall\gamma\in\Gamma, 1\in\Sp(\lambda_\Gamma(\gamma))$
@@ -1557,7 +1560,7 @@ Commençons par un petit lemme qui sera crucial.
 
 \begin{lemma}\label{abs_trick}
     Soit $\xi\in\mathscr{L}^2(\Gamma, \mu)$. La fonction $\abs{\xi} := \abs{\cdot}\comp\xi \in\mathscr{L}^2(\Gamma, \mu)$ est de même norme 
-    que $\xi$, et on a $\forall\gamma\in\Gamma, \norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$
+    que $\xi$, et on a $\forall\gamma\in\Gamma, \norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L}^2}$
 \end{lemma}
 
 \begin{proof}
@@ -1576,7 +1579,7 @@ Commençons par un petit lemme qui sera crucial.
     
     Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
     de Reiter faible \eqref{weak_Reiter_cond}. 
-    Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma)$ unitaire vérifiant $\forall\gamma\in F, \norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
+    Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma, \mu)$ unitaire vérifiant $\forall\gamma\in F, \norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
     Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie \TODO{finir}
 
     On montre similairement \TODO{\framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$}} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
@@ -1626,7 +1629,7 @@ Commençons par un petit lemme qui sera crucial.
     que l'inégalité $\norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)} \le 2\card{F}$ est automatiquement vérifée, il s'agit donc de montrer l'inégalité 
     inverse. Commençons par donner une preuve pour $\Gamma$ discret, qui nous éclairera pour la suite, et pour simplifier supposons
     que $\mu$ donne masse $1$ aux singletons. Il suffit alors d'appliquer $(\ref{amenable_weak_contain/weak_contain})$
-    à la fonction $f := \sum_{\gamma\in F}\delta_\gamma + \delta_{\gamma\inv}\in\mathscr{L}^1(\Gamma)_{+}$ pour obtenir :
+    à la fonction $f := \sum_{\gamma\in F}\delta_\gamma + \delta_{\gamma\inv}\in\mathscr{L}^1(\Gamma, \mu)_{+}$ pour obtenir :
     \begin{equation*}
         2\card{F} = \abs{\integral{}{}{f}{\mu}} = \abs{\indic_\Gamma(f)} \le \norm{\lambda_\Gamma(f)} = \norm{\sum_{\gamma\in F}\lambda_\Gamma(\gamma)+\lambda_\Gamma(\gamma\inv)}\le2\card{F}
     \end{equation*}
@@ -1643,12 +1646,12 @@ Commençons par un petit lemme qui sera crucial.
 
     La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
     Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
-    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma))$
-    et $S := \sum_{\gamma\in F}\lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma))$. Par \TODO{ref ou argument à base de convolution}, on a :
+    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma, \mu))$
+    et $S := \sum_{\gamma\in F}\lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma, \mu))$. Par \TODO{ref ou argument à base de convolution}, on a :
     \begin{equation*}
-        \forall f\in\mathrm{L}^1(\Gamma), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
+        \forall f\in\mathrm{L}^1(\Gamma, \mu), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
     \end{equation*}
-    Notons que, pour toute $f\in\mathscr{L}^1(\Gamma)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\card{F}\integral{}{}{f}{\mu}$.
+    Notons que, pour toute $f\in\mathscr{L}^1(\Gamma, \mu)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\card{F}\integral{}{}{f}{\mu}$.
     Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = (2\card{F})^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
     assure que l'on a, toujours pour $n\in\N$ quelconque :
     \begin{equation*}
@@ -1660,19 +1663,19 @@ Commençons par un petit lemme qui sera crucial.
     Montrons enfin \framebox{$(\ref{amenable_weak_contain/norm_eq_two})\implies(\ref{amenable_weak_contain/weak_almost_invariant})$}. Soient donc $\varepsilon>0, F\in\finparts(\Gamma)$, et 
     raisonnons par l'absurde en supposant :
     \begin{equation}\label{amenable_weak_contain/eq1}
-        \forall\xi\in\mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon
+        \forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) - \xi}_{\mathrm{L}^2}\geq\varepsilon
     \end{equation}
     Notons que cette hypothèse entraîne également :
     \begin{equation}\label{amenable_weak_contain/eq2}
-        \forall\xi\in\mathrm{L}^2(\Gamma), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2}\geq\varepsilon
+        \forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2}\geq\varepsilon
     \end{equation}
-    En effet, pour $\xi\in\mathscr{L}^2(\Gamma)$ unitaire, on peut appliquer \eqref{amenable_weak_contain/eq1} à $\abs\xi$ pour obtenir un $\gamma\in F$ tel que $\norm{\lambda_\Gamma(\gamma)(\abs\xi) - \abs\xi}_{\mathrm{L}^2}\geq\varepsilon$.
+    En effet, pour $\xi\in\mathscr{L}^2(\Gamma, \mu)$ unitaire, on peut appliquer \eqref{amenable_weak_contain/eq1} à $\abs\xi$ pour obtenir un $\gamma\in F$ tel que $\norm{\lambda_\Gamma(\gamma)(\abs\xi) - \abs\xi}_{\mathrm{L}^2}\geq\varepsilon$.
     Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick}, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
 
     Pour $\rho\in\set{\pm1}$, considérons $U_\rho := \sum_{\gamma\in F}(\lambda_\Gamma(\gamma) - \rho\id)^*(\lambda_\Gamma(\gamma) - \rho\id) = 2\rho\card{F} - T$, 
     où l'on note toujours $T = \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. Notons que chaque $U_\rho$ est inversible. 
     En effet, \eqref{amenable_weak_contain/eq1} et \eqref{amenable_weak_contain/eq2} montrent que, quelle que soit la valeur de $\rho$, 
-    on a pour tout $\xi\in\mathrm{L}^2(\Gamma)$ unitaire :
+    on a pour tout $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire :
     \begin{equation*}
         \varepsilon^2\leq\sum_{\gamma\in F}\norm{\lambda_\Gamma(\gamma)(\xi) - \rho\xi}_{\mathrm{L}^2}^2 = \ket{U_\rho(\xi), \xi}
     \end{equation*}
@@ -1884,7 +1887,7 @@ vérifiant $\forall x\in K, f(x) = 1$ et $\Supp f\subseteq U$. On a alors, pour 
         &= \mu(U\setminus K) + \mu(U\setminus A) \\
         &< 2\varepsilon
 \end{align*}
-On est donc capable d'approcher en norme $\mathscr{L}^p$ l'indicatrice de tout ensemble $A$ de mesure finie par des fonctions continues 
+On est donc capable d'approcher en norme $\mathrm{L}^p$ l'indicatrice de tout ensemble $A$ de mesure finie par des fonctions continues 
 à support compact. Ces indicatrices engendrant un sous-espace dense de $\mathrm{L}^p(X, \mu)$ \TODO{ref}, on vient de montrer le résultat suivant.
 
 \begin{proposition}\label{cont_supp_compact_dense_Lp}
@@ -2007,8 +2010,8 @@ pour effectuer des changements de variables de la forme $g\mapsto g\inv$.
 
 Fixons $\mu$ une mesure de Haar à gauche sur $G$. Étant données deux fonctions $f_1, f_2 : G\to\C$ mesurables, 
 on introduit leur convolution $(f_1\ast f_2)(x) := \integral{}{}{f_1(g)f_2(g\inv x)}{\mu(g)}$, du moins lorsque cela a du sens.
-Plus précisément, on dit que $f_1$ et $f_2$ sont \emph{convolables en $x\in\Gamma$} lorsque $(f_1\ast f_2)(x)$ est bien défini,
-et qu'elles sont \emph{convolables} si elles sont convolables en $\mu$-localement-presque-tout $x\in\Gamma$.
+Plus précisément, on dit que $f_1$ et $f_2$ sont \emph{convolables en $x\in G$} lorsque $(f_1\ast f_2)(x)$ est bien défini,
+et qu'elles sont \emph{convolables} si elles sont convolables en $\mu$-localement-presque-tout $x\in G$.
 On prolonge alors la fonction partielle $f_1\ast f_2$ en posant $(f_1\ast f_2)(x) := 0$ si $f_1$ et $f_2$
 ne sont pas convolables en $x$. Commençons par énoncer un résultat élémentaire.
 
@@ -2033,8 +2036,8 @@ $G$ soit $\sigma$-compact pour disposer du théorème de Fubini. Ils restent vra
 mais nous ne le ferons pas ici. 
 
 \begin{theorem}[Inégalité de Young]\label{young}
-    Soient $p, q, r\in[1, +\infty]$ tels que $\frac1p + \frac1q = 1 + \frac1r$, $f_1\in\mathscr{L}^p(\Gamma, \mu)$,
-    $f_2\in\mathscr{L}^q(\Gamma, \mu)$. Alors $f_1$ et $f_2$ sont convolables, $f_1\ast f_2\in\mathscr{L}^r(\Gamma, \mu)$,
+    Soient $p, q, r\in[1, +\infty]$ tels que $\frac1p + \frac1q = 1 + \frac1r$, $f_1\in\mathscr{L}^p(G, \mu)$,
+    $f_2\in\mathscr{L}^q(G, \mu)$. Alors $f_1$ et $f_2$ sont convolables, $f_1\ast f_2\in\mathscr{L}^r(G, \mu)$,
     et $\norm{f_1\ast f_2}_{\mathrm{L}^r} \leq \norm{f_1}_{\mathrm{L}^p} \norm{f_2}_{\mathrm{L}^q}$. En particulier, 
     la convolution descend en $\ast : \mathrm{L}^p \times \mathrm{L}^q \to \mathrm{L}^r$ bilinéaire continue de norme inférieure à $1$.
 
@@ -2049,14 +2052,14 @@ mais nous ne le ferons pas ici.
 
 Ces deux résultats assurent notamment que, muni de la convolution, l'espace $\mathrm{L}^1(G, \mu)$
 est une algèbre de Banach associative. Vérifions maintenant que l'involution $f\mapsto(\Delta\overline{f})\comp\invop$, qui est bien définie car 
-$\invop_*\mu\ll\mu$, fait de $\mathrm{L}^1(G, \mu)$ une algèbre de Banach involutive. Tout d'abord, pour $f\in\mathscr{L}^1(\Gamma, \mu)$, on a : 
+$\invop_*\mu\ll\mu$, fait de $\mathrm{L}^1(G, \mu)$ une algèbre de Banach involutive. Tout d'abord, pour $f\in\mathscr{L}^1(G, \mu)$, on a : 
 \begin{align*}
     \norm{f^*}_{\mathrm{L}^1} 
         &= \integral{}{}{\abs{\Delta(g)\overline{f(g)}}}{(\invop_*\mu)(g)} \\
         &= \integral{}{}{\frac{\Delta(g)}{\Delta(g)}\abs{f(g)}}{(\mu)(g)} \quad\text{(proposition \ref{modular_character} \textit{(\ref{modular_character/inv_change_of_variable})})}\\
         &= \norm{f}_{\mathrm{L}^1}
 \end{align*}
-La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(\Gamma, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
+La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2\in\mathscr{L}^1(G, \mu)$, l'égalité $f_1^*\ast f_2^* = (f_2\ast f_1)^*$. Soit donc $x\in\Gamma$, et vérifions :
 \begin{align*}
     (f_1^*\ast f_2^*)(x) 
         &= \integral{}{}{\Delta(g\inv)\Delta(x\inv g)\overline{f_1(g\inv) f_2(x\inv g)}}{\mu(g)} \\
@@ -2068,7 +2071,7 @@ La semi-linéarité étant évidente, il reste à montrer, pour toutes $f_1, f_2
 Terminons par un petit lemme utile dans le corps de ce document. 
 
 \begin{lemma}\label{ket_conv}
-    Soient $\varphi, \psi\in\mathscr{L}^1(\Gamma, \mu)$ et $f\in\mathscr{L}^\infty(\Gamma)$. 
+    Soient $\varphi, \psi\in\mathscr{L}^1(G, \mu)$ et $f\in\mathscr{L}^\infty(G)$. 
     On a $\ket{\psi, \varphi\ast f} = \ket{\varphi^*\ast\psi, f}$.
 \end{lemma}
 
