@@ -1195,7 +1195,24 @@ Pour conclure cette partie, nous allons donner une autre conséquence du lemme \
 \subsection{Un lemme d'intégration}
 
 Terminons cette présentation des prérequis du théorème \ref{amenable_TFAE} par un petit lemme d'intégration,
-qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref{strong_Folner_cond}$. \TODO{}
+qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref{strong_Folner_cond}$. 
+
+\begin{lemma}\label{folner_key}
+    Soient $(X, \mathcal{A}, \mu)$ un espace mesuré et $f, f':X\to\R_+$ des fonctions intégrables positives.
+    Pour tout $t\geq0$, on note $E_t := \set{x\tq f(x)\geq t}$ et $E'_t := \set{x\tq f'(x)\geq t}$.
+
+    On a alors $\norm{f - f'}_{\mathrm{L}^1} = \integral{\R_+}{}{\mu(E_t\triangle E'_t)}{t}$. En particulier, pour $f' = 0$
+    on obtient le résultat classique $\norm{f}_{\mathrm{L}^1} = \integral{\R_+}{}{\mu(E_t)}{t}$.
+\end{lemma}
+
+\begin{proof}
+    Notons déjà qu'on peut supposer que l'espace mesuré $(X, \mathcal{A}, \mu)$ est $\sigma$-fini. On peut en effet 
+    se restreindre à l'ensemble mesurable $Y := \set{x\tq f(x)\ne0} \cup \set{x\tq f'(x)\ne0}$ muni de la tribu et la mesure induite, 
+    qui est bien $\sigma$-fini en vertu du lemme \ref{presupp_sigma_finite}. Il est alors clair que les deux membres 
+    de l'égalité peuvent se calculer indifféremment sur $X$ ou sur $Y$.
+
+    Supposons donc $(X, \mathcal{A}, \mu)$ $\sigma$-fini, et notons $\indic_t := \indic_{[t, +\infty[}$ pour chaque $t\geq0$
+\end{proof}
 
 \subsection{Démonstration du théorème \ref{amenable_TFAE}} 
 
@@ -1292,7 +1309,21 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     \end{equation*}
     Cela montre bien que $\Gamma$ satisfait la condition de Reiter forte \eqref{strong_Reiter_cond}.
 
-    Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. \TODO{}
+    Montrons désormais \framebox{$(\ref{amenable_TFAE/strong_Reiter})\implies(\ref{amenable_TFAE/strong_Folner})$}. Soient $\varepsilon>0$
+    et $A\subseteq\Gamma$ un compact. Soit aussi $B$ un voisinage compact de l'origine, de sorte que $Q := A\cup B$ et $K := Q\cdot Q$ sont encore des voisinages compacts de l'origine.
+    $(\ref{amenable_TFAE/strong_Reiter})$ fournit alors $f\in\mathscr{L}^1(\Gamma, \mu)$ tel que $\forall g\in K, \norm{\lambda(g)(f) - f}_{\mathrm{L}^1} < \frac{\varepsilon\mu(Q)}{2\mu(K)}$.
+    En particulier, on a $\integral{K}{}{\norm{\lambda(g)(f) - f}_{\mathrm{L}^1}}{\mu(g)} \leq \halfilon\mu(Q)$.
+
+    Posons alors $E_t := \set{x\tq f(x)\geq t}$ pour chaque $t\geq0$, et remarquons que 
+    $\forall g\in\Gamma, gE_t = \set{x\tq \lambda(g)(f)(x) \geq t}$. Par le lemme \ref{folner_key}, on a donc :
+    \begin{equation*}
+        \forall g\in\Gamma, \norm{\lambda(g)(f) - f}_{\mathrm{L}^1} = \integral{\R_+}{}{\mu(gE_t\triangle E_t)}{t}
+    \end{equation*}
+    Par le théorème de Fubini, on a alors :
+    \begin{equation*}
+        \halfilon\mu(Q) \geq \integral{K}{}{\integral{\R_+}{}{\mu(gE_t\triangle E_t)}{t}}{\mu(g)} = \integral{\R_+}{}{\mu(E_t)\integral{K}{}{\frac{\mu(gE_t\triangle E_t)}{\mu(E_t)}}{\mu(g)}}{t}
+    \end{equation*}
+    \TODO{}
 
     L'implication \framebox{$(\ref{amenable_TFAE/strong_Folner})\implies(\ref{amenable_TFAE/weak_Folner})$} est évidente.
     De plus, on a déjà vu que tout filtre de Reiter faible permet de définir un filtre de F\o{}lner faible. Au vu des lemmes 
@@ -1774,7 +1805,7 @@ Remarquons directement que, si l'espace mesuré $(X, \mathcal{A}, \mu)$ est $\si
 tout ensemble $\mu$-localement-négligeable est en fait $\mu$-négligeable. Cela garantit en particulier que, 
 pour des fonctions intégrables, les relations $=_\mu$ et $=_\mu^{loc}$ coïncident, en vertu du lemme suivant.
 
-\begin{lemma}
+\begin{lemma}\label{presupp_sigma_finite}
     Soit $f:X\to\C$ intégrable. L'ensemble $\set{x\tq f(x)\ne 0}$ est $\sigma$-fini\footnote{C'est à dire qu'il est $\sigma$-fini comme espace mesuré, 
     lorsqu'on le munit de la mesure restreinte}. 
 \end{lemma}
