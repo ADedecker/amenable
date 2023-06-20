@@ -15,6 +15,7 @@
 \usepackage{enumerate}
 \usepackage{xcolor}
 \usepackage{lipsum}
+\usepackage{fourier-orns}
 \usepackage{tikz, tkz-tab, tikz-cd}
 \usepackage[T1]{fontenc}
 \usepackage[nottoc, notlof, notlot]{tocbibind}
@@ -67,7 +68,7 @@
 \newcommand{\divop}{\mathrm{div}}
 \newcommand{\parts}{\mathfrak{P}}
 \newcommand{\finparts}{\mathfrak{P}_{\mathrm{fin}}}
-\newcommand{\TODO}[1]{{\color{red}TODO :} #1}
+\newcommand{\TODO}[1]{}%{{\color{red}TODO :} #1}
 \newcommand{\wle}{\preccurlyeq}
 
 \DeclareMathOperator{\sgn}{sgn}
@@ -114,19 +115,32 @@ Pour $G$ un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, 
     \fundef{\invop = (\blank)\inv}{G&\to& G}{x&\mapsto& x\inv}\text{;}\quad\fundef{\ell_g=(g\blank)}{G&\to& G}{x&\mapsto& gx}\text{;}\quad\fundef{r_g=(\blank g)}{G&\to& G}{x&\mapsto& xg}
 \end{equation*}
 
-Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
-si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
-(par translations) à gauche (resp. à droite)} si $\forall g\in G, {\ell_g}_*m = m$ (resp. ${r_g}_*m = m$). Si les deux conditions
-sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
+Nous renvoyons à l'annexe \ref{appendix_integration} pour les résultats élémentaires concernant l'intégration 
+sur les groupes localement compacts, et en particulier le théorème d'existence et unicité des mesures de Haar 
+qui sera utilisé tout au long de ce document.
 
-Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
-Radon \emph{non nulle} sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
-utiliserons à de nombreuses reprises.
+Si $(X, \mu)$ est un espace mesuré et $p<+\infty$, on note $\mathscr{L}^p(X, \mu)$ l'espace vectoriel semi-normé des fonctions mesurables complexes 
+de puissance $p$-ième intégrable, muni de la semi-norme $\norm{\cdot}_{\mathrm{L}^p}$ usuelle, et $\mathrm{L}^p(X, \mu)$ l'espace normé associé. 
+Dans le cas $p=\infty$, nous adoptons les mêmes notations, mais en utilisant une définition subtilement 
+différente : une fonction mesurable $f$ appartient $\mathscr{L}^\infty(X, \mu)$ si elle est bornée 
+$\mu$-localement-presque-partout, et la borne optimale (en valeur absolue) est notée $\norm{f}_{\mathrm{L}^\infty}$.
+Cette définition assure qu'on a $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$ sans hypothèse supplémentaire. On renvoie à l'annexe \ref{appendix_Lp}
+pour plus de détails.
 
-\TODO{Repréciser définition de mesure de Radon}
-\TODO{Absolue continuité des mesures de Haar entre elles (via caractère modulaire)}
+Dans le cas des groupes topologiques localement compacts et séparés, l'espace et la norme $\mathrm{L}^\infty$ ne dépendent pas du choix de la mesure de 
+Haar, nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)$.
+
+%Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
+%si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
+%(par translations) à gauche (resp. à droite)} si $\forall g\in G, {\ell_g}_*m = m$ (resp. ${r_g}_*m = m$). Si les deux conditions
+%sont vérifiées, nous parlerons simplement de mesure \textit{invariante par translations}.
+%
+%Une \textit{mesure de Haar à gauche (resp. à droite)} sur un groupe topologique $G$ séparé et localement compact est une mesure de
+%Radon \emph{non nulle} sur $G$ invariante par tranlations à gauche (resp. à droite). Rappelons le théorème fondamental concernant les mesures de Haar, que nous 
+%utiliserons à de nombreuses reprises.
+
+
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
-\TODO{Notations $\mathscr{L}^p$, $\mathrm{L}^p$}
 
 \section{Premières définitions}
 
@@ -1527,6 +1541,17 @@ au cas où $f_1$ est remplacé par une mesure de Dirac. C'est ce que permet le l
     \end{align*}
 \end{proof}
 
+\begin{definition}
+    Soient $\pi_1, \pi_2$ deux représentations unitaires de $G$. On dit que $\pi_1$ est 
+    \emph{faiblement contenue} dans $\pi_2$, ce que l'on note $\pi_1 \wle \pi_2$, 
+    si pour toute $f\in\mathrm{L}^1(\Gamma, \mu)$, on a $\norm{\pi_1(f)} \leq \norm{\pi_2(f)}$.
+\end{definition}
+
+Par densité, on a donc $\pi_1\wle \pi_2$ \ssi l'inégalité $\norm{\pi_1(f)} \leq \norm{\pi_2(f)}$
+est valable pour toute $f\in C_c(\Gamma)$.
+
+Le dernier théorème qui nous intéresse permet de caractériser la moyennabilité en terme de contenance faible.
+
 \begin{theorem}\label{amenable_weak_contain}
     On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma, \mu))$
     les représentations triviales et régulières gauches de $\Gamma$. Les assertions suivantes sont équivalentes :
@@ -1646,14 +1671,14 @@ conditions équivalentes de ce lemme. En particulier, cela nous permet de démon
 Commençons par un petit lemme qui sera crucial.
 
 \begin{lemma}\label{abs_trick}
-    Soit $\xi\in\mathscr{L}^2(\Gamma, \mu)$. La fonction $\abs{\xi} := \abs{\cdot}\comp\xi \in\mathscr{L}^2(\Gamma, \mu)$ est de même norme 
-    que $\xi$, et on a $\forall\gamma\in\Gamma, \norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L}^2}$
+    Soient $\xi\in\mathscr{L}^2(\Gamma, \mu)$ et $c\in\mathbb{S}_1$. La fonction $\abs{\xi} := \abs{\cdot}\comp\xi \in\mathscr{L}^2(\Gamma, \mu)$ est de même norme 
+    que $\xi$, et on a $\forall\gamma\in\Gamma, \norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - c\xi}_{\mathrm{L}^2}$
 \end{lemma}
 
 \begin{proof}
     Il est clair que $\norm{\abs{\xi}}_{\mathrm{L}^2} = \norm{\xi}_{\mathrm{L}^2}$. Pour $x\in\Gamma$ quelconque, 
-    la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{- \xi(x)}} \leq \abs{\xi(\gamma\inv x) + \xi(x)}$. En intégrant le carré de ces inégalités,
-    on obtient $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L}^2}$.
+    la petite inégalité triangulaire donne $\abs{\abs{\xi}(\gamma\inv x) - \abs{\xi}(x)} = \abs{\abs{\xi(\gamma\inv x)} - \abs{c\xi(x)}} \leq \abs{\xi(\gamma\inv x) - c\xi(x)}$. En intégrant le carré de ces inégalités,
+    on obtient $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq \norm{\lambda(\gamma)(\xi) - c\xi}_{\mathrm{L}^2}$.
 \end{proof}
 
 \begin{proof}[Démonstration du théorème \ref{amenable_weak_contain}]
@@ -1667,10 +1692,19 @@ Commençons par un petit lemme qui sera crucial.
     Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
     de Reiter faible \eqref{weak_Reiter_cond}. 
     Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma, \mu)$ unitaire vérifiant $\forall\gamma\in F, \norm{\lambda(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
-    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie $\left(\lambda(g)(\overline{\xi}) + \overline{\xi}\right)(\lambda(g)(\xi) - \xi)$. \TODO{}
+    Le lemme \ref{abs_trick} assure alors que $\forall\gamma\in F\norm{\lambda(\gamma\inv)(\abs{\xi}) - \abs{\xi}} < \varepsilon$.
+    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$. On a alors, pour tout $\gamma\in\Gamma$, $\lambda(\gamma)(f) - f = (\lambda(\gamma)(\abs{\xi}) + \abs{\xi})(\lambda(\gamma)(\abs{\xi}) - \abs{\xi})$.
+    On peut alors appliquer l'inégalité de Cauchy-Schwartz, ce qui donne pour $\gamma\in F$ :
+    \begin{equation*}
+        \norm{\lambda(\gamma)(f) - f}_{\mathrm{L}^1} \leq \norm{\lambda(\gamma)(\abs{\xi}) + \abs{\xi}}_{\mathrm{L}^2}\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq 2\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} < 2\varepsilon
+    \end{equation*}
+    Ceci conclut.
 
     On montre similairement \framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
-    Soient donc $\varepsilon>0$ et $K\subseteq\Gamma$ compact, ainsi qu'un $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ vérifiant $\forall\gamma\in K, \norm{\lambda(\gamma\inv)(f) - f}_{\mathrm{L}^1}$. \TODO{}
+    Soient donc $\varepsilon>0$ et $K\subseteq\Gamma$ compact, ainsi qu'un $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ vérifiant $\forall\gamma\in K, \norm{\lambda(\gamma\inv)(f) - f}_{\mathrm{L}^1}$. 
+    Posons alors $\xi:=\sqrt{f}\in\mathscr{L}^2(\Gamma, \mu)$, qui vérifie $\norm{\xi}_{\mathrm{L}^2} = 1$. En utilisant le fait que 
+    $\forall a, b\in\R_+, \abs{a - b}^2 \leq \abs{a^2 - b^2}$.
+    On a alors, pour tout $\gamma\in Q$, $\norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}^2 \leq \norm{\lambda(\gamma)(f) - f}_{\mathrm{L}^1} < \varepsilon$. Ceci conclut.
 
     Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
     et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
@@ -1764,7 +1798,7 @@ Commençons par un petit lemme qui sera crucial.
         \forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2}\geq\varepsilon
     \end{equation}
     En effet, pour $\xi\in\mathscr{L}^2(\Gamma, \mu)$ unitaire, on peut appliquer \eqref{amenable_weak_contain/eq1} à $\abs\xi$ pour obtenir un $\gamma\in F$ tel que $\norm{\lambda_\Gamma(\gamma)(\abs\xi) - \abs\xi}_{\mathrm{L}^2}\geq\varepsilon$.
-    Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick}, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
+    Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick} pour $c = -1$, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
 
     Pour $\rho\in\set{\pm1}$, considérons $U_\rho := \sum_{\gamma\in F}(\lambda_\Gamma(\gamma) - \rho\id)^*(\lambda_\Gamma(\gamma) - \rho\id) = 2\rho\card{F} - T$, 
     où l'on note toujours $T = \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. Notons que chaque $U_\rho$ est inversible. 
@@ -1884,7 +1918,7 @@ Avant toute chose, rappelons l'inégalité de Markov et une de ses conséquences
     ce qui entraîne $f =_\mu 0$.
 \end{proof}
 
-\subsection*{Espaces \texorpdfstring{$\mathrm{L}^p$}{L\textsuperscript{p}}}
+\subsection*{Espaces \texorpdfstring{$\mathrm{L}^p$}{L\textsuperscript{p}}}\label{appendix_Lp}
 
 Nous allons maintenant énoncer les résultats fondamentaux sur les espaces $\mathrm{L}^p$. Nous allons en fait considérer une variante subtile de 
 la définition, qui est plus adaptée à l'analyse fonctionelle en ce que l'isométrie $\mathrm{L}^\infty \simeq (\mathrm{L}^1)^*$
@@ -1913,6 +1947,8 @@ pour des fonctions intégrables, les relations $=_\mu$ et $=_\mu^{loc}$ coïncid
     Chaque $\set{x\tq \abs{f(x)}\ge 2^{-n}}$ est de mesure finie par l'inégalité de Markov, et l'union de ces ensembles pour 
     $n\in\N$ recouvre $\set{x\tq f(x)\ne 0}$.
 \end{proof}
+
+\warning Section en travaux
 
 \TODO{Définitions et propriétés des espaces $\mathrm{L}^p$ avec le cette notion de localement négligeable, 
 sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
@@ -2005,6 +2041,8 @@ On est donc capable d'approcher en norme $\mathrm{L}^p$ l'indicatrice de tout en
 %\end{proof}
 
 \subsection*{Un petit peu d'intégration vectorielle}
+
+\warning Section en travaux
 
 \TODO{Décrire intégration de Bochner}
 
