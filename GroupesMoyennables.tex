@@ -86,10 +86,21 @@
 
 \begin{titlepage}
 \title{Groupes Moyennables}
-\author{Anatole \textsc{Dedecker}}
+\author{Anatole \textsc{Dedecker}, encadré par Omar \textsc{Mohsen}}
 \maketitle
+\center{Projet de recherche de M1 à l'Université Paris-Saclay}
 \thispagestyle{empty}
 \end{titlepage}
+
+\vspace*{\fill}
+
+\thispagestyle{empty}
+
+\TODO
+
+\vspace*{\fill}
+
+\clearpage
 
 \tableofcontents
 \thispagestyle{empty}
@@ -128,7 +139,7 @@ Cette définition assure qu'on a $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$ san
 pour plus de détails.
 
 Dans le cas des groupes topologiques localement compacts et séparés, l'espace et la norme $\mathrm{L}^\infty$ ne dépendent pas du choix de la mesure de 
-Haar, nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)$.
+Haar, car les mesures de Haar sont deux-à-deux absolument continues les unes. Nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)$.
 
 %Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
 %si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
@@ -142,10 +153,12 @@ Haar, nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma
 
 \TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
 
-\section{Premières définitions}
+\section{Moyennes et contenus invariants}
 
 Fixons $\Gamma$ un groupe topologique séparé et localement compact. Sauf mention explicite du contraire, $\mu$ désigne une mesure de Haar arbitraire
 sur $\Gamma$.
+
+\subsection{Définition, premiers exemples et contre-exemples}
 
 La notion qui va nous intéresser dans ce mémoire est la suivante.
 
@@ -162,7 +175,7 @@ sont vérifiées, nous dirons simplement que $T$ est \emph{invariante par transl
 
 Un groupe topologique séparé et localement compact $\Gamma$ est donc moyennable \ssi $(\Gamma, \Bor(\Gamma), \mu)$ admet une 
 moyenne invariante, pour toute mesure de Haar $\mu$ sur $\Gamma$, le choix n'ayant aucune importance car toutes les mesures 
-de Haar sont absolument continues les unes par rapport aux autres, et donc définissent le même espace $\mathrm{L}^\infty(\Gamma)$.
+de Haar définissent le même espace $\mathrm{L}^\infty(\Gamma)$.
 
 Notons tout de suite que l'invariance bilatère n'impose pas de restriction suplémentaire. 
 \begin{proposition}\label{bilateral_of_left}
@@ -248,7 +261,9 @@ Donnons tout de suite un contre-exemple, qui fut fondamental dans le développem
 
 \TODO{Mentionner importance historique ?}
 
-Il est intéressant de noter que, dans cette preuve, nous n'avons besoin d'évaluer la moyenne que sur des fonctions indicatrices.
+\subsection{Moyennes et contenus}
+
+Il est intéressant de noter que, dans la preuve précédente, nous n'avons besoin d'évaluer la moyenne que sur des fonctions indicatrices.
 Cette remarque ainsi que le cas des groupes compacts suggèrent que l'on peut aussi voir une moyenne comme fonction 
 définie sur des parties de $\Gamma$, de manière similaire à une mesure. On retrouverait alors le point de vue \og{}forme 
 linéaire positive\fg{} par une forme d'intégration.
@@ -495,7 +510,8 @@ on vient donc de montrer le résultat suivant.
 %Dans la suite, nous supposons toujours que le groupe topologique $\Gamma$ est séparé et localement compact.
 %\paragraph{}
 
-\paragraph{}
+\subsection{Moyenne invariante élémentaire}
+
 Nous allons maintenant vouloir appliquer les outils de l'analyse fonctionelle à l'étude des moyennes invariantes.
 Pour cela, le lemme \ref{positive_iff_norm} va de nouveau s'avérer crucial.
 
@@ -585,6 +601,7 @@ les moyennes à gauche sur $\Gamma$, au sens du théorème suivant.
     $\mathrm{L}^\infty(\Gamma)$ qui préservent la norme.
 \end{theorem}
 
+Nous appellerons cette application $\widetilde{T}$ la \emph{moyenne invariante élémentaire} du groupe $\Gamma$. 
 En remarquant que $\forall c\in\C, \forall f\in L_0(\Gamma), \widetilde{T}(c + f) = c$, et qu'on a toujours 
 $\norm{\widetilde{T}}\ge1$ par $\widetilde{T}(1) = 1$, on obtient le critère de moyennabilité suivant:
 
@@ -612,7 +629,7 @@ $-\frac23(\indic+\delta_1)\in L_0(F_2)$, donc $\widetilde{T}(\indic - \frac23(\i
 et d'autre part $\norm{\indic - \frac23(\indic+\delta_1)}_{\mathrm{L}^\infty}=\frac13$. 
 On a donc bien $\norm{\widetilde{T}}\geq3$.
 
-\paragraph{}
+\subsection{Moyennabilité \texorpdfstring{de $\Z$}{du groupe des entiers}}
 
 Donnons maintenant, toujours à l'aide du critère \ref{amenable_iff_L0}, notre premier exemple de groupe moyennable non-compact.
 
@@ -703,6 +720,8 @@ Pour $X$ un ensemble quelconque, notons $\parts(X)$ (resp. $\parts^*(X)$) l'ense
 l'ensemble des parties finies (resp. parties finies non-vides) de $X$. Si maintenant $X$ est un espace topologique, 
 on note aussi $\mathfrak{K}(X)$ l'ensemble des parties compactes de $X$, et si $\mu$ est une mesure borélienne sur 
 $X$ on note $\Bor_+(X, \mu)$ l'ensemble des boréliens de $X$ de mesure finie non-nulle. 
+
+\subsection{Filtres et conditions de F\o{}lner}
 
 On s'intéresse à l'\emph{application de F\o{}lner} $\mathfrak{f} : \Bor{K}_+(\Gamma, \mu) \to \mathcal{F}(\Gamma, \R_+)$, définie sur l'ensemble 
 $\Bor_+(\Gamma, \mu)$ par $\mathfrak{f}(K)(\gamma) = \frac{\mu(\gamma K \triangle K)}{\mu(K)}$.
@@ -823,7 +842,9 @@ Pour $i$ fixé, on a alors :
         &\le \norm{f_i\cdot\left(\lambda(\gamma_i\inv)(\varphi)-\varphi\right)}_{\mathrm{L}^1} \\
         &\le \norm{f_i}_{\mathrm{L}^\infty} \norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}
 \end{align*}
-Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.\\
+Pour pouvoir conclure, il faudrait donc cette fois pouvoir faire tendre $\norm{\lambda(\gamma_i\inv)(\varphi)-\varphi}_{\mathrm{L}^1}$ vers $0$, ce qui motive les définitions suivantes.
+
+\subsection{Filtres et conditions de Reiter}
 
 Notons $\mathscr{L}^1(\Gamma, \mu)_{1,+}$ l'ensemble convexe des $f\in\mathscr{L}^1(\Gamma, \mu)$ positives et de masse $1$, et $\mathrm{L}^1(\Gamma, \mu)_{1, +}$ son image dans 
 $\mathrm{L}^1(\Gamma, \mu)$. On s'intéresse désormais à l'\emph{application de Reiter} $\mathfrak{r} : \mathrm{L}^1(\Gamma, \mu)_{1, +}\to\mathcal{F}(\Gamma, \R_+)$, définie par
@@ -1011,8 +1032,8 @@ Rappelons que, sauf mention explicite du contraire, tous les espaces $\mathrm{L}
 si $E$ est un espace vectoriel topologique, $E^*$ désigne son dual topologique \emph{sur le corps $\C$}. Si
 $E$ est un espace vectoriel complexe, nous noterons $\floor{E}$ l'espace vectoriel réel sous-jacent.
 
-Rappelons aussi que, grâce à la définition choisie de $\mathrm{L}^\infty$ \TODO{ref}, l'isomorphisme $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$
-est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\sigma$-fini \TODO{ref}.
+Rappelons aussi que, grâce à la définition choisie de $\mathrm{L}^\infty$,\TODO{ref} l'isomorphisme $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$
+est valable sur \emph{tout} espace mesuré, et non plus seulement dans le cas $\sigma$-fini. \TODO{ref}
 
 Notons $\mathcal{M}(X,\mu)$ l'ensemble des moyennes sur un espaces mesuré $(X,\mathcal{A},\mu)$, telles que définies après la définition \ref{amenable_def}.
 Dans le cas d'un groupe localement compact et séparé $\Gamma$ muni d'une mesure de Haar $\mu$, nous noterons
@@ -1315,7 +1336,11 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     Considérons maintenant l'espace vectoriel $E := \mathcal{F}(\mathrm{L}^1(\Gamma, \mu)_{1, +}, \mathrm{L}^1(\Gamma, \mu))$ muni de la topologie 
     produit des topologies normiques. $E$ est alors localement convexe, et la topologie faible $\sigma(E, E^*)$ sur $E$
     coïncide avec le produit des topologies faibles sur chaque $\mathrm{L}^1(\Gamma, \mu)$. \TODO{explication ?} Notons $\Sigma\subseteq E$ l'ensemble convexe formé
-    des fonctions de la forme $\fundef{A_\psi}{\mathrm{L}^1(\Gamma, \mu)_{1, +}&\to&\mathrm{L}^1(\Gamma, \mu)}{\varphi&\mapsto&\varphi\ast\psi - \psi}$ pour $\psi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}$.
+    des fonctions de la forme 
+    \begin{equation*}
+        \fundef{A_\psi}{\mathrm{L}^1(\Gamma, \mu)_{1, +}&\to&\mathrm{L}^1(\Gamma, \mu)}{\varphi&\mapsto&\varphi\ast\psi - \psi}
+    \end{equation*}
+    pour $\psi\in\mathrm{L}^1(\Gamma, \mu)_{1, +}$.
     \eqref{amenable_TFAE/eq1} montre que $0$ est adhérent à $\Sigma$ pour le produit des topologies faibles, 
     donc pour la topologie faible sur $E$, et donc aussi pour la topologie originale de $E$ d'après la proposition \ref{weak_convex_closed}.
     Mais nous avons en plus que chaque $A_\psi$ est $1$-lipschitzienne par l'inégalité de Young, donc l'ensemble
@@ -1415,7 +1440,7 @@ qui permettra de montrer l'implication $\eqref{strong_Reiter_cond}\implies\eqref
     $\mathscr{U}$ étant non-trivial et $\mathrm{L}^\infty(\Gamma)^*$ séparé, on a $m\comp\lambda(\gamma)-m = 0$ par unicité de la limite, ce qui conclut.
 \end{proof}
 
-\section{Contenance faible}
+\section{Contenance faible et moyennabilité}
 
 Dans cette section, on désigne par \og{}représentation de $\Gamma$\fg{} une représentation continue d'un
 groupe topologique $\Gamma$ dans un espace vectoriel topologique complet sur $\C$, et on utilise le terme de \og{}morphisme 
@@ -1431,6 +1456,8 @@ Rappelons que, pour deux représentations continues $\pi_1$, $\pi_2$ de $\Gamma$
 $\pi_1\le\pi_2$ s'il existe un morphisme de représentations de $\pi_1$ vers $\pi_2$ qui soit un plongement
 d'espaces vectoriels topologiques, de sorte que $\pi_1$ s'identifie à une sous-représentation de $\pi_2$.
 On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme.
+
+\subsection{Représentations de \texorpdfstring{$\mathrm{L}^1(\Gamma, \mu)$}{l'algèbre des fonctions intégrables}, contenance faible}
 
 On veut maintenant caractériser la moyennabilité d'un groupe localement compact (séparé) en termes
 de la théorie des représentations unitaires de ce groupe. Pour cela, on va commencer par associer à toute représentation 
@@ -1500,7 +1527,7 @@ On a donc $\pi(f)\in\mathcal{L}(V_\pi)$ et $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mat
 \end{lemma}
 
 \begin{proof}
-    Par continuité, peut se restreindre à la sous-algèbre involutive $C_c(\Gamma)$. Soient donc $f, f_1, f_2\in C_c(\Gamma)$ et $x, y\in V_\pi$. 
+    Par continuité, on peut se restreindre à la sous-algèbre involutive $C_c(\Gamma)$. Soient donc $f, f_1, f_2\in C_c(\Gamma)$ et $x, y\in V_\pi$. 
     Par des arguments déjà utilisés, le lemme \ref{exists_sigma_compact_subgroup} nous permet alors de supposer que $G$ est $\sigma$-compact. 
     On a alors :
     \begin{align*}
@@ -1550,7 +1577,8 @@ au cas où $f_1$ est remplacé par une mesure de Dirac. C'est ce que permet le l
 Par densité, on a donc $\pi_1\wle \pi_2$ \ssi l'inégalité $\norm{\pi_1(f)} \leq \norm{\pi_2(f)}$
 est valable pour toute $f\in C_c(\Gamma)$.
 
-Le dernier théorème qui nous intéresse permet de caractériser la moyennabilité en terme de contenance faible.
+Le théorème suivant permet caractérise la moyennabilité en termes de la contenance faible de certaines représentations.
+Sa démonstration occupera la fin de cette section.
 
 \begin{theorem}\label{amenable_weak_contain}
     On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma, \mu))$
@@ -1625,7 +1653,7 @@ Or, cet énoncé traduit des propriétés analytiques fondamentales de l'opérat
         %On a donc 
 
     Enfin, supposons que $E=F$ est un espace de Hilbert, et que, pour un certain $\varepsilon>0$, on a $\forall x\in E, \norm{x} = 1 \implies \abs{\ket{T(x), x}}\ge\varepsilon$.
-    Il suffit alors d'appliquer l'inégalité de Cauchy-Schwartz : pour tout $\xi$ unitaire, on a $\varepsilon\le\abs{\ket{T(x), x}}\le\norm{T(x)}$. La condition $(\ref{EVT_emb_TFAE/lower_bound_norm'})$
+    Il suffit alors d'appliquer l'inégalité de Cauchy-Schwarz : pour tout $\xi$ unitaire, on a $\varepsilon\le\abs{\ket{T(x), x}}\le\norm{T(x)}$. La condition $(\ref{EVT_emb_TFAE/lower_bound_norm'})$
     est donc vérifiée.
 \end{proof}
 
@@ -1694,17 +1722,18 @@ Commençons par un petit lemme qui sera crucial.
     Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma, \mu)$ unitaire vérifiant $\forall\gamma\in F, \norm{\lambda(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
     Le lemme \ref{abs_trick} assure alors que $\forall\gamma\in F\norm{\lambda(\gamma\inv)(\abs{\xi}) - \abs{\xi}} < \varepsilon$.
     Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$. On a alors, pour tout $\gamma\in\Gamma$, $\lambda(\gamma)(f) - f = (\lambda(\gamma)(\abs{\xi}) + \abs{\xi})(\lambda(\gamma)(\abs{\xi}) - \abs{\xi})$.
-    On peut alors appliquer l'inégalité de Cauchy-Schwartz, ce qui donne pour $\gamma\in F$ :
+    L'inégalité de Cauchy-Schwarz donne alors, pour tout $\gamma\in F$ :
     \begin{equation*}
         \norm{\lambda(\gamma)(f) - f}_{\mathrm{L}^1} \leq \norm{\lambda(\gamma)(\abs{\xi}) + \abs{\xi}}_{\mathrm{L}^2}\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \leq 2\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} < 2\varepsilon
     \end{equation*}
     Ceci conclut.
 
     On montre similairement \framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
-    Soient donc $\varepsilon>0$ et $K\subseteq\Gamma$ compact, ainsi qu'un $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ vérifiant $\forall\gamma\in K, \norm{\lambda(\gamma\inv)(f) - f}_{\mathrm{L}^1}$. 
+    Soient donc $\varepsilon>0$ et $K\subseteq\Gamma$ compact, ainsi qu'une fonction $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ vérifiant $\forall\gamma\in K, \norm{\lambda(\gamma\inv)(f) - f}_{\mathrm{L}^1}$,
+    telle que fournie par \eqref{strong_Reiter_cond}. 
     Posons alors $\xi:=\sqrt{f}\in\mathscr{L}^2(\Gamma, \mu)$, qui vérifie $\norm{\xi}_{\mathrm{L}^2} = 1$. En utilisant le fait que 
-    $\forall a, b\in\R_+, \abs{a - b}^2 \leq \abs{a^2 - b^2}$.
-    On a alors, pour tout $\gamma\in Q$, $\norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}^2 \leq \norm{\lambda(\gamma)(f) - f}_{\mathrm{L}^1} < \varepsilon$. Ceci conclut.
+    $\forall a, b\in\R_+, \abs{a - b}^2 \leq \abs{a^2 - b^2}$, il vient,
+    pour tout $\gamma\in Q$, $\norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}^2 \leq \norm{\lambda(\gamma)(f) - f}_{\mathrm{L}^1} < \varepsilon$. Ceci conclut.
 
     Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
     et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
@@ -1798,20 +1827,20 @@ Commençons par un petit lemme qui sera crucial.
         \forall\xi\in\mathrm{L}^2(\Gamma, \mu), \norm{\xi}_{\mathrm{L}^2} = 1\implies \exists\gamma\in F, \norm{\lambda_\Gamma(\gamma)(\xi) + \xi}_{\mathrm{L}^2}\geq\varepsilon
     \end{equation}
     En effet, pour $\xi\in\mathscr{L}^2(\Gamma, \mu)$ unitaire, on peut appliquer \eqref{amenable_weak_contain/eq1} à $\abs\xi$ pour obtenir un $\gamma\in F$ tel que $\norm{\lambda_\Gamma(\gamma)(\abs\xi) - \abs\xi}_{\mathrm{L}^2}\geq\varepsilon$.
-    Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) - \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick} pour $c = -1$, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
+    Mais on a $\norm{\lambda(\gamma)(\abs{\xi}) - \abs{\xi}}_{\mathrm{L}^2} \le \norm{\lambda(\gamma)(\xi) + \xi}_{\mathrm{L}^2}$ par le lemme \ref{abs_trick} pour $c = -1$, ce qui achève de montrer \eqref{amenable_weak_contain/eq2}.
 
-    Pour $\rho\in\set{\pm1}$, considérons $U_\rho := \sum_{\gamma\in F}(\lambda_\Gamma(\gamma) - \rho\id)^*(\lambda_\Gamma(\gamma) - \rho\id) = 2\rho\card{F} - T$, 
-    où l'on note toujours $T = \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. Notons que chaque $U_\rho$ est inversible. 
-    En effet, \eqref{amenable_weak_contain/eq1} et \eqref{amenable_weak_contain/eq2} montrent que, quelle que soit la valeur de $\rho$, 
+    Pour $s\in\set{\pm1}$, considérons $U_s := \sum_{\gamma\in F}(\lambda_\Gamma(\gamma) - s\id)^*(\lambda_\Gamma(\gamma) - s\id) = 2s\card{F} - T$, 
+    où l'on note toujours $T = \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$. Notons que chaque $U_s$ est inversible. 
+    En effet, \eqref{amenable_weak_contain/eq1} et \eqref{amenable_weak_contain/eq2} montrent que, quelle que soit la valeur de $s$, 
     on a pour tout $\xi\in\mathrm{L}^2(\Gamma, \mu)$ unitaire :
     \begin{equation*}
-        \varepsilon^2\leq\sum_{\gamma\in F}\norm{\lambda_\Gamma(\gamma)(\xi) - \rho\xi}_{\mathrm{L}^2}^2 = \ket{U_\rho(\xi), \xi}
+        \varepsilon^2\leq\sum_{\gamma\in F}\norm{\lambda_\Gamma(\gamma)(\xi) - s\xi}_{\mathrm{L}^2}^2 = \ket{U_s(\xi), \xi}
     \end{equation*}
-    Le lemme \ref{EVT_emb_TFAE} assure alors que $U_\rho$ est injectif et d'image complète. Mais $U_\rho$ est autoadjoint, donc 
-    son injectivité implique qu'il est d'image dense. Il vient que $U_\rho$ est bijectif, donc inversible par le théorème d'isomorphisme de Banach,
-    et ce toujours pour $\rho\in\set{\pm1}$ quelconque.
+    Le lemme \ref{EVT_emb_TFAE} assure alors que $U_s$ est injectif et d'image complète. Mais $U_s$ est autoadjoint, donc 
+    son injectivité implique qu'il est d'image dense. Il vient que $U_s$ est bijectif, donc inversible par le théorème d'isomorphisme de Banach,
+    et ce toujours pour $s\in\set{\pm1}$ quelconque.
 
-    Or $U_\rho = 2\rho\card{F} - T$, donc par définition du spectre on a $\Sp(T)\cap\set{\pm2\card{F}}=\varnothing$. Mais $T$ est autoadjoint,
+    Or $U_s = 2s\card{F} - T$, donc par définition du spectre on a $\Sp(T)\cap\set{\pm2\card{F}}=\varnothing$. Mais $T$ est autoadjoint,
     et de norme $2\card{F}$ d'après $(\ref{amenable_weak_contain/norm_eq_two})$. Donc $\rho(T) = 2\card{F}$, d'où $\Sp(T)\cap\set{\pm2\card{F}}\neq\varnothing$
     puisque $\Sp(T)\subseteq\R$. Cela nous donne la contradiction recherchée.
 
@@ -1948,10 +1977,21 @@ pour des fonctions intégrables, les relations $=_\mu$ et $=_\mu^{loc}$ coïncid
     $n\in\N$ recouvre $\set{x\tq f(x)\ne 0}$.
 \end{proof}
 
-\warning Section en travaux
+Si $(X, \mu)$ est un espace mesuré et $p<+\infty$, on note $\mathscr{L}^p(X, \mu)$ l'espace vectoriel semi-normé des fonctions mesurables complexes 
+de puissance $p$-ième intégrable, muni de la semi-norme $\norm{\cdot}_{\mathrm{L}^p}$ usuelle, et $\mathrm{L}^p(X, \mu)$ l'espace normé associé. 
+Le lemme \ref{presupp_sigma_finite} s'étendant de manière immédiate aux fonctions $\mathscr{L}^p$, le quotient 
+$\mathscr{L}^p\twoheadrightarrow\mathrm{L}^p$ correspond encore à l'identification des fonctions modulo $=_\mu^{loc}$.
 
-\TODO{Définitions et propriétés des espaces $\mathrm{L}^p$ avec le cette notion de localement négligeable, 
-sans preuve mais petite explication de ce qui change dans le cas $p=+\infty$.}
+Traitons maintenant le cas $p=\infty$, pour lequel notre définition diffère de la définition habituelle. On note $\mathscr{L}^\infty(X, \mu)$ l'espace vectoriel semi-normé des fonctions $f$ mesurables complexes 
+telles que $\sup\ess_\mu^{loc} \abs{f}<+\infty$, muni de la semi-norme $\norm{\cdot}_{\mathrm{L}^\infty} \sup\ess_\mu^{loc} \abs{f}$.
+On note encore $\mathrm{L}^\infty(X, \mu)$ l'espace normé associé, de sorte que le quotient $\mathscr{L}^\infty\twoheadrightarrow\mathrm{L}^\infty$
+correspond toujours à l'identification des fonctions modulo $=_\mu^{loc}$.
+
+Nous admettons que l'inégalité de Hölder généralisée et le théorème de dualité sont encore vérifiés 
+pour cette définition de $\mathrm{L}^\infty(X, \mu)$, et ce sans aucune hypothèse de $\sigma$-finitude. 
+
+
+\TODO{Un peu plus d'explications quand même...}
 
 %Rappelons maintenant les définitions et propriétés usuelles des espaces $\mathrm{L}^p$, d'abord pour $p<+\infty$. Pour $(X, \mathcal{A}, \mu)$ espace mesuré et $p\in[1, +\infty[$, on 
 %note $\mathscr{L}^p(X, \mu)$ l'espace vectoriel semi-normé des fonctions mesurables $f:(X, \mathcal{A})\to(\C, \Bor(\C))$ telles que $\abs{f}^p$ soit intégrable,
@@ -2042,19 +2082,29 @@ On est donc capable d'approcher en norme $\mathrm{L}^p$ l'indicatrice de tout en
 
 \subsection*{Un petit peu d'intégration vectorielle}
 
-\warning Section en travaux
+Nous aurons besoin à plusieurs reprises de donner un sens à l'intégrale d'une fonction 
+à valeur dans un espace de Banach $E$. Plusieurs théories non-équivalentes existent, 
+mais nous nous cantonnerons à l'intégration au sens de Bochner, appelée parfois \emph{intégration forte},
+qui jouit de la plupart des propriétés de l'intégration de Lebesgue usuelle. Nous donnons ci-dessous un aperçu de sa 
+construction, ainsi qu'un critère d'intégrabilité forte qui nous suffira.
 
-\TODO{Décrire intégration de Bochner}
+Soient donc $(X, \mu)$ un espace mesuré et $E$ un espace de Banach. Une fonction $f:X\to E$
+est dite \emph{simple} si elle est mesurable d'image finie, et \emph{fortement mesurable} si elle est mesurable et limite simple de fonctions simples.
+On considère alors l'espace $\mathscr{L}^1(X, \mu; E)$ des fonctions \emph{fortement intégrables}, c'est à dire les fonctions $f:X\to E$
+fortement mesurables telles que $\norm{\cdot}\comp f$ est intégrable au sens de Lebesgue. 
+On munit cette espace de la semi-norme $\norm{\cdot}_{\mathrm{L}^1} : f\mapsto\integral{}{}{\norm{f(x)}}{\mu(x)}$,
+et on note $\mathrm{L}^1(X, \mu; E)$ l'espace normé associé. On peut alors démontrer 
+que l'espace des (classes de) fonctions simples intégrables est dense dans $\mathrm{L}^1(X, \mu; E)$,
+et on construit donc l'intégrale sur $\mathrm{L}^1(X, \mu; E)$ en prolongeant l'application 
+d'intégration des fonctions simples, qui est continue pour la norme $\mathrm{L}^1$.
 
-%\begin{lemma}\label{strong_measurable_of_tendsto}
-%    Soit $(X, \mathcal{A}, \mu)$ un espace mesuré, $E$ un espace de Banach, et $\varphi : (X, \mathcal{A})\to(E, \Bor(E))$
-%    une fonction mesurable. Si de plus $\varphi$ est limite presque-partout d'une suite
-%    de fonctions \emph{fortement mesurables}, alors $\varphi$ est fortement mesurable.
-%\end{lemma}
-%
-%\begin{proof}
-%    \TODO{}
-%\end{proof}
+Avec cette définition, on obtient immédiatement le lemme suivant en se ramenant aux fonctions simples.
+
+\begin{lemma}\label{Bochner_clm}
+    Soient $(X, \mu)$ un espace mesuré, $E, F$ deux espaces de Banach, $f:X\to E$ une application
+    fortement intégrable, et $T:E\to F$ une application linéaire continue. Alors $T\comp f$ est 
+    fortement intégrable, et $\integral{}{}{T\comp f}{\mu} = T\left(\integral{}{}{f}{\mu}\right)$.
+\end{lemma}
 
 En pratique, nous utiliserons le critère suivant pour montrer la mesurabilité forte.
 
@@ -2068,8 +2118,7 @@ Notons d'ailleurs que l'intégrabilité est immédiate une fois la mesurabilité
 puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à support compact donc intégrable.
 
 \begin{proof}
-    Munissons le compact $K:=\Supp f$ de son unique structure d'espace uniforme, pour laquelle $f$ est automatiquement 
-    uniformément continue en vertu du théorème de Heine. La (pré)compacité de l'espace métrique $f(K)$ fournit, 
+    Notons $K:=\Supp f$. La (pré)compacité de l'espace métrique $f(K)$ fournit, 
     pour chaque $n\in\N$, un ensemble fini $S_n\subseteq K$ tel que $f(K)\subseteq\bigcup_{x\in S_n}B(f(x), 2^{-n})$.
 
     Pour $n$ fixé, choisissons une bijection $\alpha_n : \card{S_n} \to S_n$, où l'on identifie $\card{S_n}$ à l'ensemble 
@@ -2089,7 +2138,7 @@ puisque la fonction scalaire $\norm{\cdot}\comp f$ est encore continue à suppor
     mesurable (par mesurabilité de l'ensemble $K$, et des fonctions $f$ et $\chi_n$) et d'image finie 
     inclue dans $\set{0}\cup f(S_n)$. On a enfin 
     $\forall n\in\N, \norm{\psi_n - f}_\infty \le 2^{-n}$, ce qui assure que la suite $\psi$ converge vers $f$ uniformément, 
-    et donc en particulier $\mu$-presque-partout. Cela conclut.
+    et donc en particulier simplement. Cela conclut.
 \end{proof}
 
 \begin{remark}
@@ -2105,7 +2154,7 @@ On fixe un groupe topologique $G$ séparé et localement compact.
 \subsection*{Mesures de Haar}
 
 Une \emph{mesure de Haar à gauche (resp. à droite)} sur $G$
-est une mesure de Radon $\mu$ vérifiant $\forall g\in G, {\ell_g}_*\mu = \mu$ (resp. ${r_g}_*\mu = \mu$).
+est une mesure de Radon $\mu$ non nulle vérifiant $\forall g\in G, {\ell_g}_*\mu = \mu$ (resp. ${r_g}_*\mu = \mu$).
 
 Le théorème fondamental concernant ces mesures, que nous utilisons tout au long de ce document, est le suivant :
 \begin{theorem}\label{theorem_Haar}
