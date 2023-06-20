@@ -1413,15 +1413,15 @@ Enfin, une \emph{représentation unitaire} de $\Gamma$ est la donnée d'une repr
 d'espace hilbertien sur $V_\pi$, induisant bien-sûr la topologie originale sur $V_\pi$. Les morphismes de représentations 
 unitaires sont les morphismes de représentations continues entre représentations unitaires.
 
-On veut maintenant caractériser la moyennabilité d'un groupe localement compact (séparé) en termes
-de la théorie des représentations unitaires de ce groupe. 
-
-\TODO{Plan de la section}
-
 Rappelons que, pour deux représentations continues $\pi_1$, $\pi_2$ de $\Gamma$, on note 
 $\pi_1\le\pi_2$ s'il existe un morphisme de représentations de $\pi_1$ vers $\pi_2$ qui soit un plongement
 d'espaces vectoriels topologiques, de sorte que $\pi_1$ s'identifie à une sous-représentation de $\pi_2$.
 On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme.
+
+On veut maintenant caractériser la moyennabilité d'un groupe localement compact (séparé) en termes
+de la théorie des représentations unitaires de ce groupe. Pour cela, on va commencer par associer à toute représentation 
+\emph{unitaire} $\pi : \Gamma\to\mathcal{U}(V_\pi)$ du \emph{groupe} $\Gamma$ une
+représentation, notée $\mathrm{L}^1(\pi)$ ou encore $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
 
 % C'est faux :
 %\footnote{Cette notation est justifiée par le fait que ces morphismes
@@ -1454,9 +1454,6 @@ On note $f : \pi_1\hookrightarrow\pi_2$ pour un tel morphisme.
 %        &= (f_2\ast f_1)^*(x)
 %\end{align*}
 
-On veut maintenant associer à toute représentation \emph{unitaire} $\pi : \Gamma\to\mathcal{U}(V_\pi)$ du \emph{groupe} $\Gamma$ une
-représentation, notée $\mathrm{L}^1(\pi)$ ou encore $\pi$, de l'\emph{algèbre involutive} $\mathrm{L}^1(\Gamma, \mu)$.
-
 Pour $f\in\mathscr{L}^1(\Gamma, \mu)$ et $x\in V_\pi$, on définit une forme linéaire $\underline{\pi}(f)(x)$ sur $V_\pi^*$ par 
 $\underline{\pi}(f)(x)(\varphi) := \integral{}{}{f(g)\cdot\varphi(\pi(g)(x))}{\mu(g)}$, cette intégrale étant finie car $f$ est
 intégrable et $\forall g, \abs{\varphi(\pi(g)(x))}\le\norm{\varphi}\norm{x}$. Par l'inégalité de Hölder, on a donc 
@@ -1472,9 +1469,6 @@ $\pi(f)(x)$ est l'unique élément de $V_\pi$ tel que :
 \end{equation*}
 De plus, on a vu que $\norm{\pi(f)(x)} = \norm{\underline{\pi}(f)(x)} \le \norm{f}_{\mathrm{L}^1}\norm{x}$. 
 On a donc $\pi(f)\in\mathcal{L}(V_\pi)$ et $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mathcal{L}(V_\pi)$ est continue de norme inférieure à $1$.
-Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Banach involutives, il s'agit donc de montrer...
-
-\TODO{Continuer}
 
 \begin{remark}\label{L1_repr_Cc}
     Pour $f\in C_c(\Gamma)$ et $x\in V_\pi$, la fonction $g\mapsto f(g)\pi(g)(x)\in V_\pi$ est continue à support compact,
@@ -1483,8 +1477,55 @@ Pour montrer qu'il s'agit d'un morphisme de représentations d'algèbres de Bana
     \begin{equation*}
         \ket{\integral{}{}{f(g)\pi(g)(x)}{\mu(g)}, y} = \integral{}{}{f(g)\ket{\pi(g)(x), y}}{\mu(g)} = \ket{\pi(f)(x), y}
     \end{equation*}
-    Autrement dit, $\pi(f)(x) = \integral{}{}{f(g)\pi(g)(x)}{\mu(g)}$.
+    Autrement dit, $\pi(f)(x) = \integral{}{}{f(g)\pi(g)(x)}{\mu(g)}$. Enfin, par densité, cette relation caractérise complètement l'application $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mathcal{L}(V_\pi)$.
 \end{remark}
+
+\begin{lemma}
+    $\pi:\mathrm{L}^1(\Gamma, \mu)\to\mathcal{L}(V_\pi)$ est un morphisme d'algèbres involutives,
+    et donc une représentation de $\mathrm{L}^1(\Gamma, \mu)$.
+\end{lemma}
+
+\begin{proof}
+    Par continuité, peut se restreindre à la sous-algèbre involutive $C_c(\Gamma)$. Soient donc $f, f_1, f_2\in C_c(\Gamma)$ et $x, y\in V_\pi$. 
+    Par des arguments déjà utilisés, le lemme \ref{exists_sigma_compact_subgroup} nous permet alors de supposer que $G$ est $\sigma$-compact. 
+    On a alors :
+    \begin{align*}
+        \ket{\pi(f_1\ast f_2)(x), y}
+            &= \integral{}{}{(f_1\ast f_2)(g)\ket{\pi(g)(x), y}}{\mu(g)} \\
+            &= \integral{}{}{f_1(h)f_2(h\inv g)\ket{\pi(g)(x), y}}{(\mu\otimes\mu)(g, h)} \\
+            &= \integral{}{}{f_1(h)f_2(g)\ket{\pi(g)(x), \pi(h\inv)(y)}}{(\mu\otimes\mu)(g, h)} \\
+            &= \integral{}{}{f_1(h)\ket{\pi(f_2)(x), \pi(h\inv)(y)}}{\mu(h)} \\
+            &= \integral{}{}{f_1(h)\ket{\pi(h)(\pi(f_2)(x)), y}}{\mu(h)} \\
+            &= \ket{\pi(f_1)(\pi(f_2)(x)), y}
+    \end{align*}
+    De plus :
+    \begin{align*}
+        \ket{\pi(f^*)(x), y}
+            &= \integral{}{}{f^*(g)\ket{\pi(g)(x), y}}{\mu(g)} \\
+            &= \integral{}{}{\overline{f(g)}\ket{\pi(g\inv)(x), y}}{\mu(g)} \\
+            &= \integral{}{}{\overline{f(g)}\ket{\pi(g\inv)(x), y}}{\mu(g)} \\
+            &= \overline{\integral{}{}{f(g)\ket{\pi(g)(y), x}}{\mu(g)}} \\
+            &= \ket{x, \pi(f)(y)}
+    \end{align*}
+    Cela conclut.
+\end{proof}
+
+Nous aurons besoin d'étendre l'égalité $\pi(f_1\ast f_2) = \pi(f_1)\comp\pi(f_2)$ 
+au cas où $f_1$ est remplacé par une mesure de Dirac. C'est ce que permet le lemme suivant.
+
+\begin{lemma}\label{L1_repr_translate}
+    Soient $g \in\Gamma$ et $f\in\mathscr{L}^1(\Gamma, \mu)$. On a $\pi(\lambda(g)(f)) = \pi(g)\comp\pi(f)$.
+\end{lemma}
+
+\begin{proof}
+    Encore une fois on peut supposer $f\in C_c(\Gamma)$. Pour $x\in V_\pi$, on a alors :
+    \begin{align*}
+        \pi(\lambda(g)(f))(x) 
+            &= \integral{}{}{f(g\inv h)\pi(h)(x)}{\mu(h)} \\
+            &= \integral{}{}{f(h)\pi(gh)(x)}{\mu(h)} \\
+            &= \pi(g)(\pi(f)(x))
+    \end{align*}
+\end{proof}
 
 \begin{theorem}\label{amenable_weak_contain}
     On note $\indic_\Gamma:\Gamma\to\mathbb{S}_1$ et $\lambda_\Gamma:\Gamma\to\mathcal{U}(\mathrm{L}^1(\Gamma, \mu))$
@@ -1625,10 +1666,11 @@ Commençons par un petit lemme qui sera crucial.
     
     Commençons donc par montrer \framebox{$(\ref{amenable_weak_contain/weak_almost_invariant})\implies(\ref{amenable_weak_contain/amenable})$} en s'appuyant sur le critère 
     de Reiter faible \eqref{weak_Reiter_cond}. 
-    Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma, \mu)$ unitaire vérifiant $\forall\gamma\in F, \norm{\pi(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
-    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie \TODO{finir}
+    Soient donc $\varepsilon>0$ et $F\subseteq\Gamma$ fini, ainsi qu'un $\xi\in \mathscr{L}^2(\Gamma, \mu)$ unitaire vérifiant $\forall\gamma\in F, \norm{\lambda(\gamma\inv)(\xi) - \xi}_{\mathrm{L}^2}<\varepsilon$ tel que fourni par $(\ref{amenable_weak_contain/weak_almost_invariant})$.
+    Posons alors $f := \abs{\cdot}^2\comp\xi\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$, qui vérifie $\left(\lambda(g)(\overline{\xi}) + \overline{\xi}\right)(\lambda(g)(\xi) - \xi)$. \TODO{}
 
-    On montre similairement \TODO{\framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$}} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
+    On montre similairement \framebox{$(\ref{amenable_weak_contain/amenable})\implies(\ref{amenable_weak_contain/strong_almost_invariant})$} en s'appuyant sur le critère de Reiter fort \eqref{strong_Reiter_cond}.
+    Soient donc $\varepsilon>0$ et $K\subseteq\Gamma$ compact, ainsi qu'un $f\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$ vérifiant $\forall\gamma\in K, \norm{\lambda(\gamma\inv)(f) - f}_{\mathrm{L}^1}$. \TODO{}
 
     Montrons maintenant \framebox{$(\ref{amenable_weak_contain/strong_almost_invariant})\implies(\ref{amenable_weak_contain/weak_contain})$}. Soit donc $f\in\mathscr{L}^1(\Gamma, \mu)$,
     et montrons $\norm{\indic_\Gamma(f)}\le\norm{\lambda_\Gamma(f)}$. C'est trivial pour $f=_\mu^{loc} 0$, donc on suppose $\norm{f}_{\mathrm{L}^1}\ne0$. Par continuité des représentations $\indic_\Gamma$ et 
@@ -1692,13 +1734,19 @@ Commençons par un petit lemme qui sera crucial.
 
     La solution que nous proposons est d'étudier ce qui se passe lorsqu'on itère notre opérateur $\sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv)$.
     Fixons pour cela une fonction $f_0\in\mathscr{L}^1(\Gamma, \mu)_{1, +}$\footnote{On a déjà vu qu'une telle fonction existe toujours, par exemple en posant $f_0:=\chi_U=\frac{1}{\mu(U)}\indic_U$ pour 
-    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs $T := \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma, \mu))$
-    et $S := \sum_{\gamma\in F}\lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma, \mu))$. Par \TODO{ref ou argument à base de convolution}, on a :
-    \begin{equation*}
-        \forall f\in\mathrm{L}^1(\Gamma, \mu), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)
-    \end{equation*}
+    un voisinage compact $U$ de $1$.} qui représente une distribution de masse initiale, et considérons les opérateurs : 
+    \begin{gather*}
+        T := \sum_{\gamma\in F}\lambda_\Gamma(\gamma) + \lambda_\Gamma(\gamma\inv) \in\mathcal{L}(\mathrm{L}^2(\Gamma, \mu)) \\
+        S := \sum_{\gamma\in F}\lambda(\gamma) + \lambda(\gamma\inv) \in \mathcal{L}(\mathrm{L}^1(\Gamma, \mu))
+    \end{gather*}
+    Le lemme \ref{L1_repr_translate} donne alors que $\forall f\in\mathrm{L}^1(\Gamma, \mu), \lambda_\Gamma(S(f)) = T \comp \lambda_\Gamma(f)$.
+
     Notons que, pour toute $f\in\mathscr{L}^1(\Gamma, \mu)$ positive, la fonction $S(f)$ est encore positive, et vérifie $\integral{}{}{S(f)}{\mu} = 2\card{F}\integral{}{}{f}{\mu}$.
-    Par récurrence, on a donc $\forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = (2\card{F})^n$. Or, $(\ref{amenable_weak_contain/weak_contain})$
+    Par récurrence, il vient : 
+    \begin{equation*}
+        \forall n\in\N, S^n(f_0)\geq0 \land \integral{}{}{S^n(f_0)}{\mu} = (2\card{F})^n
+    \end{equation*}
+    Or, $(\ref{amenable_weak_contain/weak_contain})$
     assure que l'on a, toujours pour $n\in\N$ quelconque :
     \begin{equation*}
         (2\card{F})^n = \integral{}{}{S^n(f_0)}{\mu} = \norm{\indic_\Gamma(S^n(f_0))} \leq \norm{\lambda_\Gamma(S^n(f_0))} = \norm{T^n \comp \lambda_\Gamma(f_0)} \le \norm{T}^n \norm{\lambda_\Gamma(f_0)}
@@ -2119,14 +2167,14 @@ Terminons par un petit lemme utile dans le corps de ce document.
 
 \begin{lemma}\label{ket_conv}
     Soient $\varphi, \psi\in\mathscr{L}^1(G, \mu)$ et $f\in\mathscr{L}^\infty(G)$. 
-    On a $\ket{\psi, \varphi\ast f} = \ket{\varphi^*\ast\psi, f}$.
+    On a $\ket{\psi, \overline{\varphi}\ast f} = \ket{\varphi^*\ast\psi, f}$.
 \end{lemma}
 
 \begin{proof}
     On vérifie directement, et \emph{sans utiliser le théorème de Fubini} :
     \begin{align*}
-        \ket{\psi, \varphi\ast f} 
-            &= \integral{}{}{\psi(x)\integral{}{}{\varphi(g)f(g\inv x)}{\mu(g)}}{\mu(x)} \\
+        \ket{\psi, \overline{\varphi}\ast f} 
+            &= \integral{}{}{\psi(x)\integral{}{}{\overline{\varphi(g)}f(g\inv x)}{\mu(g)}}{\mu(x)} \\
             &= \integral{}{}{\integral{}{}{\psi(x)\varphi^*(g)f(g x)}{\mu(g)}}{\mu(x)} \\
             &= \integral{}{}{\integral{}{}{\psi(g\inv x)\varphi^*(g)f(x)}{\mu(g)}}{\mu(x)} \\
             &= \ket{\varphi^*\ast\psi, f} 
