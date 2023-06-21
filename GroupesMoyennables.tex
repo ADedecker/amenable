@@ -86,7 +86,7 @@
 
 \begin{titlepage}
 \title{Groupes Moyennables}
-\author{Anatole \textsc{Dedecker}, encadré par Omar \textsc{Mohsen}}
+\author{Anatole \textsc{Dedecker}, encadré par M. Omar \textsc{Mohsen}}
 \maketitle
 \center{Projet de recherche de M1 à l'Université Paris-Saclay}
 \thispagestyle{empty}
@@ -96,7 +96,9 @@
 
 \thispagestyle{empty}
 
-\TODO
+Je remercie chaleureusement M. Omar \textsc{Mohsen} pour m'avoir proposé ce sujet, 
+pour le temps précieux qu'il m'a accordé tout au long du projet, 
+ainsi que pour avoir supporté mes envies de généralité.
 
 \vspace*{\fill}
 
@@ -109,9 +111,44 @@
 
 \pagenumbering{arabic}
 
-\section*{Conventions et remarques préliminaires}
+Ce mémoire présente l'essentiel du contenu de mon projet de recherche de fin d'année
+du M1 Jacques Hadamard, que j'ai effectué sous la supervision de M. Omar \textsc{Mohsen}
+sur le sujet des groupes moyennables. 
 
-\TODO{Réorganiser cette section, déplacer certaines choses en annexe}
+Si le concept de groupe moyennable a été introduit à l'origine pour mieux comprendre le paradoxe de 
+Banach-Tarski, il apparaît naturellement dans divers domaines actifs de recherche, 
+de la théorie des C*-algèbres à la théorie géométrique des groupes en passant bien sûr 
+par la théorie des représentations. L'étude des groupes moyennables est donc un sujet vaste et aux multiples facettes,
+et nous nous contentons ici de présenter plusieurs des caractérisations les plus utiles 
+de la moyennabilité, tout en prouvant bien sûr leur équivalence. 
+
+Le chapitre 1 sera dédié à la définition de la moyennabilité et à ses variations élémentaires,
+ainsi qu'à l'étude d'exemples et contre-exemples et des premiers critères élémentaires de moyennabilité.
+Ceux-ci nous amèneront à étudier au chapitre 2 les conditions de F\o{}lner et de Reiter, qui sont 
+deux équivalents incontournables de la moyennabilité. La preuve de ces équivalences est non-triviale 
+et nous occupera pour toute la fin du chapitre 2.
+
+La condition de F\o{}lner ouvre la voie vers l'étude géométrique des groupes moyennables, mais nous n'allons pas plus loin dans ce mémoire.
+De son côté, la condition de Reiter est essentielle pour rattacher la moyennabilité à 
+la théorie des représentations, et c'est ce qui nous occupe pour le chapitre 3. Plus précisément, il s'agit de 
+caractériser la moyennabilité par la notion de contenance faible. Cette notion admet elle-même de 
+nombreuses définitions non-trivialement équivalentes, nous en choisissons une assez simple à énoncer 
+et nous nous efforçons de n'utiliser que celle-ci. Cela nous évite d'avoir à développer la théorie des 
+fonctions de type positif, qui resterait néamoins un passage indispensable pour obtenir des résultats plus poussés.
+
+Bien que le concept soit déjà intéressant pour des groupes discrets, nous avons fait le choix de nous placer 
+dans le cadre des groupes localements compacts séparés, la théorie restant assez similaire malgré un besoin
+d'adaptation pour un certains nombres de preuves. Nous laissons donc de côté la définition générale 
+pour un groupe topologique quelconque, mais la preuve du théorème \ref{amenable_TFAE} permettrait 
+aisément de faire le lien entre notre contexte et le cas général.
+
+Le livre \cite{bekka_de_la_harpe_valette_2008} de Bekka, De La Harpe et Valette a été une source majeure tout 
+au long de ce projet et dans la rédaction de ce mémoire. \cite{dixmier1982c} a également été une source importante 
+pour les liens avec la théorie des C*-algèbres, qui ne sont cependant pas mentionnés dans ce rapport.
+
+\clearpage
+
+\section*{Conventions et remarques préliminaires}
 
 Par convention, les produits scalaires sur le corps $\C$ sont supposés linéaires en le premier argument.
 
@@ -125,6 +162,9 @@ Pour $G$ un groupe et $g\in G$, nous noterons $\invop$ l'inversion et $\ell_g$, 
 \begin{equation*}
     \fundef{\invop = (\blank)\inv}{G&\to& G}{x&\mapsto& x\inv}\text{;}\quad\fundef{\ell_g=(g\blank)}{G&\to& G}{x&\mapsto& gx}\text{;}\quad\fundef{r_g=(\blank g)}{G&\to& G}{x&\mapsto& xg}
 \end{equation*}
+De plus, si $f$ est une fonction définie sur $G$, on note $\lambda(g)(f) := f\comp\ell_{g\inv}$
+et $\rho(g)(f) := f\comp r_g$. Nous utiliserons également ces notations sur des classes d'équivalences de fonctions 
+lorsqu'elles ont un sens, c'est à dire lorsque ces classes sont stables par translations.
 
 Nous renvoyons à l'annexe \ref{appendix_integration} pour les résultats élémentaires concernant l'intégration 
 sur les groupes localement compacts séparés, et en particulier le théorème d'existence et unicité des mesures de Haar 
@@ -139,7 +179,11 @@ Cette définition assure qu'on a $(\mathrm{L}^1)^* \simeq \mathrm{L}^\infty$ san
 pour plus de détails.
 
 Dans le cas des groupes topologiques localement compacts et séparés, l'espace et la norme $\mathrm{L}^\infty$ ne dépendent pas du choix de la mesure de 
-Haar, car les mesures de Haar sont deux-à-deux absolument continues les unes. Nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)$.
+Haar, car les mesures de Haar sont deux-à-deux absolument continues. Nous notons donc $\mathscr{L}^\infty(\Gamma)$ et $\mathrm{L}^\infty(\Gamma)$.
+
+Enfin, nous serons amenés à utiliser la théorie des filtres. Nous nous basons pour cela 
+sur la présentation donnée dans \cite[\textit{Mathematics In Lean}]{MIL2023} et utilisée par la communauté 
+d'utilisateurs de l'assistant de preuve Lean.
 
 %Si le groupe $G$ est muni d'une $\sigma$-algèbre stable par les tranlations droite et gauche, ce qui sera notamment le cas
 %si $G$ est un groupe topologique muni de sa tribu borélienne $\Bor(G)$, nous dirons qu'une mesure $m$ sur $G$ est \textit{invariante
@@ -151,7 +195,7 @@ Haar, car les mesures de Haar sont deux-à-deux absolument continues les unes. N
 %utiliserons à de nombreuses reprises.
 
 
-\TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
+%\TODO{Définir $\lambda$, $\rho$ les actions régulières de $G$ sur les espaces de fonctions}
 
 \section{Moyennes et contenus invariants}
 
